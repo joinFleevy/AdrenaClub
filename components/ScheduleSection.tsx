@@ -1,10 +1,9 @@
 'use client';
 
-import React, { useState } from 'react';
-import { Clock, Image as ImageIcon, Dumbbell } from 'lucide-react';
+import React, { useState, useMemo } from 'react';
+import { Clock, Image as ImageIcon, Dumbbell, Shield, Flame } from 'lucide-react';
 import { Language, content } from '@/data/content';
 import { hommesSchedule, femmesSchedule, enfantsSchedule, ScheduleDay } from '@/data/schedules';
-import ScheduleFinder from '@/components/ScheduleFinder';
 
 interface ScheduleSectionProps {
   lang: Language;
@@ -12,17 +11,21 @@ interface ScheduleSectionProps {
 }
 
 type TabType = 'hommes' | 'femmes' | 'enfants';
+type DisciplineFilter = 'all' | 'combat' | 'cross' | 'muscu';
 
 export default function ScheduleSection({ lang, onOpenPostersModal }: ScheduleSectionProps) {
   const t = content[lang].planning;
+  const isAr = lang === 'ar';
   const [activeTab, setActiveTab] = useState<TabType>('hommes');
+  const [activeDiscipline, setActiveDiscipline] = useState<DisciplineFilter>('all');
 
-  const currentSchedule: ScheduleDay[] =
-    activeTab === 'hommes'
+  const currentSchedule: ScheduleDay[] = useMemo(() => {
+    return activeTab === 'hommes'
       ? hommesSchedule
       : activeTab === 'femmes'
       ? femmesSchedule
       : enfantsSchedule;
+  }, [activeTab]);
 
   const getTodayId = (): string => {
     const days = ['dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'];
@@ -31,6 +34,13 @@ export default function ScheduleSection({ lang, onOpenPostersModal }: ScheduleSe
   };
 
   const todayId = getTodayId();
+
+  const disciplinePills: Array<{ id: DisciplineFilter; label: string; icon?: React.ElementType }> = [
+    { id: 'all', label: isAr ? 'كل التخصصات' : 'Toutes disciplines' },
+    { id: 'combat', label: isAr ? 'قتال ودفاع' : 'Combat & Boxe', icon: Shield },
+    { id: 'cross', label: isAr ? 'كروس ترينينغ' : 'Cross-Training', icon: Flame },
+    { id: 'muscu', label: isAr ? 'كمال أجسام' : 'Musculation', icon: Dumbbell },
+  ];
 
   return (
     <section id="planning" className="py-20 relative bg-adrena-black border-b border-adrena-border">
@@ -55,43 +65,65 @@ export default function ScheduleSection({ lang, onOpenPostersModal }: ScheduleSe
           </button>
         </div>
 
-        {/* Smart Interactive Class Finder */}
-        <ScheduleFinder lang={lang} />
+        {/* Filter Controls Row: Audience Tabs + Discipline Filter */}
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-6">
+          {/* Audience Tabs */}
+          <div className="flex flex-wrap items-center gap-1.5 p-1.5 bg-adrena-card border border-adrena-border rounded-xl w-fit">
+            <button
+              onClick={() => setActiveTab('hommes')}
+              className={`px-4 sm:px-5 py-2.5 rounded-lg font-display font-black text-xs sm:text-sm uppercase tracking-wider transition-all ${
+                activeTab === 'hommes'
+                  ? 'bg-adrena-gold text-black shadow-md'
+                  : 'text-neutral-400 hover:text-white'
+              }`}
+            >
+              {t.tabs.hommes}
+            </button>
 
-        {/* Tab Selection */}
-        <div className="flex flex-wrap items-center gap-2 mb-8 p-1.5 bg-adrena-card/80 border border-adrena-border rounded-xl w-fit">
-          <button
-            onClick={() => setActiveTab('hommes')}
-            className={`px-5 py-2.5 rounded-lg font-display font-black text-xs sm:text-sm uppercase tracking-wider transition-all ${
-              activeTab === 'hommes'
-                ? 'bg-adrena-gold text-black shadow-md'
-                : 'text-neutral-400 hover:text-white'
-            }`}
-          >
-            {t.tabs.hommes}
-          </button>
+            <button
+              onClick={() => setActiveTab('femmes')}
+              className={`px-4 sm:px-5 py-2.5 rounded-lg font-display font-black text-xs sm:text-sm uppercase tracking-wider transition-all ${
+                activeTab === 'femmes'
+                  ? 'bg-adrena-gold text-black shadow-md'
+                  : 'text-neutral-400 hover:text-white'
+              }`}
+            >
+              {t.tabs.femmes}
+            </button>
 
-          <button
-            onClick={() => setActiveTab('femmes')}
-            className={`px-5 py-2.5 rounded-lg font-display font-black text-xs sm:text-sm uppercase tracking-wider transition-all ${
-              activeTab === 'femmes'
-                ? 'bg-adrena-gold text-black shadow-md'
-                : 'text-neutral-400 hover:text-white'
-            }`}
-          >
-            {t.tabs.femmes}
-          </button>
+            <button
+              onClick={() => setActiveTab('enfants')}
+              className={`px-4 sm:px-5 py-2.5 rounded-lg font-display font-black text-xs sm:text-sm uppercase tracking-wider transition-all ${
+                activeTab === 'enfants'
+                  ? 'bg-adrena-gold text-black shadow-md'
+                  : 'text-neutral-400 hover:text-white'
+              }`}
+            >
+              {t.tabs.enfants}
+            </button>
+          </div>
 
-          <button
-            onClick={() => setActiveTab('enfants')}
-            className={`px-5 py-2.5 rounded-lg font-display font-black text-xs sm:text-sm uppercase tracking-wider transition-all ${
-              activeTab === 'enfants'
-                ? 'bg-adrena-gold text-black shadow-md'
-                : 'text-neutral-400 hover:text-white'
-            }`}
-          >
-            {t.tabs.enfants}
-          </button>
+          {/* Discipline In-Place Filter */}
+          <div className="flex flex-wrap items-center gap-1.5">
+            {disciplinePills.map((p) => {
+              const Icon = p.icon;
+              const isActive = activeDiscipline === p.id;
+              return (
+                <button
+                  key={p.id}
+                  onClick={() => setActiveDiscipline(p.id)}
+                  className={`flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-sans font-bold transition-all ${
+                    isActive
+                      ? 'bg-white text-black shadow-md'
+                      : 'bg-black/40 text-neutral-300 hover:text-white hover:bg-white/10 border border-white/5'
+                  }`}
+                >
+                  {Icon && <Icon className="w-3.5 h-3.5" />}
+                  <span>{p.label}</span>
+                </button>
+              );
+            })}
+          </div>
         </div>
 
         {/* Note Line */}
@@ -100,10 +132,30 @@ export default function ScheduleSection({ lang, onOpenPostersModal }: ScheduleSe
           <span>{t.notes[activeTab]}</span>
         </div>
 
-        {/* Days Grid: Distilled, Highly Legible Cards */}
+        {/* Unified 7-Day Grid: Single, Distilled, Non-Repetitive */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {currentSchedule.map((day) => {
             const isToday = day.dayId === todayId;
+
+            // Filter activities according to activeDiscipline
+            const visibleActivities = day.activities.filter((act) => {
+              if (activeDiscipline === 'all') return true;
+              if (activeDiscipline === 'muscu') return false;
+              const nameLower = act.nameFr.toLowerCase();
+              if (activeDiscipline === 'combat') {
+                return nameLower.includes('kickboxing') || nameLower.includes('lutte') || nameLower.includes('judo');
+              }
+              if (activeDiscipline === 'cross') {
+                return nameLower.includes('cross');
+              }
+              return true;
+            });
+
+            // Filter muscu slots according to activeDiscipline
+            const showMuscu = (activeDiscipline === 'all' || activeDiscipline === 'muscu') && day.muscuSlots.length > 0;
+
+            const hasEntries = visibleActivities.length > 0 || showMuscu;
+
             return (
               <div
                 key={day.dayId}
@@ -126,10 +178,10 @@ export default function ScheduleSection({ lang, onOpenPostersModal }: ScheduleSe
                     )}
                   </div>
 
-                  {/* Coached Activities first (Highlighted for instant scanning) */}
-                  {day.activities.length > 0 && (
+                  {/* Coached Activities first */}
+                  {visibleActivities.length > 0 && (
                     <div className="space-y-2 mb-3">
-                      {day.activities.map((act, idx) => (
+                      {visibleActivities.map((act, idx) => (
                         <div
                           key={idx}
                           className="p-3 rounded-xl bg-black/60 border border-white/10 hover:border-adrena-gold/30 transition-colors"
@@ -153,8 +205,8 @@ export default function ScheduleSection({ lang, onOpenPostersModal }: ScheduleSe
                     </div>
                   )}
 
-                  {/* Musculation (Open gym slots) */}
-                  {day.muscuSlots.length > 0 && (
+                  {/* Musculation open access */}
+                  {showMuscu && (
                     <div className="space-y-1.5">
                       {day.muscuSlots.map((slot, idx) => (
                         <div
@@ -171,9 +223,10 @@ export default function ScheduleSection({ lang, onOpenPostersModal }: ScheduleSe
                     </div>
                   )}
 
-                  {day.muscuSlots.length === 0 && day.activities.length === 0 && (
-                    <div className="py-6 text-center text-xs text-neutral-500 font-medium">
-                      {lang === 'fr' ? 'Aucun cours programmé' : 'لا توجد حصص'}
+                  {/* Empty state when discipline has no sessions this day */}
+                  {!hasEntries && (
+                    <div className="py-6 text-center text-xs text-neutral-500 font-medium font-sans">
+                      {lang === 'fr' ? 'Pas de séance ce jour' : 'لا توجد حصص في هذا اليوم'}
                     </div>
                   )}
                 </div>
