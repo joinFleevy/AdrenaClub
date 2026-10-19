@@ -136,6 +136,63 @@ export interface ContentStrings {
     schedule: string;
     location: string;
   };
+  coaches: {
+    title: string;
+    subtitle: string;
+    items: Array<{
+      id: string;
+      name: string;
+      role: string;
+      disciplines: string[];
+      bio: string;
+      image: string;
+    }>;
+  };
+  scheduleFinder: {
+    title: string;
+    subtitle: string;
+    filterAll: string;
+    filterToday: string;
+    dayLabel: string;
+    disciplineLabel: string;
+    classesFound: string;
+    noClasses: string;
+    allDays: string;
+    allDisciplines: string;
+  };
+  calculator: {
+    title: string;
+    subtitle: string;
+    step1Title: string;
+    step2Title: string;
+    muscuOption: string;
+    muscuDesc: string;
+    mixteOption: string;
+    mixteDesc: string;
+    combatLabel: string;
+    sessionsPerWeek: string;
+    totalLabel: string;
+    savingsTag: string;
+    ctaWhatsapp: string;
+  };
+  womensSanctuary: {
+    title: string;
+    subtitle: string;
+    tag: string;
+    features: Array<{
+      title: string;
+      desc: string;
+    }>;
+    cta: string;
+  };
+  faq: {
+    title: string;
+    subtitle: string;
+    items: Array<{
+      q: string;
+      a: string;
+    }>;
+  };
 }
 
 export const content: Record<Language, ContentStrings> = {
@@ -349,6 +406,113 @@ export const content: Record<Language, ContentStrings> = {
       schedule: "Plannings",
       location: "Itinéraire",
     },
+    coaches: {
+      title: "Nos Coachs & Encadrement",
+      subtitle: "Des professionnels passionnés et exigeants pour vous guider vers vos objectifs.",
+      items: [
+        {
+          id: "abdellah",
+          name: "Coach Abdellah",
+          role: "Head Coach Combat & Conditionnement",
+          disciplines: ["Kickboxing", "Préparation Physique", "Cross-Training"],
+          bio: "Spécialiste du combat debout et du conditionnement cardio. Pédagogue rigoureux, il forme athlètes confirmés comme débutants dans une ambiance de respect et de dépassement.",
+          image: "/images/coaches/coach-abdellah.jpg",
+        },
+        {
+          id: "hmimed",
+          name: "Coach Hmimed",
+          role: "Maître Judo & Lutte Olympique",
+          disciplines: ["Judo (Ceinture Noire)", "Lutte", "Préparation Athlétique"],
+          bio: "Éducateur sportif fédéral, axé sur les valeurs fondamentales des arts martiaux : discipline, respect de l'adversaire et solidité technique dès le plus jeune âge.",
+          image: "/images/coaches/coach-hmimed.jpg",
+        },
+        {
+          id: "youth",
+          name: "Coach Jeunesse & Motricité",
+          role: "Instructeur Section Enfants",
+          disciplines: ["Éveil Martial", "Judo Enfants", "Souplesse & Agilité"],
+          bio: "Dédié au développement physique et moral des enfants dès 6 ans. Un encadrement bienveillant et structuré pour bâtir la confiance en soi et l'esprit d'équipe.",
+          image: "/images/coaches/coach-youth.jpg",
+        },
+      ],
+    },
+    scheduleFinder: {
+      title: "Trouvez Votre Créneau",
+      subtitle: "Sélectionnez votre discipline ou votre jour disponible pour afficher instantanément vos séances.",
+      filterAll: "Tous les créneaux",
+      filterToday: "Aujourd'hui",
+      dayLabel: "Jour d'entraînement",
+      disciplineLabel: "Discipline",
+      classesFound: "séance(s) trouvée(s)",
+      noClasses: "Aucune séance pour ces critères. Consultez les plannings complets ci-dessous.",
+      allDays: "Tous les jours",
+      allDisciplines: "Toutes les disciplines",
+    },
+    calculator: {
+      title: "Calculateur d'Abonnement",
+      subtitle: "Composez votre formule sur-mesure et obtenez instantanément votre tarif officiel.",
+      step1Title: "1. Choisissez votre base d'entraînement",
+      step2Title: "2. Ajoutez une discipline de combat ou cross-training",
+      muscuOption: "Musculation Seule",
+      muscuDesc: "Accès libre aux machines de force, charges libres & cardio (06h - 00h)",
+      mixteOption: "Pack Mixte (Recommandé)",
+      mixteDesc: "Musculation illimitée + cours encadrés de combat ou cross-training",
+      combatLabel: "Nombre de séances de combat / cross-training par semaine",
+      sessionsPerWeek: "séance(s) / sem",
+      totalLabel: "Tarif Mensuel Officiel",
+      savingsTag: "Formule Économique — Meilleur Rapport Progrès / Prix",
+      ctaWhatsapp: "Réserver cette formule via WhatsApp",
+    },
+    womensSanctuary: {
+      title: "Créneaux 100% Réservés aux Femmes",
+      subtitle: "Un espace d'entraînement pensé pour votre sérénité, sans compromis sur l'exigence sportive.",
+      tag: "Sanctuaire Féminin • Bab Ezzouar",
+      features: [
+        {
+          title: "Intimité Absolue & Portes Closes",
+          desc: "Accès strictement interdit aux hommes pendant les horaires féminins. Entrées et fenêtres occultées pour une tranquillité totale.",
+        },
+        {
+          title: "Ambiance Calme Sans Aucune Musique",
+          desc: "Zéro musique diffusée. Un cadre apaisant et respectueux favorisant la concentration, l'effort sain et le bien-être.",
+        },
+        {
+          title: "Coachs Féminines Qualifiées",
+          desc: "Séances de musculation guidée, cross-training adapté et kickboxing féminin encadrées exclusivement par des coachs femmes attentives.",
+        },
+        {
+          title: "Vestiaires & Douches Privatisés",
+          desc: "Espaces sanitaires soignés, douches chaudes individuelles et casiers sécurisés pour un confort optimal.",
+        },
+      ],
+      cta: "Découvrir les horaires femmes",
+    },
+    faq: {
+      title: "Questions Fréquentes",
+      subtitle: "Tout ce que vous devez savoir avant de débuter votre entraînement à Adréna Club.",
+      items: [
+        {
+          q: "Les douches et vestiaires sont-ils inclus et entretenus ?",
+          a: "Oui, l'accès aux vestiaires spacieux, aux casiers sécurisés et aux douches chaudes individuelles est inclus dans tous nos abonnements. Les espaces sont nettoyés et désinfectés en continu tout au long de la journée.",
+        },
+        {
+          q: "Comment fonctionne l'accès au sauna traditionnel ?",
+          a: "Notre sauna traditionnel en bois est privatisé par créneau de 1h15 sur réservation préalable auprès de la réception. Cela garantit un calme absolu, une hygiène irréprochable et un moment de récupération exclusif.",
+        },
+        {
+          q: "Puis-je faire une séance d'essai avant de m'abonner ?",
+          a: "Absolument ! Des séances à l'unité (séance libre musculation ou cours de combat) sont disponibles à la réception pour vous permettre de tester les équipements, l'ambiance et la pédagogie des coachs sans engagement.",
+        },
+        {
+          q: "Les débutants complets peuvent-ils intégrer les cours de combat et cross-training ?",
+          a: "Oui, sans aucune hésitation. Les coachs Abdellah et Hmimed adaptent l'intensité selon votre condition physique. L'accent est d'abord mis sur la posture, la technique et la sécurité avant tout entraînement plus poussé.",
+        },
+        {
+          q: "Faut-il apporter son propre matériel pour la boxe et les arts martiaux ?",
+          a: "Pour des raisons d'hygiène et de confort personnel, nous recommandons d'avoir vos propres bandages et gants de boxe (ou kimono pour le judo). Du matériel de base peut être prêté lors de vos premières séances ou acheté à notre boutique d'accueil.",
+        },
+      ],
+    },
   },
   ar: {
     meta: {
@@ -559,6 +723,113 @@ export const content: Record<Language, ContentStrings> = {
       whatsapp: "واتساب",
       schedule: "المواقيت",
       location: "الموقع",
+    },
+    coaches: {
+      title: "فريق التدريب والتأطير التقني",
+      subtitle: "نخبة من المدربين المعتمدين وأبطال الحلبة لمرافقتك نحو أهدافك البدنية والرياضية بكل احترافية.",
+      items: [
+        {
+          id: "abdellah",
+          name: "الكوتش عبد الله (Coach Abdellah)",
+          role: "مدرب الفنون القتالية والكيك بوكسينغ",
+          disciplines: ["كيك بوكسينغ", "ملاكمة إنجليزية", "كروس ترينينغ"],
+          bio: "خبير وممارس متمرس في رياضات القتال مع سنوات من التأطير على الحلبة. يركز على سلامة الرياضي، دقة الضربات والتكنيك، وبناء اللياقة البدنية والصلابة الذهنية.",
+          image: "/images/coaches/coach-abdellah.jpg",
+        },
+        {
+          id: "hmimed",
+          name: "الكوتش حميمد (Coach Hmimed)",
+          role: "أستاذ ومدرب الجودو والمصارعة",
+          disciplines: ["جودو", "حزام أسود", "مصارعة أولمبية"],
+          bio: "حزام أسود وخبير تاتامي متخصص في تقنيات الإسقاط، التثبيت الأرضي وتطوير القوة الوظيفية. يشرف على تدريب الفئات الصغرى والشباب على الانضباط والاحترام.",
+          image: "/images/coaches/coach-hmimed.jpg",
+        },
+        {
+          id: "youth",
+          name: "فريق الإعداد والكروس ترينينغ",
+          role: "مدرب الإعداد البدني والناشئين",
+          disciplines: ["كروس ترينينغ", "لياقة وظيفية", "فئات الناشئين"],
+          bio: "تأطير ديناميكي وحصص WODs حماسية تجمع بين الكارديو والقوة العضلية لتطوير الأداء الحركي والقدرة على التحمل لدى الكبار والصغار.",
+          image: "/images/coaches/coach-youth.jpg",
+        },
+      ],
+    },
+    scheduleFinder: {
+      title: "دليل الحصص والمواقيت الذكي",
+      subtitle: "اعثر بضغطة زر على الحصة المناسبة ليومك وبرنامجك من بين أكثر من 40 حصة أسبوعياً.",
+      filterAll: "كل الحصص",
+      filterToday: "حصص اليوم",
+      dayLabel: "اختر اليوم",
+      disciplineLabel: "الرياضة أو النشاط",
+      classesFound: "حصة تدريبية مبرمجة",
+      noClasses: "لا توجد حصص مبرمجة لهذا اليوم والنشاط المختار. يرجى مراجعة الجدول الكامل.",
+      allDays: "جميع أيام الأسبوع",
+      allDisciplines: "جميع التخصصات",
+    },
+    calculator: {
+      title: "حاسبة الاشتراكات التفاعلية",
+      subtitle: "اختر صيغة تدريبك المناسبة واكتشف تسعيرتك الرسمية فوراً بدون مفاجآت.",
+      step1Title: "1. اختر قاعدة التدريب الخاصة بك",
+      step2Title: "2. أضف حصص الفنون القتالية أو الكروس ترينينغ",
+      muscuOption: "كمال الأجسام فقط (حديد)",
+      muscuDesc: "دخول غير محدود لقاعة الأجهزة، الأوزان الحرة والكارديو (06:00 - 00:00)",
+      mixteOption: "الباقة المدمجة (الأكثر طلباً)",
+      mixteDesc: "كمال أجسام غير محدود + حصص قتالية مؤطرة أو كروس ترينينغ",
+      combatLabel: "عدد حصص القتال / الكروس ترينينغ أسبوعياً",
+      sessionsPerWeek: "حصص / أسبوع",
+      totalLabel: "الاشتراك الشهري الرسمي",
+      savingsTag: "صيغة اقتصادية موفرة — أفضل مردود بدني مقابل السعر",
+      ctaWhatsapp: "تأكيد وتسجيل هذه الباقة عبر واتساب",
+    },
+    womensSanctuary: {
+      title: "فترات 100% مخصصة ومغلقة للنساء",
+      subtitle: "مساحة رياضية متكاملة مصممة لراحتكِ وخصوصيتكِ التامة، بأعلى معايير الانضباط الرياضي.",
+      tag: "فضاء النساء الحصري • باب الزوار",
+      features: [
+        {
+          title: "أبواب مغلقة وخصوصية مطلقة",
+          desc: "منع تام لدخول الرجال خلال الأوقات المخصصة للنساء. نوافذ ومداخل محجوبة بالكامل لتوفير بيئة تدريب آمنة ومريحة.",
+        },
+        {
+          title: "بيئة هادئة ومحترمة بدون موسيقى",
+          desc: "صفر موسيقى نهائياً. جو نقي ومركز يمنحكِ الراحة النفسية والتركيز التام على التمارين والصحة البدنية.",
+        },
+        {
+          title: "مدربات معتمدات ومتخصصات",
+          desc: "تأطير نسائي حصري في كمال الأجسام، الرشاقة، الكروس ترينينغ والكيك بوكسينغ لمتابعة تطوركِ خطوة بخطوة.",
+        },
+        {
+          title: "غرف تبديل ملابس ودوشات خاصة",
+          desc: "مرافق صحية نظيفة وخزائن أمانات ودوشات دافئة تضمن أعلى مستويات الراحة والنظافة المستمرة.",
+        },
+      ],
+      cta: "اطّلعي على جدول أوقات النساء",
+    },
+    faq: {
+      title: "الأسئلة الشائعة",
+      subtitle: "إجابات واضحة ودقيقة عن كل ما يهمك معرفته قبل بدء التدريب في أدرينا كلوب.",
+      items: [
+        {
+          q: "هل غرف تبديل الملابس والدوشات مشمولة ونظيفة ؟",
+          a: "نعم، الدخول إلى غرف تبديل الملابس الفسيحة، الخزائن المؤمنة، والدوشات الفردية الساخنة مشمول في جميع الاشتراكات بدون أي رسوم إضافية. تخضع المرافق للتنظيف والتعقيم المستمر على مدار اليوم.",
+        },
+        {
+          q: "كيف تتم الاستفادة من الساونا التقليدية ؟",
+          a: "الساونا الخشبية التقليدية تكون مغلقة ومخصصة فردياً بحصة مدتها 1 ساعة و15 دقيقة بعد الحجز المسبق في مكتب الاستقبال. يضمن ذلك هدوءاً تاماً ونظافة مثالية وجلسة استرجاع خاصة بك.",
+        },
+        {
+          q: "هل يمكنني إجراء حصة تجريبية قبل الاشتراك الشهري ؟",
+          a: "بالتأكيد ! نوفر إمكانية دفع حصة فردية واحدة (كمال أجسام أو حصة قتالية/كروس ترينينغ) في مكتب الاستقبال لتجربة القاعة، العتاد، وأجواء التدريب بحرية تامة.",
+        },
+        {
+          q: "هل يمكن للمبتدئين تماماً الانضمام لحصص القتال والكروس ترينينغ ؟",
+          a: "نعم بكل تأكيد. يقوم الكوتش عبد الله والكوتش حميمد بملاءمة مستوى التمارين والشدة حسب لياقتك البدنية، مع التركيز التام في البداية على الوضعيات الصحيحة، الحركات الأساسية والأمان قبل أي احتكاك متقدم.",
+        },
+        {
+          q: "هل أحتاج لإحضار عتادي الخاص لحصص الملاكمة والفنون القتالية ؟",
+          a: "لأسباب تتعلق بالنظافة والراحة الشخصية، نوصي بالحصول على ضمادات اليدين (bandages) وقفازات الملاكمة الخاصة بك (أو بدلة الكيمونو للجودو). كما تتوفر معدات أساسية للإعارة في الحصص الأولى أو للشراء من متجر الاستقبال.",
+        },
+      ],
     },
   },
 };

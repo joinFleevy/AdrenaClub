@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Clock, Image as ImageIcon } from 'lucide-react';
 import { Language, content } from '@/data/content';
 import { hommesSchedule, femmesSchedule, enfantsSchedule, ScheduleDay } from '@/data/schedules';
+import ScheduleFinder from '@/components/ScheduleFinder';
 
 interface ScheduleSectionProps {
   lang: Language;
@@ -53,6 +54,9 @@ export default function ScheduleSection({ lang, onOpenPostersModal }: ScheduleSe
             <span>{t.openPosterBtn}</span>
           </button>
         </div>
+
+        {/* Smart Interactive Class Finder */}
+        <ScheduleFinder lang={lang} />
 
         {/* Tab Selection */}
         <div className="flex flex-wrap items-center gap-2 mb-8 p-1.5 bg-adrena-card/80 border border-adrena-border rounded-xl w-fit">

@@ -1,16 +1,16 @@
 'use client';
 
 import React, { useState } from 'react';
-import { MessageCircle, Image as ImageIcon, Sliders } from 'lucide-react';
+import { MessageCircle, Image as ImageIcon } from 'lucide-react';
 import { Language, content } from '@/data/content';
 import {
   musculationPlans,
   crosstrainingPlans,
   combatPlans,
   wellnessPlans,
-  formulesMixtesMatrix,
   PricingPlan,
 } from '@/data/pricing';
+import PricingCalculator from '@/components/PricingCalculator';
 
 interface PricingSectionProps {
   lang: Language;
@@ -22,16 +22,6 @@ type PricingTab = 'musculation' | 'crosstraining' | 'combat' | 'mixtes' | 'welln
 export default function PricingSection({ lang, onOpenPostersModal }: PricingSectionProps) {
   const t = content[lang].tarifs;
   const [activeTab, setActiveTab] = useState<PricingTab>('musculation');
-
-  const [crossSessions, setCrossSessions] = useState<number>(2);
-  const [muscuSessions, setMuscuSessions] = useState<number>(3);
-
-  const getMixedPrice = (cross: number, muscu: number): number => {
-    const item = formulesMixtesMatrix.find((f) => f.cross === cross && f.muscu === muscu);
-    return item ? item.price : 4500;
-  };
-
-  const mixedPrice = getMixedPrice(crossSessions, muscuSessions);
 
   const getPlansForTab = (): PricingPlan[] => {
     switch (activeTab) {
@@ -168,98 +158,7 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
             })}
           </div>
         ) : (
-          /* Formules Mixtes Calculator */
-          <div className="max-w-2xl mx-auto p-6 sm:p-8 rounded-2xl bg-adrena-card border border-adrena-gold/50 shadow-xl">
-            <div className="mb-6">
-              <h3 className="font-display text-2xl font-black text-white uppercase tracking-wide">
-                {lang === 'fr' ? 'Formules Mixtes (Cross + Muscu)' : 'حاسبة الباقات المدمجة'}
-              </h3>
-              <p className="text-xs sm:text-sm text-neutral-300 mt-1.5 leading-relaxed">
-                {lang === 'fr'
-                  ? 'Combinez vos séances de CrossTraining et de Musculation selon vos besoins'
-                  : 'حدد عدد حصص الكروس ترينينغ وكمال الأجسام أسبوعياً'}
-              </p>
-            </div>
-
-            {/* Cross Selector */}
-            <div className="mb-6">
-              <div className="flex justify-between items-center mb-2">
-                <span className="font-display text-xs font-bold text-neutral-300 uppercase tracking-wider">
-                  {lang === 'fr' ? 'CrossTraining / semaine :' : 'كروس ترينينغ / أسبوعياً :'}
-                </span>
-                <span className="font-display text-xs font-bold text-adrena-gold uppercase tracking-wider">
-                  {crossSessions} {lang === 'fr' ? 'séances' : 'حصص'}
-                </span>
-              </div>
-              <div className="grid grid-cols-3 gap-2">
-                {[1, 2, 3].map((val) => (
-                  <button
-                    key={val}
-                    onClick={() => setCrossSessions(val)}
-                    className={`py-2.5 rounded-lg font-display font-bold text-xs sm:text-sm uppercase tracking-wider transition-all border ${
-                      crossSessions === val
-                        ? 'bg-adrena-gold text-black border-adrena-gold font-black'
-                        : 'bg-black/50 text-neutral-400 border-white/5 hover:border-neutral-700'
-                    }`}
-                  >
-                    {val} {lang === 'fr' ? 'séance(s)' : 'حصص'}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Muscu Selector */}
-            <div className="mb-8">
-              <div className="flex justify-between items-center mb-2">
-                <span className="font-display text-xs font-bold text-neutral-300 uppercase tracking-wider">
-                  {lang === 'fr' ? 'Musculation / semaine :' : 'كمال أجسام / أسبوعياً :'}
-                </span>
-                <span className="font-display text-xs font-bold text-adrena-gold uppercase tracking-wider">
-                  {muscuSessions} {lang === 'fr' ? 'séances' : 'حصص'}
-                </span>
-              </div>
-              <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
-                {[1, 2, 3, 4, 5, 6].map((val) => (
-                  <button
-                    key={val}
-                    onClick={() => setMuscuSessions(val)}
-                    className={`py-2.5 rounded-lg font-display font-bold text-xs sm:text-sm uppercase tracking-wider transition-all border ${
-                      muscuSessions === val
-                        ? 'bg-adrena-gold text-black border-adrena-gold font-black'
-                        : 'bg-black/50 text-neutral-400 border-white/5 hover:border-neutral-700'
-                    }`}
-                  >
-                    {val} {lang === 'fr' ? 'séance(s)' : 'أيام'}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Calculated Result */}
-            <div className="p-5 sm:p-6 rounded-xl bg-black/60 border border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
-              <div>
-                <span className="font-display text-xs font-bold text-neutral-400 uppercase tracking-wider block">
-                  {lang === 'fr' ? 'Tarif officiel du club :' : 'السعر الشهري للباقة :'}
-                </span>
-                <div className="flex items-baseline gap-2 mt-1">
-                  <span className="font-display text-4xl font-black text-adrena-gold tabular-nums tracking-normal">
-                    {mixedPrice.toLocaleString()}
-                  </span>
-                  <span className="font-display text-xs font-bold text-neutral-400 uppercase tracking-wider">DA / mois</span>
-                </div>
-              </div>
-
-              <button
-                onClick={() =>
-                  handleWhatsAppOrder(`Mixte (${crossSessions} Cross + ${muscuSessions} Muscu)`, mixedPrice)
-                }
-                className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-adrena-gold hover:bg-adrena-gold-light text-black font-display font-black text-xs sm:text-sm uppercase tracking-wider transition-all whitespace-nowrap shadow-md hover:scale-[1.02]"
-              >
-                <MessageCircle className="w-4 h-4 fill-black" />
-                <span>{lang === 'fr' ? 'Réserver cette formule' : 'طلب هذه الباقة عبر واتساب'}</span>
-              </button>
-            </div>
-          </div>
+          <PricingCalculator lang={lang} />
         )}
       </div>
     </section>

@@ -6,9 +6,12 @@ import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import PanoramaViewer from '@/components/PanoramaViewer';
 import Disciplines from '@/components/Disciplines';
+import WomensSanctuary from '@/components/WomensSanctuary';
+import CoachSection from '@/components/CoachSection';
 import ScheduleSection from '@/components/ScheduleSection';
 import PricingSection from '@/components/PricingSection';
 import ReviewsSection from '@/components/ReviewsSection';
+import FAQSection from '@/components/FAQSection';
 import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
 import MobileStickyBar from '@/components/MobileStickyBar';
@@ -59,14 +62,23 @@ export default function Home() {
       {/* Disciplines & Programs */}
       <Disciplines lang={lang} />
 
-      {/* Interactive Schedules */}
+      {/* Women's Sanctuary Spotlight */}
+      <WomensSanctuary lang={lang} />
+
+      {/* Coach Profiles & Expertise */}
+      <CoachSection lang={lang} />
+
+      {/* Interactive Schedules & Class Finder */}
       <ScheduleSection lang={lang} onOpenPostersModal={handleOpenPostersModal} />
 
-      {/* Interactive Pricing */}
+      {/* Interactive Pricing & Custom Formula Calculator */}
       <PricingSection lang={lang} onOpenPostersModal={handleOpenPostersModal} />
 
       {/* Social Proof & Google Reviews */}
       <ReviewsSection lang={lang} />
+
+      {/* Objection-Busting FAQ Accordion */}
+      <FAQSection lang={lang} />
 
       {/* Location & Contact Section */}
       <ContactSection lang={lang} />
