@@ -4,6 +4,7 @@ import React, { useState, useMemo } from 'react';
 import { Clock, Image as ImageIcon, Dumbbell, Shield, Flame } from 'lucide-react';
 import { Language, content } from '@/data/content';
 import { hommesSchedule, femmesSchedule, enfantsSchedule, ScheduleDay } from '@/data/schedules';
+import LiveStatusEngine from '@/components/LiveStatusEngine';
 
 interface ScheduleSectionProps {
   lang: Language;
@@ -76,52 +77,63 @@ export default function ScheduleSection({ lang, onOpenPostersModal }: ScheduleSe
             <h2 className="font-display text-4xl sm:text-5xl md:text-6xl font-black text-white tracking-tight uppercase leading-none">
               {t.title}
             </h2>
-            <p className="mt-3 text-base text-neutral-300 max-w-[65ch] leading-relaxed">
+            <p className="mt-3 text-base sm:text-lg text-neutral-300 max-w-[65ch] leading-relaxed">
               {t.subtitle}
             </p>
           </div>
 
           <button
             onClick={() => onOpenPostersModal(activeTab)}
-            className="font-display inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-white/5 hover:bg-adrena-gold hover:text-black border border-white/10 text-sm font-bold uppercase tracking-wider text-neutral-200 transition-all self-start md:self-auto"
+            className="font-display inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-white/5 hover:bg-adrena-gold hover:text-black border border-white/10 text-sm font-black uppercase tracking-wider text-neutral-200 transition-all self-start md:self-auto shadow-sm"
           >
             <ImageIcon className="w-4 h-4 text-adrena-gold" />
             <span>{t.openPosterBtn}</span>
           </button>
         </div>
 
+        {/* Live Algerian Status Banner */}
+        <div className="mb-8">
+          <LiveStatusEngine lang={lang} onSelectAudience={(aud) => setActiveTab(aud)} />
+        </div>
+
         {/* Unified Controls Panel: Harmonized colors and layout */}
-        <div className="mb-6 p-3 sm:p-4 rounded-2xl bg-adrena-card/90 border border-adrena-border flex flex-col lg:flex-row lg:items-center justify-between gap-3 shadow-lg">
+        <div className="mb-8 p-3 sm:p-5 rounded-2xl bg-adrena-card border border-adrena-border flex flex-col lg:flex-row lg:items-center justify-between gap-4 shadow-xl">
           {/* Audience Tabs */}
-          <div className="flex items-center gap-1.5 p-1 bg-black/60 border border-white/10 rounded-xl w-fit">
+          <div className="flex items-center gap-2 p-1.5 bg-black/70 border border-white/10 rounded-xl w-fit" role="tablist" aria-label="Catégorie de membres">
             <button
+              role="tab"
+              aria-selected={activeTab === 'hommes'}
               onClick={() => setActiveTab('hommes')}
-              className={`px-3.5 sm:px-4 py-2 rounded-lg font-sans font-bold text-xs uppercase tracking-wider transition-all ${
+              className={`px-4 sm:px-6 py-2.5 rounded-lg font-display font-black text-sm uppercase tracking-wider transition-all ${
                 activeTab === 'hommes'
                   ? 'bg-adrena-gold text-black shadow-md'
-                  : 'text-neutral-400 hover:text-white'
+                  : 'text-neutral-300 hover:text-white'
               }`}
             >
               {t.tabs.hommes}
             </button>
 
             <button
+              role="tab"
+              aria-selected={activeTab === 'femmes'}
               onClick={() => setActiveTab('femmes')}
-              className={`px-3.5 sm:px-4 py-2 rounded-lg font-sans font-bold text-xs uppercase tracking-wider transition-all ${
+              className={`px-4 sm:px-6 py-2.5 rounded-lg font-display font-black text-sm uppercase tracking-wider transition-all ${
                 activeTab === 'femmes'
                   ? 'bg-adrena-gold text-black shadow-md'
-                  : 'text-neutral-400 hover:text-white'
+                  : 'text-neutral-300 hover:text-white'
               }`}
             >
               {t.tabs.femmes}
             </button>
 
             <button
+              role="tab"
+              aria-selected={activeTab === 'enfants'}
               onClick={() => setActiveTab('enfants')}
-              className={`px-3.5 sm:px-4 py-2 rounded-lg font-sans font-bold text-xs uppercase tracking-wider transition-all ${
+              className={`px-4 sm:px-6 py-2.5 rounded-lg font-display font-black text-sm uppercase tracking-wider transition-all ${
                 activeTab === 'enfants'
                   ? 'bg-adrena-gold text-black shadow-md'
-                  : 'text-neutral-400 hover:text-white'
+                  : 'text-neutral-300 hover:text-white'
               }`}
             >
               {t.tabs.enfants}
@@ -129,21 +141,23 @@ export default function ScheduleSection({ lang, onOpenPostersModal }: ScheduleSe
           </div>
 
           {/* Discipline In-Place Filter */}
-          <div className="flex flex-wrap items-center gap-1.5">
+          <div className="flex flex-wrap items-center gap-2" role="radiogroup" aria-label="Filtrer par discipline">
             {disciplinePills.map((p) => {
               const Icon = p.icon;
               const isActive = activeDiscipline === p.id;
               return (
                 <button
                   key={p.id}
+                  role="radio"
+                  aria-checked={isActive}
                   onClick={() => setActiveDiscipline(p.id)}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-sans font-semibold transition-all ${
+                  className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-bold transition-all ${
                     isActive
-                      ? 'bg-adrena-gold text-black font-bold shadow-md'
-                      : 'bg-black/50 text-neutral-300 hover:text-white hover:bg-neutral-800 border border-white/10'
+                      ? 'bg-adrena-gold text-black font-black shadow-md ring-1 ring-adrena-gold'
+                      : 'bg-black/50 text-neutral-200 hover:text-white hover:bg-neutral-800 border border-white/10'
                   }`}
                 >
-                  {Icon && <Icon className="w-3.5 h-3.5" />}
+                  {Icon && <Icon className="w-4 h-4" />}
                   <span>{p.label}</span>
                 </button>
               );
@@ -151,13 +165,13 @@ export default function ScheduleSection({ lang, onOpenPostersModal }: ScheduleSe
           </div>
         </div>
 
-        {/* Note Line */}
-        <div className="mb-6 text-xs sm:text-sm text-neutral-300 flex items-center gap-2 font-medium">
-          <span className="w-2 h-2 rounded-full bg-adrena-gold flex-shrink-0" />
+        {/* Note Line with High Contrast */}
+        <div className="mb-6 text-sm text-neutral-200 flex items-center gap-2.5 font-semibold bg-white/5 py-2.5 px-4 rounded-xl border border-white/5 w-fit">
+          <span className="w-2.5 h-2.5 rounded-full bg-adrena-gold flex-shrink-0" />
           <span>{t.notes[activeTab]}</span>
         </div>
 
-        {/* Unified 7-Day Grid: Clean, High Legibility, No Text Wrapping */}
+        {/* Unified 7-Day Grid: Clean, High Legibility, No Squinting */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {currentSchedule.map((day) => {
             const isToday = day.dayId === todayId;
@@ -183,20 +197,20 @@ export default function ScheduleSection({ lang, onOpenPostersModal }: ScheduleSe
             return (
               <div
                 key={day.dayId}
-                className={`flex flex-col justify-between p-5 rounded-2xl border transition-all ${
+                className={`flex flex-col justify-between p-5 sm:p-6 rounded-2xl border transition-all ${
                   isToday
-                    ? 'bg-adrena-card border-adrena-gold/80 shadow-xl ring-1 ring-adrena-gold/30'
-                    : 'bg-adrena-card/70 border-adrena-border hover:border-neutral-700'
+                    ? 'bg-adrena-card border-adrena-gold shadow-2xl ring-1 ring-adrena-gold/40'
+                    : 'bg-adrena-card/80 border-adrena-border hover:border-neutral-600'
                 }`}
               >
                 <div>
                   {/* Day Header */}
-                  <div className="flex items-center justify-between pb-3.5 mb-3.5 border-b border-white/5">
-                    <span className="font-sans text-base font-extrabold text-white uppercase tracking-wider">
+                  <div className="flex items-center justify-between pb-3.5 mb-3.5 border-b border-white/10">
+                    <span className="font-display text-xl sm:text-2xl font-black text-white uppercase tracking-wider">
                       {lang === 'fr' ? day.dayNameFr : day.dayNameAr}
                     </span>
                     {isToday && (
-                      <span className="font-sans px-2.5 py-0.5 rounded-full bg-adrena-gold/15 border border-adrena-gold/40 text-adrena-gold text-[10px] font-bold uppercase tracking-wider">
+                      <span className="font-sans px-3 py-1 rounded-full bg-adrena-gold text-black text-xs font-black uppercase tracking-wider shadow-sm">
                         {lang === 'fr' ? "Aujourd'hui" : 'اليوم'}
                       </span>
                     )}
@@ -204,24 +218,24 @@ export default function ScheduleSection({ lang, onOpenPostersModal }: ScheduleSe
 
                   {/* Coached Activities */}
                   {visibleActivities.length > 0 && (
-                    <div className="space-y-2 mb-3">
+                    <div className="space-y-2.5 mb-3.5">
                       {visibleActivities.map((act, idx) => (
                         <div
                           key={idx}
-                          className="p-3 rounded-xl bg-black/60 border border-white/10 hover:border-adrena-gold/30 transition-colors"
+                          className="p-3.5 rounded-xl bg-black/70 border border-white/10 hover:border-adrena-gold/40 transition-colors"
                         >
-                          <div className="flex items-start justify-between gap-2 mb-1.5">
-                            <span className="text-sm font-bold text-white font-sans leading-tight">
+                          <div className="flex items-start justify-between gap-2 mb-2">
+                            <span className="text-base font-bold text-white font-sans leading-snug">
                               {lang === 'fr' ? act.nameFr : act.nameAr}
                             </span>
                             {act.badge && (
-                              <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-white/10 text-neutral-300 uppercase tracking-wider font-sans flex-shrink-0">
+                              <span className="text-xs font-bold px-2.5 py-0.5 rounded-md bg-white/10 text-neutral-200 border border-white/10 uppercase tracking-wider font-sans flex-shrink-0">
                                 {act.badge}
                               </span>
                             )}
                           </div>
-                          <div className="flex items-center gap-1.5 text-xs font-sans font-bold text-adrena-gold tabular-nums">
-                            <Clock className="w-3.5 h-3.5 text-adrena-gold/80 flex-shrink-0" />
+                          <div className="flex items-center gap-2 text-sm font-sans font-black text-adrena-gold tabular-nums">
+                            <Clock className="w-4 h-4 text-adrena-gold flex-shrink-0" />
                             <span>{act.time.replace('-', '–')}</span>
                           </div>
                         </div>
@@ -231,26 +245,26 @@ export default function ScheduleSection({ lang, onOpenPostersModal }: ScheduleSe
 
                   {/* Musculation open access (Clean 1-line layout, zero text wrapping) */}
                   {showMuscu && (
-                    <div className="space-y-1.5">
+                    <div className="space-y-2">
                       {day.muscuSlots.map((rawSlot, idx) => {
                         const { time, period } = parseMuscuSlot(rawSlot);
                         return (
                           <div
                             key={idx}
-                            className="flex items-center justify-between px-3 py-2 rounded-xl bg-neutral-900/70 border border-white/5 text-xs font-sans"
+                            className="flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-neutral-900/90 border border-white/10 text-sm font-sans"
                           >
-                            <div className="flex items-center gap-1.5 text-neutral-400 min-w-0 pr-2 rtl:pr-0 rtl:pl-2">
-                              <Dumbbell className="w-3.5 h-3.5 text-adrena-gold/80 flex-shrink-0" />
-                              <span className="font-medium truncate">
+                            <div className="flex items-center gap-2 text-neutral-200 min-w-0 pr-2 rtl:pr-0 rtl:pl-2">
+                              <Dumbbell className="w-4 h-4 text-adrena-gold flex-shrink-0" />
+                              <span className="font-bold truncate text-sm">
                                 {lang === 'fr' ? 'Musculation' : 'حديد حر'}
                                 {period && (
-                                  <span className="text-[10px] text-neutral-500 ml-1 rtl:ml-0 rtl:mr-1 font-normal">
+                                  <span className="text-xs font-semibold text-neutral-300 ml-1.5 rtl:ml-0 rtl:mr-1.5">
                                     ({period})
                                   </span>
                                 )}
                               </span>
                             </div>
-                            <span className="font-sans font-bold text-neutral-200 tabular-nums text-xs whitespace-nowrap flex-shrink-0">
+                            <span className="font-sans font-black text-adrena-gold tabular-nums text-sm whitespace-nowrap flex-shrink-0">
                               {time}
                             </span>
                           </div>
@@ -261,7 +275,7 @@ export default function ScheduleSection({ lang, onOpenPostersModal }: ScheduleSe
 
                   {/* Empty state when discipline has no sessions this day */}
                   {!hasEntries && (
-                    <div className="py-6 text-center text-xs text-neutral-500 font-medium font-sans">
+                    <div className="py-8 text-center text-sm text-neutral-400 font-semibold font-sans">
                       {lang === 'fr' ? 'Pas de séance ce jour' : 'لا توجد حصص في هذا اليوم'}
                     </div>
                   )}
@@ -274,3 +288,4 @@ export default function ScheduleSection({ lang, onOpenPostersModal }: ScheduleSe
     </section>
   );
 }
+

@@ -104,8 +104,16 @@ export default function PanoramaViewer({ lang }: PanoramaViewerProps) {
     meshRef.current = mesh;
     scene.add(mesh);
 
-    // Animation loop
+    let isVisible = true;
+    let isLoopRunning = false;
+
+    // Throttled animation loop (only renders when visible in viewport)
     const animate = () => {
+      if (!isVisible) {
+        isLoopRunning = false;
+        return;
+      }
+      isLoopRunning = true;
       reqIdRef.current = requestAnimationFrame(animate);
 
       if (isAutoRotating && !isUserInteracting.current) {
@@ -123,7 +131,19 @@ export default function PanoramaViewer({ lang }: PanoramaViewerProps) {
       camera.lookAt(cameraTarget);
       renderer.render(scene, camera);
     };
-    animate();
+
+    // Viewport intersection observer to save mobile battery
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        isVisible = entry.isIntersecting;
+        if (isVisible && !isLoopRunning) {
+          animate();
+        }
+      },
+      { threshold: 0.1 }
+    );
+    observer.observe(container);
 
     const handleResize = () => {
       if (!container || !renderer || !camera) return;
@@ -137,6 +157,7 @@ export default function PanoramaViewer({ lang }: PanoramaViewerProps) {
     window.addEventListener('resize', handleResize);
 
     return () => {
+      observer.disconnect();
       window.removeEventListener('resize', handleResize);
       if (reqIdRef.current) cancelAnimationFrame(reqIdRef.current);
       renderer.dispose();
@@ -288,13 +309,13 @@ export default function PanoramaViewer({ lang }: PanoramaViewerProps) {
           {/* Integrated Floor Navigation Dock (Directly placed inside the bottom of the viewer) */}
           <div className="absolute bottom-4 left-4 right-4 z-20 flex flex-col sm:flex-row items-center justify-between gap-3 pointer-events-none">
             {/* Hand drag hint */}
-            <div className="hidden sm:flex items-center gap-2 bg-black/80 backdrop-blur-md px-3.5 py-1.5 rounded-lg border border-white/10 text-[11px] text-neutral-300 pointer-events-auto">
-              <Eye className="w-3.5 h-3.5 text-adrena-gold" />
+            <div className="hidden sm:flex items-center gap-2 bg-black/85 backdrop-blur-md px-4 py-2 rounded-xl border border-white/15 text-xs font-bold text-neutral-200 pointer-events-auto shadow-lg">
+              <Eye className="w-4 h-4 text-adrena-gold" />
               <span>{t.tip}</span>
             </div>
 
             {/* The 3 Floor Switchers: Integrated directly into the viewer */}
-            <div className="flex items-center gap-2 bg-black/90 backdrop-blur-md p-1.5 rounded-xl border border-white/15 pointer-events-auto max-w-full overflow-x-auto">
+            <div className="flex items-center gap-2 bg-black/90 backdrop-blur-md p-2 rounded-2xl border border-white/20 pointer-events-auto max-w-full overflow-x-auto shadow-2xl">
               {(['rdc', 'muscu', 'combat'] as PanoKey[]).map((key) => {
                 const floor = t.floors[key];
                 const isActive = activePano === key;
@@ -302,13 +323,13 @@ export default function PanoramaViewer({ lang }: PanoramaViewerProps) {
                   <button
                     key={key}
                     onClick={() => switchPano(key)}
-                    className={`flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg font-display text-xs sm:text-sm font-black uppercase tracking-wider transition-all whitespace-nowrap ${
+                    className={`flex items-center gap-2 px-4 py-2.5 rounded-xl font-display text-sm font-black uppercase tracking-wider transition-all whitespace-nowrap ${
                       isActive
                         ? 'bg-adrena-gold text-black shadow-md'
-                        : 'text-neutral-300 hover:text-white hover:bg-white/10'
+                        : 'text-neutral-200 hover:text-white hover:bg-white/10'
                     }`}
                   >
-                    <Building className="w-3.5 h-3.5" />
+                    <Building className="w-4 h-4" />
                     <span>{floor.title}</span>
                   </button>
                 );
@@ -318,8 +339,8 @@ export default function PanoramaViewer({ lang }: PanoramaViewerProps) {
         </div>
 
         {/* Current Active Room Description */}
-        <div className="mt-4 px-2 text-xs sm:text-sm text-neutral-400">
-          <strong className="text-white font-bold">{t.floors[activePano].title} :</strong>{' '}
+        <div className="mt-4 px-2 text-sm sm:text-base text-neutral-300 font-medium">
+          <strong className="text-white font-extrabold">{t.floors[activePano].title} :</strong>{' '}
           {t.floors[activePano].desc}
         </div>
       </div>

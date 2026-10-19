@@ -73,18 +73,20 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
         </div>
 
         {/* Tab Selection */}
-        <div className="flex flex-wrap items-center gap-2 mb-10 p-1.5 bg-adrena-card/80 border border-adrena-border rounded-xl w-fit">
+        <div className="flex flex-wrap items-center gap-2 mb-10 p-2 bg-adrena-card border border-adrena-border rounded-2xl w-fit" role="tablist" aria-label="Catégories de tarifs">
           {(['musculation', 'crosstraining', 'combat', 'mixtes', 'wellness'] as PricingTab[]).map(
             (tab) => {
               const isActive = activeTab === tab;
               return (
                 <button
                   key={tab}
+                  role="tab"
+                  aria-selected={isActive}
                   onClick={() => setActiveTab(tab)}
-                  className={`px-4 sm:px-5 py-2.5 rounded-lg font-display font-black text-xs sm:text-sm uppercase tracking-wider transition-all ${
+                  className={`px-5 sm:px-6 py-3 rounded-xl font-display font-black text-sm uppercase tracking-wider transition-all ${
                     isActive
                       ? 'bg-adrena-gold text-black shadow-md'
-                      : 'text-neutral-400 hover:text-white'
+                      : 'text-neutral-300 hover:text-white hover:bg-white/5'
                   }`}
                 >
                   {t.tabs[tab]}
@@ -106,36 +108,36 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
               return (
                 <div
                   key={plan.id}
-                  className={`relative flex flex-col justify-between p-6 sm:p-7 rounded-2xl border transition-all ${
+                  className={`relative flex flex-col justify-between p-6 sm:p-8 rounded-2xl border transition-all ${
                     plan.isPopular
-                      ? 'bg-adrena-card border-adrena-gold shadow-xl'
-                      : 'bg-adrena-card/70 border-adrena-border hover:border-neutral-700'
+                      ? 'bg-adrena-card border-adrena-gold shadow-2xl ring-1 ring-adrena-gold/40'
+                      : 'bg-adrena-card/80 border-adrena-border hover:border-neutral-600'
                   }`}
                 >
                   <div>
                     <div className="flex items-center justify-between gap-2 mb-2">
-                      <h3 className="font-display text-2xl font-black text-white uppercase tracking-wide">{name}</h3>
+                      <h3 className="font-display text-2xl sm:text-3xl font-black text-white uppercase tracking-wide">{name}</h3>
                       {plan.isPopular && (
-                        <span className="font-display px-2 py-0.5 rounded bg-adrena-gold text-black text-[10px] font-black uppercase tracking-wider">
+                        <span className="font-display px-3 py-1 rounded-full bg-adrena-gold text-black text-xs font-black uppercase tracking-wider shadow-sm">
                           {t.popular}
                         </span>
                       )}
                     </div>
-                    <p className="text-xs sm:text-sm text-neutral-400 font-medium mb-6">{freq}</p>
+                    <p className="text-sm sm:text-base text-neutral-300 font-semibold mb-6">{freq}</p>
 
                     {/* Price */}
-                    <div className="mb-6 pb-6 border-b border-white/5 flex items-baseline gap-2">
-                      <span className="font-display text-4xl sm:text-5xl font-black text-adrena-gold tabular-nums tracking-normal">
-                        {plan.price.toLocaleString()}
+                    <div className="mb-6 pb-6 border-b border-white/10 flex items-baseline gap-2.5">
+                      <span className="font-display text-4xl sm:text-6xl font-black text-adrena-gold tabular-nums tracking-normal">
+                        {plan.price.toLocaleString('fr-FR')}
                       </span>
-                      <span className="text-xs font-bold text-neutral-400 uppercase tracking-wider">{period}</span>
+                      <span className="text-sm sm:text-base font-bold text-neutral-300 uppercase tracking-wider">{period}</span>
                     </div>
 
                     {/* Features */}
-                    <ul className="space-y-2.5 mb-8">
+                    <ul className="space-y-3 mb-8">
                       {feats.map((feat, idx) => (
-                        <li key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-neutral-300">
-                          <span className="w-1.5 h-1.5 rounded-full bg-adrena-gold mt-1.5 flex-shrink-0" />
+                        <li key={idx} className="flex items-start gap-3 text-sm sm:text-base text-neutral-200">
+                          <span className="w-2 h-2 rounded-full bg-adrena-gold mt-2 flex-shrink-0" />
                           <span>{feat}</span>
                         </li>
                       ))}
@@ -144,13 +146,13 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
 
                   <button
                     onClick={() => handleWhatsAppOrder(name, plan.price)}
-                    className={`w-full flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl font-display font-black text-xs sm:text-sm uppercase tracking-wider transition-all ${
+                    className={`w-full flex items-center justify-center gap-2.5 py-4 px-5 rounded-xl font-display font-black text-sm uppercase tracking-wider transition-all shadow-md active:scale-95 ${
                       plan.isPopular
-                        ? 'bg-adrena-gold hover:bg-adrena-gold-light text-black shadow-md'
+                        ? 'bg-adrena-gold hover:bg-adrena-gold-light text-black'
                         : 'bg-white/10 hover:bg-adrena-gold hover:text-black text-white'
                     }`}
                   >
-                    <MessageCircle className="w-4 h-4" />
+                    <MessageCircle className="w-4 h-4 fill-current" />
                     <span>{t.choosePlan}</span>
                   </button>
                 </div>

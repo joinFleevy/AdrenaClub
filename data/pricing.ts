@@ -197,8 +197,11 @@ export const formulesMixtesMatrix = [
   { cross: 2, muscu: 3, price: 4800 },
   { cross: 2, muscu: 4, price: 5000 },
   { cross: 2, muscu: 5, price: 5500 },
+  { cross: 2, muscu: 6, price: 6000 },
   { cross: 3, muscu: 1, price: 4000 },
   { cross: 3, muscu: 2, price: 4800 },
   { cross: 3, muscu: 3, price: 5000 },
   { cross: 3, muscu: 4, price: 5500 },
+  { cross: 3, muscu: 5, price: 6000 },
+  { cross: 3, muscu: 6, price: 6500 },
 ];

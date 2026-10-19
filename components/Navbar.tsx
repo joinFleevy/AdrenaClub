@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { Phone, MapPin, Globe, Menu, X, MessageCircle, Clock, ShieldCheck } from 'lucide-react';
 import { Language, content } from '@/data/content';
+import { computeAlgiersLiveStatus, LiveStatusData } from '@/components/LiveStatusEngine';
 
 interface NavbarProps {
   lang: Language;
@@ -14,6 +15,15 @@ export default function Navbar({ lang, onToggleLang }: NavbarProps) {
   const t = content[lang];
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [liveStatus, setLiveStatus] = useState<LiveStatusData | null>(null);
+
+  useEffect(() => {
+    setLiveStatus(computeAlgiersLiveStatus());
+    const interval = setInterval(() => {
+      setLiveStatus(computeAlgiersLiveStatus());
+    }, 30000);
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -53,15 +63,35 @@ export default function Navbar({ lang, onToggleLang }: NavbarProps) {
 
           <div className="flex items-center gap-3">
             {/* Live Open Status badge */}
-            <div className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 font-semibold text-[11px]">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              <span>{t.topBar.statusOpen}</span>
+            <div
+              className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold border transition-colors ${
+                liveStatus?.audience === 'femmes'
+                  ? 'bg-fuchsia-950/70 border-fuchsia-500/40 text-fuchsia-300'
+                  : liveStatus?.isOpen
+                  ? 'bg-emerald-950/70 border-emerald-500/40 text-emerald-400'
+                  : 'bg-neutral-900 border-neutral-700 text-neutral-400'
+              }`}
+            >
+              <span
+                className={`w-2 h-2 rounded-full ${
+                  liveStatus?.audience === 'femmes'
+                    ? 'bg-fuchsia-400 animate-pulse'
+                    : liveStatus?.isOpen
+                    ? 'bg-emerald-400 animate-pulse'
+                    : 'bg-neutral-500'
+                }`}
+              />
+              <span className="font-sans">
+                {lang === 'ar'
+                  ? (liveStatus?.badgeLabelAr || 'مفتوح')
+                  : (liveStatus?.badgeLabelFr || 'Ouvert')}
+              </span>
             </div>
 
             {/* Language Switcher */}
             <button
               onClick={onToggleLang}
-              className="flex items-center gap-1 px-2.5 py-1 rounded-md bg-white/5 hover:bg-white/10 text-neutral-200 border border-white/10 transition-colors font-bold text-xs"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-neutral-200 border border-white/10 transition-colors font-bold text-xs"
               title="Changer de langue / تغيير اللغة"
             >
               <Globe className="w-3.5 h-3.5 text-adrena-gold" />
@@ -87,6 +117,7 @@ export default function Navbar({ lang, onToggleLang }: NavbarProps) {
                 src="/logo.png"
                 alt="Adrena Club Logo"
                 fill
+                sizes="48px"
                 className="object-contain"
                 priority
               />
@@ -100,7 +131,7 @@ export default function Navbar({ lang, onToggleLang }: NavbarProps) {
                   CLUB
                 </span>
               </div>
-              <span className="font-display text-[11px] text-neutral-400 tracking-wider font-bold uppercase -mt-0.5 hidden sm:block">
+              <span className="font-display text-xs text-neutral-300 tracking-wider font-extrabold uppercase -mt-0.5 hidden sm:block">
                 {lang === 'fr' ? 'BAB EZZOUAR • 2 ÉTAGES' : 'باب الزوار • طابقان'}
               </span>
             </div>

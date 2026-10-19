@@ -20,7 +20,7 @@ export default function Footer({ lang }: FooterProps) {
           <div className="space-y-4">
             <div className="flex items-center gap-3">
               <div className="relative w-10 h-10 flex-shrink-0">
-                <Image src="/logo.png" alt="Adrena Club Logo" fill className="object-contain" />
+                <Image src="/logo.png" alt="Adrena Club Logo" fill sizes="40px" className="object-contain" />
               </div>
               <div className="flex items-center gap-1.5">
                 <span className="font-display text-2xl font-black text-white tracking-widest uppercase">ADRENA</span>
@@ -89,13 +89,27 @@ export default function Footer({ lang }: FooterProps) {
               {lang === 'fr' ? 'Activités du Club' : 'الأنشطة المتاحة'}
             </h4>
             <ul className="space-y-2 text-xs sm:text-sm text-neutral-400">
-              <li>• Musculation & Plateau Force</li>
-              <li>• CrossTraining & Fitness (WODs)</li>
-              <li>• Kickboxing (Hommes & Femmes)</li>
-              <li>• Lutte Olympique & Combat</li>
-              <li>• Académie Judo & Boxe Enfants</li>
-              <li>• Sauna, Piscine & Récupération</li>
-              <li>• Suivi Nutritionnel Personnalisé</li>
+              {lang === 'fr' ? (
+                <>
+                  <li>• Musculation & Plateau Force</li>
+                  <li>• CrossTraining & WODs</li>
+                  <li>• Kickboxing (Hommes & Femmes)</li>
+                  <li>• Lutte Olympique & Combat</li>
+                  <li>• Académie Judo & Boxe Enfants</li>
+                  <li>• Sauna & Récupération</li>
+                  <li>• Suivi Nutritionnel Personnalisé</li>
+                </>
+              ) : (
+                <>
+                  <li>• كمال الأجسام وقاعة الأوزان</li>
+                  <li>• كروس ترينينغ ولياقة بدنية</li>
+                  <li>• كيك بوكسينغ (رجال ونساء)</li>
+                  <li>• مصارعة أولمبية وفنون قتالية</li>
+                  <li>• أكاديمية جودو وملاكمة للأطفال</li>
+                  <li>• ساونا واسترجاع عضلي</li>
+                  <li>• متابعة غذائية مخصصة</li>
+                </>
+              )}
             </ul>
           </div>
 
@@ -111,7 +125,7 @@ export default function Footer({ lang }: FooterProps) {
               </li>
               <li className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-adrena-gold flex-shrink-0" />
-                <a href="tel:0771570378" className="hover:text-adrena-gold font-mono tabular-nums font-bold">
+                <a href="tel:+213771570378" className="hover:text-adrena-gold font-mono tabular-nums font-bold">
                   0771 57 03 78
                 </a>
               </li>
@@ -155,9 +169,17 @@ export default function Footer({ lang }: FooterProps) {
 
         {/* Bottom Copyright */}
         <div className="pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-neutral-500 text-center sm:text-left rtl:sm:text-right">
-          <p>© {new Date().getFullYear()} Adréna Club. Tous droits réservés.</p>
+          <p>
+            {lang === 'fr'
+              ? `© ${new Date().getFullYear()} Adréna Club Bab Ezzouar. Tous droits réservés.`
+              : `© ${new Date().getFullYear()} نادي أدرينا كلوب باب الزوار. جميع الحقوق محفوظة.`}
+          </p>
           <p className="flex items-center gap-1 justify-center">
-            <span>Conçu avec passion pour la performance sportive</span>
+            <span>
+              {lang === 'fr'
+                ? 'Conçu pour la haute performance sportive'
+                : 'مُصمم للأداء الرياضي العالي والنزاهة الرياضية'}
+            </span>
           </p>
         </div>
       </div>

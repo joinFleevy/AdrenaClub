@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { X, ChevronLeft, ChevronRight, Download, ZoomIn } from 'lucide-react';
 import { Language } from '@/data/content';
@@ -56,6 +56,28 @@ export default function OfficialPostersModal({
     return idx !== -1 ? idx : 0;
   });
 
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose();
+      } else if (e.key === 'ArrowLeft') {
+        setCurrentIndex((prev) => (prev > 0 ? prev - 1 : posters.length - 1));
+      } else if (e.key === 'ArrowRight') {
+        setCurrentIndex((prev) => (prev < posters.length - 1 ? prev + 1 : 0));
+      }
+    };
+
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
   const currentPoster = posters[currentIndex];
@@ -74,6 +96,9 @@ export default function OfficialPostersModal({
     <div
       onClick={onClose}
       className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-3 sm:p-6 animate-in fade-in duration-200"
+      role="dialog"
+      aria-modal="true"
+      aria-label={lang === 'fr' ? currentPoster.titleFr : currentPoster.titleAr}
     >
       <div
         onClick={(e) => e.stopPropagation()}
@@ -114,8 +139,9 @@ export default function OfficialPostersModal({
           <div className="relative w-full h-[380px] sm:h-[520px]">
             <Image
               src={currentPoster.src}
-              alt={currentPoster.titleFr}
+              alt={lang === 'fr' ? currentPoster.titleFr : currentPoster.titleAr}
               fill
+              sizes="(max-width: 1024px) 100vw, 896px"
               className="object-contain"
               priority
             />
@@ -125,14 +151,14 @@ export default function OfficialPostersModal({
           <button
             onClick={handlePrev}
             className="absolute left-3 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-black/70 hover:bg-adrena-gold text-white hover:text-black transition-all border border-white/10"
-            aria-label="Précédent"
+            aria-label={lang === 'fr' ? 'Précédent' : 'السابق'}
           >
             <ChevronLeft className="w-6 h-6" />
           </button>
           <button
             onClick={handleNext}
             className="absolute right-3 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-black/70 hover:bg-adrena-gold text-white hover:text-black transition-all border border-white/10"
-            aria-label="Suivant"
+            aria-label={lang === 'fr' ? 'Suivant' : 'التالي'}
           >
             <ChevronRight className="w-6 h-6" />
           </button>
@@ -150,7 +176,7 @@ export default function OfficialPostersModal({
                   : 'border-white/10 opacity-50 hover:opacity-100'
               }`}
             >
-              <Image src={p.src} alt={p.titleFr} fill className="object-cover" />
+              <Image src={p.src} alt={lang === 'fr' ? p.titleFr : p.titleAr} fill sizes="64px" className="object-cover" />
             </button>
           ))}
         </div>

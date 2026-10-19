@@ -30,6 +30,12 @@ export default function Home() {
     }
   }, []);
 
+  // Sync documentElement lang and dir for screen readers and bidi layout
+  useEffect(() => {
+    document.documentElement.lang = lang;
+    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+  }, [lang]);
+
   const handleToggleLang = () => {
     const nextLang: Language = lang === 'fr' ? 'ar' : 'fr';
     setLang(nextLang);
