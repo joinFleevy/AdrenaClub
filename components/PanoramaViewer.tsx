@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
-import { Maximize2, Minimize2, RotateCcw, Play, Pause, MapPin, Eye, Building } from 'lucide-react';
+import { Maximize2, Minimize2, RotateCcw, Play, Pause, MapPin, Eye, Building, Compass } from 'lucide-react';
 import { Language, content } from '@/data/content';
 
 interface PanoramaViewerProps {
@@ -23,6 +23,7 @@ export default function PanoramaViewer({ lang }: PanoramaViewerProps) {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isAutoRotating, setIsAutoRotating] = useState<boolean>(true);
   const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
+  const [isTouchActive, setIsTouchActive] = useState<boolean>(false);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const sceneRef = useRef<THREE.Scene | null>(null);
@@ -181,6 +182,9 @@ export default function PanoramaViewer({ lang }: PanoramaViewerProps) {
   };
 
   const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (e.pointerType === 'touch' && !isTouchActive) {
+      return;
+    }
     isUserInteracting.current = true;
     onPointerDownPointerX.current = e.clientX;
     onPointerDownPointerY.current = e.clientY;
@@ -296,8 +300,44 @@ export default function PanoramaViewer({ lang }: PanoramaViewerProps) {
             onPointerMove={onPointerMove}
             onPointerUp={onPointerUp}
             onWheel={onWheel}
-            className="w-full h-[450px] sm:h-[550px] md:h-[650px] cursor-grab active:cursor-grabbing select-none"
+            style={{ touchAction: isTouchActive ? 'none' : 'pan-y' }}
+            className={`w-full h-[450px] sm:h-[550px] md:h-[650px] select-none ${
+              isTouchActive ? 'cursor-grab active:cursor-grabbing' : ''
+            }`}
           />
+
+          {/* Mobile Tap-To-Interact Barrier (Prevents Scroll Trapping) */}
+          {!isTouchActive && (
+            <div
+              onClick={() => setIsTouchActive(true)}
+              className="md:hidden absolute inset-0 z-25 bg-black/40 backdrop-blur-[2px] flex flex-col items-center justify-center p-6 text-center cursor-pointer"
+            >
+              <div className="p-4 rounded-2xl bg-[#111215]/95 border border-adrena-gold/50 shadow-2xl flex flex-col items-center gap-2 max-w-xs">
+                <div className="w-10 h-10 rounded-full bg-adrena-gold/20 text-adrena-gold flex items-center justify-center animate-pulse">
+                  <Compass className="w-5 h-5" />
+                </div>
+                <p className="font-display font-black text-base uppercase text-adrena-bone tracking-wide">
+                  {lang === 'fr' ? 'Touchez pour activer la visite 360°' : 'المس لتفعيل جولة 360°'}
+                </p>
+                <p className="text-xs text-adrena-stone font-medium">
+                  {lang === 'fr'
+                    ? 'Activez la vue panoramique sans bloquer le défilement de la page'
+                    : 'تحريك الغرفة بحرية بدون إيقاف تمرير الصفحة'}
+                </p>
+              </div>
+            </div>
+          )}
+
+          {/* Active Mobile Lock Button to Resume Page Scrolling */}
+          {isTouchActive && (
+            <button
+              onClick={() => setIsTouchActive(false)}
+              className="md:hidden absolute top-4 left-4 z-30 flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#111215]/95 border border-adrena-border text-xs font-bold text-adrena-bone shadow-lg"
+            >
+              <RotateCcw className="w-3.5 h-3.5 text-adrena-gold" />
+              <span>{lang === 'fr' ? 'Verrouiller / Défiler' : 'قفل / تمرير الصفحة'}</span>
+            </button>
+          )}
 
           {isLoading && (
             <div className="absolute inset-0 z-30 bg-black/90 flex flex-col items-center justify-center gap-3">

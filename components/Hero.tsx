@@ -49,6 +49,10 @@ export default function Hero({ lang }: HeroProps) {
               <span className="text-adrena-bone">
                 {lang === 'fr' ? 'Ouvert 7j/7 jusqu\'à minuit (00:00)' : 'مفتوح 7/7 أيام حتى منتصف الليل'}
               </span>
+              <span className="text-neutral-600 hidden sm:inline">•</span>
+              <span className="text-adrena-gold font-black">
+                {lang === 'fr' ? 'Dès 3 000 DA/mois' : 'ابتداءً من 3 000 دج/شهر'}
+              </span>
             </div>
 
             {/* Dual CTAs */}
@@ -64,11 +68,11 @@ export default function Hero({ lang }: HeroProps) {
               </a>
 
               <a
-                href="#tour-360"
+                href="#tarifs"
                 className="flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl bg-adrena-card hover:bg-adrena-surface text-adrena-bone hover:text-adrena-gold border border-adrena-border font-display font-bold text-base uppercase tracking-wider transition-all"
               >
                 <Compass className="w-5 h-5 text-adrena-gold" />
-                <span>{t.ctaSecondary}</span>
+                <span>{lang === 'fr' ? 'Formules & Tarifs' : 'الأسعار والاشتراكات'}</span>
               </a>
             </div>
           </div>

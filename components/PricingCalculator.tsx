@@ -106,6 +106,34 @@ export default function PricingCalculator({ lang }: PricingCalculatorProps) {
         </div>
       </div>
 
+      {/* Real-time Mobile Price Bar (Visible only on mobile screens so user never loses sight of total) */}
+      <div className="block lg:hidden mb-6 p-4 rounded-xl bg-adrena-surface border border-adrena-gold/50 shadow-md">
+        <div className="flex items-center justify-between gap-3">
+          <div>
+            <span className="text-[11px] font-bold uppercase tracking-wider text-adrena-stone block">
+              {isAr ? 'المجموع المحسوب' : 'Total en temps réel'}
+            </span>
+            <div className="flex items-baseline gap-1.5">
+              <span className="font-display text-2xl font-black text-adrena-gold">
+                {totalPrice.toLocaleString('fr-FR')}
+              </span>
+              <span className="text-xs font-bold text-adrena-bone">
+                {isAr ? 'دج / شهر' : 'DA / mois'}
+              </span>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            onClick={handleWhatsAppBooking}
+            className="flex items-center gap-2 py-2.5 px-4 rounded-xl bg-adrena-gold hover:bg-adrena-gold-light text-[#111215] font-display font-black text-xs uppercase tracking-wider shadow-sm active:scale-95"
+          >
+            <MessageCircle className="w-4 h-4 fill-[#111215]" />
+            <span>{isAr ? 'تأكيد عبر واتساب' : 'S\'inscrire'}</span>
+          </button>
+        </div>
+      </div>
+
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         {/* Left Column: Interactive Controls (7 cols) */}
         <div className="lg:col-span-7 space-y-6">

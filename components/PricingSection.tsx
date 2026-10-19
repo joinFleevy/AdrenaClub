@@ -72,6 +72,57 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
           </button>
         </div>
 
+        {/* 3-Step Simple Registration & Payment Guide */}
+        <div className="mb-10 grid grid-cols-1 md:grid-cols-3 gap-4 p-5 rounded-2xl bg-adrena-card border border-adrena-border">
+          <div className="flex items-start gap-3">
+            <div className="w-8 h-8 rounded-lg bg-adrena-gold/15 border border-adrena-gold/40 text-adrena-gold flex items-center justify-center font-display font-black text-sm flex-shrink-0">
+              1
+            </div>
+            <div>
+              <h4 className="font-display font-black text-sm uppercase text-adrena-bone tracking-wide">
+                {lang === 'fr' ? 'Choisissez votre formule' : 'اختر باقتك المفضلة'}
+              </h4>
+              <p className="text-xs text-adrena-stone mt-1 leading-relaxed">
+                {lang === 'fr'
+                  ? 'Musculation, Combat, Cross-Training ou Pack Mixte dès 3 000 DA/mois sans frais cachés.'
+                  : 'كمال أجسام، فنون قتالية، أو باقة مدمجة ابتداءً من 3 000 دج شهرياً بدون أي رسوم خفية.'}
+              </p>
+            </div>
+          </div>
+
+          <div className="flex items-start gap-3">
+            <div className="w-8 h-8 rounded-lg bg-adrena-gold/15 border border-adrena-gold/40 text-adrena-gold flex items-center justify-center font-display font-black text-sm flex-shrink-0">
+              2
+            </div>
+            <div>
+              <h4 className="font-display font-black text-sm uppercase text-adrena-bone tracking-wide">
+                {lang === 'fr' ? 'Dossier & Séance d\'essai' : 'الملف وحصة تجريبية'}
+              </h4>
+              <p className="text-xs text-adrena-stone mt-1 leading-relaxed">
+                {lang === 'fr'
+                  ? '1 photo d\'identité + certificat médical. Possibilité d\'une séance d\'essai sur place.'
+                  : 'صورة شمسية + شهادة طبية. إمكانية تجربة حصة مفردة في الاستقبال.'}
+              </p>
+            </div>
+          </div>
+
+          <div className="flex items-start gap-3">
+            <div className="w-8 h-8 rounded-lg bg-adrena-gold/15 border border-adrena-gold/40 text-adrena-gold flex items-center justify-center font-display font-black text-sm flex-shrink-0">
+              3
+            </div>
+            <div>
+              <h4 className="font-display font-black text-sm uppercase text-adrena-bone tracking-wide">
+                {lang === 'fr' ? 'Paiement Espèces à l\'accueil' : 'الدفع نقداً في الاستقبال'}
+              </h4>
+              <p className="text-xs text-adrena-stone mt-1 leading-relaxed">
+                {lang === 'fr'
+                  ? 'Règlement cash à la réception (CUB1) et commencez votre entraînement immédiatement.'
+                  : 'تسديد الاشتراك نقداً بمدخل النادي والبدء في التدريب مباشرة بدون انتظار.'}
+              </p>
+            </div>
+          </div>
+        </div>
+
         {/* Tab Selection */}
         <div className="flex flex-wrap items-center gap-2 mb-10 p-2 bg-adrena-card border border-adrena-border rounded-2xl w-fit" role="tablist" aria-label="Catégories de tarifs">
           {(['musculation', 'crosstraining', 'combat', 'mixtes', 'wellness'] as PricingTab[]).map(

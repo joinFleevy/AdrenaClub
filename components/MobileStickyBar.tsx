@@ -1,57 +1,63 @@
 'use client';
 
 import React from 'react';
-import { Phone, MessageCircle, Clock, Navigation } from 'lucide-react';
-import { Language, content } from '@/data/content';
+import { Phone, MessageCircle, MapPin } from 'lucide-react';
+import { Language } from '@/data/content';
 
 interface MobileStickyBarProps {
   lang: Language;
 }
 
 export default function MobileStickyBar({ lang }: MobileStickyBarProps) {
-  const t = content[lang].mobileBar;
+  const isAr = lang === 'ar';
+
+  const defaultMsg = isAr
+    ? encodeURIComponent("السلام عليكم نادي أدرينا سبورت، أود الاستفسار عن الاشتراكات والتسجيل في النادي.")
+    : encodeURIComponent("Bonjour Adrena Club, je souhaite m'inscrire. Pouvez-vous me donner les détails et les formules ?");
 
   return (
-    <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#0E0F13]/95 backdrop-blur-lg border-t border-adrena-border pt-2 pb-[max(0.75rem,env(safe-area-inset-bottom))] px-3 shadow-2xl safe-area-pb">
-      <div className="grid grid-cols-4 gap-2">
-        {/* Call button */}
+    <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#0E0F13]/98 backdrop-blur-xl border-t border-adrena-border py-2 px-3 shadow-2xl safe-area-pb">
+      <div className="flex items-center gap-2">
+        {/* Dominant Primary WhatsApp Subscription Button (65% width) */}
         <a
-          href="tel:+213771570378"
-          className="flex flex-col items-center justify-center py-2 px-1 rounded-xl bg-adrena-card hover:bg-adrena-surface text-adrena-bone border border-adrena-border transition-colors"
-        >
-          <Phone className="w-5 h-5 text-adrena-bone mb-1" />
-          <span className="font-display text-xs font-extrabold uppercase tracking-wide">{t.call}</span>
-        </a>
-
-        {/* WhatsApp CTA (Highlighted Gold) */}
-        <a
-          href="https://wa.me/213771570378?text=Bonjour%20Adrena%20Club,%20je%20souhaite%20m'inscrire."
+          href={`https://wa.me/213771570378?text=${defaultMsg}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex flex-col items-center justify-center py-2 px-1 rounded-xl bg-adrena-gold text-[#111215] transition-transform active:scale-95 shadow-md"
+          className="flex-1 flex items-center justify-center gap-2.5 py-3 px-4 rounded-xl bg-adrena-gold hover:bg-adrena-gold-light text-[#111215] font-display font-black text-sm uppercase tracking-wider shadow-lg active:scale-98 transition-all"
         >
-          <MessageCircle className="w-5 h-5 fill-[#111215] mb-1" />
-          <span className="font-display text-xs font-black uppercase tracking-wide">{t.whatsapp}</span>
+          <MessageCircle className="w-5 h-5 fill-[#111215] flex-shrink-0" />
+          <div className="flex flex-col items-start leading-tight">
+            <span>{isAr ? 'التسجيل عبر واتساب' : 'S\'inscrire via WhatsApp'}</span>
+            <span className="text-[10px] font-sans font-bold opacity-80 lowercase">
+              {isAr ? 'رد فوري • بدون التزام' : 'réponse rapide • dès 3 000 DA'}
+            </span>
+          </div>
         </a>
 
-        {/* Planning button */}
+        {/* Compact Phone Call Button */}
         <a
-          href="#planning"
-          className="flex flex-col items-center justify-center py-2 px-1 rounded-xl bg-adrena-card hover:bg-adrena-surface text-adrena-bone border border-adrena-border transition-colors"
+          href="tel:+213771570378"
+          className="flex flex-col items-center justify-center w-14 h-12 rounded-xl bg-adrena-card hover:bg-adrena-surface text-adrena-bone border border-adrena-border transition-colors flex-shrink-0"
+          title={isAr ? 'اتصال مباشر' : 'Appeler la réception'}
         >
-          <Clock className="w-5 h-5 text-adrena-gold mb-1" />
-          <span className="font-display text-xs font-extrabold uppercase tracking-wide">{t.schedule}</span>
+          <Phone className="w-4 h-4 text-adrena-bone mb-0.5" />
+          <span className="font-display text-[10px] font-extrabold uppercase tracking-wide text-adrena-stone">
+            {isAr ? 'اتصال' : 'Appel'}
+          </span>
         </a>
 
-        {/* Maps Directions button */}
+        {/* Compact GPS Directions Button */}
         <a
           href="https://maps.app.goo.gl/6YJepRtyWvXcrZoV9"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex flex-col items-center justify-center py-2 px-1 rounded-xl bg-adrena-card hover:bg-adrena-surface text-adrena-bone border border-adrena-border transition-colors"
+          className="flex flex-col items-center justify-center w-14 h-12 rounded-xl bg-adrena-card hover:bg-adrena-surface text-adrena-bone border border-adrena-border transition-colors flex-shrink-0"
+          title={isAr ? 'موقع النادي على الخريطة' : 'Localisation Google Maps'}
         >
-          <Navigation className="w-5 h-5 text-adrena-bone mb-1" />
-          <span className="font-display text-xs font-extrabold uppercase tracking-wide">{t.location}</span>
+          <MapPin className="w-4 h-4 text-adrena-gold mb-0.5" />
+          <span className="font-display text-[10px] font-extrabold uppercase tracking-wide text-adrena-stone">
+            {isAr ? 'الموقع' : 'GPS'}
+          </span>
         </a>
       </div>
     </div>

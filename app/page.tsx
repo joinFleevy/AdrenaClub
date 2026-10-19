@@ -4,12 +4,13 @@ import React, { useState, useEffect } from 'react';
 import { Language } from '@/data/content';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
-import PanoramaViewer from '@/components/PanoramaViewer';
-import Disciplines from '@/components/Disciplines';
-import WomensSanctuary from '@/components/WomensSanctuary';
-import CoachSection from '@/components/CoachSection';
-import ScheduleSection from '@/components/ScheduleSection';
+import LiveStatusEngine from '@/components/LiveStatusEngine';
 import PricingSection from '@/components/PricingSection';
+import ScheduleSection from '@/components/ScheduleSection';
+import WomensSanctuary from '@/components/WomensSanctuary';
+import Disciplines from '@/components/Disciplines';
+import CoachSection from '@/components/CoachSection';
+import PanoramaViewer from '@/components/PanoramaViewer';
 import ReviewsSection from '@/components/ReviewsSection';
 import FAQSection from '@/components/FAQSection';
 import ContactSection from '@/components/ContactSection';
@@ -62,37 +63,78 @@ export default function Home() {
       {/* Hero Section */}
       <Hero lang={lang} />
 
-      {/* 360 Interactive Virtual Tour */}
-      <PanoramaViewer lang={lang} />
+      {/* Real-Time Facility Activity Engine (Live open/closed, Women vs Men session) */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 sm:-mt-8 relative z-20 mb-8 sm:mb-12">
+        <LiveStatusEngine lang={lang} />
+      </div>
 
-      {/* Disciplines & Programs */}
-      <Disciplines lang={lang} />
+      {/* Fast Mobile Action Anchors (Allows mobile visitors to jump directly without scroll fatigue) */}
+      <div className="block sm:hidden px-4 py-3 bg-[#0E0F13] border-y border-adrena-border overflow-x-auto scrollbar-none mb-4">
+        <div className="flex items-center gap-2 text-xs font-bold font-display uppercase tracking-wider text-adrena-bone w-max">
+          <a
+            href="#tarifs"
+            className="px-3.5 py-2 rounded-xl bg-adrena-gold text-[#111215] shadow-sm flex items-center gap-1.5"
+          >
+            <span>⚡ {lang === 'fr' ? 'Tarifs dès 3 000 DA' : 'الأسعار من 3 000 دج'}</span>
+          </a>
+          <a
+            href="#planning"
+            className="px-3.5 py-2 rounded-xl bg-adrena-card border border-adrena-border text-adrena-bone"
+          >
+            <span>📅 {lang === 'fr' ? 'Plannings 2026' : 'المواقيت والحصص'}</span>
+          </a>
+          <a
+            href="#femmes"
+            className="px-3.5 py-2 rounded-xl bg-adrena-card border border-adrena-border text-adrena-bone"
+          >
+            <span>🌸 {lang === 'fr' ? 'Espace Femmes' : 'فضاء النساء'}</span>
+          </a>
+          <a
+            href="#contact"
+            className="px-3.5 py-2 rounded-xl bg-adrena-card border border-adrena-border text-adrena-bone"
+          >
+            <span>📍 {lang === 'fr' ? 'Accès CUB1' : 'الموقع والوصول'}</span>
+          </a>
+          <a
+            href="#tour-360"
+            className="px-3.5 py-2 rounded-xl bg-adrena-card border border-adrena-border text-adrena-bone"
+          >
+            <span>🔄 {lang === 'fr' ? 'Visite 360°' : 'جولة 360°'}</span>
+          </a>
+        </div>
+      </div>
 
-      {/* Women's Sanctuary Spotlight */}
-      <WomensSanctuary lang={lang} />
-
-      {/* Coach Profiles & Expertise */}
-      <CoachSection lang={lang} />
-
-      {/* Interactive Schedules & Class Finder */}
-      <ScheduleSection lang={lang} onOpenPostersModal={handleOpenPostersModal} />
-
-      {/* Interactive Pricing & Custom Formula Calculator */}
+      {/* 1. Pricing & Custom Formula Calculator (Moved UP for immediate purchase clarity) */}
       <PricingSection lang={lang} onOpenPostersModal={handleOpenPostersModal} />
 
-      {/* Social Proof & Google Reviews */}
+      {/* 2. Interactive Schedules & Class Finder (Directly follows pricing) */}
+      <ScheduleSection lang={lang} onOpenPostersModal={handleOpenPostersModal} />
+
+      {/* 3. Women's Sanctuary Spotlight (100% private, zero music) */}
+      <WomensSanctuary lang={lang} />
+
+      {/* 4. Disciplines & Programs (2 levels: RDC & Sous-sol bays) */}
+      <Disciplines lang={lang} />
+
+      {/* 5. Coach Profiles & Expertise (Coaches Abdellah & Hmimed) */}
+      <CoachSection lang={lang} />
+
+      {/* 6. 360 Interactive Virtual Tour (Placed as social proof & physical tour; no scroll-hijack) */}
+      <PanoramaViewer lang={lang} />
+
+      {/* 7. Social Proof & Google Reviews (160+ verified reviews) */}
       <ReviewsSection lang={lang} />
 
-      {/* Objection-Busting FAQ Accordion */}
+      {/* 8. Objection-Busting FAQ (Cash payment, trial session, documents needed) */}
       <FAQSection lang={lang} />
 
-      {/* Location & Contact Section */}
+      {/* 9. Location & Contact Section (Google Maps, hours, phone) */}
       <ContactSection lang={lang} />
 
       {/* Footer */}
       <Footer lang={lang} />
 
-      {/* Mobile Sticky CTA Bar */}
+      {/* High-Converting Mobile Sticky CTA Bar */}
       <MobileStickyBar lang={lang} />
 
       {/* Official Graphic Posters Lightbox Modal */}
