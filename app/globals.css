@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-primary: 247 183 47;
+    --color-bg: 10 10 11;
+    --font-sans: 'Outfit', 'Cairo', system-ui, -apple-system, sans-serif;
+    --font-display: 'Barlow Condensed', 'Cairo', system-ui, sans-serif;
+    --font-arabic: 'Cairo', system-ui, Tahoma, sans-serif;
+  }
+
+  [dir="rtl"] {
+    --font-sans: 'Cairo', system-ui, Tahoma, sans-serif;
+    --font-display: 'Cairo', system-ui, Tahoma, sans-serif;
+  }
+
+  body {
+    @apply bg-adrena-black text-white antialiased selection:bg-adrena-gold selection:text-black;
+    font-family: var(--font-sans);
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    text-wrap: balance;
+  }
+
+  [dir="rtl"] h1,
+  [dir="rtl"] h2,
+  [dir="rtl"] h3,
+  [dir="rtl"] h4,
+  [dir="rtl"] h5,
+  [dir="rtl"] h6,
+  [dir="rtl"] p,
+  [dir="rtl"] span,
+  [dir="rtl"] button,
+  [dir="rtl"] a {
+    letter-spacing: normal !important;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0d0d0e;
+}
+::-webkit-scrollbar-thumb {
+  background: #2a2a30;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #f7b72f;
+}
+
+/* Athletic Accent Glows */
+.gold-glow {
+  text-shadow: 0 0 25px rgba(247, 183, 47, 0.45);
+}
+
+.box-gold-glow {
+  box-shadow: 0 0 35px -5px rgba(247, 183, 47, 0.25);
+}
+
+.box-gold-glow-lg {
+  box-shadow: 0 0 50px 0 rgba(247, 183, 47, 0.35);
+}
+
+/* Caution Tape Pattern */
+.caution-pattern {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    rgba(247, 183, 47, 0.15),
+    rgba(247, 183, 47, 0.15) 15px,
+    transparent 15px,
+    transparent 30px
+  );
+}

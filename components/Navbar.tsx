@@ -1,0 +1,184 @@
+'use client';
+
+import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
+import { Phone, MapPin, Globe, Menu, X, MessageCircle, Clock, ShieldCheck } from 'lucide-react';
+import { Language, content } from '@/data/content';
+
+interface NavbarProps {
+  lang: Language;
+  onToggleLang: () => void;
+}
+
+export default function Navbar({ lang, onToggleLang }: NavbarProps) {
+  const t = content[lang];
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const navLinks = [
+    { href: '#accueil', label: t.nav.home },
+    { href: '#tour-360', label: t.nav.tour360 },
+    { href: '#activites', label: t.nav.disciplines },
+    { href: '#planning', label: t.nav.planning },
+    { href: '#tarifs', label: t.nav.tarifs },
+    { href: '#avis', label: t.nav.reviews },
+    { href: '#contact', label: t.nav.contact },
+  ];
+
+  return (
+    <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+      {/* Top micro bar */}
+      <div className="bg-black/90 border-b border-white/5 py-1.5 px-4 sm:px-6 lg:px-8 text-xs text-neutral-400">
+        <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
+          <div className="flex items-center gap-4 overflow-hidden text-ellipsis whitespace-nowrap">
+            <span className="flex items-center gap-1.5 text-neutral-300">
+              <MapPin className="w-3.5 h-3.5 text-adrena-gold flex-shrink-0" />
+              <span className="hidden sm:inline">{t.topBar.address}</span>
+              <span className="sm:hidden">Bab Ezzouar, Alger</span>
+            </span>
+            <span className="hidden md:inline text-neutral-600">|</span>
+            <span className="hidden md:flex items-center gap-1.5 text-neutral-300">
+              <Clock className="w-3.5 h-3.5 text-adrena-gold flex-shrink-0" />
+              <span>Sam-Jeu : 06h - 00h (Hommes)</span>
+            </span>
+          </div>
+
+          <div className="flex items-center gap-3">
+            {/* Live Open Status badge */}
+            <div className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 font-semibold text-[11px]">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              <span>{t.topBar.statusOpen}</span>
+            </div>
+
+            {/* Language Switcher */}
+            <button
+              onClick={onToggleLang}
+              className="flex items-center gap-1 px-2.5 py-1 rounded-md bg-white/5 hover:bg-white/10 text-neutral-200 border border-white/10 transition-colors font-bold text-xs"
+              title="Changer de langue / تغيير اللغة"
+            >
+              <Globe className="w-3.5 h-3.5 text-adrena-gold" />
+              <span>{lang === 'fr' ? 'العربية' : 'Français'}</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Main Navbar */}
+      <nav
+        className={`transition-all duration-300 px-4 sm:px-6 lg:px-8 ${
+          isScrolled
+            ? 'bg-adrena-black/95 backdrop-blur-md py-3 border-b border-adrena-border shadow-xl'
+            : 'bg-gradient-to-b from-black/80 to-transparent py-4'
+        }`}
+      >
+        <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
+          {/* Brand Logo */}
+          <a href="#accueil" className="flex items-center gap-3 group">
+            <div className="relative w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0 transition-transform group-hover:scale-105">
+              <Image
+                src="/logo.png"
+                alt="Adrena Club Logo"
+                fill
+                className="object-contain"
+                priority
+              />
+            </div>
+            <div className="flex flex-col">
+              <div className="flex items-center gap-1.5">
+                <span className="font-display text-xl sm:text-2xl font-black text-white tracking-widest uppercase">
+                  ADRENA
+                </span>
+                <span className="font-display text-xl sm:text-2xl font-black text-adrena-gold tracking-widest uppercase">
+                  CLUB
+                </span>
+              </div>
+              <span className="font-display text-[11px] text-neutral-400 tracking-wider font-bold uppercase -mt-0.5 hidden sm:block">
+                {lang === 'fr' ? 'BAB EZZOUAR • 2 ÉTAGES' : 'باب الزوار • طابقان'}
+              </span>
+            </div>
+          </a>
+
+          {/* Desktop Navigation Links */}
+          <div className="hidden lg:flex items-center gap-1 xl:gap-2">
+            {navLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="px-3 py-1.5 rounded-lg font-display text-sm font-bold uppercase tracking-wider text-neutral-300 hover:text-adrena-gold hover:bg-white/5 transition-all"
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
+
+          {/* Right Action Button */}
+          <div className="hidden sm:flex items-center gap-3">
+            <a
+              href="https://wa.me/213771570378?text=Bonjour%20Adrena%20Club,%20je%20souhaite%20avoir%20des%20informations%20sur%20les%20inscriptions."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-adrena-gold hover:bg-adrena-gold-light text-black font-display font-black text-sm uppercase tracking-wider transition-all shadow-md hover:scale-[1.02]"
+            >
+              <MessageCircle className="w-4 h-4" />
+              <span>{t.nav.ctaButton}</span>
+            </a>
+          </div>
+
+          {/* Mobile menu toggle button */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="lg:hidden p-2 rounded-xl text-neutral-300 hover:text-white bg-white/5 border border-white/10"
+            aria-label="Toggle navigation menu"
+          >
+            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
+      </nav>
+
+      {/* Mobile Drawer Menu */}
+      {mobileMenuOpen && (
+        <div className="lg:hidden bg-adrena-dark/98 backdrop-blur-xl border-b border-adrena-border px-6 py-6 transition-all animate-in fade-in slide-in-from-top-4">
+          <div className="flex flex-col gap-3">
+            {navLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={() => setMobileMenuOpen(false)}
+                className="px-4 py-3 rounded-xl text-base font-bold text-neutral-200 hover:text-black hover:bg-adrena-gold transition-colors"
+              >
+                {link.label}
+              </a>
+            ))}
+
+            <div className="pt-4 border-t border-white/10 flex flex-col gap-3">
+              <a
+                href="tel:0771570378"
+                className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-white/10 text-white font-bold text-sm"
+              >
+                <Phone className="w-4 h-4 text-adrena-gold" />
+                <span>0771 57 03 78</span>
+              </a>
+              <a
+                href="https://wa.me/213771570378?text=Bonjour%20Adrena%20Club,%20je%20souhaite%20m'inscrire."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-adrena-gold text-black font-black text-sm tracking-wide"
+              >
+                <MessageCircle className="w-4 h-4" />
+                <span>{t.nav.ctaButton}</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
+    </header>
+  );
+}
