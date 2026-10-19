@@ -50,7 +50,7 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
   };
 
   return (
-    <section id="tarifs" className="py-20 relative bg-adrena-dark/40 border-b border-adrena-border">
+    <section id="tarifs" className="py-20 scroll-mt-28 relative bg-adrena-dark/40 border-b border-adrena-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header without generic kicker badges */}
         <div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-4">

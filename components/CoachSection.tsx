@@ -14,7 +14,7 @@ export default function CoachSection({ lang }: CoachSectionProps) {
   const isAr = lang === 'ar';
 
   return (
-    <section id="coachs" className="py-20 relative bg-adrena-black border-b border-adrena-border">
+    <section id="coachs" className="py-20 scroll-mt-28 relative bg-adrena-black border-b border-adrena-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="mb-12 max-w-3xl">

@@ -13,7 +13,7 @@ export default function ReviewsSection({ lang }: ReviewsSectionProps) {
   const t = content[lang].reviews;
 
   return (
-    <section id="avis" className="py-20 relative bg-adrena-black border-b border-adrena-border">
+    <section id="avis" className="py-20 scroll-mt-28 relative bg-adrena-black border-b border-adrena-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header without generic AI-slop kickers */}
         <div className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-4">

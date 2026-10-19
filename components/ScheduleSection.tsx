@@ -42,11 +42,36 @@ export default function ScheduleSection({ lang, onOpenPostersModal }: ScheduleSe
     { id: 'muscu', label: isAr ? 'كمال أجسام' : 'Musculation', icon: Dumbbell },
   ];
 
+  // Cleanly parse muscu slot to avoid awkward line wrapping
+  const parseMuscuSlot = (rawSlot: string) => {
+    const match = rawSlot.match(/^([\d:]+\s*[-–]\s*[\d:]+)(?:\s*\((.*?)\))?/);
+    if (!match) return { time: rawSlot, period: '' };
+
+    const time = match[1].replace('-', '–').trim();
+    let period = match[2] || '';
+
+    if (period.toLowerCase().includes('soirée continue')) {
+      period = isAr ? 'مستمر' : 'Non-stop';
+    } else if (period.toLowerCase().includes('après-midi & soirée') || period.toLowerCase().includes('après-midi')) {
+      period = isAr ? 'مساءً' : 'Après-midi';
+    } else if (period.toLowerCase().includes('matinée') || period.toLowerCase().includes('matin')) {
+      period = isAr ? 'صباحاً' : 'Matin';
+    } else if (period.toLowerCase().includes('midi')) {
+      period = isAr ? 'ظهيرة' : 'Midi';
+    } else if (period.toLowerCase().includes('journée continue')) {
+      period = isAr ? 'مستمر' : 'Non-stop';
+    } else if (period.toLowerCase().includes('soirée')) {
+      period = isAr ? 'مساءً' : 'Soirée';
+    }
+
+    return { time, period };
+  };
+
   return (
-    <section id="planning" className="py-20 relative bg-adrena-black border-b border-adrena-border">
+    <section id="planning" className="py-20 scroll-mt-28 relative bg-adrena-black border-b border-adrena-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header without generic kicker pills */}
-        <div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-4">
+        {/* Header with clear clearance */}
+        <div className="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
           <div>
             <h2 className="font-display text-4xl sm:text-5xl md:text-6xl font-black text-white tracking-tight uppercase leading-none">
               {t.title}
@@ -65,13 +90,13 @@ export default function ScheduleSection({ lang, onOpenPostersModal }: ScheduleSe
           </button>
         </div>
 
-        {/* Filter Controls Row: Audience Tabs + Discipline Filter */}
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-6">
+        {/* Unified Controls Panel: Harmonized colors and layout */}
+        <div className="mb-6 p-3 sm:p-4 rounded-2xl bg-adrena-card/90 border border-adrena-border flex flex-col lg:flex-row lg:items-center justify-between gap-3 shadow-lg">
           {/* Audience Tabs */}
-          <div className="flex flex-wrap items-center gap-1.5 p-1.5 bg-adrena-card border border-adrena-border rounded-xl w-fit">
+          <div className="flex items-center gap-1.5 p-1 bg-black/60 border border-white/10 rounded-xl w-fit">
             <button
               onClick={() => setActiveTab('hommes')}
-              className={`px-4 sm:px-5 py-2.5 rounded-lg font-display font-black text-xs sm:text-sm uppercase tracking-wider transition-all ${
+              className={`px-3.5 sm:px-4 py-2 rounded-lg font-sans font-bold text-xs uppercase tracking-wider transition-all ${
                 activeTab === 'hommes'
                   ? 'bg-adrena-gold text-black shadow-md'
                   : 'text-neutral-400 hover:text-white'
@@ -82,7 +107,7 @@ export default function ScheduleSection({ lang, onOpenPostersModal }: ScheduleSe
 
             <button
               onClick={() => setActiveTab('femmes')}
-              className={`px-4 sm:px-5 py-2.5 rounded-lg font-display font-black text-xs sm:text-sm uppercase tracking-wider transition-all ${
+              className={`px-3.5 sm:px-4 py-2 rounded-lg font-sans font-bold text-xs uppercase tracking-wider transition-all ${
                 activeTab === 'femmes'
                   ? 'bg-adrena-gold text-black shadow-md'
                   : 'text-neutral-400 hover:text-white'
@@ -93,7 +118,7 @@ export default function ScheduleSection({ lang, onOpenPostersModal }: ScheduleSe
 
             <button
               onClick={() => setActiveTab('enfants')}
-              className={`px-4 sm:px-5 py-2.5 rounded-lg font-display font-black text-xs sm:text-sm uppercase tracking-wider transition-all ${
+              className={`px-3.5 sm:px-4 py-2 rounded-lg font-sans font-bold text-xs uppercase tracking-wider transition-all ${
                 activeTab === 'enfants'
                   ? 'bg-adrena-gold text-black shadow-md'
                   : 'text-neutral-400 hover:text-white'
@@ -112,10 +137,10 @@ export default function ScheduleSection({ lang, onOpenPostersModal }: ScheduleSe
                 <button
                   key={p.id}
                   onClick={() => setActiveDiscipline(p.id)}
-                  className={`flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-sans font-bold transition-all ${
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-sans font-semibold transition-all ${
                     isActive
-                      ? 'bg-white text-black shadow-md'
-                      : 'bg-black/40 text-neutral-300 hover:text-white hover:bg-white/10 border border-white/5'
+                      ? 'bg-adrena-gold text-black font-bold shadow-md'
+                      : 'bg-black/50 text-neutral-300 hover:text-white hover:bg-neutral-800 border border-white/10'
                   }`}
                 >
                   {Icon && <Icon className="w-3.5 h-3.5" />}
@@ -127,12 +152,12 @@ export default function ScheduleSection({ lang, onOpenPostersModal }: ScheduleSe
         </div>
 
         {/* Note Line */}
-        <div className="mb-8 text-xs sm:text-sm text-neutral-300 flex items-center gap-2 font-medium">
+        <div className="mb-6 text-xs sm:text-sm text-neutral-300 flex items-center gap-2 font-medium">
           <span className="w-2 h-2 rounded-full bg-adrena-gold flex-shrink-0" />
           <span>{t.notes[activeTab]}</span>
         </div>
 
-        {/* Unified 7-Day Grid: Single, Distilled, Non-Repetitive */}
+        {/* Unified 7-Day Grid: Clean, High Legibility, No Text Wrapping */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {currentSchedule.map((day) => {
             const isToday = day.dayId === todayId;
@@ -153,7 +178,6 @@ export default function ScheduleSection({ lang, onOpenPostersModal }: ScheduleSe
 
             // Filter muscu slots according to activeDiscipline
             const showMuscu = (activeDiscipline === 'all' || activeDiscipline === 'muscu') && day.muscuSlots.length > 0;
-
             const hasEntries = visibleActivities.length > 0 || showMuscu;
 
             return (
@@ -178,7 +202,7 @@ export default function ScheduleSection({ lang, onOpenPostersModal }: ScheduleSe
                     )}
                   </div>
 
-                  {/* Coached Activities first */}
+                  {/* Coached Activities */}
                   {visibleActivities.length > 0 && (
                     <div className="space-y-2 mb-3">
                       {visibleActivities.map((act, idx) => (
@@ -196,30 +220,42 @@ export default function ScheduleSection({ lang, onOpenPostersModal }: ScheduleSe
                               </span>
                             )}
                           </div>
-                          <div className="flex items-center gap-1.5 text-xs font-mono font-bold text-adrena-gold tabular-nums">
-                            <Clock className="w-3.5 h-3.5 text-adrena-gold/80" />
-                            <span>{act.time}</span>
+                          <div className="flex items-center gap-1.5 text-xs font-sans font-bold text-adrena-gold tabular-nums">
+                            <Clock className="w-3.5 h-3.5 text-adrena-gold/80 flex-shrink-0" />
+                            <span>{act.time.replace('-', '–')}</span>
                           </div>
                         </div>
                       ))}
                     </div>
                   )}
 
-                  {/* Musculation open access */}
+                  {/* Musculation open access (Clean 1-line layout, zero text wrapping) */}
                   {showMuscu && (
                     <div className="space-y-1.5">
-                      {day.muscuSlots.map((slot, idx) => (
-                        <div
-                          key={idx}
-                          className="flex items-center justify-between px-3 py-2 rounded-xl bg-neutral-900/60 border border-white/5 text-xs"
-                        >
-                          <span className="flex items-center gap-1.5 text-neutral-400 font-medium font-sans">
-                            <Dumbbell className="w-3.5 h-3.5 text-adrena-gold/70 flex-shrink-0" />
-                            <span>{lang === 'fr' ? 'Musculation' : 'حديد حر'}</span>
-                          </span>
-                          <span className="font-mono tabular-nums text-neutral-200 font-semibold">{slot}</span>
-                        </div>
-                      ))}
+                      {day.muscuSlots.map((rawSlot, idx) => {
+                        const { time, period } = parseMuscuSlot(rawSlot);
+                        return (
+                          <div
+                            key={idx}
+                            className="flex items-center justify-between px-3 py-2 rounded-xl bg-neutral-900/70 border border-white/5 text-xs font-sans"
+                          >
+                            <div className="flex items-center gap-1.5 text-neutral-400 min-w-0 pr-2 rtl:pr-0 rtl:pl-2">
+                              <Dumbbell className="w-3.5 h-3.5 text-adrena-gold/80 flex-shrink-0" />
+                              <span className="font-medium truncate">
+                                {lang === 'fr' ? 'Musculation' : 'حديد حر'}
+                                {period && (
+                                  <span className="text-[10px] text-neutral-500 ml-1 rtl:ml-0 rtl:mr-1 font-normal">
+                                    ({period})
+                                  </span>
+                                )}
+                              </span>
+                            </div>
+                            <span className="font-sans font-bold text-neutral-200 tabular-nums text-xs whitespace-nowrap flex-shrink-0">
+                              {time}
+                            </span>
+                          </div>
+                        );
+                      })}
                     </div>
                   )}
 

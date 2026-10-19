@@ -204,7 +204,7 @@ export default function PanoramaViewer({ lang }: PanoramaViewerProps) {
   };
 
   return (
-    <section id="tour-360" className="py-20 relative bg-adrena-black">
+    <section id="tour-360" className="py-20 scroll-mt-28 relative bg-adrena-black">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header: direct and clean without generic kicker pills */}
         <div className="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">

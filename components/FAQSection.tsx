@@ -18,7 +18,7 @@ export default function FAQSection({ lang }: FAQSectionProps) {
   };
 
   return (
-    <section id="faq" className="py-20 relative bg-adrena-black border-b border-adrena-border">
+    <section id="faq" className="py-20 scroll-mt-28 relative bg-adrena-black border-b border-adrena-border">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
