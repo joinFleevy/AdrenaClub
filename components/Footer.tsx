@@ -35,7 +35,7 @@ export default function Footer({ lang }: FooterProps) {
             </p>
 
             <div className="p-3.5 rounded-xl bg-white/5 border border-white/10 text-xs italic text-adrena-gold font-medium leading-relaxed">
-              &ldquo;نادي ولاد الفاميليا، شعارنا: التربية، النظافة، والصحة&rdquo;
+              {t.hero.motto}
             </div>
           </div>
 

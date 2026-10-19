@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Clock, Image as ImageIcon } from 'lucide-react';
+import { Clock, Image as ImageIcon, Dumbbell } from 'lucide-react';
 import { Language, content } from '@/data/content';
 import { hommesSchedule, femmesSchedule, enfantsSchedule, ScheduleDay } from '@/data/schedules';
 import ScheduleFinder from '@/components/ScheduleFinder';
@@ -100,80 +100,79 @@ export default function ScheduleSection({ lang, onOpenPostersModal }: ScheduleSe
           <span>{t.notes[activeTab]}</span>
         </div>
 
-        {/* Days Grid */}
+        {/* Days Grid: Distilled, Highly Legible Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {currentSchedule.map((day) => {
             const isToday = day.dayId === todayId;
             return (
               <div
                 key={day.dayId}
-                className={`flex flex-col justify-between p-5 rounded-xl border transition-all ${
+                className={`flex flex-col justify-between p-5 rounded-2xl border transition-all ${
                   isToday
-                    ? 'bg-adrena-card border-adrena-gold shadow-lg'
-                    : 'bg-adrena-card/60 border-adrena-border hover:border-neutral-700'
+                    ? 'bg-adrena-card border-adrena-gold/80 shadow-xl ring-1 ring-adrena-gold/30'
+                    : 'bg-adrena-card/70 border-adrena-border hover:border-neutral-700'
                 }`}
               >
                 <div>
                   {/* Day Header */}
-                  <div className="flex items-center justify-between pb-3 mb-3 border-b border-white/5">
-                    <span className="font-display text-lg font-black text-white uppercase tracking-wider">
+                  <div className="flex items-center justify-between pb-3.5 mb-3.5 border-b border-white/5">
+                    <span className="font-sans text-base font-extrabold text-white uppercase tracking-wider">
                       {lang === 'fr' ? day.dayNameFr : day.dayNameAr}
                     </span>
                     {isToday && (
-                      <span className="font-display px-2 py-0.5 rounded bg-adrena-gold text-black text-[10px] font-black uppercase tracking-wider">
+                      <span className="font-sans px-2.5 py-0.5 rounded-full bg-adrena-gold/15 border border-adrena-gold/40 text-adrena-gold text-[10px] font-bold uppercase tracking-wider">
                         {lang === 'fr' ? "Aujourd'hui" : 'اليوم'}
                       </span>
                     )}
                   </div>
 
-                  {/* Musculation */}
-                  {day.muscuSlots.length > 0 && (
-                    <div className="mb-3">
-                      <span className="font-display text-xs font-bold text-neutral-400 uppercase tracking-wider block mb-1.5">
-                        Musculation
-                      </span>
-                      <div className="space-y-1">
-                        {day.muscuSlots.map((slot, idx) => (
-                          <div
-                            key={idx}
-                            className="flex items-center gap-2 px-2.5 py-1.5 rounded bg-black/40 border border-white/5 text-xs font-mono tabular-nums text-neutral-200"
-                          >
-                            <Clock className="w-3 h-3 text-neutral-400" />
-                            <span>{slot}</span>
+                  {/* Coached Activities first (Highlighted for instant scanning) */}
+                  {day.activities.length > 0 && (
+                    <div className="space-y-2 mb-3">
+                      {day.activities.map((act, idx) => (
+                        <div
+                          key={idx}
+                          className="p-3 rounded-xl bg-black/60 border border-white/10 hover:border-adrena-gold/30 transition-colors"
+                        >
+                          <div className="flex items-start justify-between gap-2 mb-1.5">
+                            <span className="text-sm font-bold text-white font-sans leading-tight">
+                              {lang === 'fr' ? act.nameFr : act.nameAr}
+                            </span>
+                            {act.badge && (
+                              <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-white/10 text-neutral-300 uppercase tracking-wider font-sans flex-shrink-0">
+                                {act.badge}
+                              </span>
+                            )}
                           </div>
-                        ))}
-                      </div>
+                          <div className="flex items-center gap-1.5 text-xs font-mono font-bold text-adrena-gold tabular-nums">
+                            <Clock className="w-3.5 h-3.5 text-adrena-gold/80" />
+                            <span>{act.time}</span>
+                          </div>
+                        </div>
+                      ))}
                     </div>
                   )}
 
-                  {/* Activities */}
-                  {day.activities.length > 0 && (
-                    <div>
-                      <span className="font-display text-xs font-bold text-neutral-400 uppercase tracking-wider block mb-1.5">
-                        {lang === 'fr' ? 'Séances du jour' : 'الحصص'}
-                      </span>
-                      <div className="space-y-1.5">
-                        {day.activities.map((act, idx) => (
-                          <div key={idx} className="p-2.5 rounded bg-black/50 border border-white/5">
-                            <div className="flex items-center justify-between gap-2 mb-1">
-                              <span className="text-xs sm:text-sm font-bold text-white">
-                                {lang === 'fr' ? act.nameFr : act.nameAr}
-                              </span>
-                              {act.badge && (
-                                <span className="font-display text-[10px] font-bold px-1.5 py-0.5 rounded bg-white/10 text-neutral-300 uppercase tracking-wider">
-                                  {act.badge}
-                                </span>
-                              )}
-                            </div>
-                            <span className="text-xs font-mono tabular-nums text-adrena-gold font-bold">{act.time}</span>
-                          </div>
-                        ))}
-                      </div>
+                  {/* Musculation (Open gym slots) */}
+                  {day.muscuSlots.length > 0 && (
+                    <div className="space-y-1.5">
+                      {day.muscuSlots.map((slot, idx) => (
+                        <div
+                          key={idx}
+                          className="flex items-center justify-between px-3 py-2 rounded-xl bg-neutral-900/60 border border-white/5 text-xs"
+                        >
+                          <span className="flex items-center gap-1.5 text-neutral-400 font-medium font-sans">
+                            <Dumbbell className="w-3.5 h-3.5 text-adrena-gold/70 flex-shrink-0" />
+                            <span>{lang === 'fr' ? 'Musculation' : 'حديد حر'}</span>
+                          </span>
+                          <span className="font-mono tabular-nums text-neutral-200 font-semibold">{slot}</span>
+                        </div>
+                      ))}
                     </div>
                   )}
 
                   {day.muscuSlots.length === 0 && day.activities.length === 0 && (
-                    <div className="py-4 text-center text-xs text-neutral-500 font-medium">
+                    <div className="py-6 text-center text-xs text-neutral-500 font-medium">
                       {lang === 'fr' ? 'Aucun cours programmé' : 'لا توجد حصص'}
                     </div>
                   )}

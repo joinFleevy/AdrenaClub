@@ -223,11 +223,11 @@ export const content: Record<Language, ContentStrings> = {
       tagline: "Complexe Sportif • Bab Ezzouar • 2 Étages",
       title: "2 ÉTAGES DÉDIÉS À LA PERFORMANCE.",
       subtitle: "Plateau musculation complet, ring de combat officiel, tatami & cross-training. Créneaux femmes 100% privés, calmes et sans musique. Ouvert tous les jours jusqu'à minuit.",
-      motto: "« نادي ولاد الفاميليا : التربية، النظافة، والصحة »",
+      motto: "« Discipline, Respect & Dépassement de Soi : L'Excellence Sportive à Bab Ezzouar »",
       ctaPrimary: "Nous contacter sur WhatsApp",
       ctaSecondary: "Explorer la salle en 360°",
       pillars: [
-        { title: "2 Étages Complets", desc: "Plateau force en haut, accueil & vestiaires au RDC" },
+        { title: "2 Niveaux d'Entraînement", desc: "Accueil & vestiaires au RDC, plateaux d'entraînement au sous-sol" },
         { title: "Jusqu'à Minuit (00:00)", desc: "Ouvert tous les soirs pour les hommes dès 06:00" },
         { title: "Créneaux Femmes Privés", desc: "100% sans musique avec coachs féminines" },
         { title: "Sports de Combat & Ring", desc: "Kickboxing, Lutte & Judo avec coachs diplômés" },
@@ -241,7 +241,7 @@ export const content: Record<Language, ContentStrings> = {
     },
     tour360: {
       title: "Visite Interactive 360°",
-      subtitle: "Sélectionnez un espace pour explorer nos deux étages comme si vous y étiez.",
+      subtitle: "Sélectionnez un espace pour explorer nos deux niveaux comme si vous y étiez.",
       floors: {
         rdc: {
           title: "RDC : Accueil & Portiques",
@@ -249,13 +249,13 @@ export const content: Record<Language, ContentStrings> = {
           desc: "Accès sécurisé par tourniquets RFID, comptoir d'accueil, espace boissons fraîches & compléments, vestiaires et sauna.",
         },
         muscu: {
-          title: "Étage 1 : Plateau Musculation",
-          badge: "1er Étage",
+          title: "Sous-Sol : Plateau Musculation",
+          badge: "Sous-Sol",
           desc: "Grand plateau équipé en machines professionnelles jaune et noir, charges libres, développé couché et bancs de tirage.",
         },
         combat: {
-          title: "Étage 1 : Ring & Cross-Training",
-          badge: "1er Étage",
+          title: "Sous-Sol : Ring & Cross-Training",
+          badge: "Sous-Sol",
           desc: "Ring de boxe aux normes, surface tatami de combat, sacs de frappe lourds, cordes ondulatoires et équipement WOD.",
         },
       },
@@ -541,11 +541,11 @@ export const content: Record<Language, ContentStrings> = {
       tagline: "مجمع رياضي متكامل • باب الزوار • طابقان",
       title: "طابقان من التدريب والاحتراف في باب الزوار.",
       subtitle: "كمال أجسام بأحدث الأجهزة، حلبة ملاكمة وبساط تاتامي، وفترات خاصة ومغلقة للنساء بدون موسيقى. مفتوح يومياً حتى منتصف الليل.",
-      motto: "« نادي ولاد الفاميليا : التربية، النظافة، والصحة »",
+      motto: "« الانضباط، الاحترام، والتطور البدني : بيئة تدريب استثنائية في باب الزوار »",
       ctaPrimary: "تواصل معنا مباشرة عبر واتساب",
       ctaSecondary: "جولة 360° داخل الصالة",
       pillars: [
-        { title: "طابقان مجهزان بالكامل", desc: "قاعة الحديد بالأعلى، والاستقبال والخدمات بالطابق الأرضي" },
+        { title: "طابقان مجهزان بالكامل", desc: "الاستقبال والخدمات بالطابق الأرضي، وقاعات التدريب بالطابق السفلي" },
         { title: "حتى منتصف الليل (00:00)", desc: "مفتوح يومياً للرجال ابتداءً من 06:00 صباحاً" },
         { title: "فترات خاصة للنساء", desc: "100% خصوصية وبدون موسيقى مع مدربات" },
         { title: "حلبة ملاكمة وبساط نزال", desc: "كيك بوكسينغ، مصارعة وجودو مع مدربين معتمدين" },
@@ -567,13 +567,13 @@ export const content: Record<Language, ContentStrings> = {
           desc: "بوابات إلكترونية ذكية RFID، مكتب الاستقبال، ركن المشروبات والمكملات، غرف تبديل الملابس والساونا.",
         },
         muscu: {
-          title: "الطابق الأول : قاعة كمال الأجسام",
-          badge: "الطابق الأول",
+          title: "الطابق السفلي : قاعة كمال الأجسام",
+          badge: "الطابق السفلي",
           desc: "قاعة واسعة تضم تشكيلة متكاملة من أجهزة الحديد الصفراء والسوداء، أوزان حرة ومقاعد تدريب متعددة.",
         },
         combat: {
-          title: "الطابق الأول : حلبة القتال والكروس فيت",
-          badge: "الطابق الأول",
+          title: "الطابق السفلي : حلبة القتال والكروس فيت",
+          badge: "الطابق السفلي",
           desc: "حلبة ملاكمة رسمية، بساط تاتامي للنزال، أكياس ملاكمة ثقيلة، ومعدات كروس ترينينغ متنوعة.",
         },
       },
