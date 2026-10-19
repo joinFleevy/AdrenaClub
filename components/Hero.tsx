@@ -67,12 +67,20 @@ export default function Hero({ lang }: HeroProps) {
             </a>
           </div>
 
-          {/* 4 Pillars in Clean Typographic Columns (No generic rounded rainbow boxes) */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-8 border-t border-white/10">
-            {t.pillars.map((pillar, idx) => (
-              <div key={idx} className="border-l-2 rtl:border-l-0 rtl:border-r-2 border-adrena-gold/60 pl-4 rtl:pl-0 rtl:pr-4">
-                <h4 className="font-display text-base font-black text-white uppercase tracking-wider leading-snug">{pillar.title}</h4>
-                <p className="text-xs text-neutral-400 mt-1.5 leading-relaxed">{pillar.desc}</p>
+          {/* 4 Authentic Trust Badges */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-8 border-t border-white/10">
+            {t.trustBadges.map((badge, idx) => (
+              <div
+                key={idx}
+                className="p-5 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-adrena-gold/40 transition-colors"
+              >
+                <div className="w-2 h-2 rounded-full bg-adrena-gold mb-3" />
+                <h3 className="font-display text-base font-black text-white uppercase tracking-wider leading-snug">
+                  {badge.title}
+                </h3>
+                <p className="text-xs text-neutral-400 mt-1.5 leading-relaxed">
+                  {badge.subtitle}
+                </p>
               </div>
             ))}
           </div>

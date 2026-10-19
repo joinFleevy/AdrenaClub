@@ -34,6 +34,10 @@ export interface ContentStrings {
       title: string;
       desc: string;
     }>;
+    trustBadges: Array<{
+      title: string;
+      subtitle: string;
+    }>;
   };
   tour360: {
     title: string;
@@ -54,6 +58,7 @@ export interface ContentStrings {
       title: string;
       desc: string;
       category: string;
+      image: string;
       features: string[];
     }>;
   };
@@ -170,6 +175,12 @@ export const content: Record<Language, ContentStrings> = {
         { title: "Créneaux Femmes Privés", desc: "100% sans musique avec coachs féminines" },
         { title: "Sports de Combat & Ring", desc: "Kickboxing, Lutte & Judo avec coachs diplômés" },
       ],
+      trustBadges: [
+        { title: "2 Étages Dédiés", subtitle: "Plateau Musculation & Espace Combat" },
+        { title: "Ring & Tatami Officiels", subtitle: "Aux normes pour Boxe & Lutte" },
+        { title: "Créneaux Femmes Dédiés", subtitle: "100% sans musique & intimité totale" },
+        { title: "160+ Avis Google", subtitle: "Noté 4.9/5 par les membres" },
+      ],
     },
     tour360: {
       title: "Visite Interactive 360°",
@@ -202,6 +213,7 @@ export const content: Record<Language, ContentStrings> = {
           id: "muscu",
           title: "Musculation & Force",
           category: "Plateau Force",
+          image: "/images/disciplines/musculation.jpg",
           desc: "Parc complet de machines guidées et postes libres pour travailler chaque groupe musculaire avec précision et sécurité.",
           features: ["Machines professionnelles ciblées", "Zone haltères et barres olympiques", "Espace cardio training"],
         },
@@ -209,6 +221,7 @@ export const content: Record<Language, ContentStrings> = {
           id: "cross",
           title: "Cross-Training",
           category: "Conditionnement",
+          image: "/images/disciplines/crossfit.jpg",
           desc: "Séances fonctionnelles à haute intensité axées sur le cardio, la force et l'agilité sous la direction de coachs expérimentés.",
           features: ["WODs structurés et progressifs", "Kettlebells, cordes & box jumps", "Ambiance d'entraînement rigoureuse"],
         },
@@ -216,6 +229,7 @@ export const content: Record<Language, ContentStrings> = {
           id: "combat",
           title: "Sports de Combat",
           category: "Ring & Tatami",
+          image: "/images/disciplines/combat.jpg",
           desc: "Kickboxing, Lutte olympique et Judo encadrés par les coachs Abdellah et Hmimed sur ring et tatami adaptés.",
           features: ["Véritable ring de combat", "Sacs de frappe suspendus", "Entraînement technique et sparring"],
         },
@@ -223,6 +237,7 @@ export const content: Record<Language, ContentStrings> = {
           id: "femmes",
           title: "Créneaux Femmes (Sans Musique)",
           category: "100% Réservé",
+          image: "/images/disciplines/femmes.jpg",
           desc: "Horaires exclusifs pour femmes assurant intimité et sérénité. Ambiance calme sans musique avec des coachs féminines qualifiées.",
           features: ["Portes fermées & intimité totale", "Kickboxing féminin dédié", "Musculation & Cross-training adaptés"],
         },
@@ -230,6 +245,7 @@ export const content: Record<Language, ContentStrings> = {
           id: "enfants",
           title: "Section Enfants",
           category: "Jeunes dès 6 ans",
+          image: "/images/disciplines/enfants.jpg",
           desc: "Apprentissage du Judo, du Kickboxing et de la Lutte pour développer motricité, respect, confiance et discipline.",
           features: ["Encadrement pédagogique attentif", "Groupes d'âge et niveaux séparés", "Horaires adaptés au calendrier scolaire"],
         },
@@ -237,6 +253,7 @@ export const content: Record<Language, ContentStrings> = {
           id: "wellness",
           title: "Sauna, Piscine & Récupération",
           category: "Bien-Être & Santé",
+          image: "/images/disciplines/reception.jpg",
           desc: "Séances de sauna privatisées (1h15 sur réservation), suivi en nutrition sportive et soins de récupération.",
           features: ["Sauna traditionnel privatisé", "Suivi nutritionniste personnalisé", "Espace calme pour la détente"],
         },
@@ -369,6 +386,12 @@ export const content: Record<Language, ContentStrings> = {
         { title: "فترات خاصة للنساء", desc: "100% خصوصية وبدون موسيقى مع مدربات" },
         { title: "حلبة ملاكمة وبساط نزال", desc: "كيك بوكسينغ، مصارعة وجودو مع مدربين معتمدين" },
       ],
+      trustBadges: [
+        { title: "طابقان مجهزان بالكامل", subtitle: "كمال أجسام وفنون قتالية" },
+        { title: "حلبة وبساط معتمد", subtitle: "للملاكمة والمصارعة والجودو" },
+        { title: "أوقات مخصصة للنساء", subtitle: "بدون أي موسيقى وخصوصية تامة" },
+        { title: "+160 تقييم Google", subtitle: "تقييم 4.9/5 من الأعضاء" },
+      ],
     },
     tour360: {
       title: "جولة افتراضية تفاعلية 360°",
@@ -401,6 +424,7 @@ export const content: Record<Language, ContentStrings> = {
           id: "muscu",
           title: "كمال الأجسام والحديد",
           category: "قاعة الأوزان",
+          image: "/images/disciplines/musculation.jpg",
           desc: "مجموعة شاملة من الآلات الموجهة والأوزان الحرة لتمرين كل عضلات الجسم بأمان ودقة.",
           features: ["آلات احترافية دقيقة الزوايا", "منطقة أوزان حرة وقضبان أولمبية", "ركن مخصص لأجهزة الكارديو"],
         },
@@ -408,6 +432,7 @@ export const content: Record<Language, ContentStrings> = {
           id: "cross",
           title: "كروس ترينينغ",
           category: "اللياقة الوظيفية",
+          image: "/images/disciplines/crossfit.jpg",
           desc: "تمارين وظيفية عالية الشدة لتطوير التنفس والقدرة العضلية والسرعة بإشراف مدربين أكفاء.",
           features: ["برامج WODs متدرجة ومدروسة", "كرات وأثقال روسية وحبال مقاومة", "بيئة تدريب جماعية محفزة"],
         },
@@ -415,6 +440,7 @@ export const content: Record<Language, ContentStrings> = {
           id: "combat",
           title: "فنون القتال والدفاع عن النفس",
           category: "الحلبة والتاتامي",
+          image: "/images/disciplines/combat.jpg",
           desc: "كيك بوكسينغ، مصارعة أولمبية وجودو مع الكوتشين عبد الله وحميمد على حلبة وتاتامي معتمدين.",
           features: ["حلبة ملاكمة مطابقة للمواصفات", "أكياس ملاكمة معلقة", "نزالات تدريبية مأمونة"],
         },
@@ -422,6 +448,7 @@ export const content: Record<Language, ContentStrings> = {
           id: "femmes",
           title: "فترات النساء (بدون موسيقى)",
           category: "خصوصية تامة",
+          image: "/images/disciplines/femmes.jpg",
           desc: "مواعيد مغلقة تماماً للنساء تضمن الهدوء والاحترام بدون موسيقى، بإشراف مدربات متخصصات.",
           features: ["أبواب مغلقة وخصوصية كاملة", "كيك بوكسينغ نسائي مخصص", "حصص كمال أجسام ورشاقة ملائمة"],
         },
@@ -429,6 +456,7 @@ export const content: Record<Language, ContentStrings> = {
           id: "enfants",
           title: "قسم الأطفال",
           category: "ابتداءً من 6 سنوات",
+          image: "/images/disciplines/enfants.jpg",
           desc: "تعليم الجودو والكيك بوكسينغ والمصارعة لتربية الأطفال على الانضباط، الثقة بالنفس، والاحترام.",
           features: ["تأطير بيداغوجي وأمان تام", "فصل الفئات حسب السن والمستوى", "مواعيد مناسبة للدوام المدرسي"],
         },
@@ -436,6 +464,7 @@ export const content: Record<Language, ContentStrings> = {
           id: "wellness",
           title: "الساونا، المسبح والاسترجاع",
           category: "العافية والصحة",
+          image: "/images/disciplines/reception.jpg",
           desc: "جلسات ساونا فردية ومغلقة (1h15 بالحجز مسبقاً)، برامج تغذية مخصصة واستشفاء عضلي.",
           features: ["ساونا تقليدية مريحة بالحجز", "متابعة مع أخصائي تغذية معتمد", "أجواء استرخاء واسترجاع بدني"],
         },
