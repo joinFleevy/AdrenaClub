@@ -225,15 +225,15 @@ export default function PanoramaViewer({ lang }: PanoramaViewerProps) {
   };
 
   return (
-    <section id="tour-360" className="py-20 scroll-mt-28 relative bg-adrena-black">
+    <section id="tour-360" className="py-20 scroll-mt-28 relative bg-adrena-black border-b border-adrena-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header: direct and clean without generic kicker pills */}
         <div className="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
           <div>
-            <h2 className="font-display text-4xl sm:text-5xl md:text-6xl font-black text-white tracking-tight uppercase leading-none">
+            <h2 className="font-display text-4xl sm:text-5xl md:text-6xl font-black text-adrena-bone tracking-tight uppercase leading-none">
               {t.title}
             </h2>
-            <p className="mt-3 text-base text-neutral-300 max-w-[65ch] leading-relaxed">
+            <p className="mt-3 text-base sm:text-lg text-adrena-stone max-w-[65ch] leading-relaxed">
               {t.subtitle}
             </p>
           </div>
@@ -242,7 +242,7 @@ export default function PanoramaViewer({ lang }: PanoramaViewerProps) {
             href="https://www.google.com/maps/place/Adr%C3%A9na+club/@36.731219,3.185733,17z/data=!4m6!3m5!1s0x128e510838572915:0x98c81818d117e070!8m2!3d36.731219!4d3.185733!16s%2Fg%2F11v402rb1s"
             target="_blank"
             rel="noopener noreferrer"
-            className="font-display inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-white/5 hover:bg-adrena-gold hover:text-black border border-white/10 text-sm font-bold uppercase tracking-wider text-neutral-200 transition-all self-start md:self-auto"
+            className="font-display inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-adrena-card hover:bg-adrena-gold hover:text-[#111215] border border-adrena-border text-sm font-bold uppercase tracking-wider text-adrena-bone transition-all self-start md:self-auto shadow-sm"
           >
             <MapPin className="w-4 h-4 text-adrena-gold" />
             <span>{t.googleMapsBtn}</span>

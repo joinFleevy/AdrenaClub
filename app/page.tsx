@@ -52,7 +52,7 @@ export default function Home() {
   return (
     <div
       dir={isRtl ? 'rtl' : 'ltr'}
-      className={`min-h-screen bg-adrena-black text-white ${
+      className={`min-h-screen bg-adrena-black text-adrena-bone ${
         isRtl ? 'font-sans' : 'font-sans'
       }`}
     >

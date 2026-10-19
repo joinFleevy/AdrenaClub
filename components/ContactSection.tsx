@@ -12,14 +12,14 @@ export default function ContactSection({ lang }: ContactSectionProps) {
   const t = content[lang].contact;
 
   return (
-    <section id="contact" className="py-20 scroll-mt-28 relative bg-adrena-dark/40 border-b border-adrena-border">
+    <section id="contact" className="py-20 scroll-mt-28 relative bg-adrena-black border-b border-adrena-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header without generic AI-slop kickers */}
         <div className="mb-12">
-          <h2 className="font-display text-4xl sm:text-5xl md:text-6xl font-black text-white tracking-tight uppercase leading-none">
+          <h2 className="font-display text-4xl sm:text-5xl md:text-6xl font-black text-adrena-bone tracking-tight uppercase leading-none">
             {t.title}
           </h2>
-          <p className="mt-3 text-base text-neutral-300 max-w-[65ch] leading-relaxed">
+          <p className="mt-3 text-base sm:text-lg text-adrena-stone max-w-[65ch] leading-relaxed">
             {t.subtitle}
           </p>
         </div>
@@ -28,35 +28,35 @@ export default function ContactSection({ lang }: ContactSectionProps) {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Left Column: Direct Info Cards */}
           <div className="lg:col-span-5 flex flex-col gap-4">
-            <div className="p-6 sm:p-7 rounded-2xl bg-adrena-card border border-adrena-border shadow-xl">
+            <div className="p-6 sm:p-7 rounded-2xl bg-adrena-card border border-adrena-border shadow-md">
               <div className="space-y-6 text-sm">
                 {/* Address */}
                 <div className="flex items-start gap-3.5">
-                  <div className="w-8 h-8 rounded-lg bg-adrena-gold/10 flex items-center justify-center flex-shrink-0 text-adrena-gold mt-0.5">
+                  <div className="w-9 h-9 rounded-xl bg-adrena-surface border border-adrena-border flex items-center justify-center flex-shrink-0 text-adrena-gold mt-0.5">
                     <MapPin className="w-4 h-4" />
                   </div>
                   <div>
-                    <span className="font-display text-xs font-bold text-neutral-400 uppercase tracking-wider block">
+                    <span className="font-display text-xs font-bold text-adrena-stone uppercase tracking-wider block">
                       {t.addressLabel}
                     </span>
-                    <span className="font-semibold text-white mt-0.5 block">{t.addressValue}</span>
+                    <span className="font-semibold text-adrena-bone mt-0.5 block">{t.addressValue}</span>
                   </div>
                 </div>
 
                 {/* Phones */}
                 <div className="flex items-start gap-3.5">
-                  <div className="w-8 h-8 rounded-lg bg-adrena-gold/10 flex items-center justify-center flex-shrink-0 text-adrena-gold mt-0.5">
+                  <div className="w-9 h-9 rounded-xl bg-adrena-surface border border-adrena-border flex items-center justify-center flex-shrink-0 text-adrena-gold mt-0.5">
                     <Phone className="w-4 h-4" />
                   </div>
                   <div>
-                    <span className="font-display text-xs font-bold text-neutral-400 uppercase tracking-wider block">
+                    <span className="font-display text-xs font-bold text-adrena-stone uppercase tracking-wider block">
                       {t.phoneLabel}
                     </span>
                     <div className="flex flex-col gap-1 mt-0.5 font-mono tabular-nums font-bold text-adrena-gold text-base">
-                      <a href="tel:0771570378" className="hover:underline">
+                      <a href="tel:+213771570378" className="hover:underline">
                         0771 57 03 78
                       </a>
-                      <a href="tel:0719925474" className="hover:underline text-neutral-300">
+                      <a href="tel:+213719925474" className="hover:underline text-adrena-bone">
                         0719 92 54 74
                       </a>
                     </div>
@@ -65,16 +65,16 @@ export default function ContactSection({ lang }: ContactSectionProps) {
 
                 {/* Email */}
                 <div className="flex items-start gap-3.5">
-                  <div className="w-8 h-8 rounded-lg bg-adrena-gold/10 flex items-center justify-center flex-shrink-0 text-adrena-gold mt-0.5">
+                  <div className="w-9 h-9 rounded-xl bg-adrena-surface border border-adrena-border flex items-center justify-center flex-shrink-0 text-adrena-gold mt-0.5">
                     <Mail className="w-4 h-4" />
                   </div>
                   <div>
-                    <span className="font-display text-xs font-bold text-neutral-400 uppercase tracking-wider block">
+                    <span className="font-display text-xs font-bold text-adrena-stone uppercase tracking-wider block">
                       {t.emailLabel}
                     </span>
                     <a
                       href="mailto:1adrenaclub@gmail.com"
-                      className="font-semibold text-white hover:text-adrena-gold transition-colors mt-0.5 block"
+                      className="font-semibold text-adrena-bone hover:text-adrena-gold transition-colors mt-0.5 block"
                     >
                       {t.emailValue}
                     </a>
@@ -83,34 +83,34 @@ export default function ContactSection({ lang }: ContactSectionProps) {
 
                 {/* Hours */}
                 <div className="flex items-start gap-3.5">
-                  <div className="w-8 h-8 rounded-lg bg-adrena-gold/10 flex items-center justify-center flex-shrink-0 text-adrena-gold mt-0.5">
+                  <div className="w-9 h-9 rounded-xl bg-adrena-surface border border-adrena-border flex items-center justify-center flex-shrink-0 text-adrena-gold mt-0.5">
                     <Clock className="w-4 h-4" />
                   </div>
                   <div>
-                    <span className="font-display text-xs font-bold text-neutral-400 uppercase tracking-wider block">
+                    <span className="font-display text-xs font-bold text-adrena-stone uppercase tracking-wider block">
                       {t.hoursLabel}
                     </span>
-                    <span className="font-semibold text-neutral-200 mt-0.5 block">{t.hoursValue}</span>
+                    <span className="font-semibold text-adrena-bone mt-0.5 block">{t.hoursValue}</span>
                   </div>
                 </div>
               </div>
 
               {/* Actions */}
-              <div className="mt-8 pt-6 border-t border-white/10 flex flex-col gap-3">
+              <div className="mt-8 pt-6 border-t border-adrena-border flex flex-col gap-3">
                 <a
                   href="https://wa.me/213771570378"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl bg-adrena-gold hover:bg-adrena-gold-light text-black font-display font-black text-xs sm:text-sm uppercase tracking-wider transition-all shadow-md hover:scale-[1.02]"
+                  className="flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl bg-adrena-gold hover:bg-adrena-gold-light text-[#111215] font-display font-black text-xs sm:text-sm uppercase tracking-wider transition-all shadow-md hover:scale-[1.02]"
                 >
-                  <MessageCircle className="w-4 h-4 fill-black" />
+                  <MessageCircle className="w-4 h-4 fill-[#111215]" />
                   <span>{t.whatsappChat}</span>
                 </a>
 
                 <div className="grid grid-cols-2 gap-3">
                   <a
-                    href="tel:0771570378"
-                    className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-lg bg-white/5 hover:bg-white/10 text-white border border-white/10 font-display font-bold text-xs uppercase tracking-wider transition-all"
+                    href="tel:+213771570378"
+                    className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl bg-adrena-surface hover:bg-[#252830] text-adrena-bone border border-adrena-border font-display font-bold text-xs uppercase tracking-wider transition-all"
                   >
                     <Phone className="w-3.5 h-3.5 text-adrena-gold" />
                     <span>{t.callNow}</span>
@@ -119,7 +119,7 @@ export default function ContactSection({ lang }: ContactSectionProps) {
                     href="https://maps.app.goo.gl/6YJepRtyWvXcrZoV9"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-lg bg-white/5 hover:bg-white/10 text-white border border-white/10 font-display font-bold text-xs uppercase tracking-wider transition-all"
+                    className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl bg-adrena-surface hover:bg-[#252830] text-adrena-bone border border-adrena-border font-display font-bold text-xs uppercase tracking-wider transition-all"
                   >
                     <Navigation className="w-3.5 h-3.5 text-adrena-gold" />
                     <span>{t.getDirections}</span>
@@ -129,12 +129,12 @@ export default function ContactSection({ lang }: ContactSectionProps) {
             </div>
 
             {/* Social Links */}
-            <div className="p-3.5 rounded-xl bg-adrena-card/80 border border-adrena-border flex items-center justify-around">
+            <div className="p-3.5 rounded-xl bg-adrena-card border border-adrena-border flex items-center justify-around shadow-sm">
               <a
                 href="https://www.instagram.com/adrena.club/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-xs font-bold text-neutral-300 hover:text-pink-400 transition-colors"
+                className="flex items-center gap-2 text-xs font-bold text-adrena-stone hover:text-pink-400 transition-colors"
               >
                 <Instagram className="w-4 h-4 text-pink-400" />
                 <span>Instagram</span>
@@ -144,7 +144,7 @@ export default function ContactSection({ lang }: ContactSectionProps) {
                 href="https://www.facebook.com/clubadrena/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-xs font-bold text-neutral-300 hover:text-blue-400 transition-colors"
+                className="flex items-center gap-2 text-xs font-bold text-adrena-stone hover:text-blue-400 transition-colors"
               >
                 <Facebook className="w-4 h-4 text-blue-400" />
                 <span>Facebook</span>
@@ -154,7 +154,7 @@ export default function ContactSection({ lang }: ContactSectionProps) {
                 href="https://www.tiktok.com/@adrena.club"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-xs font-bold text-neutral-300 hover:text-white transition-colors"
+                className="flex items-center gap-2 text-xs font-bold text-adrena-stone hover:text-white transition-colors"
               >
                 <span className="font-mono text-sm text-adrena-gold">#</span>
                 <span>TikTok</span>

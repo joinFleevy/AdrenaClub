@@ -84,23 +84,23 @@ export default function PricingCalculator({ lang }: PricingCalculatorProps) {
   };
 
   return (
-    <div className="mb-16 p-6 sm:p-8 rounded-3xl bg-adrena-card/90 border border-adrena-border shadow-2xl">
+    <div className="mb-16 p-6 sm:p-8 rounded-3xl bg-adrena-card border border-adrena-border shadow-xl">
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 pb-6 border-b border-adrena-border">
         <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-adrena-gold/10 border border-adrena-gold/30 text-adrena-gold text-xs font-display font-semibold uppercase tracking-wider mb-2">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-adrena-surface border border-adrena-border text-adrena-gold text-xs font-display font-semibold uppercase tracking-wider mb-2">
             <Calculator className="w-3.5 h-3.5" />
             <span>{isAr ? 'حاسبة الاشتراكات الرسمية' : 'Simulateur Officiel'}</span>
           </div>
-          <h3 className="font-display text-2xl sm:text-3xl font-black text-white tracking-tight uppercase">
+          <h3 className="font-display text-2xl sm:text-3xl font-black text-adrena-bone tracking-tight uppercase">
             {t.title}
           </h3>
-          <p className="text-xs sm:text-sm text-neutral-300 mt-1">
+          <p className="text-xs sm:text-sm text-adrena-stone mt-1">
             {t.subtitle}
           </p>
         </div>
 
-        <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-medium self-start md:self-auto">
+        <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-950/50 border border-emerald-500/30 text-emerald-400 text-xs font-medium self-start md:self-auto">
           <Sparkles className="w-3.5 h-3.5" />
           <span>{isAr ? 'وفورات الباقات المدمجة' : 'Meilleur rapport sport / prix'}</span>
         </div>
@@ -111,7 +111,7 @@ export default function PricingCalculator({ lang }: PricingCalculatorProps) {
         <div className="lg:col-span-7 space-y-6">
           {/* Step 1: Base Formula */}
           <div>
-            <label className="block text-sm font-bold uppercase tracking-wider text-neutral-300 mb-3 font-display">
+            <label className="block text-sm font-bold uppercase tracking-wider text-adrena-bone mb-3 font-display">
               {t.step1Title}
             </label>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3" role="radiogroup" aria-label="Type de formule">
@@ -122,12 +122,12 @@ export default function PricingCalculator({ lang }: PricingCalculatorProps) {
                 onClick={() => setFormulaType('mixte')}
                 className={`p-4 rounded-2xl text-left rtl:text-right border transition-all ${
                   formulaType === 'mixte'
-                    ? 'bg-adrena-gold/15 border-adrena-gold shadow-lg shadow-adrena-gold/10 ring-1 ring-adrena-gold/40'
-                    : 'bg-black/40 border-white/10 hover:border-white/20'
+                    ? 'bg-adrena-surface border-adrena-gold shadow-md ring-1 ring-adrena-gold/40'
+                    : 'bg-adrena-surface/50 border-adrena-border hover:border-neutral-600'
                 }`}
               >
                 <div className="flex items-center justify-between mb-2">
-                  <span className="font-display font-bold text-base text-white flex items-center gap-2">
+                  <span className="font-display font-bold text-base text-adrena-bone flex items-center gap-2">
                     <Flame className="w-5 h-5 text-adrena-gold" />
                     {t.mixteOption}
                   </span>
@@ -135,7 +135,7 @@ export default function PricingCalculator({ lang }: PricingCalculatorProps) {
                     <span className="w-2.5 h-2.5 rounded-full bg-adrena-gold" />
                   )}
                 </div>
-                <p className="text-sm text-neutral-300 leading-relaxed font-sans">
+                <p className="text-sm text-adrena-stone leading-relaxed font-sans">
                   {t.mixteDesc}
                 </p>
               </button>
@@ -147,20 +147,20 @@ export default function PricingCalculator({ lang }: PricingCalculatorProps) {
                 onClick={() => setFormulaType('muscu')}
                 className={`p-4 rounded-2xl text-left rtl:text-right border transition-all ${
                   formulaType === 'muscu'
-                    ? 'bg-adrena-gold/15 border-adrena-gold shadow-lg shadow-adrena-gold/10 ring-1 ring-adrena-gold/40'
-                    : 'bg-black/40 border-white/10 hover:border-white/20'
+                    ? 'bg-adrena-surface border-adrena-gold shadow-md ring-1 ring-adrena-gold/40'
+                    : 'bg-adrena-surface/50 border-adrena-border hover:border-neutral-600'
                 }`}
               >
                 <div className="flex items-center justify-between mb-2">
-                  <span className="font-display font-bold text-base text-white flex items-center gap-2">
-                    <Dumbbell className="w-5 h-5 text-neutral-300" />
+                  <span className="font-display font-bold text-base text-adrena-bone flex items-center gap-2">
+                    <Dumbbell className="w-5 h-5 text-adrena-stone" />
                     {t.muscuOption}
                   </span>
                   {formulaType === 'muscu' && (
                     <span className="w-2.5 h-2.5 rounded-full bg-adrena-gold" />
                   )}
                 </div>
-                <p className="text-sm text-neutral-300 leading-relaxed font-sans">
+                <p className="text-sm text-adrena-stone leading-relaxed font-sans">
                   {t.muscuDesc}
                 </p>
               </button>
@@ -169,13 +169,13 @@ export default function PricingCalculator({ lang }: PricingCalculatorProps) {
 
           {/* Step 2: Frequency Selectors */}
           {formulaType === 'mixte' && (
-            <div className="p-5 rounded-2xl bg-black/50 border border-white/10 space-y-6">
+            <div className="p-5 rounded-2xl bg-adrena-surface/70 border border-adrena-border space-y-6">
               <div>
                 <div className="flex items-center justify-between mb-2.5">
-                  <label className="text-sm font-bold uppercase tracking-wider text-neutral-200 font-display">
+                  <label className="text-sm font-bold uppercase tracking-wider text-adrena-bone font-display">
                     {t.combatLabel}
                   </label>
-                  <span className="font-mono text-xs sm:text-sm font-bold text-adrena-gold bg-adrena-gold/15 border border-adrena-gold/30 px-2.5 py-1 rounded-md">
+                  <span className="font-mono text-xs sm:text-sm font-bold text-adrena-gold bg-adrena-surface border border-adrena-border px-2.5 py-1 rounded-md">
                     {crossSessions} {isAr ? 'حصص / أسبوع' : 'séances / semaine'}
                   </span>
                 </div>
@@ -189,8 +189,8 @@ export default function PricingCalculator({ lang }: PricingCalculatorProps) {
                       onClick={() => setCrossSessions(num)}
                       className={`py-3 px-3 rounded-xl text-sm font-bold transition-all ${
                         crossSessions === num
-                          ? 'bg-adrena-gold text-black shadow-md font-black'
-                          : 'bg-white/5 text-neutral-200 hover:text-white hover:bg-white/10 border border-white/10'
+                          ? 'bg-adrena-gold text-[#111215] shadow-sm font-black'
+                          : 'bg-adrena-surface text-adrena-stone hover:text-adrena-bone hover:bg-[#252830] border border-adrena-border'
                       }`}
                     >
                       {num} {isAr ? 'حصص' : num > 1 ? 'séances' : 'séance'}
@@ -201,10 +201,10 @@ export default function PricingCalculator({ lang }: PricingCalculatorProps) {
 
               <div>
                 <div className="flex items-center justify-between mb-2.5">
-                  <label className="text-sm font-bold uppercase tracking-wider text-neutral-200 font-display">
+                  <label className="text-sm font-bold uppercase tracking-wider text-adrena-bone font-display">
                     {isAr ? 'عدد حصص كمال الأجسام أسبوعياً' : 'Séances de Musculation par semaine'}
                   </label>
-                  <span className="font-mono text-xs sm:text-sm font-bold text-adrena-gold bg-adrena-gold/15 border border-adrena-gold/30 px-2.5 py-1 rounded-md">
+                  <span className="font-mono text-xs sm:text-sm font-bold text-adrena-gold bg-adrena-surface border border-adrena-border px-2.5 py-1 rounded-md">
                     {muscuSessions} {isAr ? 'حصص / أسبوع' : 'séances / semaine'}
                   </span>
                 </div>
@@ -218,8 +218,8 @@ export default function PricingCalculator({ lang }: PricingCalculatorProps) {
                       onClick={() => setMuscuSessions(num)}
                       className={`py-3 rounded-xl text-sm font-bold transition-all ${
                         muscuSessions === num
-                          ? 'bg-white text-black shadow-md font-black'
-                          : 'bg-white/5 text-neutral-200 hover:text-white hover:bg-white/10 border border-white/10'
+                          ? 'bg-adrena-bone text-[#111215] shadow-sm font-black'
+                          : 'bg-adrena-surface text-adrena-stone hover:text-adrena-bone hover:bg-[#252830] border border-adrena-border'
                       }`}
                     >
                       {num}x
@@ -231,8 +231,8 @@ export default function PricingCalculator({ lang }: PricingCalculatorProps) {
           )}
 
           {formulaType === 'muscu' && (
-            <div className="p-5 rounded-2xl bg-black/50 border border-white/10">
-              <label className="block text-sm font-bold uppercase tracking-wider text-neutral-200 font-display mb-3">
+            <div className="p-5 rounded-2xl bg-adrena-surface/70 border border-adrena-border">
+              <label className="block text-sm font-bold uppercase tracking-wider text-adrena-bone font-display mb-3">
                 {isAr ? 'وتيرة التدريب في الأسبوع' : 'Fréquence hebdomadaire'}
               </label>
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2" role="radiogroup">
@@ -245,8 +245,8 @@ export default function PricingCalculator({ lang }: PricingCalculatorProps) {
                     onClick={() => setMuscuSessions(num)}
                     className={`py-3 rounded-xl text-sm font-bold transition-all ${
                       muscuSessions === num
-                        ? 'bg-adrena-gold text-black shadow-md font-black'
-                        : 'bg-white/5 text-neutral-200 hover:text-white hover:bg-white/10 border border-white/10'
+                        ? 'bg-adrena-gold text-[#111215] shadow-sm font-black'
+                        : 'bg-adrena-surface text-adrena-stone hover:text-adrena-bone hover:bg-[#252830] border border-adrena-border'
                     }`}
                   >
                     {num === 6 ? (isAr ? 'غير محدود' : 'Illimité') : `${num}x / sem`}
@@ -258,7 +258,7 @@ export default function PricingCalculator({ lang }: PricingCalculatorProps) {
 
           {/* Optional Add-ons */}
           <div>
-            <label className="block text-sm font-bold uppercase tracking-wider text-neutral-300 mb-2.5 font-display">
+            <label className="block text-sm font-bold uppercase tracking-wider text-adrena-stone mb-2.5 font-display">
               {isAr ? 'خدمات إضافية اختيارية' : 'Options bien-être & récupération'}
             </label>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -269,19 +269,19 @@ export default function PricingCalculator({ lang }: PricingCalculatorProps) {
                 onClick={() => setIncludeSauna(!includeSauna)}
                 className={`p-4 rounded-xl border text-left rtl:text-right flex items-center justify-between transition-all ${
                   includeSauna
-                    ? 'bg-adrena-gold/15 border-adrena-gold text-white shadow-sm'
-                    : 'bg-black/40 border-white/10 text-neutral-300 hover:border-white/20'
+                    ? 'bg-adrena-surface border-adrena-gold text-adrena-bone shadow-sm'
+                    : 'bg-adrena-surface/50 border-adrena-border text-adrena-stone hover:border-neutral-600'
                 }`}
               >
                 <div>
-                  <p className="text-sm sm:text-base font-bold text-white">
+                  <p className="text-sm sm:text-base font-bold text-adrena-bone">
                     {isAr ? 'حصة ساونا ومسبح (1h15)' : 'Séance Sauna & Piscine (1h15)'}
                   </p>
                   <p className="text-xs sm:text-sm font-bold text-adrena-gold mt-0.5">+2 000 DA {isAr ? '/ حصة' : '/ séance'}</p>
                 </div>
                 <div
                   className={`w-6 h-6 rounded-lg flex items-center justify-center border transition-colors ${
-                    includeSauna ? 'bg-adrena-gold border-adrena-gold text-black' : 'border-neutral-500 bg-black/40'
+                    includeSauna ? 'bg-adrena-gold border-adrena-gold text-[#111215]' : 'border-neutral-600 bg-adrena-card'
                   }`}
                 >
                   {includeSauna && <Check className="w-4 h-4 stroke-[3]" />}
@@ -295,19 +295,19 @@ export default function PricingCalculator({ lang }: PricingCalculatorProps) {
                 onClick={() => setIncludeNutrition(!includeNutrition)}
                 className={`p-4 rounded-xl border text-left rtl:text-right flex items-center justify-between transition-all ${
                   includeNutrition
-                    ? 'bg-adrena-gold/15 border-adrena-gold text-white shadow-sm'
-                    : 'bg-black/40 border-white/10 text-neutral-300 hover:border-white/20'
+                    ? 'bg-adrena-surface border-adrena-gold text-adrena-bone shadow-sm'
+                    : 'bg-adrena-surface/50 border-adrena-border text-adrena-stone hover:border-neutral-600'
                 }`}
               >
                 <div>
-                  <p className="text-sm sm:text-base font-bold text-white">
+                  <p className="text-sm sm:text-base font-bold text-adrena-bone">
                     {isAr ? 'متابعة أخصائي التغذية' : 'Bilan & Suivi Nutritionniste'}
                   </p>
                   <p className="text-xs sm:text-sm font-bold text-adrena-gold mt-0.5">+2 000 DA {isAr ? '/ برنامج' : '/ programme'}</p>
                 </div>
                 <div
                   className={`w-6 h-6 rounded-lg flex items-center justify-center border transition-colors ${
-                    includeNutrition ? 'bg-adrena-gold border-adrena-gold text-black' : 'border-neutral-500 bg-black/40'
+                    includeNutrition ? 'bg-adrena-gold border-adrena-gold text-[#111215]' : 'border-neutral-600 bg-adrena-card'
                   }`}
                 >
                   {includeNutrition && <Check className="w-4 h-4 stroke-[3]" />}
@@ -319,15 +319,15 @@ export default function PricingCalculator({ lang }: PricingCalculatorProps) {
 
         {/* Right Column: Calculated Price Card (5 cols) */}
         <div className="lg:col-span-5">
-          <div className="p-6 sm:p-7 rounded-2xl bg-neutral-900 border border-adrena-gold/40 shadow-2xl relative overflow-hidden">
-            <div className="absolute top-0 right-0 left-0 h-1.5 bg-gradient-to-r from-adrena-gold/40 via-adrena-gold to-adrena-gold/40" />
+          <div className="p-6 sm:p-7 rounded-2xl bg-adrena-surface border border-adrena-border shadow-xl relative overflow-hidden">
+            <div className="absolute top-0 right-0 left-0 h-1 bg-adrena-gold" />
 
-            <span className="text-xs sm:text-sm font-bold uppercase tracking-wider text-neutral-300 font-display block mb-1">
+            <span className="text-xs sm:text-sm font-bold uppercase tracking-wider text-adrena-stone font-display block mb-1">
               {t.totalLabel}
             </span>
 
             <div className="flex items-baseline gap-2.5 mb-4">
-              <span className="font-display text-4xl sm:text-6xl font-black text-white tracking-tight">
+              <span className="font-display text-4xl sm:text-6xl font-black text-adrena-bone tracking-tight">
                 {totalPrice.toLocaleString('fr-FR')}
               </span>
               <span className="font-display text-xl sm:text-2xl font-black text-adrena-gold">
@@ -336,12 +336,12 @@ export default function PricingCalculator({ lang }: PricingCalculatorProps) {
             </div>
 
             {/* Inclusions Callout */}
-            <div className="p-4 rounded-xl bg-black/70 border border-white/10 text-sm text-neutral-200 space-y-2.5 mb-6">
+            <div className="p-4 rounded-xl bg-adrena-card border border-adrena-border text-sm text-adrena-bone space-y-2.5 mb-6">
               <div className="flex items-center gap-2 text-adrena-gold font-bold text-xs uppercase tracking-wider">
                 <Sparkles className="w-4 h-4" />
                 <span>{t.savingsTag}</span>
               </div>
-              <ul className="space-y-2 text-xs sm:text-sm text-neutral-300">
+              <ul className="space-y-2 text-xs sm:text-sm text-adrena-stone">
                 <li className="flex items-center gap-2">
                   <Check className="w-4 h-4 text-emerald-400 flex-shrink-0" />
                   <span>{isAr ? 'الدخول للغرف والدوشات الساخنة مشمول' : 'Accès douches chaudes & vestiaires inclus'}</span>
@@ -361,9 +361,9 @@ export default function PricingCalculator({ lang }: PricingCalculatorProps) {
             <button
               type="button"
               onClick={handleWhatsAppBooking}
-              className="w-full inline-flex items-center justify-center gap-2.5 py-4 px-6 rounded-xl bg-adrena-gold hover:bg-adrena-gold-light text-black font-display font-black text-base uppercase tracking-wider transition-all duration-200 shadow-xl active:scale-95"
+              className="w-full inline-flex items-center justify-center gap-2.5 py-4 px-6 rounded-xl bg-adrena-gold hover:bg-adrena-gold-light text-[#111215] font-display font-black text-base uppercase tracking-wider transition-all duration-200 shadow-md active:scale-95"
             >
-              <MessageCircle className="w-5 h-5 fill-black" />
+              <MessageCircle className="w-5 h-5 fill-[#111215]" />
               <span>{t.ctaWhatsapp}</span>
             </button>
           </div>

@@ -105,12 +105,12 @@ export default function OfficialPostersModal({
         className="relative max-w-4xl w-full bg-adrena-card border border-adrena-border rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl flex flex-col max-h-[92vh]"
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-adrena-dark">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-adrena-border bg-adrena-card">
           <div>
-            <h3 className="font-display text-base sm:text-xl font-black text-white uppercase tracking-wide">
+            <h3 className="font-display text-base sm:text-xl font-black text-adrena-bone uppercase tracking-wide">
               {lang === 'fr' ? currentPoster.titleFr : currentPoster.titleAr}
             </h3>
-            <span className="font-display text-xs text-neutral-400 font-bold tabular-nums">
+            <span className="font-display text-xs text-adrena-stone font-bold tabular-nums">
               {currentIndex + 1} / {posters.length}
             </span>
           </div>
@@ -119,14 +119,14 @@ export default function OfficialPostersModal({
             <a
               href={currentPoster.src}
               download
-              className="p-2 rounded-xl bg-white/5 hover:bg-white/10 text-neutral-300 hover:text-white transition-colors"
+              className="p-2.5 rounded-xl bg-adrena-surface hover:bg-[#252830] text-adrena-bone border border-adrena-border transition-colors"
               title="Télécharger l'affiche"
             >
-              <Download className="w-5 h-5" />
+              <Download className="w-5 h-5 text-adrena-gold" />
             </a>
             <button
               onClick={onClose}
-              className="p-2 rounded-xl bg-white/5 hover:bg-white/10 text-neutral-300 hover:text-white transition-colors"
+              className="p-2.5 rounded-xl bg-adrena-surface hover:bg-[#252830] text-adrena-bone border border-adrena-border transition-colors"
               aria-label="Fermer"
             >
               <X className="w-5 h-5" />
@@ -135,7 +135,7 @@ export default function OfficialPostersModal({
         </div>
 
         {/* Poster Image Area */}
-        <div className="relative flex-1 min-h-[380px] sm:min-h-[520px] bg-black flex items-center justify-center p-2 overflow-auto">
+        <div className="relative flex-1 min-h-[380px] sm:min-h-[520px] bg-[#0E0F13] flex items-center justify-center p-2 overflow-auto">
           <div className="relative w-full h-[380px] sm:h-[520px]">
             <Image
               src={currentPoster.src}
@@ -150,14 +150,14 @@ export default function OfficialPostersModal({
           {/* Nav arrows */}
           <button
             onClick={handlePrev}
-            className="absolute left-3 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-black/70 hover:bg-adrena-gold text-white hover:text-black transition-all border border-white/10"
+            className="absolute left-3 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-[#111215]/80 hover:bg-adrena-gold text-adrena-bone hover:text-[#111215] transition-all border border-adrena-border"
             aria-label={lang === 'fr' ? 'Précédent' : 'السابق'}
           >
             <ChevronLeft className="w-6 h-6" />
           </button>
           <button
             onClick={handleNext}
-            className="absolute right-3 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-black/70 hover:bg-adrena-gold text-white hover:text-black transition-all border border-white/10"
+            className="absolute right-3 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-[#111215]/80 hover:bg-adrena-gold text-adrena-bone hover:text-[#111215] transition-all border border-adrena-border"
             aria-label={lang === 'fr' ? 'Suivant' : 'التالي'}
           >
             <ChevronRight className="w-6 h-6" />
@@ -165,15 +165,15 @@ export default function OfficialPostersModal({
         </div>
 
         {/* Bottom Thumbnails Strip */}
-        <div className="px-4 py-3 bg-adrena-dark border-t border-white/10 flex items-center justify-center gap-2 overflow-x-auto">
+        <div className="px-4 py-3 bg-adrena-card border-t border-adrena-border flex items-center justify-center gap-2 overflow-x-auto">
           {posters.map((p, idx) => (
             <button
               key={p.id}
               onClick={() => setCurrentIndex(idx)}
-              className={`relative w-14 h-14 sm:w-16 sm:h-16 rounded-lg overflow-hidden border-2 transition-all flex-shrink-0 ${
+              className={`relative w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden border-2 transition-all flex-shrink-0 ${
                 currentIndex === idx
                   ? 'border-adrena-gold scale-105'
-                  : 'border-white/10 opacity-50 hover:opacity-100'
+                  : 'border-adrena-border opacity-50 hover:opacity-100'
               }`}
             >
               <Image src={p.src} alt={lang === 'fr' ? p.titleFr : p.titleAr} fill sizes="64px" className="object-cover" />

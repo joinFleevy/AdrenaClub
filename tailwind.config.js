@@ -10,14 +10,18 @@ module.exports = {
     extend: {
       colors: {
         adrena: {
-          gold: "#F7B72F",
-          "gold-light": "#FFC94D",
-          "gold-dark": "#D49514",
-          black: "#0A0A0B",
-          dark: "#121215",
-          card: "#19191D",
-          border: "#2A2A30",
-          muted: "#8A8A93",
+          gold: "#D49B2E",
+          "gold-light": "#E5AE44",
+          "gold-dark": "#B3801D",
+          black: "#111215",
+          dark: "#16171B",
+          card: "#18191E",
+          surface: "#1E2026",
+          border: "#262830",
+          muted: "#9CA3AF",
+          bone: "#F4F5F7",
+          stone: "#D1D5DB",
+          crimson: "#DC2626",
         },
       },
       fontFamily: {

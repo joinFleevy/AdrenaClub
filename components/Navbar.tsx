@@ -46,16 +46,16 @@ export default function Navbar({ lang, onToggleLang }: NavbarProps) {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
       {/* Top micro bar */}
-      <div className="bg-black/90 border-b border-white/5 py-1.5 px-4 sm:px-6 lg:px-8 text-xs text-neutral-400">
+      <div className="bg-[#0E0F13] border-b border-adrena-border py-1.5 px-4 sm:px-6 lg:px-8 text-xs text-adrena-stone">
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
           <div className="flex items-center gap-4 overflow-hidden text-ellipsis whitespace-nowrap">
-            <span className="flex items-center gap-1.5 text-neutral-300">
+            <span className="flex items-center gap-1.5 text-adrena-bone">
               <MapPin className="w-3.5 h-3.5 text-adrena-gold flex-shrink-0" />
               <span className="hidden sm:inline">{t.topBar.address}</span>
               <span className="sm:hidden">Bab Ezzouar, Alger</span>
             </span>
             <span className="hidden md:inline text-neutral-600">|</span>
-            <span className="hidden md:flex items-center gap-1.5 text-neutral-300">
+            <span className="hidden md:flex items-center gap-1.5 text-adrena-bone">
               <Clock className="w-3.5 h-3.5 text-adrena-gold flex-shrink-0" />
               <span>Sam-Jeu : 06h - 00h (Hommes)</span>
             </span>
@@ -91,7 +91,7 @@ export default function Navbar({ lang, onToggleLang }: NavbarProps) {
             {/* Language Switcher */}
             <button
               onClick={onToggleLang}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-neutral-200 border border-white/10 transition-colors font-bold text-xs"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-adrena-card hover:bg-adrena-surface text-adrena-bone border border-adrena-border transition-colors font-bold text-xs"
               title="Changer de langue / تغيير اللغة"
             >
               <Globe className="w-3.5 h-3.5 text-adrena-gold" />
@@ -106,7 +106,7 @@ export default function Navbar({ lang, onToggleLang }: NavbarProps) {
         className={`transition-all duration-300 px-4 sm:px-6 lg:px-8 ${
           isScrolled
             ? 'bg-adrena-black/95 backdrop-blur-md py-3 border-b border-adrena-border shadow-xl'
-            : 'bg-gradient-to-b from-black/80 to-transparent py-4'
+            : 'bg-gradient-to-b from-[#111215]/95 via-[#111215]/70 to-transparent py-4'
         }`}
       >
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
@@ -143,7 +143,7 @@ export default function Navbar({ lang, onToggleLang }: NavbarProps) {
               <a
                 key={link.href}
                 href={link.href}
-                className="px-3 py-1.5 rounded-lg font-display text-sm font-bold uppercase tracking-wider text-neutral-300 hover:text-adrena-gold hover:bg-white/5 transition-all"
+                className="px-3.5 py-1.5 rounded-lg font-display text-sm font-bold uppercase tracking-wider text-adrena-bone hover:text-adrena-gold hover:bg-white/5 transition-all"
               >
                 {link.label}
               </a>
@@ -156,7 +156,7 @@ export default function Navbar({ lang, onToggleLang }: NavbarProps) {
               href="https://wa.me/213771570378?text=Bonjour%20Adrena%20Club,%20je%20souhaite%20avoir%20des%20informations%20sur%20les%20inscriptions."
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-adrena-gold hover:bg-adrena-gold-light text-black font-display font-black text-sm uppercase tracking-wider transition-all shadow-md hover:scale-[1.02]"
+              className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-adrena-gold hover:bg-adrena-gold-light text-[#111215] font-display font-black text-sm uppercase tracking-wider transition-all shadow-md hover:scale-[1.02]"
             >
               <MessageCircle className="w-4 h-4" />
               <span>{t.nav.ctaButton}</span>
@@ -166,7 +166,7 @@ export default function Navbar({ lang, onToggleLang }: NavbarProps) {
           {/* Mobile menu toggle button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2 rounded-xl text-neutral-300 hover:text-white bg-white/5 border border-white/10"
+            className="lg:hidden p-2.5 rounded-xl text-adrena-bone hover:text-white bg-adrena-card border border-adrena-border"
             aria-label="Toggle navigation menu"
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -183,25 +183,25 @@ export default function Navbar({ lang, onToggleLang }: NavbarProps) {
                 key={link.href}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="px-4 py-3 rounded-xl text-base font-bold text-neutral-200 hover:text-black hover:bg-adrena-gold transition-colors"
+                className="px-4 py-3 rounded-xl text-base font-bold text-adrena-bone hover:text-[#111215] hover:bg-adrena-gold transition-colors"
               >
                 {link.label}
               </a>
             ))}
 
-            <div className="pt-4 border-t border-white/10 flex flex-col gap-3">
+            <div className="pt-4 border-t border-adrena-border flex flex-col gap-3">
               <a
-                href="tel:0771570378"
-                className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-white/10 text-white font-bold text-sm"
+                href="tel:+213771570378"
+                className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-adrena-card border border-adrena-border text-adrena-bone font-bold text-sm"
               >
                 <Phone className="w-4 h-4 text-adrena-gold" />
-                <span>0771 57 03 78</span>
+                <span className="font-mono tabular-nums">0771 57 03 78</span>
               </a>
               <a
                 href="https://wa.me/213771570378?text=Bonjour%20Adrena%20Club,%20je%20souhaite%20m'inscrire."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-adrena-gold text-black font-black text-sm tracking-wide"
+                className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-adrena-gold text-[#111215] font-display font-black text-sm tracking-wide uppercase"
               >
                 <MessageCircle className="w-4 h-4" />
                 <span>{t.nav.ctaButton}</span>

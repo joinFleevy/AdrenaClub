@@ -20,16 +20,12 @@ export default function FAQSection({ lang }: FAQSectionProps) {
   return (
     <section id="faq" className="py-20 scroll-mt-28 relative bg-adrena-black border-b border-adrena-border">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
+        {/* Header without generic AI-slop kickers */}
         <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-adrena-gold/10 border border-adrena-gold/30 text-adrena-gold text-xs font-display font-semibold uppercase tracking-wider mb-4">
-            <HelpCircle className="w-3.5 h-3.5" />
-            <span>{isAr ? 'إجابات مباشرة' : 'Réponses Claires'}</span>
-          </div>
-          <h2 className="font-display text-4xl sm:text-5xl font-black text-white tracking-tight uppercase leading-none">
+          <h2 className="font-display text-4xl sm:text-5xl md:text-6xl font-black text-adrena-bone tracking-tight uppercase leading-none">
             {t.title}
           </h2>
-          <p className="mt-3 text-base text-neutral-300 max-w-xl mx-auto leading-relaxed">
+          <p className="mt-3 text-base sm:text-lg text-adrena-stone max-w-xl mx-auto leading-relaxed">
             {t.subtitle}
           </p>
         </div>
@@ -41,18 +37,18 @@ export default function FAQSection({ lang }: FAQSectionProps) {
             return (
               <div
                 key={index}
-                className="rounded-2xl bg-adrena-card border border-adrena-border transition-all duration-200 overflow-hidden"
+                className="rounded-2xl bg-adrena-card border border-adrena-border transition-all duration-200 overflow-hidden shadow-sm"
               >
                 <button
                   type="button"
                   onClick={() => toggleItem(index)}
                   aria-expanded={isOpen}
-                  className="w-full p-5 sm:p-6 text-left rtl:text-right flex items-center justify-between gap-4 font-display font-bold text-base sm:text-lg text-white hover:text-adrena-gold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-adrena-gold"
+                  className="w-full p-5 sm:p-6 text-left rtl:text-right flex items-center justify-between gap-4 font-display font-bold text-base sm:text-lg text-adrena-bone hover:text-adrena-gold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-adrena-gold"
                 >
                   <span className="leading-snug">{item.q}</span>
                   <div
-                    className={`w-7 h-7 rounded-full bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0 transition-transform duration-200 ${
-                      isOpen ? 'rotate-180 bg-adrena-gold/20 text-adrena-gold border-adrena-gold/30' : 'text-neutral-400'
+                    className={`w-8 h-8 rounded-full bg-adrena-surface border border-adrena-border flex items-center justify-center flex-shrink-0 transition-transform duration-200 ${
+                      isOpen ? 'rotate-180 bg-adrena-gold text-[#111215] border-adrena-gold' : 'text-adrena-stone'
                     }`}
                   >
                     <ChevronDown className="w-4 h-4" />
@@ -60,8 +56,8 @@ export default function FAQSection({ lang }: FAQSectionProps) {
                 </button>
 
                 {isOpen && (
-                  <div className="px-5 sm:px-6 pb-6 pt-0 border-t border-white/5 mt-1">
-                    <p className="text-sm sm:text-base text-neutral-300 leading-relaxed max-w-prose pt-4">
+                  <div className="px-5 sm:px-6 pb-6 pt-0 border-t border-adrena-border mt-1">
+                    <p className="text-sm sm:text-base text-adrena-stone leading-relaxed max-w-prose pt-4 font-sans">
                       {item.a}
                     </p>
                   </div>
@@ -72,8 +68,8 @@ export default function FAQSection({ lang }: FAQSectionProps) {
         </div>
 
         {/* Bottom Help Note */}
-        <div className="mt-10 p-6 rounded-2xl bg-neutral-900/60 border border-white/5 text-center">
-          <p className="text-sm text-neutral-300 mb-3">
+        <div className="mt-10 p-6 rounded-2xl bg-adrena-card border border-adrena-border text-center shadow-sm">
+          <p className="text-sm text-adrena-stone mb-3 font-medium">
             {isAr
               ? 'لديك سؤال آخر أو ترغب في زيارة القاعة اليوم ؟'
               : 'Vous avez une autre question ou souhaitez visiter la salle aujourd\'hui ?'}

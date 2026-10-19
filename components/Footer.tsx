@@ -13,7 +13,7 @@ export default function Footer({ lang }: FooterProps) {
   const t = content[lang];
 
   return (
-    <footer className="bg-black border-t border-adrena-border text-neutral-400 text-sm pb-24 md:pb-12 pt-16">
+    <footer className="bg-[#0D0E11] border-t border-adrena-border text-adrena-stone text-sm pb-24 md:pb-12 pt-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
           {/* Col 1: Brand & Slogan */}
@@ -23,28 +23,28 @@ export default function Footer({ lang }: FooterProps) {
                 <Image src="/logo.png" alt="Adrena Club Logo" fill sizes="40px" className="object-contain" />
               </div>
               <div className="flex items-center gap-1.5">
-                <span className="font-display text-2xl font-black text-white tracking-widest uppercase">ADRENA</span>
+                <span className="font-display text-2xl font-black text-adrena-bone tracking-widest uppercase">ADRENA</span>
                 <span className="font-display text-2xl font-black text-adrena-gold tracking-widest uppercase">CLUB</span>
               </div>
             </div>
 
-            <p className="text-xs sm:text-sm text-neutral-400 leading-relaxed max-w-[38ch]">
+            <p className="text-xs sm:text-sm text-adrena-stone leading-relaxed max-w-[38ch]">
               {lang === 'fr'
                 ? 'Complexe sportif haut de gamme sur 2 étages à Bab Ezzouar. Musculation, CrossTraining, Sports de Combat, Sauna & Espace 100% femmes.'
                 : 'مجمع رياضي متكامل على طابقين في باب الزوار. كمال أجسام، كروس ترينينغ، رياضات قتالية، ساونا وفترات خاصة للنساء.'}
             </p>
 
-            <div className="p-3.5 rounded-xl bg-white/5 border border-white/10 text-xs italic text-adrena-gold font-medium leading-relaxed">
+            <div className="p-3.5 rounded-xl bg-adrena-card border border-adrena-border text-xs italic text-adrena-gold font-medium leading-relaxed">
               {t.hero.motto}
             </div>
           </div>
 
           {/* Col 2: Navigation Links */}
           <div>
-            <h4 className="font-display text-xs font-black text-white uppercase tracking-wider mb-4">
+            <h4 className="font-display text-xs font-black text-adrena-bone uppercase tracking-wider mb-4">
               {lang === 'fr' ? 'Navigation' : 'روابط سريعة'}
             </h4>
-            <ul className="space-y-2 text-xs sm:text-sm">
+            <ul className="space-y-2 text-xs sm:text-sm text-adrena-stone">
               <li>
                 <a href="#accueil" className="hover:text-adrena-gold transition-colors">
                   {t.nav.home}
@@ -85,10 +85,10 @@ export default function Footer({ lang }: FooterProps) {
 
           {/* Col 3: Disciplines */}
           <div>
-            <h4 className="font-display text-xs font-black text-white uppercase tracking-wider mb-4">
+            <h4 className="font-display text-xs font-black text-adrena-bone uppercase tracking-wider mb-4">
               {lang === 'fr' ? 'Activités du Club' : 'الأنشطة المتاحة'}
             </h4>
-            <ul className="space-y-2 text-xs sm:text-sm text-neutral-400">
+            <ul className="space-y-2 text-xs sm:text-sm text-adrena-stone">
               {lang === 'fr' ? (
                 <>
                   <li>• Musculation & Plateau Force</li>
@@ -115,7 +115,7 @@ export default function Footer({ lang }: FooterProps) {
 
           {/* Col 4: Contact & Social */}
           <div>
-            <h4 className="font-display text-xs font-black text-white uppercase tracking-wider mb-4">
+            <h4 className="font-display text-xs font-black text-adrena-bone uppercase tracking-wider mb-4">
               {lang === 'fr' ? 'Contact & Réseaux' : 'التواصل والشبكات'}
             </h4>
             <ul className="space-y-2.5 text-xs sm:text-sm mb-6">

@@ -21,7 +21,7 @@ export default function WomensSanctuary({ lang }: WomensSanctuaryProps) {
   ];
 
   return (
-    <section id="espace-femmes" className="py-20 scroll-mt-28 relative bg-adrena-dark/60 border-b border-adrena-border">
+    <section id="espace-femmes" className="py-20 scroll-mt-28 relative bg-adrena-black border-b border-adrena-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
@@ -36,10 +36,10 @@ export default function WomensSanctuary({ lang }: WomensSanctuaryProps) {
                   sizes="(max-width: 1024px) 100vw, 40vw"
                   className="object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-adrena-card via-black/25 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-adrena-card via-[#111215]/25 to-transparent" />
                 
                 {/* Floating Highlight Pill */}
-                <div className="absolute top-4 left-4 rtl:left-auto rtl:right-4 px-3.5 py-1.5 rounded-full bg-black/90 backdrop-blur-md border border-adrena-gold/40 text-xs font-sans font-bold uppercase tracking-wider text-adrena-gold flex items-center gap-2 shadow-md">
+                <div className="absolute top-4 left-4 rtl:left-auto rtl:right-4 px-3.5 py-1.5 rounded-full bg-[#111215]/90 backdrop-blur-md border border-adrena-border text-xs font-sans font-bold uppercase tracking-wider text-adrena-gold flex items-center gap-2 shadow-md">
                   <VolumeX className="w-3.5 h-3.5" />
                   <span>{isAr ? '100% بدون أي موسيقى' : '100% Sans Musique'}</span>
                 </div>
@@ -49,16 +49,16 @@ export default function WomensSanctuary({ lang }: WomensSanctuaryProps) {
               <div className="p-5 bg-adrena-card border-t border-adrena-border">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="font-sans text-base sm:text-lg font-bold text-white tracking-tight">
+                    <p className="font-sans text-base sm:text-lg font-bold text-adrena-bone tracking-tight">
                       {isAr ? 'بيئة رياضية آمنة ومحترمة' : 'Tranquillité & Sérénité'}
                     </p>
-                    <p className="text-sm text-neutral-300 mt-1 font-medium">
+                    <p className="text-sm text-adrena-stone mt-1 font-medium">
                       {isAr ? 'مواعيد مخصصة ومنفصلة تماماً' : 'Créneaux dédiés avec accès exclusivement féminin'}
                     </p>
                   </div>
                   <a
                     href="#planning"
-                    className="p-3 rounded-xl bg-white/5 hover:bg-adrena-gold/20 text-adrena-gold border border-white/10 transition-colors"
+                    className="p-3 rounded-xl bg-adrena-surface hover:bg-adrena-gold hover:text-[#111215] text-adrena-gold border border-adrena-border transition-colors"
                     aria-label="Planning femmes"
                   >
                     <Calendar className="w-5 h-5" />
@@ -71,11 +71,11 @@ export default function WomensSanctuary({ lang }: WomensSanctuaryProps) {
           {/* Right Column: Key Commitments & Features */}
           <div className="lg:col-span-7 order-1 lg:order-2">
             {/* Heading without generic kicker pills */}
-            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight uppercase leading-none mb-3">
+            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-black text-adrena-bone tracking-tight uppercase leading-none mb-3">
               {t.title}
             </h2>
 
-            <p className="text-base sm:text-lg text-neutral-300 leading-relaxed max-w-xl mb-8 font-medium">
+            <p className="text-base sm:text-lg text-adrena-stone leading-relaxed max-w-xl mb-8 font-medium">
               {t.subtitle}
             </p>
 
@@ -84,17 +84,17 @@ export default function WomensSanctuary({ lang }: WomensSanctuaryProps) {
               {t.features.map((feat, index) => (
                 <div
                   key={index}
-                  className="p-5 rounded-2xl bg-adrena-card/90 border border-adrena-border hover:border-adrena-gold/40 transition-colors duration-200"
+                  className="p-5 rounded-2xl bg-adrena-card border border-adrena-border hover:border-neutral-600 transition-colors duration-200 shadow-sm"
                 >
                   <div className="flex items-start gap-3.5">
-                    <div className="p-2.5 rounded-xl bg-black/60 border border-white/10 flex-shrink-0">
+                    <div className="p-2.5 rounded-xl bg-adrena-surface border border-adrena-border flex-shrink-0">
                       {featureIcons[index % featureIcons.length]}
                     </div>
                     <div>
-                      <h3 className="font-sans text-base sm:text-lg font-bold text-white mb-1.5 tracking-tight">
+                      <h3 className="font-sans text-base sm:text-lg font-bold text-adrena-bone mb-1.5 tracking-tight">
                         {feat.title}
                       </h3>
-                      <p className="text-sm sm:text-base text-neutral-200 leading-relaxed font-sans">
+                      <p className="text-sm sm:text-base text-adrena-stone leading-relaxed font-sans">
                         {feat.desc}
                       </p>
                     </div>
@@ -107,7 +107,7 @@ export default function WomensSanctuary({ lang }: WomensSanctuaryProps) {
             <div className="flex flex-wrap items-center gap-4">
               <a
                 href="#planning"
-                className="inline-flex items-center gap-2.5 px-6 py-4 rounded-xl bg-adrena-gold hover:bg-adrena-gold-light text-adrena-black font-display font-black uppercase tracking-wider text-sm sm:text-base transition-all duration-200 shadow-md active:scale-95"
+                className="inline-flex items-center gap-2.5 px-6 py-4 rounded-xl bg-adrena-gold hover:bg-adrena-gold-light text-[#111215] font-display font-black uppercase tracking-wider text-sm sm:text-base transition-all duration-200 shadow-md active:scale-95"
               >
                 <span>{t.cta}</span>
                 <ArrowRight className="w-4 h-4 rtl:rotate-180" />
@@ -116,7 +116,7 @@ export default function WomensSanctuary({ lang }: WomensSanctuaryProps) {
                 href="https://wa.me/213771570378?text=Bonjour,%20je%20souhaite%20des%20informations%20sur%20les%20cr%C3%A9neaux%20femmes"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-4 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-neutral-200 border border-white/10 text-sm sm:text-base font-bold transition-colors"
+                className="inline-flex items-center gap-2 px-6 py-4 rounded-xl bg-adrena-card hover:bg-adrena-surface text-adrena-bone border border-adrena-border text-sm sm:text-base font-bold transition-colors shadow-sm"
               >
                 <span>{isAr ? 'استفسار عبر واتساب' : 'Poser une question via WhatsApp'}</span>
               </a>
