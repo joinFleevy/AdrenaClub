@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { Phone, MapPin, Globe, Menu, X, MessageCircle, Clock, ShieldCheck } from 'lucide-react';
+import { Phone, MapPin, Globe, Menu, X, MessageCircle, Clock } from 'lucide-react';
 import { Language, content } from '@/data/content';
 import { computeAlgiersLiveStatus, LiveStatusData } from '@/components/LiveStatusEngine';
 
@@ -13,8 +13,10 @@ interface NavbarProps {
 
 export default function Navbar({ lang, onToggleLang }: NavbarProps) {
   const t = content[lang];
+  const isAr = lang === 'ar';
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState<string>('accueil');
   const [liveStatus, setLiveStatus] = useState<LiveStatusData | null>(null);
 
   useEffect(() => {
@@ -29,60 +31,111 @@ export default function Navbar({ lang, onToggleLang }: NavbarProps) {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Track active section via IntersectionObserver for polished navigation feedback
+  useEffect(() => {
+    const sectionIds = ['accueil', 'tour-360', 'activites', 'planning', 'tarifs', 'avis', 'contact'];
+    const elements = sectionIds
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => el !== null);
+
+    if (elements.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries.find((entry) => entry.isIntersecting);
+        if (visible?.target?.id) {
+          setActiveSection(visible.target.id);
+        }
+      },
+      { rootMargin: '-20% 0px -65% 0px', threshold: 0 }
+    );
+
+    elements.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
+  // Close mobile drawer on Escape key and lock body scroll
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setMobileMenuOpen(false);
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = '';
+    };
+  }, [mobileMenuOpen]);
+
   const navLinks = [
-    { href: '#accueil', label: t.nav.home },
-    { href: '#tour-360', label: t.nav.tour360 },
-    { href: '#activites', label: t.nav.disciplines },
-    { href: '#planning', label: t.nav.planning },
-    { href: '#tarifs', label: t.nav.tarifs },
-    { href: '#avis', label: t.nav.reviews },
-    { href: '#contact', label: t.nav.contact },
+    { id: 'accueil', href: '#accueil', label: t.nav.home },
+    { id: 'tour-360', href: '#tour-360', label: t.nav.tour360 },
+    { id: 'activites', href: '#activites', label: t.nav.disciplines },
+    { id: 'planning', href: '#planning', label: t.nav.planning },
+    { id: 'tarifs', href: '#tarifs', label: t.nav.tarifs },
+    { id: 'avis', href: '#avis', label: t.nav.reviews },
+    { id: 'contact', href: '#contact', label: t.nav.contact },
   ];
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
-      {/* Top micro bar */}
-      <div className="bg-[#0E0F13] border-b border-adrena-border py-1.5 px-4 sm:px-6 lg:px-8 text-xs text-adrena-stone">
+      {/* Top micro utility bar */}
+      <div className="bg-[#0D0E11] border-b border-adrena-border py-1.5 px-4 sm:px-6 lg:px-8 text-xs text-adrena-stone">
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
-          <div className="flex items-center gap-4 overflow-hidden text-ellipsis whitespace-nowrap">
+          <div className="flex items-center gap-3 sm:gap-4 overflow-hidden text-ellipsis whitespace-nowrap text-[11px] sm:text-xs">
             <span className="flex items-center gap-1.5 text-adrena-bone">
               <MapPin className="w-3.5 h-3.5 text-adrena-gold flex-shrink-0" />
               <span className="hidden sm:inline">{t.topBar.address}</span>
               <span className="sm:hidden">Bab Ezzouar, Alger</span>
             </span>
-            <span className="hidden md:inline text-neutral-600">|</span>
+            <span className="hidden md:inline text-neutral-700">|</span>
             <span className="hidden md:flex items-center gap-1.5 text-adrena-bone">
               <Clock className="w-3.5 h-3.5 text-adrena-gold flex-shrink-0" />
-              <span>Sam-Jeu : 06h - 00h (Hommes)</span>
+              <span>
+                {isAr
+                  ? 'السبت-الخميس : 06h - 00h (رجال)'
+                  : 'Sam-Jeu : 06h - 00h (Hommes)'}
+              </span>
             </span>
           </div>
 
-          <div className="flex items-center gap-3">
-            {/* Live Open Status badge */}
+          <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+            {/* Live Open Status badge with refined ping ring */}
             <div
-              className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold border transition-colors ${
+              className={`inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full text-[11px] sm:text-xs font-semibold border transition-colors ${
                 liveStatus?.audience === 'femmes'
-                  ? 'bg-fuchsia-950/70 border-fuchsia-500/40 text-fuchsia-300'
+                  ? 'bg-fuchsia-950/60 border-fuchsia-500/30 text-fuchsia-300'
                   : liveStatus?.isOpen
-                  ? 'bg-emerald-950/70 border-emerald-500/40 text-emerald-400'
-                  : 'bg-neutral-900 border-neutral-700 text-neutral-400'
+                  ? 'bg-emerald-950/60 border-emerald-500/30 text-emerald-400'
+                  : 'bg-neutral-900 border-neutral-800 text-neutral-400'
               }`}
             >
-              <span
-                className={`w-2 h-2 rounded-full ${
-                  liveStatus?.audience === 'femmes'
-                    ? 'bg-fuchsia-400 animate-pulse'
-                    : liveStatus?.isOpen
-                    ? 'bg-emerald-400 animate-pulse'
-                    : 'bg-neutral-500'
-                }`}
-              />
-              <span className="font-sans">
-                {lang === 'ar'
+              <span className="relative flex h-2 w-2">
+                {liveStatus?.isOpen && (
+                  <span
+                    className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${
+                      liveStatus?.audience === 'femmes' ? 'bg-fuchsia-400' : 'bg-emerald-400'
+                    }`}
+                  />
+                )}
+                <span
+                  className={`relative inline-flex rounded-full h-2 w-2 ${
+                    liveStatus?.audience === 'femmes'
+                      ? 'bg-fuchsia-400'
+                      : liveStatus?.isOpen
+                      ? 'bg-emerald-400'
+                      : 'bg-neutral-500'
+                  }`}
+                />
+              </span>
+              <span>
+                {isAr
                   ? (liveStatus?.badgeLabelAr || 'مفتوح')
                   : (liveStatus?.badgeLabelFr || 'Ouvert')}
               </span>
@@ -90,11 +143,13 @@ export default function Navbar({ lang, onToggleLang }: NavbarProps) {
 
             {/* Language Switcher */}
             <button
+              type="button"
               onClick={onToggleLang}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-adrena-card hover:bg-adrena-surface text-adrena-bone border border-adrena-border transition-colors font-bold text-xs"
+              className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-adrena-card hover:bg-adrena-surface text-adrena-bone border border-adrena-border hover:border-adrena-gold/40 transition-all font-semibold text-[11px] sm:text-xs active:scale-95 focus-visible:ring-2 focus-visible:ring-adrena-gold focus-visible:outline-none"
               title="Changer de langue / تغيير اللغة"
+              aria-label={isAr ? 'Changer en Français' : 'تغيير إلى العربية'}
             >
-              <Globe className="w-3.5 h-3.5 text-adrena-gold" />
+              <Globe className="w-3.5 h-3.5 text-adrena-gold flex-shrink-0" />
               <span>{lang === 'fr' ? 'العربية' : 'Français'}</span>
             </button>
           </div>
@@ -103,51 +158,61 @@ export default function Navbar({ lang, onToggleLang }: NavbarProps) {
 
       {/* Main Navbar */}
       <nav
+        aria-label="Navigation principale"
         className={`transition-all duration-300 px-4 sm:px-6 lg:px-8 ${
           isScrolled
-            ? 'bg-adrena-black/95 backdrop-blur-md py-3 border-b border-adrena-border shadow-xl'
-            : 'bg-gradient-to-b from-[#111215]/95 via-[#111215]/70 to-transparent py-4'
+            ? 'bg-adrena-black/95 backdrop-blur-md py-2.5 border-b border-adrena-border shadow-xl'
+            : 'bg-[#111215]/85 backdrop-blur-sm py-3.5 border-b border-white/5'
         }`}
       >
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
           {/* Brand Logo */}
-          <a href="#accueil" className="flex items-center gap-3 group">
-            <div className="relative w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0 transition-transform group-hover:scale-105">
+          <a
+            href="#accueil"
+            className="flex items-center gap-3 group rounded-xl focus-visible:ring-2 focus-visible:ring-adrena-gold focus-visible:outline-none"
+          >
+            <div className="relative w-10 h-10 sm:w-11 sm:h-11 flex-shrink-0 transition-transform duration-200 group-hover:scale-105">
               <Image
                 src="/logo.png"
                 alt="Adrena Club Logo"
                 fill
-                sizes="48px"
+                sizes="44px"
                 className="object-contain"
                 priority
               />
             </div>
             <div className="flex flex-col">
-              <div className="flex items-center gap-1.5 font-extrabold text-xl sm:text-2xl tracking-tight">
-                <span className="text-white">
-                  ADRENA
-                </span>
-                <span className="text-adrena-gold">
-                  CLUB
-                </span>
+              <div className="flex items-center gap-1 font-extrabold text-xl sm:text-2xl tracking-tight leading-none">
+                <span className="text-white">ADRENA</span>
+                <span className="text-adrena-gold">CLUB</span>
               </div>
-              <span className="text-xs text-neutral-400 tracking-wider font-semibold -mt-0.5 hidden sm:block">
-                {lang === 'fr' ? 'BAB EZZOUAR • 2 ÉTAGES' : 'باب الزوار • طابقان'}
+              <span className="text-[10px] sm:text-[11px] text-neutral-400 tracking-wider font-semibold mt-0.5 hidden sm:block">
+                {isAr ? 'باب الزوار • طابقان' : 'BAB EZZOUAR • 2 ÉTAGES'}
               </span>
             </div>
           </a>
 
           {/* Desktop Navigation Links */}
-          <div className="hidden lg:flex items-center gap-1 xl:gap-2">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="px-3.5 py-1.5 rounded-lg text-sm font-medium text-adrena-bone hover:text-adrena-gold hover:bg-white/5 transition-all"
-              >
-                {link.label}
-              </a>
-            ))}
+          <div className="hidden lg:flex items-center gap-1">
+            {navLinks.map((link) => {
+              const isActive = activeSection === link.id;
+              return (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className={`relative px-3.5 py-1.5 rounded-lg text-sm transition-all duration-150 focus-visible:ring-2 focus-visible:ring-adrena-gold focus-visible:outline-none ${
+                    isActive
+                      ? 'text-adrena-gold font-semibold bg-white/[0.04]'
+                      : 'text-adrena-stone font-medium hover:text-adrena-bone hover:bg-white/[0.03]'
+                  }`}
+                >
+                  <span>{link.label}</span>
+                  {isActive && (
+                    <span className="absolute bottom-0 left-3.5 right-3.5 h-[2px] bg-adrena-gold rounded-full" />
+                  )}
+                </a>
+              );
+            })}
           </div>
 
           {/* Right Action Button */}
@@ -156,43 +221,66 @@ export default function Navbar({ lang, onToggleLang }: NavbarProps) {
               href="https://wa.me/213771570378?text=Bonjour%20Adrena%20Club,%20je%20souhaite%20avoir%20des%20informations%20sur%20les%20inscriptions."
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-adrena-gold hover:bg-adrena-gold-light text-[#111215] font-semibold text-sm transition-all shadow-md hover:scale-[1.01]"
+              className="flex items-center gap-2 px-4 py-2 rounded-xl bg-adrena-gold hover:bg-adrena-gold-light text-[#111215] font-semibold text-sm transition-all shadow-sm hover:scale-[1.01] active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-adrena-gold focus-visible:outline-none"
             >
-              <MessageCircle className="w-4 h-4" />
+              <MessageCircle className="w-4 h-4 fill-[#111215]" />
               <span>{t.nav.ctaButton}</span>
             </a>
           </div>
 
           {/* Mobile menu toggle button */}
           <button
+            type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2.5 rounded-xl text-adrena-bone hover:text-white bg-adrena-card border border-adrena-border"
-            aria-label="Toggle navigation menu"
+            className="lg:hidden p-2.5 rounded-xl text-adrena-bone hover:text-white bg-adrena-card border border-adrena-border focus-visible:ring-2 focus-visible:ring-adrena-gold focus-visible:outline-none"
+            aria-label={mobileMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-navigation"
           >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
       </nav>
 
+      {/* Backdrop overlay for mobile drawer */}
+      {mobileMenuOpen && (
+        <div
+          className="lg:hidden fixed inset-0 top-[102px] bg-black/60 backdrop-blur-sm z-40 transition-opacity animate-in fade-in duration-200"
+          onClick={() => setMobileMenuOpen(false)}
+          aria-hidden="true"
+        />
+      )}
+
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-adrena-dark/98 backdrop-blur-xl border-b border-adrena-border px-6 py-6 transition-all animate-in fade-in slide-in-from-top-4">
-          <div className="flex flex-col gap-3">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className="px-4 py-3 rounded-xl text-base font-bold text-adrena-bone hover:text-[#111215] hover:bg-adrena-gold transition-colors"
-              >
-                {link.label}
-              </a>
-            ))}
+        <div
+          id="mobile-navigation"
+          className="lg:hidden relative z-50 bg-[#141519] border-b border-adrena-border px-6 py-6 shadow-2xl transition-all animate-in fade-in slide-in-from-top-2 duration-200"
+        >
+          <div className="flex flex-col gap-2">
+            {navLinks.map((link) => {
+              const isActive = activeSection === link.id;
+              return (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`px-4 py-3 rounded-xl text-base font-semibold transition-all flex items-center justify-between min-h-[44px] ${
+                    isActive
+                      ? 'bg-adrena-surface text-adrena-gold border border-adrena-gold/30'
+                      : 'text-adrena-bone hover:bg-white/5 border border-transparent'
+                  }`}
+                >
+                  <span>{link.label}</span>
+                  {isActive && <span className="w-1.5 h-1.5 rounded-full bg-adrena-gold" />}
+                </a>
+              );
+            })}
 
-            <div className="pt-4 border-t border-adrena-border flex flex-col gap-3">
+            <div className="pt-4 mt-2 border-t border-adrena-border flex flex-col gap-3">
               <a
                 href="tel:+213771570378"
-                className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-adrena-card border border-adrena-border text-adrena-bone font-bold text-sm"
+                className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-adrena-card border border-adrena-border text-adrena-bone font-medium text-sm min-h-[44px] hover:border-adrena-gold/40 transition-colors"
               >
                 <Phone className="w-4 h-4 text-adrena-gold" />
                 <span className="font-mono tabular-nums">0771 57 03 78</span>
@@ -201,9 +289,9 @@ export default function Navbar({ lang, onToggleLang }: NavbarProps) {
                 href="https://wa.me/213771570378?text=Bonjour%20Adrena%20Club,%20je%20souhaite%20m'inscrire."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-adrena-gold text-[#111215] font-semibold text-sm transition-all"
+                className="flex items-center justify-center gap-2 px-4 py-3.5 rounded-xl bg-adrena-gold hover:bg-adrena-gold-light text-[#111215] font-semibold text-sm transition-all shadow-md active:scale-98 min-h-[44px]"
               >
-                <MessageCircle className="w-4 h-4" />
+                <MessageCircle className="w-4 h-4 fill-[#111215]" />
                 <span>{t.nav.ctaButton}</span>
               </a>
             </div>
