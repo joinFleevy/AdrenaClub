@@ -1,8 +1,8 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import Image from 'next/image';
-import { MessageCircle, Compass, Dumbbell, ShieldCheck, Eye } from 'lucide-react';
+import { MessageCircle, Compass } from 'lucide-react';
 import { Language, content } from '@/data/content';
 
 interface HeroProps {
@@ -11,204 +11,117 @@ interface HeroProps {
 
 export default function Hero({ lang }: HeroProps) {
   const t = content[lang].hero;
-  const [activePhoto, setActivePhoto] = useState<'floor' | 'reception'>('floor');
+  const isAr = lang === 'ar';
 
   return (
-    <section id="accueil" className="relative pt-28 pb-16 md:pt-36 md:pb-20 overflow-hidden bg-adrena-black border-b border-adrena-border">
+    <section id="accueil" className="relative pt-28 pb-14 md:pt-36 md:pb-20 overflow-hidden bg-adrena-black border-b border-adrena-border">
       {/* Background ambient lighting */}
-      <div className="absolute top-0 right-1/4 w-[600px] h-[600px] bg-adrena-gold/10 blur-[180px] pointer-events-none rounded-full" />
-      <div className="absolute bottom-0 left-10 w-[400px] h-[400px] bg-adrena-surface/40 blur-[140px] pointer-events-none rounded-full" />
+      <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-adrena-gold/5 blur-[160px] pointer-events-none rounded-full" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Split Hero Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
-          {/* Left Column: Athletic Value Proposition & Actions */}
+          {/* Left Column: Natural, Confident Headline & Purpose */}
           <div className="lg:col-span-7 flex flex-col justify-center">
+            
+            {/* Location & Status Tag */}
+            <div className="inline-flex items-center gap-2 mb-4 text-xs font-semibold text-adrena-stone tracking-wide">
+              <span className="w-2 h-2 rounded-full bg-emerald-500" />
+              <span>{isAr ? 'باب الزوار (CUB1) • طابقان • مفتوح حتى 00:00' : 'Bab Ezzouar (CUB1) • 2 Niveaux • Ouvert jusqu\'à 00:00'}</span>
+            </div>
+
             {/* Main Statement Title */}
-            <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black text-white tracking-tight uppercase leading-[1.02] sm:leading-[0.96] mb-6">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-adrena-bone tracking-tight leading-[1.12] mb-5">
               {t.title}
             </h1>
 
             {/* Subtitle */}
-            <p className="text-base sm:text-lg md:text-xl text-neutral-200 max-w-[62ch] font-medium leading-relaxed mb-6">
+            <p className="text-base sm:text-lg text-adrena-stone max-w-[56ch] font-normal leading-relaxed mb-8">
               {t.subtitle}
             </p>
 
-            {/* Practical Grounded Landmark Bar */}
-            <div className="flex flex-wrap items-center gap-y-2 gap-x-4 py-3 px-5 rounded-xl bg-adrena-card border border-adrena-border text-sm sm:text-base font-bold text-adrena-bone mb-8 tracking-wide shadow-sm">
-              <span className="flex items-center gap-2 text-adrena-gold">
-                <span className="w-2 h-2 rounded-full bg-adrena-gold animate-pulse" />
-                <span>Bab Ezzouar (CUB1)</span>
-              </span>
-              <span className="text-neutral-600 hidden sm:inline">•</span>
-              <span className="text-adrena-stone">
-                {lang === 'fr' ? '2 Niveaux d\'entraînement' : 'طابقان مجهزان بالكامل'}
-              </span>
-              <span className="text-neutral-600 hidden sm:inline">•</span>
-              <span className="text-adrena-bone">
-                {lang === 'fr' ? 'Ouvert 7j/7 jusqu\'à minuit (00:00)' : 'مفتوح 7/7 أيام حتى منتصف الليل'}
-              </span>
-              <span className="text-neutral-600 hidden sm:inline">•</span>
-              <span className="text-adrena-gold font-black">
-                {lang === 'fr' ? 'Dès 3 000 DA/mois' : 'ابتداءً من 3 000 دج/شهر'}
-              </span>
+            {/* Quiet Context Details */}
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-adrena-muted mb-8 font-medium">
+              <span>{isAr ? 'كمال أجسام وكروس ترينينغ' : 'Musculation & Cross-Training'}</span>
+              <span className="opacity-30">•</span>
+              <span>{isAr ? 'حلبة وبساط فنون قتال' : 'Ring de Boxe & Tatami'}</span>
+              <span className="opacity-30">•</span>
+              <span className="text-adrena-bone">{isAr ? 'فترات نسائية بدون موسيقى' : 'Créneaux femmes 100% privés'}</span>
+              <span className="opacity-30">•</span>
+              <span className="text-adrena-gold font-bold">{isAr ? 'من 3 000 دج/شهر' : 'Dès 3 000 DA/mois'}</span>
             </div>
 
-            {/* Dual CTAs */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+            {/* Primary & Secondary Actions */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
               <a
                 href="https://wa.me/213771570378?text=Bonjour%20Adrena%20Club,%20je%20souhaite%20m'inscrire%20ou%20demander%20des%20informations."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl bg-adrena-gold hover:bg-adrena-gold-light text-[#111215] font-display font-black text-base uppercase tracking-wider transition-all shadow-lg hover:scale-[1.02]"
+                className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-adrena-gold hover:bg-adrena-gold-light text-[#111215] font-bold text-sm tracking-wide transition-all shadow-md active:scale-98"
               >
-                <MessageCircle className="w-5 h-5 fill-[#111215]" />
-                <span>{t.ctaPrimary}</span>
+                <MessageCircle className="w-4 h-4 fill-[#111215]" />
+                <span>{isAr ? 'التسجيل عبر واتساب' : 'S\'inscrire via WhatsApp'}</span>
               </a>
 
               <a
                 href="#tarifs"
-                className="flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl bg-adrena-card hover:bg-adrena-surface text-adrena-bone hover:text-adrena-gold border border-adrena-border font-display font-bold text-base uppercase tracking-wider transition-all"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-adrena-card hover:bg-adrena-surface text-adrena-bone border border-adrena-border font-semibold text-sm transition-all"
               >
-                <Compass className="w-5 h-5 text-adrena-gold" />
-                <span>{lang === 'fr' ? 'Formules & Tarifs' : 'الأسعار والاشتراكات'}</span>
+                <Compass className="w-4 h-4 text-adrena-gold" />
+                <span>{isAr ? 'الاطلاع على الأسعار' : 'Consulter les formules & tarifs'}</span>
               </a>
             </div>
           </div>
 
-          {/* Right Column: Interactive Real Gym Showcase */}
+          {/* Right Column: Clean, Framed Photography of the Real Gym */}
           <div className="lg:col-span-5 w-full">
-            <div className="bg-adrena-card border border-adrena-border rounded-2xl p-3 sm:p-4 shadow-2xl">
-              {/* Photo Selector Switcher */}
-              <div className="grid grid-cols-2 gap-2 mb-3 bg-[#111215] p-1.5 rounded-xl border border-adrena-border">
-                <button
-                  type="button"
-                  onClick={() => setActivePhoto('floor')}
-                  className={`flex items-center justify-center gap-2 py-2 px-3 rounded-lg text-xs sm:text-sm font-bold tracking-wide transition-all ${
-                    activePhoto === 'floor'
-                      ? 'bg-adrena-gold text-[#111215] shadow-md'
-                      : 'text-adrena-stone hover:text-adrena-bone hover:bg-adrena-surface'
-                  }`}
-                >
-                  <Dumbbell className="w-4 h-4" />
-                  <span>{lang === 'fr' ? 'Plateau Force' : 'كمال الأجسام'}</span>
-                </button>
+            <div className="relative aspect-[4/3] w-full rounded-2xl overflow-hidden border border-adrena-border bg-[#0E0F13] shadow-xl group">
+              <Image
+                src="/images/hero/hero-gym-floor.jpg"
+                alt="Plateau Musculation Adrena Club Bab Ezzouar"
+                fill
+                sizes="(max-width: 1024px) 100vw, 42vw"
+                className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-103"
+                priority
+              />
 
-                <button
-                  type="button"
-                  onClick={() => setActivePhoto('reception')}
-                  className={`flex items-center justify-center gap-2 py-2 px-3 rounded-lg text-xs sm:text-sm font-bold tracking-wide transition-all ${
-                    activePhoto === 'reception'
-                      ? 'bg-adrena-gold text-[#111215] shadow-md'
-                      : 'text-adrena-stone hover:text-adrena-bone hover:bg-adrena-surface'
-                  }`}
-                >
-                  <ShieldCheck className="w-4 h-4" />
-                  <span>{lang === 'fr' ? 'Accueil & Entrée' : 'الاستقبال والمدخل'}</span>
-                </button>
-              </div>
+              {/* Subtle dark bottom vignette */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#111215]/90 via-transparent to-transparent pointer-events-none" />
 
-              {/* Main Photo Frame */}
-              <div className="relative aspect-[4/3] w-full rounded-xl overflow-hidden border border-adrena-border bg-[#0E0F13] group">
-                <Image
-                  src={
-                    activePhoto === 'floor'
-                      ? '/images/hero/hero-gym-floor.jpg'
-                      : '/images/hero/hero-reception.jpg'
-                  }
-                  alt={
-                    activePhoto === 'floor'
-                      ? 'Plateau Musculation Adrena Club Bab Ezzouar'
-                      : 'Accueil et Réception Adrena Club Bab Ezzouar'
-                  }
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 42vw"
-                  className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
-                  priority
-                />
-
-                {/* Dark atmospheric gradient vignette */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#111215] via-[#111215]/20 to-transparent pointer-events-none" />
-
-                {/* Level / Zone Tag */}
-                <div className="absolute top-3 left-3 z-10">
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#111215]/90 backdrop-blur-sm border border-adrena-border text-xs font-bold text-adrena-gold uppercase tracking-wider shadow-sm">
-                    <span className="w-1.5 h-1.5 rounded-full bg-adrena-gold" />
-                    {activePhoto === 'floor'
-                      ? lang === 'fr'
-                        ? 'Sous-Sol • Plateau Musculation'
-                        : 'الطابق السفلي • قاعة كمال الأجسام'
-                      : lang === 'fr'
-                      ? 'RDC • Accueil & Portiques'
-                      : 'الطابق الأرضي • الاستقبال وبوابات الدخول'}
-                  </span>
-                </div>
-
-                {/* Bottom Details Tag */}
-                <div className="absolute bottom-3 inset-x-3 z-10 flex items-center justify-between gap-2 p-2.5 rounded-lg bg-[#111215]/95 backdrop-blur-sm border border-adrena-border">
-                  <div className="min-w-0">
-                    <p className="text-xs sm:text-sm font-bold text-adrena-bone truncate">
-                      {activePhoto === 'floor'
-                        ? lang === 'fr'
-                          ? 'Équipement Pro Black & Gold'
-                          : 'أجهزة احترافية بالأسود والأصفر'
-                        : lang === 'fr'
-                        ? 'Comptoir Bois & Tourniquets RFID'
-                        : 'مكتب استقبال خشبي وبوابات إلكترونية'}
-                    </p>
-                    <p className="text-[11px] text-adrena-stone truncate">
-                      {activePhoto === 'floor'
-                        ? lang === 'fr'
-                          ? 'Haltères jusqu\'à 50kg+ & Machines guidées'
-                          : 'أوزان ثقيلة وآلات متنوعة'
-                        : lang === 'fr'
-                        ? 'Accès sécurisé & Bar protéines'
-                        : 'دخول بالبطاقة ومكملات غذائية'}
-                    </p>
-                  </div>
-
-                  <a
-                    href="#tour-360"
-                    className="flex-shrink-0 flex items-center gap-1.5 px-2.5 py-1.5 rounded-md bg-adrena-surface hover:bg-adrena-gold hover:text-[#111215] text-adrena-gold text-xs font-bold transition-colors"
-                    title={lang === 'fr' ? 'Explorer en 360°' : 'جولة 360°'}
-                  >
-                    <Eye className="w-3.5 h-3.5" />
-                    <span className="hidden sm:inline">360°</span>
-                  </a>
-                </div>
-              </div>
-
-              {/* Bottom Quick Indicator */}
-              <div className="mt-3 px-2 flex items-center justify-between text-xs text-adrena-stone">
-                <span className="flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                  <span className="font-semibold text-adrena-bone">
-                    {lang === 'fr' ? 'Photos réelles de la salle' : 'صور حقيقية من داخل النادي'}
-                  </span>
+              {/* Understated caption */}
+              <div className="absolute bottom-4 left-4 right-4 z-10 flex items-center justify-between text-xs text-adrena-bone">
+                <span className="font-semibold bg-[#111215]/80 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-adrena-border">
+                  {isAr ? 'قاعة كمال الأجسام والأوزان الحرة (طابق سفلي)' : 'Plateau musculation & charges libres (Sous-Sol)'}
                 </span>
-                <span className="text-neutral-500 font-mono">Bab Ezzouar, Alger</span>
+                <a
+                  href="#tour-360"
+                  className="font-medium text-adrena-gold hover:underline flex items-center gap-1 bg-[#111215]/80 backdrop-blur-sm px-2.5 py-1.5 rounded-lg border border-adrena-border"
+                >
+                  <span>{isAr ? 'جولة 360°' : 'Visite 360°'}</span>
+                </a>
               </div>
             </div>
           </div>
         </div>
 
-        {/* 4 Authentic Trust Blocks with High Contrast & Grounded Design */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-12 lg:mt-16 pt-8 border-t border-adrena-border">
-          {t.trustBadges.map((badge, idx) => (
-            <div
-              key={idx}
-              className="p-5 rounded-xl bg-adrena-card border border-adrena-border hover:border-adrena-gold/50 transition-colors shadow-sm"
-            >
-              <div className="w-8 h-1 bg-adrena-gold rounded-full mb-4" />
-              <h3 className="font-display text-lg font-black text-adrena-bone uppercase tracking-wider leading-snug">
-                {badge.title}
-              </h3>
-              <p className="text-sm text-adrena-stone mt-2 leading-relaxed font-medium">
-                {badge.subtitle}
-              </p>
-            </div>
-          ))}
+        {/* 4 Quiet Human Benefit Metrics */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-14 pt-8 border-t border-adrena-border/60">
+          <div>
+            <p className="text-2xl sm:text-3xl font-extrabold text-adrena-bone tracking-tight">2 Niveaux</p>
+            <p className="text-xs sm:text-sm text-adrena-muted mt-1">{isAr ? 'كمال أجسام وقتال بالأسفل، استقبال بالأعلى' : 'Plateaux entraînement & accueil séparés'}</p>
+          </div>
+          <div>
+            <p className="text-2xl sm:text-3xl font-extrabold text-adrena-bone tracking-tight">00:00</p>
+            <p className="text-xs sm:text-sm text-adrena-muted mt-1">{isAr ? 'مفتوح حتى منتصف الليل يومياً' : 'Ouvert tous les soirs jusqu\'à minuit'}</p>
+          </div>
+          <div>
+            <p className="text-2xl sm:text-3xl font-extrabold text-adrena-bone tracking-tight">100% Privé</p>
+            <p className="text-xs sm:text-sm text-adrena-muted mt-1">{isAr ? 'فترات نسائية بدون موسيقى مع مدربات' : 'Créneaux femmes calmes sans musique'}</p>
+          </div>
+          <div>
+            <p className="text-2xl sm:text-3xl font-extrabold text-adrena-gold tracking-tight">4.9 / 5</p>
+            <p className="text-xs sm:text-sm text-adrena-muted mt-1">{isAr ? 'أكثر من 160 تقييم Google معتمد' : 'Plus de 160 avis membres vérifiés'}</p>
+          </div>
         </div>
       </div>
     </section>

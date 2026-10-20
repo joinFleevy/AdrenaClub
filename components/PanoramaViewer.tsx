@@ -234,10 +234,10 @@ export default function PanoramaViewer({ lang }: PanoramaViewerProps) {
         {/* Section Header: direct and clean without generic kicker pills */}
         <div className="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
           <div>
-            <h2 className="font-display text-4xl sm:text-5xl md:text-6xl font-black text-adrena-bone tracking-tight uppercase leading-none">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-adrena-bone tracking-tight leading-tight">
               {t.title}
             </h2>
-            <p className="mt-3 text-base sm:text-lg text-adrena-stone max-w-[65ch] leading-relaxed">
+            <p className="mt-2 text-base text-adrena-stone max-w-[60ch] leading-relaxed">
               {t.subtitle}
             </p>
           </div>
@@ -246,7 +246,7 @@ export default function PanoramaViewer({ lang }: PanoramaViewerProps) {
             href="https://www.google.com/maps/place/Adr%C3%A9na+club/@36.731219,3.185733,17z/data=!4m6!3m5!1s0x128e510838572915:0x98c81818d117e070!8m2!3d36.731219!4d3.185733!16s%2Fg%2F11v402rb1s"
             target="_blank"
             rel="noopener noreferrer"
-            className="font-display inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-adrena-card hover:bg-adrena-gold hover:text-[#111215] border border-adrena-border text-sm font-bold uppercase tracking-wider text-adrena-bone transition-all self-start md:self-auto shadow-sm"
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-adrena-card hover:bg-adrena-surface border border-adrena-border text-xs sm:text-sm font-semibold text-adrena-stone hover:text-adrena-bone transition-all self-start md:self-auto shadow-sm"
           >
             <MapPin className="w-4 h-4 text-adrena-gold" />
             <span>{t.googleMapsBtn}</span>
@@ -316,7 +316,7 @@ export default function PanoramaViewer({ lang }: PanoramaViewerProps) {
                 <div className="w-10 h-10 rounded-full bg-adrena-gold/20 text-adrena-gold flex items-center justify-center animate-pulse">
                   <Compass className="w-5 h-5" />
                 </div>
-                <p className="font-display font-black text-base uppercase text-adrena-bone tracking-wide">
+                <p className="font-bold text-base text-adrena-bone">
                   {lang === 'fr' ? 'Touchez pour activer la visite 360°' : 'المس لتفعيل جولة 360°'}
                 </p>
                 <p className="text-xs text-adrena-stone font-medium">
@@ -363,7 +363,7 @@ export default function PanoramaViewer({ lang }: PanoramaViewerProps) {
                   <button
                     key={key}
                     onClick={() => switchPano(key)}
-                    className={`flex items-center gap-2 px-4 py-2.5 rounded-xl font-display text-sm font-black uppercase tracking-wider transition-all whitespace-nowrap ${
+                    className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold transition-all whitespace-nowrap ${
                       isActive
                         ? 'bg-adrena-gold text-black shadow-md'
                         : 'text-neutral-200 hover:text-white hover:bg-white/10'

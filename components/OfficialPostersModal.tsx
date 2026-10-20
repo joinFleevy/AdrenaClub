@@ -107,10 +107,10 @@ export default function OfficialPostersModal({
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-adrena-border bg-adrena-card">
           <div>
-            <h3 className="font-display text-base sm:text-xl font-black text-adrena-bone uppercase tracking-wide">
+            <h3 className="text-base sm:text-lg font-bold text-adrena-bone">
               {lang === 'fr' ? currentPoster.titleFr : currentPoster.titleAr}
             </h3>
-            <span className="font-display text-xs text-adrena-stone font-bold tabular-nums">
+            <span className="text-xs text-adrena-stone font-medium tabular-nums">
               {currentIndex + 1} / {posters.length}
             </span>
           </div>

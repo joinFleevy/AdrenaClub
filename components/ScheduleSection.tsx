@@ -4,7 +4,6 @@ import React, { useState, useMemo } from 'react';
 import { Clock, Image as ImageIcon, Dumbbell, Shield, Flame } from 'lucide-react';
 import { Language, content } from '@/data/content';
 import { hommesSchedule, femmesSchedule, enfantsSchedule, ScheduleDay } from '@/data/schedules';
-import LiveStatusEngine from '@/components/LiveStatusEngine';
 
 interface ScheduleSectionProps {
   lang: Language;
@@ -74,39 +73,34 @@ export default function ScheduleSection({ lang, onOpenPostersModal }: ScheduleSe
         {/* Header with clear clearance */}
         <div className="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
           <div>
-            <h2 className="font-display text-4xl sm:text-5xl md:text-6xl font-black text-adrena-bone tracking-tight uppercase leading-none">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-adrena-bone tracking-tight leading-tight">
               {t.title}
             </h2>
-            <p className="mt-3 text-base sm:text-lg text-adrena-stone max-w-[65ch] leading-relaxed">
+            <p className="mt-2 text-base text-adrena-stone max-w-[60ch] leading-relaxed">
               {t.subtitle}
             </p>
           </div>
 
           <button
             onClick={() => onOpenPostersModal(activeTab)}
-            className="font-display inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-adrena-card hover:bg-adrena-gold hover:text-[#111215] border border-adrena-border text-sm font-black uppercase tracking-wider text-adrena-bone transition-all self-start md:self-auto shadow-sm"
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-adrena-card hover:bg-adrena-surface border border-adrena-border text-xs sm:text-sm font-semibold text-adrena-stone hover:text-adrena-bone transition-all self-start md:self-auto shadow-sm"
           >
             <ImageIcon className="w-4 h-4 text-adrena-gold" />
             <span>{t.openPosterBtn}</span>
           </button>
         </div>
 
-        {/* Live Algerian Status Banner */}
-        <div className="mb-8">
-          <LiveStatusEngine lang={lang} onSelectAudience={(aud) => setActiveTab(aud)} />
-        </div>
-
-        {/* Unified Controls Panel: Harmonized colors and layout */}
-        <div className="mb-8 p-3 sm:p-5 rounded-2xl bg-adrena-card border border-adrena-border flex flex-col lg:flex-row lg:items-center justify-between gap-4 shadow-md">
+        {/* Unified Controls Panel */}
+        <div className="mb-8 p-3 sm:p-4 rounded-2xl bg-adrena-card border border-adrena-border flex flex-col lg:flex-row lg:items-center justify-between gap-4 shadow-sm">
           {/* Audience Tabs */}
-          <div className="flex items-center gap-2 p-1.5 bg-[#111215] border border-adrena-border rounded-xl w-fit" role="tablist" aria-label="Catégorie de membres">
+          <div className="flex items-center gap-1.5 p-1 bg-[#111215] border border-adrena-border rounded-xl w-fit" role="tablist" aria-label="Catégorie de membres">
             <button
               role="tab"
               aria-selected={activeTab === 'hommes'}
               onClick={() => setActiveTab('hommes')}
-              className={`px-4 sm:px-6 py-2.5 rounded-lg font-display font-black text-sm uppercase tracking-wider transition-all ${
+              className={`px-4 sm:px-5 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all ${
                 activeTab === 'hommes'
-                  ? 'bg-adrena-gold text-[#111215] shadow-sm'
+                  ? 'bg-adrena-gold text-[#111215] shadow-sm font-bold'
                   : 'text-adrena-stone hover:text-adrena-bone'
               }`}
             >
@@ -117,9 +111,9 @@ export default function ScheduleSection({ lang, onOpenPostersModal }: ScheduleSe
               role="tab"
               aria-selected={activeTab === 'femmes'}
               onClick={() => setActiveTab('femmes')}
-              className={`px-4 sm:px-6 py-2.5 rounded-lg font-display font-black text-sm uppercase tracking-wider transition-all ${
+              className={`px-4 sm:px-5 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all ${
                 activeTab === 'femmes'
-                  ? 'bg-adrena-gold text-[#111215] shadow-sm'
+                  ? 'bg-adrena-gold text-[#111215] shadow-sm font-bold'
                   : 'text-adrena-stone hover:text-adrena-bone'
               }`}
             >
@@ -130,9 +124,9 @@ export default function ScheduleSection({ lang, onOpenPostersModal }: ScheduleSe
               role="tab"
               aria-selected={activeTab === 'enfants'}
               onClick={() => setActiveTab('enfants')}
-              className={`px-4 sm:px-6 py-2.5 rounded-lg font-display font-black text-sm uppercase tracking-wider transition-all ${
+              className={`px-4 sm:px-5 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all ${
                 activeTab === 'enfants'
-                  ? 'bg-adrena-gold text-[#111215] shadow-sm'
+                  ? 'bg-adrena-gold text-[#111215] shadow-sm font-bold'
                   : 'text-adrena-stone hover:text-adrena-bone'
               }`}
             >
@@ -153,7 +147,7 @@ export default function ScheduleSection({ lang, onOpenPostersModal }: ScheduleSe
                   onClick={() => setActiveDiscipline(p.id)}
                   className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-bold transition-all ${
                     isActive
-                      ? 'bg-adrena-gold text-[#111215] font-black shadow-sm ring-1 ring-adrena-gold'
+                      ? 'bg-adrena-gold text-[#111215] font-semibold shadow-sm ring-1 ring-adrena-gold'
                       : 'bg-adrena-surface text-adrena-stone hover:text-adrena-bone border border-adrena-border'
                   }`}
                 >
@@ -206,11 +200,11 @@ export default function ScheduleSection({ lang, onOpenPostersModal }: ScheduleSe
                 <div>
                   {/* Day Header */}
                   <div className="flex items-center justify-between pb-3.5 mb-3.5 border-b border-adrena-border">
-                    <span className="font-display text-xl sm:text-2xl font-black text-adrena-bone uppercase tracking-wider">
+                    <span className="text-lg sm:text-xl font-bold text-adrena-bone">
                       {lang === 'fr' ? day.dayNameFr : day.dayNameAr}
                     </span>
                     {isToday && (
-                      <span className="font-sans px-3 py-1 rounded-full bg-adrena-gold text-[#111215] text-xs font-black uppercase tracking-wider shadow-sm">
+                      <span className="px-2.5 py-0.5 rounded-full bg-adrena-gold/20 text-adrena-gold text-xs font-semibold">
                         {lang === 'fr' ? "Aujourd'hui" : 'اليوم'}
                       </span>
                     )}
@@ -234,7 +228,7 @@ export default function ScheduleSection({ lang, onOpenPostersModal }: ScheduleSe
                               </span>
                             )}
                           </div>
-                          <div className="flex items-center gap-2 text-sm font-sans font-black text-adrena-gold tabular-nums">
+                          <div className="flex items-center gap-2 text-sm font-sans font-semibold text-adrena-gold tabular-nums">
                             <Clock className="w-4 h-4 text-adrena-gold flex-shrink-0" />
                             <span>{act.time.replace('-', '–')}</span>
                           </div>
@@ -264,7 +258,7 @@ export default function ScheduleSection({ lang, onOpenPostersModal }: ScheduleSe
                                 )}
                               </span>
                             </div>
-                            <span className="font-sans font-black text-adrena-gold tabular-nums text-sm whitespace-nowrap flex-shrink-0">
+                            <span className="font-sans font-semibold text-adrena-gold tabular-nums text-sm whitespace-nowrap flex-shrink-0">
                               {time}
                             </span>
                           </div>

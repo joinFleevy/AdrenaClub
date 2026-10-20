@@ -544,7 +544,7 @@ export default function LiveStatusEngine({ lang, onSelectAudience }: LiveStatusE
           <div className="flex flex-wrap items-center gap-2.5">
             {/* Live Indicator Pill */}
             <div
-              className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-black uppercase tracking-wider font-display border ${
+              className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold border ${
                 isWomen
                   ? 'bg-fuchsia-950/60 border-fuchsia-500/40 text-fuchsia-300'
                   : isMen
@@ -567,14 +567,14 @@ export default function LiveStatusEngine({ lang, onSelectAudience }: LiveStatusE
             </div>
 
             {/* Discipline Tag */}
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-adrena-surface border border-adrena-border text-xs font-bold text-adrena-gold uppercase tracking-wider">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-adrena-surface border border-adrena-border text-xs font-medium text-adrena-gold">
               {isWomen ? <VolumeX className="w-3.5 h-3.5" /> : <Dumbbell className="w-3.5 h-3.5" />}
               <span>{isAr ? status.activeDisciplineBadgeAr : status.activeDisciplineBadgeFr}</span>
             </span>
           </div>
 
           {/* Main Headline */}
-          <h3 className="font-display text-2xl sm:text-3xl md:text-4xl font-black text-adrena-bone tracking-wide uppercase leading-tight">
+          <h3 className="text-2xl sm:text-3xl font-extrabold text-adrena-bone tracking-tight">
             {isAr ? status.headlineAr : status.headlineFr}
           </h3>
 
@@ -593,7 +593,7 @@ export default function LiveStatusEngine({ lang, onSelectAudience }: LiveStatusE
                 onSelectAudience(isWomen ? 'femmes' : 'hommes');
               }
             }}
-            className="flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-adrena-gold hover:bg-adrena-gold-light text-[#111215] font-display font-black text-sm uppercase tracking-wider transition-all shadow-md active:scale-95"
+            className="flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-adrena-gold hover:bg-adrena-gold-light text-[#111215] font-semibold text-sm transition-all shadow-md active:scale-95"
           >
             <span>{isAr ? 'عرض جدول الحصص' : 'Voir les créneaux du jour'}</span>
             <ArrowRight className="w-4 h-4 rtl:rotate-180" />
@@ -603,7 +603,7 @@ export default function LiveStatusEngine({ lang, onSelectAudience }: LiveStatusE
             href="https://wa.me/213771570378?text=Bonjour%20Adrena%20Club,%20je%20souhaite%20m'inscrire%20ou%20demander%20des%20informations."
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-adrena-surface hover:bg-[#252830] text-adrena-bone border border-adrena-border font-display font-bold text-sm uppercase tracking-wider transition-all"
+            className="flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-adrena-surface hover:bg-[#252830] text-adrena-bone border border-adrena-border font-semibold text-sm transition-all"
           >
             <span>{isAr ? 'تواصل عبر واتساب' : 'Contacter sur WhatsApp'}</span>
           </a>

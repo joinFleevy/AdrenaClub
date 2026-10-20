@@ -21,6 +21,7 @@ type PricingTab = 'musculation' | 'crosstraining' | 'combat' | 'mixtes' | 'welln
 
 export default function PricingSection({ lang, onOpenPostersModal }: PricingSectionProps) {
   const t = content[lang].tarifs;
+  const isAr = lang === 'ar';
   const [activeTab, setActiveTab] = useState<PricingTab>('musculation');
 
   const getPlansForTab = (): PricingPlan[] => {
@@ -50,81 +51,34 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
   };
 
   return (
-    <section id="tarifs" className="py-20 scroll-mt-28 relative bg-adrena-black border-b border-adrena-border">
+    <section id="tarifs" className="py-16 md:py-24 scroll-mt-20 relative bg-adrena-black border-b border-adrena-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header without generic kicker badges */}
+        
+        {/* Header */}
         <div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-4">
           <div>
-            <h2 className="font-display text-4xl sm:text-5xl md:text-6xl font-black text-adrena-bone tracking-tight uppercase leading-none">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-adrena-bone tracking-tight leading-tight">
               {t.title}
             </h2>
-            <p className="mt-3 text-base text-adrena-stone max-w-[65ch] leading-relaxed">
+            <p className="mt-2 text-base text-adrena-stone max-w-[60ch] leading-relaxed">
               {t.subtitle}
+            </p>
+            <p className="mt-1 text-xs text-adrena-muted font-medium">
+              {isAr ? 'الدفع نقداً في الاستقبال (CUB1) • إمكانية تجربة حصة مفردة بدون التزام' : 'Règlement en espèces à la réception (CUB1) • Séances d\'essai disponibles'}
             </p>
           </div>
 
           <button
             onClick={() => onOpenPostersModal('tarifs')}
-            className="font-display inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-adrena-card hover:bg-adrena-gold hover:text-[#111215] border border-adrena-border text-sm font-bold uppercase tracking-wider text-adrena-bone transition-all self-start md:self-auto shadow-sm"
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-adrena-card hover:bg-adrena-surface border border-adrena-border text-xs sm:text-sm font-semibold text-adrena-stone hover:text-adrena-bone transition-all self-start md:self-auto shadow-sm"
           >
             <ImageIcon className="w-4 h-4 text-adrena-gold" />
             <span>{t.viewPosterBtn}</span>
           </button>
         </div>
 
-        {/* 3-Step Simple Registration & Payment Guide */}
-        <div className="mb-10 grid grid-cols-1 md:grid-cols-3 gap-4 p-5 rounded-2xl bg-adrena-card border border-adrena-border">
-          <div className="flex items-start gap-3">
-            <div className="w-8 h-8 rounded-lg bg-adrena-gold/15 border border-adrena-gold/40 text-adrena-gold flex items-center justify-center font-display font-black text-sm flex-shrink-0">
-              1
-            </div>
-            <div>
-              <h4 className="font-display font-black text-sm uppercase text-adrena-bone tracking-wide">
-                {lang === 'fr' ? 'Choisissez votre formule' : 'اختر باقتك المفضلة'}
-              </h4>
-              <p className="text-xs text-adrena-stone mt-1 leading-relaxed">
-                {lang === 'fr'
-                  ? 'Musculation, Combat, Cross-Training ou Pack Mixte dès 3 000 DA/mois sans frais cachés.'
-                  : 'كمال أجسام، فنون قتالية، أو باقة مدمجة ابتداءً من 3 000 دج شهرياً بدون أي رسوم خفية.'}
-              </p>
-            </div>
-          </div>
-
-          <div className="flex items-start gap-3">
-            <div className="w-8 h-8 rounded-lg bg-adrena-gold/15 border border-adrena-gold/40 text-adrena-gold flex items-center justify-center font-display font-black text-sm flex-shrink-0">
-              2
-            </div>
-            <div>
-              <h4 className="font-display font-black text-sm uppercase text-adrena-bone tracking-wide">
-                {lang === 'fr' ? 'Dossier & Séance d\'essai' : 'الملف وحصة تجريبية'}
-              </h4>
-              <p className="text-xs text-adrena-stone mt-1 leading-relaxed">
-                {lang === 'fr'
-                  ? '1 photo d\'identité + certificat médical. Possibilité d\'une séance d\'essai sur place.'
-                  : 'صورة شمسية + شهادة طبية. إمكانية تجربة حصة مفردة في الاستقبال.'}
-              </p>
-            </div>
-          </div>
-
-          <div className="flex items-start gap-3">
-            <div className="w-8 h-8 rounded-lg bg-adrena-gold/15 border border-adrena-gold/40 text-adrena-gold flex items-center justify-center font-display font-black text-sm flex-shrink-0">
-              3
-            </div>
-            <div>
-              <h4 className="font-display font-black text-sm uppercase text-adrena-bone tracking-wide">
-                {lang === 'fr' ? 'Paiement Espèces à l\'accueil' : 'الدفع نقداً في الاستقبال'}
-              </h4>
-              <p className="text-xs text-adrena-stone mt-1 leading-relaxed">
-                {lang === 'fr'
-                  ? 'Règlement cash à la réception (CUB1) et commencez votre entraînement immédiatement.'
-                  : 'تسديد الاشتراك نقداً بمدخل النادي والبدء في التدريب مباشرة بدون انتظار.'}
-              </p>
-            </div>
-          </div>
-        </div>
-
         {/* Tab Selection */}
-        <div className="flex flex-wrap items-center gap-2 mb-10 p-2 bg-adrena-card border border-adrena-border rounded-2xl w-fit" role="tablist" aria-label="Catégories de tarifs">
+        <div className="flex flex-wrap items-center gap-2 mb-10 p-1.5 bg-adrena-card border border-adrena-border rounded-xl w-fit" role="tablist" aria-label="Catégories de tarifs">
           {(['musculation', 'crosstraining', 'combat', 'mixtes', 'wellness'] as PricingTab[]).map(
             (tab) => {
               const isActive = activeTab === tab;
@@ -134,9 +88,9 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
                   role="tab"
                   aria-selected={isActive}
                   onClick={() => setActiveTab(tab)}
-                  className={`px-5 sm:px-6 py-3 rounded-xl font-display font-black text-sm uppercase tracking-wider transition-all ${
+                  className={`px-4 sm:px-5 py-2.5 rounded-lg font-semibold text-xs sm:text-sm transition-all ${
                     isActive
-                      ? 'bg-adrena-gold text-[#111215] shadow-sm'
+                      ? 'bg-adrena-gold text-[#111215] shadow-sm font-bold'
                       : 'text-adrena-stone hover:text-adrena-bone hover:bg-adrena-surface'
                   }`}
                 >
@@ -159,36 +113,36 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
               return (
                 <div
                   key={plan.id}
-                  className={`relative flex flex-col justify-between p-6 sm:p-8 rounded-2xl border transition-all ${
+                  className={`relative flex flex-col justify-between p-6 sm:p-7 rounded-2xl border transition-all ${
                     plan.isPopular
-                      ? 'bg-adrena-card border-adrena-gold shadow-xl ring-1 ring-adrena-gold/40'
-                      : 'bg-adrena-card border-adrena-border hover:border-neutral-600 shadow-sm'
+                      ? 'bg-adrena-card border-adrena-gold/70 shadow-lg'
+                      : 'bg-adrena-card border-adrena-border hover:border-neutral-700 shadow-sm'
                   }`}
                 >
                   <div>
-                    <div className="flex items-center justify-between gap-2 mb-2">
-                      <h3 className="font-display text-2xl sm:text-3xl font-black text-adrena-bone uppercase tracking-wide">{name}</h3>
+                    <div className="flex items-center justify-between gap-2 mb-1.5">
+                      <h3 className="text-xl sm:text-2xl font-bold text-adrena-bone">{name}</h3>
                       {plan.isPopular && (
-                        <span className="font-display px-3 py-1 rounded-full bg-adrena-gold text-[#111215] text-xs font-black uppercase tracking-wider shadow-sm">
+                        <span className="px-2.5 py-0.5 rounded-full bg-adrena-gold/20 text-adrena-gold text-xs font-semibold">
                           {t.popular}
                         </span>
                       )}
                     </div>
-                    <p className="text-sm sm:text-base text-adrena-stone font-semibold mb-6">{freq}</p>
+                    <p className="text-sm text-adrena-stone font-medium mb-5">{freq}</p>
 
                     {/* Price */}
-                    <div className="mb-6 pb-6 border-b border-adrena-border flex items-baseline gap-2.5">
-                      <span className="font-display text-4xl sm:text-6xl font-black text-adrena-gold tabular-nums tracking-normal">
+                    <div className="mb-5 pb-5 border-b border-adrena-border flex items-baseline gap-2">
+                      <span className="text-3xl sm:text-4xl font-extrabold text-adrena-bone tabular-nums tracking-tight">
                         {plan.price.toLocaleString('fr-FR')}
                       </span>
-                      <span className="text-sm sm:text-base font-bold text-adrena-stone uppercase tracking-wider">{period}</span>
+                      <span className="text-xs sm:text-sm font-semibold text-adrena-gold uppercase">{period}</span>
                     </div>
 
                     {/* Features */}
-                    <ul className="space-y-3 mb-8">
+                    <ul className="space-y-2.5 mb-7">
                       {feats.map((feat, idx) => (
-                        <li key={idx} className="flex items-start gap-3 text-sm sm:text-base text-adrena-bone">
-                          <span className="w-2 h-2 rounded-full bg-adrena-gold mt-2 flex-shrink-0" />
+                        <li key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-adrena-stone">
+                          <span className="w-1.5 h-1.5 rounded-full bg-adrena-gold mt-1.5 flex-shrink-0" />
                           <span>{feat}</span>
                         </li>
                       ))}
@@ -197,7 +151,7 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
 
                   <button
                     onClick={() => handleWhatsAppOrder(name, plan.price)}
-                    className={`w-full flex items-center justify-center gap-2.5 py-4 px-5 rounded-xl font-display font-black text-sm uppercase tracking-wider transition-all shadow-md active:scale-95 ${
+                    className={`w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl font-bold text-xs sm:text-sm transition-all shadow-sm active:scale-98 ${
                       plan.isPopular
                         ? 'bg-adrena-gold hover:bg-adrena-gold-light text-[#111215]'
                         : 'bg-adrena-surface hover:bg-adrena-gold hover:text-[#111215] text-adrena-bone border border-adrena-border'

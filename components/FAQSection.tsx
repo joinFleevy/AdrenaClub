@@ -20,9 +20,9 @@ export default function FAQSection({ lang }: FAQSectionProps) {
   return (
     <section id="faq" className="py-20 scroll-mt-28 relative bg-adrena-black border-b border-adrena-border">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header without generic AI-slop kickers */}
+        {/* Header */}
         <div className="text-center mb-12">
-          <h2 className="font-display text-4xl sm:text-5xl md:text-6xl font-black text-adrena-bone tracking-tight uppercase leading-none">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-adrena-bone tracking-tight">
             {t.title}
           </h2>
           <p className="mt-3 text-base sm:text-lg text-adrena-stone max-w-xl mx-auto leading-relaxed">
@@ -43,7 +43,7 @@ export default function FAQSection({ lang }: FAQSectionProps) {
                   type="button"
                   onClick={() => toggleItem(index)}
                   aria-expanded={isOpen}
-                  className="w-full p-5 sm:p-6 text-left rtl:text-right flex items-center justify-between gap-4 font-display font-bold text-base sm:text-lg text-adrena-bone hover:text-adrena-gold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-adrena-gold"
+                  className="w-full p-5 sm:p-6 text-left rtl:text-right flex items-center justify-between gap-4 font-bold text-base sm:text-lg text-adrena-bone hover:text-adrena-gold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-adrena-gold"
                 >
                   <span className="leading-snug">{item.q}</span>
                   <div
@@ -78,7 +78,7 @@ export default function FAQSection({ lang }: FAQSectionProps) {
             href="https://wa.me/213771570378?text=Bonjour,%20j'ai%20une%20question%20sur%20Adrena%20Club"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold uppercase tracking-wider text-adrena-gold hover:underline"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-adrena-gold hover:underline"
           >
             <span>{isAr ? 'تحدث مع موظف الاستقبال عبر واتساب' : 'Contacter l\'accueil via WhatsApp'}</span>
           </a>

@@ -16,12 +16,12 @@ export default function CoachSection({ lang }: CoachSectionProps) {
   return (
     <section id="coachs" className="py-20 scroll-mt-28 relative bg-adrena-black border-b border-adrena-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header without generic kicker pill */}
-        <div className="mb-12 max-w-3xl">
-          <h2 className="font-display text-4xl sm:text-5xl md:text-6xl font-black text-adrena-bone tracking-tight uppercase leading-none">
+        {/* Section Header */}
+        <div className="mb-10 max-w-3xl">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-adrena-bone tracking-tight leading-tight">
             {t.title}
           </h2>
-          <p className="mt-3 text-base sm:text-lg text-adrena-stone leading-relaxed">
+          <p className="mt-2 text-base text-adrena-stone leading-relaxed">
             {t.subtitle}
           </p>
         </div>
@@ -61,13 +61,13 @@ export default function CoachSection({ lang }: CoachSectionProps) {
               {/* Coach Bio & Info */}
               <div className="p-6 sm:p-7 flex flex-col justify-between flex-grow">
                 <div>
-                  <h3 className="font-display text-2xl font-black text-adrena-bone tracking-wide mb-1">
+                  <h3 className="text-xl font-bold text-adrena-bone mb-1">
                     {coach.name}
                   </h3>
-                  <p className="text-xs sm:text-sm font-bold text-adrena-gold mb-4 uppercase tracking-wider">
+                  <p className="text-xs sm:text-sm font-semibold text-adrena-gold mb-3">
                     {coach.role}
                   </p>
-                  <p className="text-sm text-adrena-stone leading-relaxed mb-6 font-sans">
+                  <p className="text-sm text-adrena-stone leading-relaxed mb-6">
                     {coach.bio}
                   </p>
                 </div>
@@ -77,7 +77,7 @@ export default function CoachSection({ lang }: CoachSectionProps) {
                   href="https://wa.me/213771570378?text=Bonjour,%20je%20souhaite%20des%20informations%20sur%20les%20cours%20de%20combat%20et%20l'encadrement"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-display inline-flex items-center justify-between text-xs sm:text-sm font-bold text-adrena-bone hover:text-adrena-gold transition-colors uppercase tracking-wider pt-4 border-t border-adrena-border"
+                  className="inline-flex items-center justify-between text-xs sm:text-sm font-semibold text-adrena-bone hover:text-adrena-gold transition-colors pt-4 border-t border-adrena-border"
                 >
                   <span>{isAr ? 'احجز استشارتك مع الفريق' : 'Réserver une séance coachée'}</span>
                   <ArrowRight className="w-4 h-4 rtl:rotate-180 text-adrena-gold" />

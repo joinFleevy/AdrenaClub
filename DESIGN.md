@@ -17,11 +17,11 @@ colors:
   active-emerald: "#10B981"
 typography:
   display:
-    fontFamily: "Barlow Condensed, sans-serif"
+    fontFamily: "Manrope, sans-serif"
     fontWeight: 700
-    letterSpacing: "0.025em"
+    letterSpacing: "-0.02em"
   body:
-    fontFamily: "Outfit, sans-serif"
+    fontFamily: "Manrope, sans-serif"
     fontWeight: 400
     lineHeight: 1.6
   arabic:
@@ -74,9 +74,9 @@ The visual design language represents **Premium Athletic Craftsmanship**: tactil
 
 ## Typography
 
-- **Display & Section Titles**: `Barlow Condensed` (Uppercase, Weights 700 & 800). Delivers an authentic sports pavilion character reminiscent of athletic scoreboards and boxing banners.
-- **Body & Functional UI**: `Outfit` (Weights 400, 500, 600). A modern, balanced geometric sans-serif that ensures effortless legibility across dense schedules, pricing grids, and FAQs.
-- **Arabic Script**: `Cairo` (Weights 600, 700). Carefully paired to maintain proportional stroke weight and optical rhythm alongside Barlow Condensed and Outfit in bilingual toggles.
+- **Display & Headings**: `Manrope` (Weights 600, 700, 800, sentence-case). Clean geometric grotesque with authoritative modern athletic precision, eliminating AI-template screaming all-caps.
+- **Body & Functional UI**: `Manrope` (Weights 400, 500, 600). Unrivalled numeral legibility, open apertures, and effortless scanability across dense schedules, pricing grids, and FAQs.
+- **Arabic Script**: `Cairo` (Weights 600, 700). Carefully paired to maintain proportional stroke weight and optical rhythm alongside Manrope in bilingual toggles.
 
 ## Layout
 
@@ -106,7 +106,7 @@ The visual design language represents **Premium Athletic Craftsmanship**: tactil
 
 ### Do's
 - Always maintain high contrast with `#F4F5F7` (Bone) or `#D1D5DB` (Stone) on dark surfaces.
-- Use uppercase condensed display typography for athletic titles.
+- Use sentence-case, authoritative geometric typography (Manrope) for athletic titles.
 - Anchor sections with real physical context (Bab Ezzouar CUB1, RDC, Sous-Sol).
 - Ensure all interactive elements have visible focus and hover states.
 

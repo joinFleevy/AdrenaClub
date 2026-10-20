@@ -221,7 +221,7 @@ export const content: Record<Language, ContentStrings> = {
     },
     hero: {
       tagline: "Complexe Sportif • Bab Ezzouar • 2 Étages",
-      title: "2 ÉTAGES DÉDIÉS À LA PERFORMANCE.",
+      title: "Deux étages dédiés à la performance.",
       subtitle: "Plateau musculation complet, ring de combat officiel, tatami & cross-training. Créneaux femmes 100% privés, calmes et sans musique. Ouvert tous les jours jusqu'à minuit.",
       motto: "« Discipline, Respect & Dépassement de Soi : L'Excellence Sportive à Bab Ezzouar »",
       ctaPrimary: "Nous contacter sur WhatsApp",

@@ -25,9 +25,9 @@ module.exports = {
         },
       },
       fontFamily: {
-        sans: ['var(--font-sans)', 'Outfit', 'Cairo', 'system-ui', 'sans-serif'],
-        display: ['var(--font-display)', 'Barlow Condensed', 'Cairo', 'sans-serif'],
-        arabic: ['var(--font-arabic)', 'Cairo', 'sans-serif'],
+        sans: ['Manrope', 'Cairo', 'system-ui', 'sans-serif'],
+        display: ['Manrope', 'Cairo', 'sans-serif'],
+        arabic: ['Cairo', 'sans-serif'],
       },
       letterSpacing: {
         tighter: '-0.03em',

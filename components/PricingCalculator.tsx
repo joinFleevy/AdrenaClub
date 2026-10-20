@@ -88,11 +88,11 @@ export default function PricingCalculator({ lang }: PricingCalculatorProps) {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 pb-6 border-b border-adrena-border">
         <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-adrena-surface border border-adrena-border text-adrena-gold text-xs font-display font-semibold uppercase tracking-wider mb-2">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-adrena-surface border border-adrena-border text-adrena-gold text-xs font-semibold mb-2">
             <Calculator className="w-3.5 h-3.5" />
-            <span>{isAr ? 'حاسبة الاشتراكات الرسمية' : 'Simulateur Officiel'}</span>
+            <span>{isAr ? 'حاسبة الاشتراكات الرسمية' : 'Simulateur d\'abonnement'}</span>
           </div>
-          <h3 className="font-display text-2xl sm:text-3xl font-black text-adrena-bone tracking-tight uppercase">
+          <h3 className="text-2xl sm:text-3xl font-extrabold text-adrena-bone tracking-tight">
             {t.title}
           </h3>
           <p className="text-xs sm:text-sm text-adrena-stone mt-1">
@@ -114,7 +114,7 @@ export default function PricingCalculator({ lang }: PricingCalculatorProps) {
               {isAr ? 'المجموع المحسوب' : 'Total en temps réel'}
             </span>
             <div className="flex items-baseline gap-1.5">
-              <span className="font-display text-2xl font-black text-adrena-gold">
+              <span className="text-2xl font-extrabold text-adrena-gold">
                 {totalPrice.toLocaleString('fr-FR')}
               </span>
               <span className="text-xs font-bold text-adrena-bone">
@@ -126,7 +126,7 @@ export default function PricingCalculator({ lang }: PricingCalculatorProps) {
           <button
             type="button"
             onClick={handleWhatsAppBooking}
-            className="flex items-center gap-2 py-2.5 px-4 rounded-xl bg-adrena-gold hover:bg-adrena-gold-light text-[#111215] font-display font-black text-xs uppercase tracking-wider shadow-sm active:scale-95"
+            className="flex items-center gap-2 py-2 px-3.5 rounded-xl bg-adrena-gold hover:bg-adrena-gold-light text-[#111215] font-bold text-xs shadow-sm active:scale-95"
           >
             <MessageCircle className="w-4 h-4 fill-[#111215]" />
             <span>{isAr ? 'تأكيد عبر واتساب' : 'S\'inscrire'}</span>
@@ -139,7 +139,7 @@ export default function PricingCalculator({ lang }: PricingCalculatorProps) {
         <div className="lg:col-span-7 space-y-6">
           {/* Step 1: Base Formula */}
           <div>
-            <label className="block text-sm font-bold uppercase tracking-wider text-adrena-bone mb-3 font-display">
+            <label className="block text-sm font-semibold text-adrena-bone mb-3">
               {t.step1Title}
             </label>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3" role="radiogroup" aria-label="Type de formule">
@@ -155,7 +155,7 @@ export default function PricingCalculator({ lang }: PricingCalculatorProps) {
                 }`}
               >
                 <div className="flex items-center justify-between mb-2">
-                  <span className="font-display font-bold text-base text-adrena-bone flex items-center gap-2">
+                  <span className="font-bold text-base text-adrena-bone flex items-center gap-2">
                     <Flame className="w-5 h-5 text-adrena-gold" />
                     {t.mixteOption}
                   </span>
@@ -180,7 +180,7 @@ export default function PricingCalculator({ lang }: PricingCalculatorProps) {
                 }`}
               >
                 <div className="flex items-center justify-between mb-2">
-                  <span className="font-display font-bold text-base text-adrena-bone flex items-center gap-2">
+                  <span className="font-bold text-base text-adrena-bone flex items-center gap-2">
                     <Dumbbell className="w-5 h-5 text-adrena-stone" />
                     {t.muscuOption}
                   </span>
@@ -200,7 +200,7 @@ export default function PricingCalculator({ lang }: PricingCalculatorProps) {
             <div className="p-5 rounded-2xl bg-adrena-surface/70 border border-adrena-border space-y-6">
               <div>
                 <div className="flex items-center justify-between mb-2.5">
-                  <label className="text-sm font-bold uppercase tracking-wider text-adrena-bone font-display">
+                  <label className="text-sm font-semibold text-adrena-bone">
                     {t.combatLabel}
                   </label>
                   <span className="font-mono text-xs sm:text-sm font-bold text-adrena-gold bg-adrena-surface border border-adrena-border px-2.5 py-1 rounded-md">
@@ -217,7 +217,7 @@ export default function PricingCalculator({ lang }: PricingCalculatorProps) {
                       onClick={() => setCrossSessions(num)}
                       className={`py-3 px-3 rounded-xl text-sm font-bold transition-all ${
                         crossSessions === num
-                          ? 'bg-adrena-gold text-[#111215] shadow-sm font-black'
+                          ? 'bg-adrena-gold text-[#111215] shadow-sm'
                           : 'bg-adrena-surface text-adrena-stone hover:text-adrena-bone hover:bg-[#252830] border border-adrena-border'
                       }`}
                     >
@@ -229,7 +229,7 @@ export default function PricingCalculator({ lang }: PricingCalculatorProps) {
 
               <div>
                 <div className="flex items-center justify-between mb-2.5">
-                  <label className="text-sm font-bold uppercase tracking-wider text-adrena-bone font-display">
+                  <label className="text-sm font-semibold text-adrena-bone">
                     {isAr ? 'عدد حصص كمال الأجسام أسبوعياً' : 'Séances de Musculation par semaine'}
                   </label>
                   <span className="font-mono text-xs sm:text-sm font-bold text-adrena-gold bg-adrena-surface border border-adrena-border px-2.5 py-1 rounded-md">
@@ -246,7 +246,7 @@ export default function PricingCalculator({ lang }: PricingCalculatorProps) {
                       onClick={() => setMuscuSessions(num)}
                       className={`py-3 rounded-xl text-sm font-bold transition-all ${
                         muscuSessions === num
-                          ? 'bg-adrena-bone text-[#111215] shadow-sm font-black'
+                          ? 'bg-adrena-bone text-[#111215] shadow-sm'
                           : 'bg-adrena-surface text-adrena-stone hover:text-adrena-bone hover:bg-[#252830] border border-adrena-border'
                       }`}
                     >
@@ -260,7 +260,7 @@ export default function PricingCalculator({ lang }: PricingCalculatorProps) {
 
           {formulaType === 'muscu' && (
             <div className="p-5 rounded-2xl bg-adrena-surface/70 border border-adrena-border">
-              <label className="block text-sm font-bold uppercase tracking-wider text-adrena-bone font-display mb-3">
+              <label className="block text-sm font-semibold text-adrena-bone mb-3">
                 {isAr ? 'وتيرة التدريب في الأسبوع' : 'Fréquence hebdomadaire'}
               </label>
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2" role="radiogroup">
@@ -273,7 +273,7 @@ export default function PricingCalculator({ lang }: PricingCalculatorProps) {
                     onClick={() => setMuscuSessions(num)}
                     className={`py-3 rounded-xl text-sm font-bold transition-all ${
                       muscuSessions === num
-                        ? 'bg-adrena-gold text-[#111215] shadow-sm font-black'
+                        ? 'bg-adrena-gold text-[#111215] shadow-sm'
                         : 'bg-adrena-surface text-adrena-stone hover:text-adrena-bone hover:bg-[#252830] border border-adrena-border'
                     }`}
                   >
@@ -286,7 +286,7 @@ export default function PricingCalculator({ lang }: PricingCalculatorProps) {
 
           {/* Optional Add-ons */}
           <div>
-            <label className="block text-sm font-bold uppercase tracking-wider text-adrena-stone mb-2.5 font-display">
+            <label className="block text-sm font-semibold text-adrena-stone mb-2.5">
               {isAr ? 'خدمات إضافية اختيارية' : 'Options bien-être & récupération'}
             </label>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -350,15 +350,15 @@ export default function PricingCalculator({ lang }: PricingCalculatorProps) {
           <div className="p-6 sm:p-7 rounded-2xl bg-adrena-surface border border-adrena-border shadow-xl relative overflow-hidden">
             <div className="absolute top-0 right-0 left-0 h-1 bg-adrena-gold" />
 
-            <span className="text-xs sm:text-sm font-bold uppercase tracking-wider text-adrena-stone font-display block mb-1">
+            <span className="text-xs font-semibold uppercase tracking-wider text-adrena-stone block mb-1">
               {t.totalLabel}
             </span>
 
-            <div className="flex items-baseline gap-2.5 mb-4">
-              <span className="font-display text-4xl sm:text-6xl font-black text-adrena-bone tracking-tight">
+            <div className="flex items-baseline gap-2 mb-4">
+              <span className="text-4xl sm:text-5xl font-extrabold text-adrena-bone tracking-tight">
                 {totalPrice.toLocaleString('fr-FR')}
               </span>
-              <span className="font-display text-xl sm:text-2xl font-black text-adrena-gold">
+              <span className="text-lg sm:text-xl font-bold text-adrena-gold">
                 {isAr ? 'دج / شهر' : 'DA / mois'}
               </span>
             </div>
@@ -389,9 +389,9 @@ export default function PricingCalculator({ lang }: PricingCalculatorProps) {
             <button
               type="button"
               onClick={handleWhatsAppBooking}
-              className="w-full inline-flex items-center justify-center gap-2.5 py-4 px-6 rounded-xl bg-adrena-gold hover:bg-adrena-gold-light text-[#111215] font-display font-black text-base uppercase tracking-wider transition-all duration-200 shadow-md active:scale-95"
+              className="w-full inline-flex items-center justify-center gap-2 py-3.5 px-5 rounded-xl bg-adrena-gold hover:bg-adrena-gold-light text-[#111215] font-bold text-sm tracking-wide transition-all shadow-md active:scale-98"
             >
-              <MessageCircle className="w-5 h-5 fill-[#111215]" />
+              <MessageCircle className="w-4 h-4 fill-[#111215]" />
               <span>{t.ctaWhatsapp}</span>
             </button>
           </div>

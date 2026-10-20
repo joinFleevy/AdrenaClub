@@ -23,12 +23,12 @@ export default function MobileStickyBar({ lang }: MobileStickyBarProps) {
           href={`https://wa.me/213771570378?text=${defaultMsg}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex-1 flex items-center justify-center gap-2.5 py-3 px-4 rounded-xl bg-adrena-gold hover:bg-adrena-gold-light text-[#111215] font-display font-black text-sm uppercase tracking-wider shadow-lg active:scale-98 transition-all"
+          className="flex-1 flex items-center justify-center gap-2.5 py-3 px-4 rounded-xl bg-adrena-gold hover:bg-adrena-gold-light text-[#111215] font-semibold text-sm shadow-md active:scale-98 transition-all"
         >
           <MessageCircle className="w-5 h-5 fill-[#111215] flex-shrink-0" />
           <div className="flex flex-col items-start leading-tight">
             <span>{isAr ? 'التسجيل عبر واتساب' : 'S\'inscrire via WhatsApp'}</span>
-            <span className="text-[10px] font-sans font-bold opacity-80 lowercase">
+            <span className="text-[10px] opacity-80">
               {isAr ? 'رد فوري • بدون التزام' : 'réponse rapide • dès 3 000 DA'}
             </span>
           </div>
@@ -41,7 +41,7 @@ export default function MobileStickyBar({ lang }: MobileStickyBarProps) {
           title={isAr ? 'اتصال مباشر' : 'Appeler la réception'}
         >
           <Phone className="w-4 h-4 text-adrena-bone mb-0.5" />
-          <span className="font-display text-[10px] font-extrabold uppercase tracking-wide text-adrena-stone">
+          <span className="text-[10px] font-medium text-adrena-stone">
             {isAr ? 'اتصال' : 'Appel'}
           </span>
         </a>
@@ -55,7 +55,7 @@ export default function MobileStickyBar({ lang }: MobileStickyBarProps) {
           title={isAr ? 'موقع النادي على الخريطة' : 'Localisation Google Maps'}
         >
           <MapPin className="w-4 h-4 text-adrena-gold mb-0.5" />
-          <span className="font-display text-[10px] font-extrabold uppercase tracking-wide text-adrena-stone">
+          <span className="text-[10px] font-medium text-adrena-stone">
             {isAr ? 'الموقع' : 'GPS'}
           </span>
         </a>

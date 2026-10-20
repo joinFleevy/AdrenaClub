@@ -14,9 +14,9 @@ export default function ContactSection({ lang }: ContactSectionProps) {
   return (
     <section id="contact" className="py-20 scroll-mt-28 relative bg-adrena-black border-b border-adrena-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header without generic AI-slop kickers */}
+        {/* Header */}
         <div className="mb-12">
-          <h2 className="font-display text-4xl sm:text-5xl md:text-6xl font-black text-adrena-bone tracking-tight uppercase leading-none">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-adrena-bone tracking-tight">
             {t.title}
           </h2>
           <p className="mt-3 text-base sm:text-lg text-adrena-stone max-w-[65ch] leading-relaxed">
@@ -36,7 +36,7 @@ export default function ContactSection({ lang }: ContactSectionProps) {
                     <MapPin className="w-4 h-4" />
                   </div>
                   <div>
-                    <span className="font-display text-xs font-bold text-adrena-stone uppercase tracking-wider block">
+                    <span className="text-xs font-semibold text-adrena-stone block">
                       {t.addressLabel}
                     </span>
                     <span className="font-semibold text-adrena-bone mt-0.5 block">{t.addressValue}</span>
@@ -49,7 +49,7 @@ export default function ContactSection({ lang }: ContactSectionProps) {
                     <Phone className="w-4 h-4" />
                   </div>
                   <div>
-                    <span className="font-display text-xs font-bold text-adrena-stone uppercase tracking-wider block">
+                    <span className="text-xs font-semibold text-adrena-stone block">
                       {t.phoneLabel}
                     </span>
                     <div className="flex flex-col gap-1 mt-0.5 font-mono tabular-nums font-bold text-adrena-gold text-base">
@@ -69,7 +69,7 @@ export default function ContactSection({ lang }: ContactSectionProps) {
                     <Mail className="w-4 h-4" />
                   </div>
                   <div>
-                    <span className="font-display text-xs font-bold text-adrena-stone uppercase tracking-wider block">
+                    <span className="text-xs font-semibold text-adrena-stone block">
                       {t.emailLabel}
                     </span>
                     <a
@@ -87,7 +87,7 @@ export default function ContactSection({ lang }: ContactSectionProps) {
                     <Clock className="w-4 h-4" />
                   </div>
                   <div>
-                    <span className="font-display text-xs font-bold text-adrena-stone uppercase tracking-wider block">
+                    <span className="text-xs font-semibold text-adrena-stone block">
                       {t.hoursLabel}
                     </span>
                     <span className="font-semibold text-adrena-bone mt-0.5 block">{t.hoursValue}</span>
@@ -101,7 +101,7 @@ export default function ContactSection({ lang }: ContactSectionProps) {
                   href="https://wa.me/213771570378"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl bg-adrena-gold hover:bg-adrena-gold-light text-[#111215] font-display font-black text-xs sm:text-sm uppercase tracking-wider transition-all shadow-md hover:scale-[1.02]"
+                  className="flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl bg-adrena-gold hover:bg-adrena-gold-light text-[#111215] font-semibold text-sm transition-all shadow-md hover:scale-[1.01]"
                 >
                   <MessageCircle className="w-4 h-4 fill-[#111215]" />
                   <span>{t.whatsappChat}</span>
@@ -110,7 +110,7 @@ export default function ContactSection({ lang }: ContactSectionProps) {
                 <div className="grid grid-cols-2 gap-3">
                   <a
                     href="tel:+213771570378"
-                    className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl bg-adrena-surface hover:bg-[#252830] text-adrena-bone border border-adrena-border font-display font-bold text-xs uppercase tracking-wider transition-all"
+                    className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl bg-adrena-surface hover:bg-[#252830] text-adrena-bone border border-adrena-border font-medium text-xs sm:text-sm transition-all"
                   >
                     <Phone className="w-3.5 h-3.5 text-adrena-gold" />
                     <span>{t.callNow}</span>
@@ -119,7 +119,7 @@ export default function ContactSection({ lang }: ContactSectionProps) {
                     href="https://maps.app.goo.gl/6YJepRtyWvXcrZoV9"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl bg-adrena-surface hover:bg-[#252830] text-adrena-bone border border-adrena-border font-display font-bold text-xs uppercase tracking-wider transition-all"
+                    className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl bg-adrena-surface hover:bg-[#252830] text-adrena-bone border border-adrena-border font-medium text-xs sm:text-sm transition-all"
                   >
                     <Navigation className="w-3.5 h-3.5 text-adrena-gold" />
                     <span>{t.getDirections}</span>

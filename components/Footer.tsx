@@ -22,9 +22,9 @@ export default function Footer({ lang }: FooterProps) {
               <div className="relative w-10 h-10 flex-shrink-0">
                 <Image src="/logo.png" alt="Adrena Club Logo" fill sizes="40px" className="object-contain" />
               </div>
-              <div className="flex items-center gap-1.5">
-                <span className="font-display text-2xl font-black text-adrena-bone tracking-widest uppercase">ADRENA</span>
-                <span className="font-display text-2xl font-black text-adrena-gold tracking-widest uppercase">CLUB</span>
+              <div className="flex items-center gap-1.5 font-extrabold text-2xl tracking-tight">
+                <span className="text-adrena-bone">ADRENA</span>
+                <span className="text-adrena-gold">CLUB</span>
               </div>
             </div>
 
@@ -41,7 +41,7 @@ export default function Footer({ lang }: FooterProps) {
 
           {/* Col 2: Navigation Links */}
           <div>
-            <h4 className="font-display text-xs font-black text-adrena-bone uppercase tracking-wider mb-4">
+            <h4 className="text-xs font-bold text-adrena-bone uppercase tracking-wider mb-4">
               {lang === 'fr' ? 'Navigation' : 'روابط سريعة'}
             </h4>
             <ul className="space-y-2 text-xs sm:text-sm text-adrena-stone">
@@ -85,7 +85,7 @@ export default function Footer({ lang }: FooterProps) {
 
           {/* Col 3: Disciplines */}
           <div>
-            <h4 className="font-display text-xs font-black text-adrena-bone uppercase tracking-wider mb-4">
+            <h4 className="text-xs font-bold text-adrena-bone uppercase tracking-wider mb-4">
               {lang === 'fr' ? 'Activités du Club' : 'الأنشطة المتاحة'}
             </h4>
             <ul className="space-y-2 text-xs sm:text-sm text-adrena-stone">
@@ -115,7 +115,7 @@ export default function Footer({ lang }: FooterProps) {
 
           {/* Col 4: Contact & Social */}
           <div>
-            <h4 className="font-display text-xs font-black text-adrena-bone uppercase tracking-wider mb-4">
+            <h4 className="text-xs font-bold text-adrena-bone uppercase tracking-wider mb-4">
               {lang === 'fr' ? 'Contact & Réseaux' : 'التواصل والشبكات'}
             </h4>
             <ul className="space-y-2.5 text-xs sm:text-sm mb-6">

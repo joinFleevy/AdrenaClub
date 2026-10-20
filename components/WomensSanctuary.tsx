@@ -70,12 +70,12 @@ export default function WomensSanctuary({ lang }: WomensSanctuaryProps) {
 
           {/* Right Column: Key Commitments & Features */}
           <div className="lg:col-span-7 order-1 lg:order-2">
-            {/* Heading without generic kicker pills */}
-            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-black text-adrena-bone tracking-tight uppercase leading-none mb-3">
+            {/* Heading */}
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-adrena-bone tracking-tight leading-tight mb-3">
               {t.title}
             </h2>
 
-            <p className="text-base sm:text-lg text-adrena-stone leading-relaxed max-w-xl mb-8 font-medium">
+            <p className="text-base text-adrena-stone leading-relaxed max-w-xl mb-8 font-normal">
               {t.subtitle}
             </p>
 
@@ -107,7 +107,7 @@ export default function WomensSanctuary({ lang }: WomensSanctuaryProps) {
             <div className="flex flex-wrap items-center gap-4">
               <a
                 href="#planning"
-                className="inline-flex items-center gap-2.5 px-6 py-4 rounded-xl bg-adrena-gold hover:bg-adrena-gold-light text-[#111215] font-display font-black uppercase tracking-wider text-sm sm:text-base transition-all duration-200 shadow-md active:scale-95"
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-adrena-gold hover:bg-adrena-gold-light text-[#111215] font-bold text-xs sm:text-sm transition-all shadow-sm active:scale-98"
               >
                 <span>{t.cta}</span>
                 <ArrowRight className="w-4 h-4 rtl:rotate-180" />
@@ -116,7 +116,7 @@ export default function WomensSanctuary({ lang }: WomensSanctuaryProps) {
                 href="https://wa.me/213771570378?text=Bonjour,%20je%20souhaite%20des%20informations%20sur%20les%20cr%C3%A9neaux%20femmes"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-4 rounded-xl bg-adrena-card hover:bg-adrena-surface text-adrena-bone border border-adrena-border text-sm sm:text-base font-bold transition-colors shadow-sm"
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-adrena-card hover:bg-adrena-surface text-adrena-bone border border-adrena-border text-xs sm:text-sm font-semibold transition-colors shadow-sm"
               >
                 <span>{isAr ? 'استفسار عبر واتساب' : 'Poser une question via WhatsApp'}</span>
               </a>

@@ -4,7 +4,6 @@ import React, { useState, useEffect } from 'react';
 import { Language } from '@/data/content';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
-import LiveStatusEngine from '@/components/LiveStatusEngine';
 import PricingSection from '@/components/PricingSection';
 import ScheduleSection from '@/components/ScheduleSection';
 import WomensSanctuary from '@/components/WomensSanctuary';
@@ -63,48 +62,7 @@ export default function Home() {
       {/* Hero Section */}
       <Hero lang={lang} />
 
-      {/* Real-Time Facility Activity Engine (Live open/closed, Women vs Men session) */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 sm:-mt-8 relative z-20 mb-8 sm:mb-12">
-        <LiveStatusEngine lang={lang} />
-      </div>
-
-      {/* Fast Mobile Action Anchors (Allows mobile visitors to jump directly without scroll fatigue) */}
-      <div className="block sm:hidden px-4 py-3 bg-[#0E0F13] border-y border-adrena-border overflow-x-auto scrollbar-none mb-4">
-        <div className="flex items-center gap-2 text-xs font-bold font-display uppercase tracking-wider text-adrena-bone w-max">
-          <a
-            href="#tarifs"
-            className="px-3.5 py-2 rounded-xl bg-adrena-gold text-[#111215] shadow-sm flex items-center gap-1.5"
-          >
-            <span>⚡ {lang === 'fr' ? 'Tarifs dès 3 000 DA' : 'الأسعار من 3 000 دج'}</span>
-          </a>
-          <a
-            href="#planning"
-            className="px-3.5 py-2 rounded-xl bg-adrena-card border border-adrena-border text-adrena-bone"
-          >
-            <span>📅 {lang === 'fr' ? 'Plannings 2026' : 'المواقيت والحصص'}</span>
-          </a>
-          <a
-            href="#femmes"
-            className="px-3.5 py-2 rounded-xl bg-adrena-card border border-adrena-border text-adrena-bone"
-          >
-            <span>🌸 {lang === 'fr' ? 'Espace Femmes' : 'فضاء النساء'}</span>
-          </a>
-          <a
-            href="#contact"
-            className="px-3.5 py-2 rounded-xl bg-adrena-card border border-adrena-border text-adrena-bone"
-          >
-            <span>📍 {lang === 'fr' ? 'Accès CUB1' : 'الموقع والوصول'}</span>
-          </a>
-          <a
-            href="#tour-360"
-            className="px-3.5 py-2 rounded-xl bg-adrena-card border border-adrena-border text-adrena-bone"
-          >
-            <span>🔄 {lang === 'fr' ? 'Visite 360°' : 'جولة 360°'}</span>
-          </a>
-        </div>
-      </div>
-
-      {/* 1. Pricing & Custom Formula Calculator (Moved UP for immediate purchase clarity) */}
+      {/* 1. Pricing & Custom Formula Calculator */}
       <PricingSection lang={lang} onOpenPostersModal={handleOpenPostersModal} />
 
       {/* 2. Interactive Schedules & Class Finder (Directly follows pricing) */}
