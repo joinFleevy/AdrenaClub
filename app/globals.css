@@ -57,9 +57,13 @@
   background: #D49B2E;
 }
 
-/* Athletic Accent Glows */
-.gold-glow {
-  text-shadow: 0 0 20px rgba(212, 155, 46, 0.35);
+/* Architectural Card & Border Accents */
+.border-cedar-subtle {
+  border-color: rgba(160, 110, 59, 0.25);
+}
+
+.bg-cedar-gradient {
+  background: linear-gradient(135deg, rgba(46, 30, 20, 0.6) 0%, rgba(24, 25, 30, 0.95) 100%);
 }
 
 .box-gold-glow {

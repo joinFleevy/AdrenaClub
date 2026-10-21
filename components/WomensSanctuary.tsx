@@ -22,12 +22,15 @@ export default function WomensSanctuary({ lang }: WomensSanctuaryProps) {
 
   return (
     <section id="espace-femmes" className="py-20 scroll-mt-28 relative bg-adrena-black border-b border-adrena-border">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Warm Cedar Architectural Ambient Glow */}
+      <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[450px] h-[450px] bg-[#A06E3B]/10 blur-[160px] pointer-events-none rounded-full" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
           {/* Left Column: Visual Showcase */}
           <div className="lg:col-span-5 order-2 lg:order-1">
-            <div className="relative rounded-2xl overflow-hidden border border-adrena-border bg-adrena-card shadow-xl">
+            <div className="relative rounded-2xl overflow-hidden border border-[#A06E3B]/30 bg-adrena-card shadow-2xl">
               <div className="relative h-72 sm:h-88 lg:h-[420px] w-full">
                 <Image
                   src="/images/disciplines/femmes.jpg"
@@ -36,11 +39,11 @@ export default function WomensSanctuary({ lang }: WomensSanctuaryProps) {
                   sizes="(max-width: 1024px) 100vw, 40vw"
                   className="object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-adrena-card via-[#111215]/25 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-adrena-card via-[#111215]/30 to-transparent" />
                 
                 {/* Floating Highlight Pill */}
-                <div className="absolute top-4 left-4 rtl:left-auto rtl:right-4 px-3.5 py-1.5 rounded-full bg-[#111215]/90 backdrop-blur-md border border-adrena-border text-xs font-sans font-bold uppercase tracking-wider text-adrena-gold flex items-center gap-2 shadow-md">
-                  <VolumeX className="w-3.5 h-3.5" />
+                <div className="absolute top-4 left-4 rtl:left-auto rtl:right-4 px-3.5 py-1.5 rounded-full bg-[#111215]/95 backdrop-blur-md border border-[#A06E3B]/40 text-xs font-sans font-bold uppercase tracking-wider text-adrena-gold flex items-center gap-2 shadow-lg">
+                  <VolumeX className="w-3.5 h-3.5 text-adrena-gold" />
                   <span>{isAr ? '100% بدون أي موسيقى' : '100% Sans Musique'}</span>
                 </div>
               </div>

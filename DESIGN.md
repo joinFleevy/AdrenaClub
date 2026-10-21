@@ -15,6 +15,8 @@ colors:
   text-muted: "#9CA3AF"
   combat-accent: "#DC2626"
   active-emerald: "#10B981"
+  cedar: "#A06E3B"
+  cedar-dark: "#2E1E14"
 typography:
   display:
     fontFamily: "Manrope, sans-serif"
