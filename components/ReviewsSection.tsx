@@ -18,10 +18,10 @@ export default function ReviewsSection({ lang }: ReviewsSectionProps) {
         {/* Header */}
         <div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-4">
           <div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-adrena-bone tracking-tight leading-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight">
               {t.title}
             </h2>
-            <p className="mt-2 text-base text-adrena-stone max-w-[60ch] leading-relaxed">
+            <p className="mt-2 text-base text-adrena-stone max-w-[60ch] leading-relaxed font-medium">
               {t.subtitle}
             </p>
           </div>
@@ -30,7 +30,7 @@ export default function ReviewsSection({ lang }: ReviewsSectionProps) {
             href="https://search.google.com/local/writereview?placeid=ChIJFSlXOAhRjhIRcOAX0RgYyJg"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-adrena-card hover:bg-adrena-surface border border-adrena-border text-xs sm:text-sm font-semibold text-adrena-stone hover:text-adrena-bone transition-all self-start md:self-auto shadow-sm"
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-adrena-card hover:bg-adrena-surface border border-adrena-border text-xs sm:text-sm font-bold text-adrena-stone hover:text-white transition-all self-start md:self-auto shadow-sm"
           >
             <Star className="w-4 h-4 text-adrena-gold fill-adrena-gold" />
             <span>{t.leaveReview}</span>
@@ -42,7 +42,7 @@ export default function ReviewsSection({ lang }: ReviewsSectionProps) {
           {t.items.map((item, idx) => (
             <div
               key={idx}
-              className="w-[84vw] max-w-[320px] flex-shrink-0 snap-center sm:w-auto sm:max-w-none flex flex-col justify-between p-6 sm:p-7 rounded-2xl bg-adrena-card border border-adrena-border shadow-sm hover:border-neutral-600 transition-colors"
+              className="w-[84vw] max-w-[320px] flex-shrink-0 snap-center sm:w-auto sm:max-w-none flex flex-col justify-between p-6 sm:p-7 rounded-2xl bg-adrena-card border border-adrena-border shadow-lg hover:border-adrena-gold/40 transition-colors"
             >
               <div>
                 {/* 5 Stars */}
@@ -53,7 +53,7 @@ export default function ReviewsSection({ lang }: ReviewsSectionProps) {
                 </div>
 
                 {/* Review Content */}
-                <p className="text-sm sm:text-base text-adrena-bone leading-relaxed italic mb-6 font-sans">
+                <p className="text-sm sm:text-base text-white leading-relaxed italic mb-6 font-medium">
                   &ldquo;{item.text}&rdquo;
                 </p>
               </div>

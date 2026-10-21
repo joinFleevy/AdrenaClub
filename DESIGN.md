@@ -1,22 +1,20 @@
 ---
 name: Adrena Club Design System
-description: Premium Athletic Club visual design system for Adrena Club in Bab Ezzouar, Algiers.
+description: Kinetic Athletic Power visual design system for Adrena Club in Bab Ezzouar, Algiers.
 colors:
-  primary: "#D49B2E"
-  primary-hover: "#E5AC3F"
-  primary-muted: "#8A641E"
-  neutral-bg: "#111215"
-  neutral-dark: "#16171B"
-  neutral-card: "#18191E"
-  neutral-surface: "#1E2026"
-  border: "#2A2D35"
-  text-primary: "#F4F5F7"
-  text-secondary: "#D1D5DB"
-  text-muted: "#9CA3AF"
-  combat-accent: "#DC2626"
+  primary: "#F5C518"
+  primary-hover: "#FFD738"
+  primary-muted: "#D4A30A"
+  neutral-bg: "#08090B"
+  neutral-dark: "#0D0E12"
+  neutral-card: "#131419"
+  neutral-surface: "#181A21"
+  border: "#232630"
+  text-primary: "#FFFFFF"
+  text-secondary: "#D1D5DF"
+  text-muted: "#8E93A0"
+  combat-accent: "#EF4444"
   active-emerald: "#10B981"
-  cedar: "#A06E3B"
-  cedar-dark: "#2E1E14"
 typography:
   display:
     fontFamily: "Manrope, sans-serif"
@@ -61,17 +59,17 @@ components:
 
 Adrena Club is an elite, multi-discipline athletic facility located in Bab Ezzouar (CUB1), Algiers. Spread over two dedicated levels (Ground Floor & Basement / Sous-Sol), it provides dedicated zones for Musculation/Fitness, Combat Sports (Kickboxing, Judo, Lutte), and a 100% private, zero-music Women's Sanctuary.
 
-The visual design language represents **Premium Athletic Craftsmanship**: tactile, architectural dark charcoal, high-contrast bone typography, solid cast-iron surfaces, and championship athletic gold. It deliberately avoids synthetic AI cliches (such as pitch-black empty voids, muddy grey unreadable text, neon gradients, and floating blurred glass cards).
+The visual design language represents **Kinetic Athletic Power**: deep carbon black, high-contrast bone typography, solid steel charcoal surfaces, and high-voltage championship athletic gold (`#F5C518`), directly echoing the dynamic golden chevron brand identity. It deliberately avoids synthetic AI cliches (such as pitch-black empty voids, muddy grey unreadable text, neon gradients, and floating blurred glass cards).
 
 ## Colors
 
-- **Architectural Charcoal Base (`#111215`)**: Deep, textured obsidian-charcoal evoking heavy cast-iron plates and industrial architecture.
-- **Card & Surface Tiers (`#16171B`, `#18191E`, `#1E2026`)**: Solid structural backgrounds creating tactile depth and hierarchy without artificial drop shadows.
-- **Structural Border (`#2A2D35`)**: Crisp 1px razor edges defining equipment bays and timetable grids.
-- **Championship Athletic Gold (`#D49B2E`)**: Warm, refined metallic gold representing excellence, medals, and focus.
-- **Bone White / Chalk (`#F4F5F7`)**: Crisp, readable primary typography providing maximum contrast (AAA) against dark surfaces.
-- **Architectural Stone (`#D1D5DB`)**: Clean supporting secondary text ensuring effortless legibility without muddying.
-- **Combat Crimson (`#DC2626`)**: High-intensity alert and combat badge accent for ring/tatami sessions.
+- **Deep Carbon Black (`#08090B`)**: Authentic obsidian black base echoing iron plates and the physical gym environment.
+- **Card & Surface Tiers (`#0D0E12`, `#131419`, `#181A21`)**: Solid structural backgrounds creating tactile depth and hierarchy without artificial drop shadows.
+- **Structural Border (`#232630`)**: Crisp 1px razor edges defining equipment bays and timetable grids.
+- **High-Voltage Adrena Gold (`#F5C518`)**: Vibrant, authoritative metallic gold representing energy, championship medals, and maximum focus.
+- **Bone White / Stark Chalk (`#FFFFFF`)**: Crisp, readable primary typography providing maximum contrast (AAA) against dark surfaces.
+- **Architectural Stone (`#D1D5DF`)**: Clean supporting secondary text ensuring effortless legibility without muddying.
+- **Combat Crimson (`#EF4444`)**: High-intensity alert and combat badge accent for ring/tatami sessions.
 - **Emerald Pulse (`#10B981`)**: Real-time open/closed indicators and live facility activity.
 
 ## Typography

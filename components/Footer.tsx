@@ -13,7 +13,7 @@ export default function Footer({ lang }: FooterProps) {
   const t = content[lang];
 
   return (
-    <footer className="bg-[#0D0E11] border-t border-adrena-border text-adrena-stone text-sm pb-24 md:pb-12 pt-16">
+    <footer className="bg-adrena-black border-t border-adrena-border text-adrena-stone text-sm pb-24 md:pb-12 pt-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
           {/* Col 1: Brand & Slogan */}
@@ -22,8 +22,8 @@ export default function Footer({ lang }: FooterProps) {
               <div className="relative w-10 h-10 flex-shrink-0">
                 <Image src="/logo.png" alt="Adrena Club Logo" fill sizes="40px" className="object-contain" />
               </div>
-              <div className="flex items-center gap-1.5 font-extrabold text-2xl tracking-tight">
-                <span className="text-adrena-bone">ADRENA</span>
+              <div className="flex items-center gap-1.5 font-black text-2xl tracking-tight">
+                <span className="text-white">ADRENA</span>
                 <span className="text-adrena-gold">CLUB</span>
               </div>
             </div>

@@ -318,7 +318,7 @@ export default function PanoramaViewer({ lang }: PanoramaViewerProps) {
               onClick={() => setIsTouchActive(true)}
               className="md:hidden absolute inset-0 z-[25] bg-black/40 backdrop-blur-[2px] flex flex-col items-center justify-center p-6 text-center cursor-pointer"
             >
-              <div className="p-4 rounded-2xl bg-[#111215]/95 border border-adrena-gold/50 shadow-2xl flex flex-col items-center gap-2 max-w-xs">
+              <div className="p-4 rounded-2xl bg-adrena-black/95 border border-adrena-gold/50 shadow-2xl flex flex-col items-center gap-2 max-w-xs">
                 <div className="w-10 h-10 rounded-full bg-adrena-gold/20 text-adrena-gold flex items-center justify-center animate-pulse">
                   <Compass className="w-5 h-5" />
                 </div>
@@ -338,7 +338,7 @@ export default function PanoramaViewer({ lang }: PanoramaViewerProps) {
           {isTouchActive && (
             <button
               onClick={() => setIsTouchActive(false)}
-              className="md:hidden absolute bottom-20 left-1/2 -translate-x-1/2 z-30 flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#111215]/95 border border-adrena-gold/60 text-xs font-bold text-adrena-bone shadow-2xl backdrop-blur-md"
+              className="md:hidden absolute bottom-20 left-1/2 -translate-x-1/2 z-30 flex items-center gap-1.5 px-4 py-2 rounded-full bg-adrena-black/95 border border-adrena-gold/60 text-xs font-bold text-adrena-bone shadow-2xl backdrop-blur-md"
             >
               <RotateCcw className="w-3.5 h-3.5 text-adrena-gold" />
               <span>{lang === 'fr' ? 'Terminer rotation / Défiler' : 'إنهاء التدوير / تمرير الصفحة'}</span>

@@ -347,40 +347,40 @@ export default function PricingCalculator({ lang }: PricingCalculatorProps) {
 
         {/* Right Column: Calculated Price Card (5 cols) */}
         <div className="lg:col-span-5">
-          <div className="p-6 sm:p-7 rounded-2xl bg-adrena-surface border border-adrena-border shadow-xl relative overflow-hidden">
+          <div className="p-6 sm:p-7 rounded-2xl bg-adrena-card border border-adrena-gold shadow-2xl relative overflow-hidden">
             <div className="absolute top-0 right-0 left-0 h-1 bg-adrena-gold" />
 
-            <span className="text-xs font-semibold uppercase tracking-wider text-adrena-stone block mb-1">
+            <span className="text-xs font-black uppercase tracking-wider text-adrena-muted block mb-1">
               {t.totalLabel}
             </span>
 
             <div className="flex items-baseline gap-2 mb-4">
-              <span className="text-4xl sm:text-5xl font-extrabold text-adrena-bone tracking-tight">
+              <span className="text-4xl sm:text-5xl font-black text-white tracking-tight tabular-nums">
                 {totalPrice.toLocaleString('fr-FR')}
               </span>
-              <span className="text-lg sm:text-xl font-bold text-adrena-gold">
+              <span className="text-lg sm:text-xl font-black text-adrena-gold uppercase">
                 {isAr ? 'دج / شهر' : 'DA / mois'}
               </span>
             </div>
 
             {/* Inclusions Callout */}
-            <div className="p-4 rounded-xl bg-adrena-card border border-adrena-border text-sm text-adrena-bone space-y-2.5 mb-6">
-              <div className="flex items-center gap-2 text-adrena-gold font-bold text-xs uppercase tracking-wider">
+            <div className="p-4 rounded-xl bg-adrena-surface border border-adrena-border text-sm text-white space-y-2.5 mb-6">
+              <div className="flex items-center gap-2 text-adrena-gold font-black text-xs uppercase tracking-wider">
                 <Sparkles className="w-4 h-4" />
                 <span>{t.savingsTag}</span>
               </div>
               <ul className="space-y-2 text-xs sm:text-sm text-adrena-stone">
                 <li className="flex items-center gap-2">
                   <Check className="w-4 h-4 text-emerald-400 flex-shrink-0" />
-                  <span>{isAr ? 'الدخول للغرف والدوشات الساخنة مشمول' : 'Accès douches chaudes & vestiaires inclus'}</span>
+                  <span className="font-medium">{isAr ? 'الدخول للغرف والدوشات الساخنة مشمول' : 'Accès douches chaudes & vestiaires inclus'}</span>
                 </li>
                 <li className="flex items-center gap-2">
                   <Check className="w-4 h-4 text-emerald-400 flex-shrink-0" />
-                  <span>{isAr ? 'تأطير تقني وحرية التوقيت' : 'Encadrement par coachs diplômés'}</span>
+                  <span className="font-medium">{isAr ? 'تأطير تقني وحرية التوقيت' : 'Encadrement par coachs diplômés'}</span>
                 </li>
                 <li className="flex items-center gap-2">
                   <Check className="w-4 h-4 text-emerald-400 flex-shrink-0" />
-                  <span>{isAr ? 'لا توجد أي رسوم تسجيل خفية' : 'Tarifs transparents sans frais cachés'}</span>
+                  <span className="font-medium">{isAr ? 'لا توجد أي رسوم تسجيل خفية' : 'Tarifs transparents sans frais cachés'}</span>
                 </li>
               </ul>
             </div>
@@ -389,9 +389,9 @@ export default function PricingCalculator({ lang }: PricingCalculatorProps) {
             <button
               type="button"
               onClick={handleWhatsAppBooking}
-              className="w-full inline-flex items-center justify-center gap-2 py-3.5 px-5 rounded-xl bg-adrena-gold hover:bg-adrena-gold-light text-[#111215] font-bold text-sm tracking-wide transition-all shadow-md active:scale-98"
+              className="w-full inline-flex items-center justify-center gap-2 py-4 px-5 rounded-lg bg-adrena-gold hover:bg-adrena-gold-light text-adrena-black font-black text-xs uppercase tracking-wider transition-all shadow-md active:scale-98"
             >
-              <MessageCircle className="w-4 h-4 fill-[#111215]" />
+              <MessageCircle className="w-4 h-4 fill-current" />
               <span>{t.ctaWhatsapp}</span>
             </button>
           </div>

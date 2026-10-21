@@ -22,10 +22,10 @@ export default function FAQSection({ lang }: FAQSectionProps) {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-adrena-bone tracking-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight">
             {t.title}
           </h2>
-          <p className="mt-3 text-base sm:text-lg text-adrena-stone max-w-xl mx-auto leading-relaxed">
+          <p className="mt-3 text-base sm:text-lg text-adrena-stone max-w-xl mx-auto leading-relaxed font-medium">
             {t.subtitle}
           </p>
         </div>
@@ -37,7 +37,7 @@ export default function FAQSection({ lang }: FAQSectionProps) {
             return (
               <div
                 key={index}
-                className="rounded-2xl bg-adrena-card border border-adrena-border transition-all duration-200 overflow-hidden shadow-sm"
+                className="rounded-2xl bg-adrena-card border border-adrena-border hover:border-adrena-gold/30 transition-all duration-200 overflow-hidden shadow-md"
               >
                 <button
                   type="button"
@@ -45,12 +45,12 @@ export default function FAQSection({ lang }: FAQSectionProps) {
                   onClick={() => toggleItem(index)}
                   aria-expanded={isOpen}
                   aria-controls={`faq-answer-${index}`}
-                  className="w-full p-5 sm:p-6 text-left rtl:text-right flex items-center justify-between gap-4 font-bold text-base sm:text-lg text-adrena-bone hover:text-adrena-gold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-adrena-gold"
+                  className="w-full p-5 sm:p-6 text-left rtl:text-right flex items-center justify-between gap-4 font-black text-base sm:text-lg text-white hover:text-adrena-gold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-adrena-gold"
                 >
                   <span className="leading-snug">{item.q}</span>
                   <div
                     className={`w-8 h-8 rounded-full bg-adrena-surface border border-adrena-border flex items-center justify-center flex-shrink-0 transition-transform duration-200 ${
-                      isOpen ? 'rotate-180 bg-adrena-gold text-[#111215] border-adrena-gold' : 'text-adrena-stone'
+                      isOpen ? 'rotate-180 bg-adrena-gold text-adrena-black border-adrena-gold' : 'text-adrena-stone'
                     }`}
                   >
                     <ChevronDown className="w-4 h-4" />

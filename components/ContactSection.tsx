@@ -16,10 +16,10 @@ export default function ContactSection({ lang }: ContactSectionProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-12">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-adrena-bone tracking-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight">
             {t.title}
           </h2>
-          <p className="mt-3 text-base sm:text-lg text-adrena-stone max-w-[65ch] leading-relaxed">
+          <p className="mt-3 text-base sm:text-lg text-adrena-stone max-w-[65ch] leading-relaxed font-medium">
             {t.subtitle}
           </p>
         </div>
@@ -101,16 +101,16 @@ export default function ContactSection({ lang }: ContactSectionProps) {
                   href="https://wa.me/213771570378"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl bg-adrena-gold hover:bg-adrena-gold-light text-[#111215] font-semibold text-sm transition-all shadow-md hover:scale-[1.01]"
+                  className="flex items-center justify-center gap-2 py-3.5 px-4 rounded-lg bg-adrena-gold hover:bg-adrena-gold-light text-adrena-black font-black uppercase text-xs tracking-wider transition-all shadow-md active:scale-98"
                 >
-                  <MessageCircle className="w-4 h-4 fill-[#111215]" />
+                  <MessageCircle className="w-4 h-4 fill-current" />
                   <span>{t.whatsappChat}</span>
                 </a>
 
                 <div className="grid grid-cols-2 gap-3">
                   <a
                     href="tel:+213771570378"
-                    className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl bg-adrena-surface hover:bg-[#252830] text-adrena-bone border border-adrena-border font-medium text-xs sm:text-sm transition-all"
+                    className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-lg bg-adrena-surface hover:bg-white/10 text-white border border-adrena-border font-bold text-xs uppercase tracking-wider transition-all"
                   >
                     <Phone className="w-3.5 h-3.5 text-adrena-gold" />
                     <span>{t.callNow}</span>
@@ -119,7 +119,7 @@ export default function ContactSection({ lang }: ContactSectionProps) {
                     href="https://maps.app.goo.gl/6YJepRtyWvXcrZoV9"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl bg-adrena-surface hover:bg-[#252830] text-adrena-bone border border-adrena-border font-medium text-xs sm:text-sm transition-all"
+                    className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-lg bg-adrena-surface hover:bg-white/10 text-white border border-adrena-border font-bold text-xs uppercase tracking-wider transition-all"
                   >
                     <Navigation className="w-3.5 h-3.5 text-adrena-gold" />
                     <span>{t.getDirections}</span>

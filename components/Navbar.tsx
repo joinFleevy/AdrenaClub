@@ -86,7 +86,7 @@ export default function Navbar({ lang, onToggleLang }: NavbarProps) {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
       {/* Top micro utility bar */}
-      <div className="bg-[#0D0E11] border-b border-adrena-border py-1.5 px-4 sm:px-6 lg:px-8 text-xs text-adrena-stone">
+      <div className="bg-adrena-black border-b border-adrena-border py-1.5 px-4 sm:px-6 lg:px-8 text-xs text-adrena-stone">
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
           <div className="flex items-center gap-3 sm:gap-4 overflow-hidden text-ellipsis whitespace-nowrap text-[11px] sm:text-xs">
             <span className="flex items-center gap-1.5 text-adrena-bone">
@@ -113,7 +113,7 @@ export default function Navbar({ lang, onToggleLang }: NavbarProps) {
                   ? 'bg-fuchsia-950/60 border-fuchsia-500/30 text-fuchsia-300'
                   : liveStatus?.isOpen
                   ? 'bg-emerald-950/60 border-emerald-500/30 text-emerald-400'
-                  : 'bg-neutral-900 border-neutral-800 text-neutral-400'
+                  : 'bg-adrena-card border-adrena-border text-adrena-muted'
               }`}
             >
               <span className="relative flex h-2 w-2">
@@ -161,8 +161,8 @@ export default function Navbar({ lang, onToggleLang }: NavbarProps) {
         aria-label="Navigation principale"
         className={`transition-all duration-300 px-4 sm:px-6 lg:px-8 ${
           isScrolled
-            ? 'bg-adrena-black/95 backdrop-blur-md py-2.5 border-b border-adrena-border shadow-xl'
-            : 'bg-[#111215]/85 backdrop-blur-sm py-3.5 border-b border-white/5'
+            ? 'bg-adrena-black/98 backdrop-blur-md py-2.5 border-b border-adrena-border shadow-xl'
+            : 'bg-adrena-black/90 backdrop-blur-md py-3.5 border-b border-adrena-border/60'
         }`}
       >
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
@@ -171,7 +171,7 @@ export default function Navbar({ lang, onToggleLang }: NavbarProps) {
             href="#accueil"
             className="flex items-center gap-3 group rounded-xl focus-visible:ring-2 focus-visible:ring-adrena-gold focus-visible:outline-none"
           >
-            <div className="relative w-10 h-10 sm:w-11 sm:h-11 flex-shrink-0 transition-transform duration-200 group-hover:scale-105">
+            <div className="relative w-10 h-10 sm:w-11 sm:h-11 flex-shrink-0">
               <Image
                 src="/logo.png"
                 alt="Adrena Club Logo"
@@ -182,11 +182,11 @@ export default function Navbar({ lang, onToggleLang }: NavbarProps) {
               />
             </div>
             <div className="flex flex-col">
-              <div className="flex items-center gap-1 font-extrabold text-xl sm:text-2xl tracking-tight leading-none">
+              <div className="flex items-center gap-1.5 font-black text-xl sm:text-2xl tracking-tight leading-none">
                 <span className="text-white">ADRENA</span>
                 <span className="text-adrena-gold">CLUB</span>
               </div>
-              <span className="text-[10px] sm:text-[11px] text-neutral-400 tracking-wider font-semibold mt-0.5 hidden sm:block">
+              <span className="text-[10px] sm:text-[11px] text-adrena-muted tracking-widest font-bold mt-0.5 hidden sm:block uppercase">
                 {isAr ? 'باب الزوار • طابقان' : 'BAB EZZOUAR • 2 ÉTAGES'}
               </span>
             </div>
@@ -202,8 +202,8 @@ export default function Navbar({ lang, onToggleLang }: NavbarProps) {
                   href={link.href}
                   className={`relative px-3.5 py-1.5 rounded-lg text-sm transition-all duration-150 focus-visible:ring-2 focus-visible:ring-adrena-gold focus-visible:outline-none ${
                     isActive
-                      ? 'text-adrena-gold font-semibold bg-white/[0.04]'
-                      : 'text-adrena-stone font-medium hover:text-adrena-bone hover:bg-white/[0.03]'
+                      ? 'text-adrena-gold font-bold bg-adrena-surface'
+                      : 'text-adrena-stone font-semibold hover:text-white hover:bg-adrena-card/60'
                   }`}
                 >
                   <span>{link.label}</span>
@@ -221,9 +221,9 @@ export default function Navbar({ lang, onToggleLang }: NavbarProps) {
               href="https://wa.me/213771570378?text=Bonjour%20Adrena%20Club,%20je%20souhaite%20avoir%20des%20informations%20sur%20les%20inscriptions."
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 px-4 py-2 rounded-xl bg-adrena-gold hover:bg-adrena-gold-light text-[#111215] font-semibold text-sm transition-all shadow-sm hover:scale-[1.01] active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-adrena-gold focus-visible:outline-none"
+              className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-adrena-gold hover:bg-adrena-gold-light text-adrena-black font-black text-xs uppercase tracking-wider transition-all shadow-md active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-adrena-gold focus-visible:outline-none"
             >
-              <MessageCircle className="w-4 h-4 fill-[#111215]" />
+              <MessageCircle className="w-4 h-4 fill-current" />
               <span>{t.nav.ctaButton}</span>
             </a>
           </div>
@@ -245,7 +245,7 @@ export default function Navbar({ lang, onToggleLang }: NavbarProps) {
       {/* Backdrop overlay for mobile drawer */}
       {mobileMenuOpen && (
         <div
-          className="lg:hidden fixed inset-0 top-[102px] bg-black/60 backdrop-blur-sm z-40 transition-opacity animate-in fade-in duration-200"
+          className="lg:hidden fixed inset-0 top-[102px] bg-black/70 backdrop-blur-sm z-40 transition-opacity animate-in fade-in duration-200"
           onClick={() => setMobileMenuOpen(false)}
           aria-hidden="true"
         />
@@ -255,7 +255,7 @@ export default function Navbar({ lang, onToggleLang }: NavbarProps) {
       {mobileMenuOpen && (
         <div
           id="mobile-navigation"
-          className="lg:hidden relative z-50 bg-[#141519] border-b border-adrena-border px-6 py-6 shadow-2xl transition-all animate-in fade-in slide-in-from-top-2 duration-200"
+          className="lg:hidden relative z-50 bg-adrena-dark border-b border-adrena-border px-6 py-6 shadow-2xl transition-all animate-in fade-in slide-in-from-top-2 duration-200"
         >
           <div className="flex flex-col gap-2">
             {navLinks.map((link) => {
@@ -265,14 +265,14 @@ export default function Navbar({ lang, onToggleLang }: NavbarProps) {
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`px-4 py-3 rounded-xl text-base font-semibold transition-all flex items-center justify-between min-h-[44px] ${
+                  className={`px-4 py-3 rounded-xl text-base font-bold transition-all flex items-center justify-between min-h-[44px] ${
                     isActive
-                      ? 'bg-adrena-surface text-adrena-gold border border-adrena-gold/30'
+                      ? 'bg-adrena-surface text-adrena-gold border border-adrena-gold/40'
                       : 'text-adrena-bone hover:bg-white/5 border border-transparent'
                   }`}
                 >
                   <span>{link.label}</span>
-                  {isActive && <span className="w-1.5 h-1.5 rounded-full bg-adrena-gold" />}
+                  {isActive && <span className="w-2 h-2 rounded-full bg-adrena-gold" />}
                 </a>
               );
             })}
@@ -280,7 +280,7 @@ export default function Navbar({ lang, onToggleLang }: NavbarProps) {
             <div className="pt-4 mt-2 border-t border-adrena-border flex flex-col gap-3">
               <a
                 href="tel:+213771570378"
-                className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-adrena-card border border-adrena-border text-adrena-bone font-medium text-sm min-h-[44px] hover:border-adrena-gold/40 transition-colors"
+                className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-adrena-card border border-adrena-border text-adrena-bone font-bold text-sm min-h-[44px] hover:border-adrena-gold/40 transition-colors"
               >
                 <Phone className="w-4 h-4 text-adrena-gold" />
                 <span className="font-mono tabular-nums">0771 57 03 78</span>
@@ -289,9 +289,9 @@ export default function Navbar({ lang, onToggleLang }: NavbarProps) {
                 href="https://wa.me/213771570378?text=Bonjour%20Adrena%20Club,%20je%20souhaite%20m'inscrire."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 px-4 py-3.5 rounded-xl bg-adrena-gold hover:bg-adrena-gold-light text-[#111215] font-semibold text-sm transition-all shadow-md active:scale-98 min-h-[44px]"
+                className="flex items-center justify-center gap-2 px-4 py-3.5 rounded-xl bg-adrena-gold hover:bg-adrena-gold-light text-adrena-black font-black text-sm uppercase tracking-wider transition-all shadow-md active:scale-98 min-h-[44px]"
               >
-                <MessageCircle className="w-4 h-4 fill-[#111215]" />
+                <MessageCircle className="w-4 h-4 fill-current" />
                 <span>{t.nav.ctaButton}</span>
               </a>
             </div>

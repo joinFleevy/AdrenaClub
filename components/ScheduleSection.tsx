@@ -82,17 +82,17 @@ export default function ScheduleSection({ lang, onOpenPostersModal }: ScheduleSe
         {/* Header with clear clearance */}
         <div className="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
           <div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-adrena-bone tracking-tight leading-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight">
               {t.title}
             </h2>
-            <p className="mt-2 text-base text-adrena-stone max-w-[60ch] leading-relaxed">
+            <p className="mt-2 text-base text-adrena-stone max-w-[60ch] leading-relaxed font-medium">
               {t.subtitle}
             </p>
           </div>
 
           <button
             onClick={() => onOpenPostersModal(activeTab)}
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-adrena-card hover:bg-adrena-surface border border-adrena-border text-xs sm:text-sm font-semibold text-adrena-stone hover:text-adrena-bone transition-all self-start md:self-auto shadow-sm"
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-adrena-card hover:bg-adrena-surface border border-adrena-border text-xs sm:text-sm font-bold text-adrena-stone hover:text-white transition-all self-start md:self-auto shadow-sm"
           >
             <ImageIcon className="w-4 h-4 text-adrena-gold" />
             <span>{t.openPosterBtn}</span>
@@ -100,17 +100,17 @@ export default function ScheduleSection({ lang, onOpenPostersModal }: ScheduleSe
         </div>
 
         {/* Unified Controls Panel */}
-        <div className="mb-8 p-3 sm:p-4 rounded-2xl bg-adrena-card border border-adrena-border flex flex-col lg:flex-row lg:items-center justify-between gap-4 shadow-sm">
+        <div className="mb-8 p-3 sm:p-4 rounded-2xl bg-adrena-card border border-adrena-border flex flex-col lg:flex-row lg:items-center justify-between gap-4 shadow-md">
           {/* Audience Tabs */}
-          <div className="flex items-center gap-1.5 p-1 bg-[#111215] border border-adrena-border rounded-xl w-fit" role="tablist" aria-label="Catégorie de membres">
+          <div className="flex items-center gap-1.5 p-1 bg-adrena-dark border border-adrena-border rounded-xl w-fit" role="tablist" aria-label="Catégorie de membres">
             <button
               role="tab"
               aria-selected={activeTab === 'hommes'}
               onClick={() => setActiveTab('hommes')}
-              className={`px-4 sm:px-5 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all ${
+              className={`px-4 sm:px-5 py-2.5 rounded-lg font-black text-xs sm:text-sm uppercase tracking-wider transition-all ${
                 activeTab === 'hommes'
-                  ? 'bg-adrena-gold text-[#111215] shadow-sm font-bold'
-                  : 'text-adrena-stone hover:text-adrena-bone'
+                  ? 'bg-adrena-gold text-adrena-black shadow-md'
+                  : 'text-adrena-stone hover:text-white'
               }`}
             >
               {t.tabs.hommes}
@@ -120,10 +120,10 @@ export default function ScheduleSection({ lang, onOpenPostersModal }: ScheduleSe
               role="tab"
               aria-selected={activeTab === 'femmes'}
               onClick={() => setActiveTab('femmes')}
-              className={`px-4 sm:px-5 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all ${
+              className={`px-4 sm:px-5 py-2.5 rounded-lg font-black text-xs sm:text-sm uppercase tracking-wider transition-all ${
                 activeTab === 'femmes'
-                  ? 'bg-adrena-gold text-[#111215] shadow-sm font-bold'
-                  : 'text-adrena-stone hover:text-adrena-bone'
+                  ? 'bg-adrena-gold text-adrena-black shadow-md'
+                  : 'text-adrena-stone hover:text-white'
               }`}
             >
               {t.tabs.femmes}
@@ -133,10 +133,10 @@ export default function ScheduleSection({ lang, onOpenPostersModal }: ScheduleSe
               role="tab"
               aria-selected={activeTab === 'enfants'}
               onClick={() => setActiveTab('enfants')}
-              className={`px-4 sm:px-5 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all ${
+              className={`px-4 sm:px-5 py-2.5 rounded-lg font-black text-xs sm:text-sm uppercase tracking-wider transition-all ${
                 activeTab === 'enfants'
-                  ? 'bg-adrena-gold text-[#111215] shadow-sm font-bold'
-                  : 'text-adrena-stone hover:text-adrena-bone'
+                  ? 'bg-adrena-gold text-adrena-black shadow-md'
+                  : 'text-adrena-stone hover:text-white'
               }`}
             >
               {t.tabs.enfants}
@@ -154,10 +154,10 @@ export default function ScheduleSection({ lang, onOpenPostersModal }: ScheduleSe
                   role="radio"
                   aria-checked={isActive}
                   onClick={() => setActiveDiscipline(p.id)}
-                  className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-bold transition-all ${
+                  className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-xs sm:text-sm font-black uppercase tracking-wider transition-all ${
                     isActive
-                      ? 'bg-adrena-gold text-[#111215] font-semibold shadow-sm ring-1 ring-adrena-gold'
-                      : 'bg-adrena-surface text-adrena-stone hover:text-adrena-bone border border-adrena-border'
+                      ? 'bg-adrena-gold text-adrena-black shadow-md ring-1 ring-adrena-gold'
+                      : 'bg-adrena-surface text-adrena-stone hover:text-white border border-adrena-border'
                   }`}
                 >
                   {Icon && <Icon className="w-4 h-4" />}

@@ -16,19 +16,19 @@ export default function MobileStickyBar({ lang }: MobileStickyBarProps) {
     : encodeURIComponent("Bonjour Adrena Club, je souhaite m'inscrire. Pouvez-vous me donner les détails et les formules ?");
 
   return (
-    <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#0E0F13]/98 backdrop-blur-xl border-t border-adrena-border py-2 px-3 shadow-2xl safe-area-pb">
+    <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-adrena-black/98 backdrop-blur-xl border-t border-adrena-border py-2 px-3 shadow-2xl safe-area-pb">
       <div className="flex items-center gap-2">
         {/* Dominant Primary WhatsApp Subscription Button (65% width) */}
         <a
           href={`https://wa.me/213771570378?text=${defaultMsg}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex-1 flex items-center justify-center gap-2.5 py-3 px-4 rounded-xl bg-adrena-gold hover:bg-adrena-gold-light text-[#111215] font-semibold text-sm shadow-md active:scale-98 transition-all"
+          className="flex-1 flex items-center justify-center gap-2.5 py-3 px-4 rounded-lg bg-adrena-gold hover:bg-adrena-gold-light text-adrena-black font-black text-sm shadow-lg active:scale-98 transition-all"
         >
-          <MessageCircle className="w-5 h-5 fill-[#111215] flex-shrink-0" />
+          <MessageCircle className="w-5 h-5 fill-current flex-shrink-0" />
           <div className="flex flex-col items-start leading-tight">
-            <span>{isAr ? 'التسجيل عبر واتساب' : 'S\'inscrire via WhatsApp'}</span>
-            <span className="text-[10px] opacity-80">
+            <span className="font-black text-sm uppercase tracking-wider">{isAr ? 'التسجيل عبر واتساب' : 'S\'inscrire via WhatsApp'}</span>
+            <span className="text-[10px] opacity-85 font-bold">
               {isAr ? 'رد فوري • بدون التزام' : 'réponse rapide • dès 3 000 DA'}
             </span>
           </div>
