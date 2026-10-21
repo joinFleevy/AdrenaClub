@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
-import { Maximize2, Minimize2, RotateCcw, Play, Pause, MapPin, Eye, Building, Compass } from 'lucide-react';
+import { Maximize2, Minimize2, RotateCcw, Play, Pause, MapPin, Eye, Building, Compass, Dumbbell, Swords } from 'lucide-react';
 import { Language, content } from '@/data/content';
 
 interface PanoramaViewerProps {
@@ -15,6 +15,12 @@ const panos: Record<PanoKey, { src: string; key: PanoKey }> = {
   rdc: { src: '/images/360/reception_entrance_360.jpg', key: 'rdc' },
   muscu: { src: '/images/360/musculation_360.jpg', key: 'muscu' },
   combat: { src: '/images/360/crossfit_combat_360.jpg', key: 'combat' },
+};
+
+const floorIcons: Record<PanoKey, React.ComponentType<{ className?: string }>> = {
+  rdc: Building,
+  muscu: Dumbbell,
+  combat: Swords,
 };
 
 export default function PanoramaViewer({ lang }: PanoramaViewerProps) {
@@ -259,19 +265,19 @@ export default function PanoramaViewer({ lang }: PanoramaViewerProps) {
           className="relative w-full rounded-2xl border border-adrena-border bg-adrena-dark overflow-hidden shadow-2xl"
         >
           {/* Top Left: Active Area Label */}
-          <div className="absolute top-4 left-4 rtl:left-auto rtl:right-4 z-20 flex items-center gap-2.5 bg-black/85 backdrop-blur-md px-4 py-2 rounded-lg border border-white/10 text-xs text-white">
-            <span className="w-2 h-2 rounded-full bg-adrena-gold animate-pulse" />
-            <span className="font-extrabold uppercase tracking-wider">{t.floors[activePano].badge}</span>
-            <span className="text-neutral-500">•</span>
-            <span className="font-semibold text-neutral-200">{t.floors[activePano].title}</span>
+          <div className="absolute top-3 left-3 sm:top-4 sm:left-4 rtl:left-auto rtl:right-3 sm:rtl:right-4 z-20 flex items-center gap-2 bg-black/85 backdrop-blur-md px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg border border-white/10 text-xs text-white max-w-[calc(100%-130px)] sm:max-w-none">
+            <span className="w-2 h-2 rounded-full bg-adrena-gold animate-pulse shrink-0" />
+            <span className="font-extrabold uppercase tracking-wider text-[11px] sm:text-xs shrink-0">{t.floors[activePano].badge}</span>
+            <span className="text-neutral-500 hidden sm:inline">•</span>
+            <span className="font-semibold text-neutral-200 hidden sm:inline truncate">{t.floors[activePano].title}</span>
           </div>
 
           {/* Top Right: Rotation & Fullscreen Utility */}
-          <div className="absolute top-4 right-4 rtl:right-auto rtl:left-4 z-20 flex items-center gap-1.5 bg-black/85 backdrop-blur-md p-1.5 rounded-lg border border-white/10">
+          <div className="absolute top-3 right-3 sm:top-4 sm:right-4 rtl:right-auto rtl:left-3 sm:rtl:left-4 z-20 flex items-center gap-1 sm:gap-1.5 bg-black/85 backdrop-blur-md p-1 sm:p-1.5 rounded-lg border border-white/10">
             <button
               onClick={() => setIsAutoRotating(!isAutoRotating)}
               title={isAutoRotating ? 'Pause rotation' : 'Rotation auto'}
-              className={`p-2 rounded-md transition-colors ${
+              className={`p-2 rounded-md transition-colors min-w-[36px] min-h-[36px] flex items-center justify-center ${
                 isAutoRotating ? 'bg-adrena-gold text-black' : 'text-neutral-400 hover:text-white'
               }`}
             >
@@ -280,14 +286,14 @@ export default function PanoramaViewer({ lang }: PanoramaViewerProps) {
             <button
               onClick={resetView}
               title="Réinitialiser la vue"
-              className="p-2 rounded-md text-neutral-400 hover:text-white transition-colors"
+              className="p-2 rounded-md text-neutral-400 hover:text-white transition-colors min-w-[36px] min-h-[36px] flex items-center justify-center"
             >
               <RotateCcw className="w-4 h-4" />
             </button>
             <button
               onClick={toggleFullscreen}
               title="Plein écran"
-              className="p-2 rounded-md text-neutral-400 hover:text-white transition-colors"
+              className="p-2 rounded-md text-neutral-400 hover:text-white transition-colors min-w-[36px] min-h-[36px] flex items-center justify-center"
             >
               {isFullscreen ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
             </button>
@@ -310,7 +316,7 @@ export default function PanoramaViewer({ lang }: PanoramaViewerProps) {
           {!isTouchActive && (
             <div
               onClick={() => setIsTouchActive(true)}
-              className="md:hidden absolute inset-0 z-25 bg-black/40 backdrop-blur-[2px] flex flex-col items-center justify-center p-6 text-center cursor-pointer"
+              className="md:hidden absolute inset-0 z-[25] bg-black/40 backdrop-blur-[2px] flex flex-col items-center justify-center p-6 text-center cursor-pointer"
             >
               <div className="p-4 rounded-2xl bg-[#111215]/95 border border-adrena-gold/50 shadow-2xl flex flex-col items-center gap-2 max-w-xs">
                 <div className="w-10 h-10 rounded-full bg-adrena-gold/20 text-adrena-gold flex items-center justify-center animate-pulse">
@@ -332,10 +338,10 @@ export default function PanoramaViewer({ lang }: PanoramaViewerProps) {
           {isTouchActive && (
             <button
               onClick={() => setIsTouchActive(false)}
-              className="md:hidden absolute top-4 left-4 z-30 flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#111215]/95 border border-adrena-border text-xs font-bold text-adrena-bone shadow-lg"
+              className="md:hidden absolute bottom-20 left-1/2 -translate-x-1/2 z-30 flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#111215]/95 border border-adrena-gold/60 text-xs font-bold text-adrena-bone shadow-2xl backdrop-blur-md"
             >
               <RotateCcw className="w-3.5 h-3.5 text-adrena-gold" />
-              <span>{lang === 'fr' ? 'Verrouiller / Défiler' : 'قفل / تمرير الصفحة'}</span>
+              <span>{lang === 'fr' ? 'Terminer rotation / Défiler' : 'إنهاء التدوير / تمرير الصفحة'}</span>
             </button>
           )}
 
@@ -347,30 +353,33 @@ export default function PanoramaViewer({ lang }: PanoramaViewerProps) {
           )}
 
           {/* Integrated Floor Navigation Dock (Directly placed inside the bottom of the viewer) */}
-          <div className="absolute bottom-4 left-4 right-4 z-20 flex flex-col sm:flex-row items-center justify-between gap-3 pointer-events-none">
-            {/* Hand drag hint */}
+          <div className="absolute bottom-3 sm:bottom-4 left-3 right-3 sm:left-4 sm:right-4 z-30 flex flex-col sm:flex-row items-center justify-between gap-2 sm:gap-3 pointer-events-none">
+            {/* Hand drag hint (desktop only) */}
             <div className="hidden sm:flex items-center gap-2 bg-black/85 backdrop-blur-md px-4 py-2 rounded-xl border border-white/15 text-xs font-bold text-neutral-200 pointer-events-auto shadow-lg">
               <Eye className="w-4 h-4 text-adrena-gold" />
               <span>{t.tip}</span>
             </div>
 
-            {/* The 3 Floor Switchers: Integrated directly into the viewer */}
-            <div className="flex items-center gap-2 bg-black/90 backdrop-blur-md p-2 rounded-2xl border border-white/20 pointer-events-auto max-w-full overflow-x-auto shadow-2xl">
+            {/* The 3 Floor Switchers: 3-column responsive grid on mobile, flex on desktop - zero overflow, no scrollbar */}
+            <div className="w-full sm:w-auto grid grid-cols-3 sm:flex items-center gap-1 sm:gap-1.5 bg-black/90 backdrop-blur-md p-1.5 sm:p-2 rounded-2xl border border-white/20 pointer-events-auto shadow-2xl">
               {(['rdc', 'muscu', 'combat'] as PanoKey[]).map((key) => {
                 const floor = t.floors[key];
                 const isActive = activePano === key;
+                const Icon = floorIcons[key];
                 return (
                   <button
                     key={key}
+                    type="button"
                     onClick={() => switchPano(key)}
-                    className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold transition-all whitespace-nowrap ${
+                    className={`flex items-center justify-center gap-1 sm:gap-2 px-1.5 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all min-h-[44px] ${
                       isActive
                         ? 'bg-adrena-gold text-black shadow-md'
-                        : 'text-neutral-200 hover:text-white hover:bg-white/10'
+                        : 'text-neutral-300 hover:text-white hover:bg-white/10'
                     }`}
                   >
-                    <Building className="w-4 h-4" />
-                    <span>{floor.title}</span>
+                    <Icon className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
+                    <span className="sm:hidden truncate">{floor.shortTitle || floor.title}</span>
+                    <span className="hidden sm:inline whitespace-nowrap">{floor.title}</span>
                   </button>
                 );
               })}

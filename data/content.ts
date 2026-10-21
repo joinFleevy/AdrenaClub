@@ -43,9 +43,9 @@ export interface ContentStrings {
     title: string;
     subtitle: string;
     floors: {
-      rdc: { title: string; badge: string; desc: string };
-      muscu: { title: string; badge: string; desc: string };
-      combat: { title: string; badge: string; desc: string };
+      rdc: { title: string; shortTitle: string; badge: string; desc: string };
+      muscu: { title: string; shortTitle: string; badge: string; desc: string };
+      combat: { title: string; shortTitle: string; badge: string; desc: string };
     };
     tip: string;
     googleMapsBtn: string;
@@ -245,16 +245,19 @@ export const content: Record<Language, ContentStrings> = {
       floors: {
         rdc: {
           title: "RDC : Accueil & Portiques",
+          shortTitle: "Accueil",
           badge: "Rez-de-chaussée",
           desc: "Accès sécurisé par tourniquets RFID, comptoir d'accueil, espace boissons fraîches & compléments, vestiaires et sauna.",
         },
         muscu: {
           title: "Sous-Sol : Plateau Musculation",
+          shortTitle: "Musculation",
           badge: "Sous-Sol",
           desc: "Grand plateau équipé en machines professionnelles jaune et noir, charges libres, développé couché et bancs de tirage.",
         },
         combat: {
           title: "Sous-Sol : Ring & Cross-Training",
+          shortTitle: "Combat & Ring",
           badge: "Sous-Sol",
           desc: "Ring de boxe aux normes, surface tatami de combat, sacs de frappe lourds, cordes ondulatoires et équipement WOD.",
         },
@@ -571,16 +574,19 @@ export const content: Record<Language, ContentStrings> = {
       floors: {
         rdc: {
           title: "الطابق الأرضي : الاستقبال والبوابات",
+          shortTitle: "الاستقبال",
           badge: "الطابق الأرضي",
           desc: "بوابات إلكترونية ذكية RFID، مكتب الاستقبال، ركن المشروبات والمكملات، غرف تبديل الملابس والساونا.",
         },
         muscu: {
           title: "الطابق السفلي : قاعة كمال الأجسام",
+          shortTitle: "كمال الأجسام",
           badge: "الطابق السفلي",
           desc: "قاعة واسعة تضم تشكيلة متكاملة من أجهزة الحديد الصفراء والسوداء، أوزان حرة ومقاعد تدريب متعددة.",
         },
         combat: {
           title: "الطابق السفلي : حلبة القتال والكروس فيت",
+          shortTitle: "حلبة القتال",
           badge: "الطابق السفلي",
           desc: "حلبة ملاكمة رسمية، بساط تاتامي للنزال، أكياس ملاكمة ثقيلة، ومعدات كروس ترينينغ متنوعة.",
         },
