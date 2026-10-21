@@ -63,8 +63,10 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
             <p className="mt-2 text-base text-adrena-stone max-w-[60ch] leading-relaxed">
               {t.subtitle}
             </p>
-            <p className="mt-1 text-xs text-adrena-muted font-medium">
-              {isAr ? 'الدفع نقداً في الاستقبال (CUB1) • إمكانية تجربة حصة مفردة بدون التزام' : 'Règlement en espèces à la réception (CUB1) • Séances d\'essai disponibles'}
+            <p className="mt-1 text-xs text-adrena-stone font-medium">
+              {isAr
+                ? 'الدفع نقداً بمكتب الاستقبال (CUB1) • شهادة طبية وصورتان للتسجيل • إمكانية تجربة حصة مفردة'
+                : 'Paiement en espèces à la réception (CUB1) • Certificat médical & 2 photos requis • Séances d\'essai disponibles'}
             </p>
           </div>
 
@@ -77,8 +79,8 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
           </button>
         </div>
 
-        {/* Tab Selection */}
-        <div className="flex flex-wrap items-center gap-2 mb-10 p-1.5 bg-adrena-card border border-adrena-border rounded-xl w-fit" role="tablist" aria-label="Catégories de tarifs">
+        {/* Tab Selection (Scrollable on mobile, no awkward multi-line wrapping) */}
+        <div className="flex items-center gap-2 mb-8 p-1.5 bg-adrena-card border border-adrena-border rounded-xl max-w-full overflow-x-auto no-scrollbar" role="tablist" aria-label="Catégories de tarifs">
           {(['musculation', 'crosstraining', 'combat', 'mixtes', 'wellness'] as PricingTab[]).map(
             (tab) => {
               const isActive = activeTab === tab;
@@ -88,7 +90,7 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
                   role="tab"
                   aria-selected={isActive}
                   onClick={() => setActiveTab(tab)}
-                  className={`px-4 sm:px-5 py-2.5 rounded-lg font-semibold text-xs sm:text-sm transition-all ${
+                  className={`px-4 sm:px-5 py-2.5 rounded-lg font-semibold text-xs sm:text-sm transition-all whitespace-nowrap min-h-[40px] flex items-center justify-center ${
                     isActive
                       ? 'bg-adrena-gold text-[#111215] shadow-sm font-bold'
                       : 'text-adrena-stone hover:text-adrena-bone hover:bg-adrena-surface'
@@ -101,24 +103,28 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
           )}
         </div>
 
-        {/* Regular Plans Cards */}
+        {/* Regular Plans Cards: Horizontal snap carousel on mobile to eliminate vertical scroll fatigue */}
         {activeTab !== 'mixtes' ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {currentPlans.map((plan) => {
-              const name = lang === 'fr' ? plan.nameFr : plan.nameAr;
-              const freq = lang === 'fr' ? plan.frequencyFr : plan.frequencyAr;
-              const period = lang === 'fr' ? plan.periodFr : plan.periodAr;
-              const feats = lang === 'fr' ? plan.featuresFr : plan.featuresAr;
+          <div>
+            <div className="sm:hidden text-center text-xs text-adrena-muted mb-2 font-medium flex items-center justify-center gap-1.5">
+              <span>{isAr ? '← اسحب أفقياً لمقارنة الباقات →' : '← Glissez horizontalement pour comparer les formules →'}</span>
+            </div>
+            <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 -mx-4 px-4 sm:mx-0 sm:px-0 sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:gap-6 no-scrollbar">
+              {currentPlans.map((plan) => {
+                const name = lang === 'fr' ? plan.nameFr : plan.nameAr;
+                const freq = lang === 'fr' ? plan.frequencyFr : plan.frequencyAr;
+                const period = lang === 'fr' ? plan.periodFr : plan.periodAr;
+                const feats = lang === 'fr' ? plan.featuresFr : plan.featuresAr;
 
-              return (
-                <div
-                  key={plan.id}
-                  className={`relative flex flex-col justify-between p-6 sm:p-7 rounded-2xl border transition-all ${
-                    plan.isPopular
-                      ? 'bg-adrena-card border-adrena-gold/70 shadow-lg'
-                      : 'bg-adrena-card border-adrena-border hover:border-neutral-700 shadow-sm'
-                  }`}
-                >
+                return (
+                  <div
+                    key={plan.id}
+                    className={`relative w-[84vw] max-w-[320px] flex-shrink-0 snap-center sm:w-auto sm:max-w-none flex flex-col justify-between p-6 sm:p-7 rounded-2xl border transition-all ${
+                      plan.isPopular
+                        ? 'bg-adrena-card border-adrena-gold/70 shadow-lg'
+                        : 'bg-adrena-card border-adrena-border hover:border-neutral-700 shadow-sm'
+                    }`}
+                  >
                   <div>
                     <div className="flex items-center justify-between gap-2 mb-1.5">
                       <h3 className="text-xl sm:text-2xl font-bold text-adrena-bone">{name}</h3>
@@ -163,6 +169,7 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
                 </div>
               );
             })}
+            </div>
           </div>
         ) : (
           <PricingCalculator lang={lang} />

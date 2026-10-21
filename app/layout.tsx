@@ -57,7 +57,10 @@ export default function RootLayout({
       </head>
       <body className="bg-adrena-black text-white antialiased font-sans">
         {children}
-      </body>
+      {/* impeccable-live-start */}
+<script src="http://localhost:8400/live.js?token=7a69c132-84a3-4303-854c-e9a079d4cf23"></script>
+{/* impeccable-live-end */}
+</body>
     </html>
   );
 }

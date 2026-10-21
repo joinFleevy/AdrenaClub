@@ -168,7 +168,7 @@ export default function Footer({ lang }: FooterProps) {
         </div>
 
         {/* Bottom Copyright */}
-        <div className="pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-neutral-500 text-center sm:text-left rtl:sm:text-right">
+        <div className="pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-adrena-stone text-center sm:text-left rtl:sm:text-right">
           <p>
             {lang === 'fr'
               ? `© ${new Date().getFullYear()} Adréna Club Bab Ezzouar. Tous droits réservés.`

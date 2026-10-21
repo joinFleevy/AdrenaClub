@@ -41,8 +41,10 @@ export default function FAQSection({ lang }: FAQSectionProps) {
               >
                 <button
                   type="button"
+                  id={`faq-btn-${index}`}
                   onClick={() => toggleItem(index)}
                   aria-expanded={isOpen}
+                  aria-controls={`faq-answer-${index}`}
                   className="w-full p-5 sm:p-6 text-left rtl:text-right flex items-center justify-between gap-4 font-bold text-base sm:text-lg text-adrena-bone hover:text-adrena-gold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-adrena-gold"
                 >
                   <span className="leading-snug">{item.q}</span>
@@ -56,7 +58,12 @@ export default function FAQSection({ lang }: FAQSectionProps) {
                 </button>
 
                 {isOpen && (
-                  <div className="px-5 sm:px-6 pb-6 pt-0 border-t border-adrena-border mt-1">
+                  <div
+                    id={`faq-answer-${index}`}
+                    role="region"
+                    aria-labelledby={`faq-btn-${index}`}
+                    className="px-5 sm:px-6 pb-6 pt-0 border-t border-adrena-border mt-1"
+                  >
                     <p className="text-sm sm:text-base text-adrena-stone leading-relaxed max-w-prose pt-4 font-sans">
                       {item.a}
                     </p>

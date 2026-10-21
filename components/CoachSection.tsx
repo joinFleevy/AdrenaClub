@@ -26,12 +26,15 @@ export default function CoachSection({ lang }: CoachSectionProps) {
           </p>
         </div>
 
-        {/* Coaches Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Coaches Cards: Horizontal snap carousel on mobile */}
+        <div className="sm:hidden text-center text-xs text-adrena-muted mb-3 font-medium">
+          <span>{lang === 'ar' ? '← اسحب للتعرف على الطاقم التدريبي →' : '← Glissez pour découvrir l\'équipe des coachs →'}</span>
+        </div>
+        <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 -mx-4 px-4 sm:mx-0 sm:px-0 sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:gap-6 no-scrollbar">
           {t.items.map((coach) => (
             <div
               key={coach.id}
-              className="flex flex-col justify-between overflow-hidden rounded-2xl bg-adrena-card border border-adrena-border hover:border-neutral-600 transition-all duration-300 shadow-md"
+              className="w-[84vw] max-w-[320px] flex-shrink-0 snap-center sm:w-auto sm:max-w-none flex flex-col justify-between overflow-hidden rounded-2xl bg-adrena-card border border-adrena-border hover:border-neutral-600 transition-all duration-300 shadow-md"
             >
               {/* Authentic Coach Photography */}
               <div className="relative h-72 sm:h-80 w-full overflow-hidden bg-neutral-900">
@@ -41,7 +44,6 @@ export default function CoachSection({ lang }: CoachSectionProps) {
                   fill
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   className="object-cover object-top"
-                  priority={coach.id === 'abdellah'}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-adrena-card via-adrena-card/20 to-transparent" />
                 

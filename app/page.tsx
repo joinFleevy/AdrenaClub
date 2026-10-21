@@ -1,21 +1,37 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import dynamic from 'next/dynamic';
 import { Language } from '@/data/content';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
+import LiveStatusEngine from '@/components/LiveStatusEngine';
 import PricingSection from '@/components/PricingSection';
 import ScheduleSection from '@/components/ScheduleSection';
 import WomensSanctuary from '@/components/WomensSanctuary';
 import Disciplines from '@/components/Disciplines';
 import CoachSection from '@/components/CoachSection';
-import PanoramaViewer from '@/components/PanoramaViewer';
 import ReviewsSection from '@/components/ReviewsSection';
 import FAQSection from '@/components/FAQSection';
 import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
 import MobileStickyBar from '@/components/MobileStickyBar';
 import OfficialPostersModal from '@/components/OfficialPostersModal';
+
+// Code-split Three.js WebGL Panorama to reduce initial page load JS by >50%
+const PanoramaViewer = dynamic(() => import('@/components/PanoramaViewer'), {
+  ssr: false,
+  loading: () => (
+    <section className="py-20 bg-adrena-black border-b border-adrena-border">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="h-[450px] sm:h-[550px] md:h-[650px] bg-adrena-card border border-adrena-border rounded-2xl flex flex-col items-center justify-center gap-3 animate-pulse text-adrena-stone text-sm">
+          <div className="w-8 h-8 rounded-full border-2 border-adrena-gold border-t-transparent animate-spin" />
+          <span>Chargement de la visite 360°...</span>
+        </div>
+      </div>
+    </section>
+  ),
+});
 
 export default function Home() {
   const [lang, setLang] = useState<Language>('fr');
@@ -61,6 +77,11 @@ export default function Home() {
 
       {/* Hero Section */}
       <Hero lang={lang} />
+
+      {/* Real-time Gym Operational Status Board */}
+      <section className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 sm:-mt-8 mb-4">
+        <LiveStatusEngine lang={lang} />
+      </section>
 
       {/* 1. Pricing & Custom Formula Calculator */}
       <PricingSection lang={lang} onOpenPostersModal={handleOpenPostersModal} />

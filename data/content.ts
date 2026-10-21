@@ -508,6 +508,14 @@ export const content: Record<Language, ContentStrings> = {
           a: "Oui, sans aucune hésitation. Les coachs Abdellah et Hmimed adaptent l'intensité selon votre condition physique. L'accent est d'abord mis sur la posture, la technique et la sécurité avant tout entraînement plus poussé.",
         },
         {
+          q: "Quels documents sont nécessaires pour l'inscription définitive ?",
+          a: "Pour finaliser votre dossier à l'accueil, munissez-vous d'un certificat médical d'aptitude physique (moins de 3 mois), de 2 photos d'identité récentes et du montant de votre formule (règlement en espèces à la réception CUB1).",
+        },
+        {
+          q: "Où se situe exactement la salle et comment stationner ?",
+          a: "Nous sommes situés à Bab Ezzouar au niveau de la Cité Universitaire CUB1 (accès facile depuis l'USTHB). Des espaces de stationnement sécurisés sont disponibles à proximité immédiate de l'entrée du club.",
+        },
+        {
           q: "Faut-il apporter son propre matériel pour la boxe et les arts martiaux ?",
           a: "Pour des raisons d'hygiène et de confort personnel, nous recommandons d'avoir vos propres bandages et gants de boxe (ou kimono pour le judo). Du matériel de base peut être prêté lors de vos premières séances ou acheté à notre boutique d'accueil.",
         },
@@ -746,10 +754,10 @@ export const content: Record<Language, ContentStrings> = {
         },
         {
           id: "youth",
-          name: "فريق الإعداد والكروس ترينينغ",
-          role: "مدرب الإعداد البدني والناشئين",
-          disciplines: ["كروس ترينينغ", "لياقة وظيفية", "فئات الناشئين"],
-          bio: "تأطير ديناميكي وحصص WODs حماسية تجمع بين الكارديو والقوة العضلية لتطوير الأداء الحركي والقدرة على التحمل لدى الكبار والصغار.",
+          name: "مدرب الفئات الصغرى والبراعم",
+          role: "كوتش معتمد لتطوير المهارات الحركية والدفاع عن النفس للأطفال",
+          disciplines: ["جودو أطفال", "لياقة بدنية", "مرونة وتوافق حركي"],
+          bio: "مكرس لتطوير اللياقة البدنية، الثقة بالنفس، والانضباط الأخلاقي والرياضي للأطفال من 6 إلى 14 سنة في بيئة آمنة ومحفزة.",
           image: "/images/coaches/coach-youth.jpg",
         },
       ],
@@ -824,6 +832,14 @@ export const content: Record<Language, ContentStrings> = {
         {
           q: "هل يمكن للمبتدئين تماماً الانضمام لحصص القتال والكروس ترينينغ ؟",
           a: "نعم بكل تأكيد. يقوم الكوتش عبد الله والكوتش حميمد بملاءمة مستوى التمارين والشدة حسب لياقتك البدنية، مع التركيز التام في البداية على الوضعيات الصحيحة، الحركات الأساسية والأمان قبل أي احتكاك متقدم.",
+        },
+        {
+          q: "ما هي الوثائق المطلوبة للتسجيل النهائي في النادي ؟",
+          a: "لإتمام ملف الاشتراك في مكتب الاستقبال، يرجى إحضار شهادة طبية عامة للقدرة البدنية حديثة (أقل من 3 أشهر)، صورتين شمسيتين حديثتين، ومبلغ الاشتراك المختار (الدفع نقداً بمكتب الاستقبال CUB1).",
+        },
+        {
+          q: "أين تقع القاعة بالضبط وهل تتوفر أماكن لركن السيارات ؟",
+          a: "يقع النادي في باب الزوار بمحاذاة الإقامة الجامعية CUB1 (بالقرب من جامعة العلوم والتكنولوجيا هواري بومدين USTHB). تتوفر مساحات آمنة ومخصصة لركن السيارات بمحيط مدخل القاعة مباشرة.",
         },
         {
           q: "هل أحتاج لإحضار عتادي الخاص لحصص الملاكمة والفنون القتالية ؟",

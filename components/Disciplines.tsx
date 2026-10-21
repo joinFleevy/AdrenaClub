@@ -25,12 +25,15 @@ export default function Disciplines({ lang }: DisciplinesProps) {
           </p>
         </div>
 
-        {/* Disciplines Grid with Authentic Facility Photography */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Disciplines Grid with Authentic Facility Photography: Horizontal snap carousel on mobile */}
+        <div className="sm:hidden text-center text-xs text-adrena-muted mb-3 font-medium">
+          <span>{lang === 'ar' ? '← اسحب لمشاهدة جميع التخصصات →' : '← Glissez pour voir toutes les disciplines →'}</span>
+        </div>
+        <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 -mx-4 px-4 sm:mx-0 sm:px-0 sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:gap-6 no-scrollbar">
           {t.items.map((item) => (
             <div
               key={item.id}
-              className="group flex flex-col justify-between overflow-hidden rounded-2xl bg-adrena-card border border-adrena-border hover:border-neutral-600 transition-all duration-300 shadow-md"
+              className="group w-[84vw] max-w-[320px] flex-shrink-0 snap-center sm:w-auto sm:max-w-none flex flex-col justify-between overflow-hidden rounded-2xl bg-adrena-card border border-adrena-border hover:border-neutral-600 transition-all duration-300 shadow-md"
             >
               {/* Authentic Facility Image */}
               <div className="relative h-52 sm:h-56 w-full overflow-hidden bg-neutral-900">

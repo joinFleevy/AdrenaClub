@@ -37,12 +37,12 @@ export default function ReviewsSection({ lang }: ReviewsSectionProps) {
           </a>
         </div>
 
-        {/* Reviews Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {/* Reviews Cards: Horizontal snap carousel on mobile */}
+        <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 -mx-4 px-4 sm:mx-0 sm:px-0 sm:grid sm:grid-cols-3 sm:gap-6 no-scrollbar">
           {t.items.map((item, idx) => (
             <div
               key={idx}
-              className="flex flex-col justify-between p-6 sm:p-7 rounded-2xl bg-adrena-card border border-adrena-border shadow-sm hover:border-neutral-600 transition-colors"
+              className="w-[84vw] max-w-[320px] flex-shrink-0 snap-center sm:w-auto sm:max-w-none flex flex-col justify-between p-6 sm:p-7 rounded-2xl bg-adrena-card border border-adrena-border shadow-sm hover:border-neutral-600 transition-colors"
             >
               <div>
                 {/* 5 Stars */}

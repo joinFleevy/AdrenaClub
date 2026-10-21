@@ -54,21 +54,21 @@ export default function Hero({ lang }: HeroProps) {
             {/* Primary & Secondary Actions */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
               <a
-                href="https://wa.me/213771570378?text=Bonjour%20Adrena%20Club,%20je%20souhaite%20m'inscrire%20ou%20demander%20des%20informations."
+                href="https://wa.me/213771570378?text=Bonjour%20Adrena%20Club,%20je%20souhaite%20r%C3%A9server%20une%20s%C3%A9ance%20d'essai."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-adrena-gold hover:bg-adrena-gold-light text-[#111215] font-bold text-sm tracking-wide transition-all shadow-md active:scale-98"
               >
                 <MessageCircle className="w-4 h-4 fill-[#111215]" />
-                <span>{isAr ? 'التسجيل عبر واتساب' : 'S\'inscrire via WhatsApp'}</span>
+                <span>{isAr ? 'احجز حصتك التجريبية عبر واتساب' : 'Réserver votre séance d\'essai'}</span>
               </a>
 
               <a
-                href="#tarifs"
+                href="#tour-360"
                 className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-adrena-card hover:bg-adrena-surface text-adrena-bone border border-adrena-border font-semibold text-sm transition-all"
               >
                 <Compass className="w-4 h-4 text-adrena-gold" />
-                <span>{isAr ? 'الاطلاع على الأسعار' : 'Consulter les formules & tarifs'}</span>
+                <span>{isAr ? 'جولة 360° داخل القاعات' : 'Explorer les 2 étages en 360°'}</span>
               </a>
             </div>
           </div>

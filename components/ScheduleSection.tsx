@@ -18,6 +18,8 @@ export default function ScheduleSection({ lang, onOpenPostersModal }: ScheduleSe
   const isAr = lang === 'ar';
   const [activeTab, setActiveTab] = useState<TabType>('hommes');
   const [activeDiscipline, setActiveDiscipline] = useState<DisciplineFilter>('all');
+  const [mobileDay, setMobileDay] = useState<string>('today');
+  const [mobileViewAll, setMobileViewAll] = useState<boolean>(false);
 
   const currentSchedule: ScheduleDay[] = useMemo(() => {
     return activeTab === 'hommes'
@@ -34,6 +36,13 @@ export default function ScheduleSection({ lang, onOpenPostersModal }: ScheduleSe
   };
 
   const todayId = getTodayId();
+  const activeMobileDayId = mobileDay === 'today' ? todayId : mobileDay;
+
+  const mobileFilteredSchedule = useMemo(() => {
+    if (mobileViewAll) return currentSchedule;
+    const found = currentSchedule.filter((d) => d.dayId === activeMobileDayId);
+    return found.length > 0 ? found : currentSchedule.slice(0, 1);
+  }, [currentSchedule, mobileViewAll, activeMobileDayId]);
 
   const disciplinePills: Array<{ id: DisciplineFilter; label: string; icon?: React.ElementType }> = [
     { id: 'all', label: isAr ? 'كل التخصصات' : 'Toutes disciplines' },
@@ -165,8 +174,169 @@ export default function ScheduleSection({ lang, onOpenPostersModal }: ScheduleSe
           <span>{t.notes[activeTab]}</span>
         </div>
 
-        {/* Unified 7-Day Grid: Clean, High Legibility, No Squinting */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        {/* Mobile Day Selector Strip (Zero-scroll day navigation) */}
+        <div className="md:hidden mb-5">
+          <div className="flex items-center justify-between mb-2.5 px-1">
+            <span className="text-xs font-semibold text-adrena-bone flex items-center gap-1.5">
+              <span className="w-2 h-2 rounded-full bg-adrena-gold" />
+              <span>{isAr ? 'اختر اليوم :' : 'Sélectionner le jour :'}</span>
+            </span>
+            <button
+              onClick={() => setMobileViewAll(!mobileViewAll)}
+              className="text-xs font-semibold text-adrena-gold hover:underline p-1"
+            >
+              {mobileViewAll
+                ? (isAr ? 'عرض يوم بيوم' : 'Vue jour par jour')
+                : (isAr ? 'عرض الأسبوع كاملاً (7)' : 'Voir les 7 jours')}
+            </button>
+          </div>
+
+          {!mobileViewAll && (
+            <div className="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar">
+              <button
+                onClick={() => setMobileDay('today')}
+                className={`px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap min-h-[42px] flex items-center gap-1.5 transition-all ${
+                  mobileDay === 'today'
+                    ? 'bg-adrena-gold text-[#111215] shadow-sm'
+                    : 'bg-adrena-card text-adrena-stone border border-adrena-border'
+                }`}
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                <span>{isAr ? 'اليوم' : "Aujourd'hui"}</span>
+              </button>
+
+              {currentSchedule.map((d) => {
+                const isSelected = mobileDay === d.dayId;
+                const isCurrentToday = d.dayId === todayId;
+                return (
+                  <button
+                    key={d.dayId}
+                    onClick={() => setMobileDay(d.dayId)}
+                    className={`px-3 py-2 rounded-xl text-xs font-semibold whitespace-nowrap min-h-[42px] transition-all flex items-center gap-1 ${
+                      isSelected
+                        ? 'bg-adrena-bone text-[#111215] font-bold shadow-sm'
+                        : 'bg-adrena-card text-adrena-stone border border-adrena-border hover:text-adrena-bone'
+                    }`}
+                  >
+                    <span>{isAr ? d.dayNameAr : d.dayNameFr.slice(0, 3)}</span>
+                    {isCurrentToday && (
+                      <span className="w-1.5 h-1.5 rounded-full bg-adrena-gold" />
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+          )}
+        </div>
+
+        {/* Mobile View: Single Selected Day Card (or All if requested) */}
+        <div className="md:hidden space-y-4">
+          {mobileFilteredSchedule.map((day) => {
+            const isToday = day.dayId === todayId;
+            const visibleActivities = day.activities.filter((act) => {
+              if (activeDiscipline === 'all') return true;
+              if (activeDiscipline === 'muscu') return false;
+              const nameLower = act.nameFr.toLowerCase();
+              if (activeDiscipline === 'combat') {
+                return nameLower.includes('kickboxing') || nameLower.includes('lutte') || nameLower.includes('judo');
+              }
+              if (activeDiscipline === 'cross') {
+                return nameLower.includes('cross');
+              }
+              return true;
+            });
+            const showMuscu = (activeDiscipline === 'all' || activeDiscipline === 'muscu') && day.muscuSlots.length > 0;
+            const hasEntries = visibleActivities.length > 0 || showMuscu;
+
+            return (
+              <div
+                key={day.dayId}
+                className={`flex flex-col justify-between p-5 rounded-2xl border transition-all ${
+                  isToday
+                    ? 'bg-adrena-card border-adrena-gold shadow-xl ring-1 ring-adrena-gold/40'
+                    : 'bg-adrena-card border-adrena-border shadow-sm'
+                }`}
+              >
+                <div>
+                  <div className="flex items-center justify-between pb-3.5 mb-3.5 border-b border-adrena-border">
+                    <span className="text-lg font-bold text-adrena-bone">
+                      {lang === 'fr' ? day.dayNameFr : day.dayNameAr}
+                    </span>
+                    {isToday && (
+                      <span className="px-2.5 py-0.5 rounded-full bg-adrena-gold/20 text-adrena-gold text-xs font-semibold">
+                        {lang === 'fr' ? "Aujourd'hui" : 'اليوم'}
+                      </span>
+                    )}
+                  </div>
+
+                  {visibleActivities.length > 0 && (
+                    <div className="space-y-2.5 mb-3.5">
+                      {visibleActivities.map((act, idx) => (
+                        <div
+                          key={idx}
+                          className="p-3.5 rounded-xl bg-adrena-surface border border-adrena-border"
+                        >
+                          <div className="flex items-start justify-between gap-2 mb-2">
+                            <span className="text-base font-bold text-adrena-bone font-sans leading-snug">
+                              {lang === 'fr' ? act.nameFr : act.nameAr}
+                            </span>
+                            {act.badge && (
+                              <span className="text-xs font-bold px-2 py-0.5 rounded-md bg-adrena-card text-adrena-stone border border-adrena-border font-sans flex-shrink-0">
+                                {act.badge}
+                              </span>
+                            )}
+                          </div>
+                          <div className="flex items-center gap-2 text-sm font-sans font-semibold text-adrena-gold tabular-nums">
+                            <Clock className="w-4 h-4 text-adrena-gold flex-shrink-0" />
+                            <span>{act.time.replace('-', '–')}</span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  {showMuscu && (
+                    <div className="space-y-2">
+                      {day.muscuSlots.map((rawSlot, idx) => {
+                        const { time, period } = parseMuscuSlot(rawSlot);
+                        return (
+                          <div
+                            key={idx}
+                            className="flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-adrena-surface border border-adrena-border text-sm font-sans"
+                          >
+                            <div className="flex items-center gap-2 text-adrena-bone min-w-0 pr-2 rtl:pr-0 rtl:pl-2">
+                              <Dumbbell className="w-4 h-4 text-adrena-gold flex-shrink-0" />
+                              <span className="font-bold truncate text-sm">
+                                {lang === 'fr' ? 'Musculation' : 'حديد حر'}
+                                {period && (
+                                  <span className="text-xs font-semibold text-adrena-stone ml-1.5 rtl:ml-0 rtl:mr-1.5">
+                                    ({period})
+                                  </span>
+                                )}
+                              </span>
+                            </div>
+                            <span className="font-sans font-semibold text-adrena-gold tabular-nums text-sm whitespace-nowrap flex-shrink-0">
+                              {time}
+                            </span>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
+
+                  {!hasEntries && (
+                    <div className="py-6 text-center text-sm text-adrena-muted font-medium font-sans">
+                      {lang === 'fr' ? 'Aucun créneau programmé ce jour pour ce filtre' : 'لا توجد حصص مبرمجة اليوم لهذا التخصص'}
+                    </div>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Desktop View: Full 7-Day Grid */}
+        <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {currentSchedule.map((day) => {
             const isToday = day.dayId === todayId;
 

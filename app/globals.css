@@ -6,8 +6,8 @@
   :root {
     --color-primary: 212 155 46;
     --color-bg: 17 18 21;
-    --font-sans: 'Outfit', 'Cairo', system-ui, -apple-system, sans-serif;
-    --font-display: 'Barlow Condensed', 'Cairo', system-ui, sans-serif;
+    --font-sans: 'Manrope', 'Cairo', system-ui, -apple-system, sans-serif;
+    --font-display: 'Manrope', 'Cairo', system-ui, sans-serif;
     --font-arabic: 'Cairo', system-ui, Tahoma, sans-serif;
   }
 
@@ -68,4 +68,14 @@
 
 .box-gold-glow-lg {
   box-shadow: 0 8px 30px -4px rgba(212, 155, 46, 0.25);
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }

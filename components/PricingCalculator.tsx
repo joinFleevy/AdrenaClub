@@ -207,7 +207,7 @@ export default function PricingCalculator({ lang }: PricingCalculatorProps) {
                     {crossSessions} {isAr ? 'حصص / أسبوع' : 'séances / semaine'}
                   </span>
                 </div>
-                <div className="grid grid-cols-3 gap-2.5" role="radiogroup">
+                <div className="grid grid-cols-3 gap-2.5" role="radiogroup" aria-label={isAr ? 'عدد حصص الكروس ترينينغ والقتال' : 'Nombre de séances de combat ou cross'}>
                   {[1, 2, 3].map((num) => (
                     <button
                       key={num}
@@ -236,7 +236,7 @@ export default function PricingCalculator({ lang }: PricingCalculatorProps) {
                     {muscuSessions} {isAr ? 'حصص / أسبوع' : 'séances / semaine'}
                   </span>
                 </div>
-                <div className="grid grid-cols-3 sm:grid-cols-6 gap-2" role="radiogroup">
+                <div className="grid grid-cols-3 sm:grid-cols-6 gap-2" role="radiogroup" aria-label={isAr ? 'عدد حصص كمال الأجسام' : 'Nombre de séances de musculation'}>
                   {[1, 2, 3, 4, 5, 6].map((num) => (
                     <button
                       key={num}
@@ -263,7 +263,7 @@ export default function PricingCalculator({ lang }: PricingCalculatorProps) {
               <label className="block text-sm font-semibold text-adrena-bone mb-3">
                 {isAr ? 'وتيرة التدريب في الأسبوع' : 'Fréquence hebdomadaire'}
               </label>
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2" role="radiogroup">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2" role="radiogroup" aria-label={isAr ? 'وتيرة تدريب كمال الأجسام' : 'Fréquence de musculation'}>
                 {[1, 2, 3, 4, 5, 6].map((num) => (
                   <button
                     key={num}
