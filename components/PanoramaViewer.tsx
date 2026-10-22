@@ -240,7 +240,7 @@ export default function PanoramaViewer({ lang }: PanoramaViewerProps) {
         {/* Section Header: direct and clean without generic kicker pills */}
         <div className="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
           <div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-adrena-bone tracking-tight leading-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight">
               {t.title}
             </h2>
             <p className="mt-2 text-base text-adrena-stone max-w-[60ch] leading-relaxed">

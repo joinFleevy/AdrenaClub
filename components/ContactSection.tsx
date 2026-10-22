@@ -16,10 +16,10 @@ export default function ContactSection({ lang }: ContactSectionProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-12">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight">
             {t.title}
           </h2>
-          <p className="mt-3 text-base sm:text-lg text-adrena-stone max-w-[65ch] leading-relaxed font-medium">
+          <p className="mt-3 text-base sm:text-lg text-adrena-stone max-w-[65ch] leading-relaxed font-normal">
             {t.subtitle}
           </p>
         </div>

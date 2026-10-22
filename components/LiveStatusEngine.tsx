@@ -530,65 +530,33 @@ export default function LiveStatusEngine({ lang, onSelectAudience }: LiveStatusE
   const isClosed = !status.isOpen;
 
   return (
-    <div className="relative overflow-hidden rounded-2xl border border-adrena-border bg-adrena-card p-5 sm:p-7 shadow-2xl transition-all duration-300">
-      {/* Top athletic edge accent line */}
-      <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-adrena-gold to-transparent opacity-80" />
-
-      {/* Subtle background ambient hint */}
-      <div
-        className={`absolute -right-20 -top-20 w-64 h-64 rounded-full blur-[100px] pointer-events-none ${
-          isWomen ? 'bg-fuchsia-600/10' : isMen ? 'bg-adrena-gold/15' : 'bg-neutral-600/5'
-        }`}
-      />
-
-      <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
-        {/* Left column: Live Pulse Badge & Headline */}
-        <div className="space-y-3">
-          <div className="flex flex-wrap items-center gap-2.5">
-            {/* Live Indicator Pill */}
-            <div
-              className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-black uppercase tracking-wider border ${
-                isWomen
-                  ? 'bg-fuchsia-950/60 border-fuchsia-500/40 text-fuchsia-300'
-                  : isMen
-                  ? 'bg-emerald-950/60 border-emerald-500/40 text-emerald-400'
-                  : 'bg-adrena-dark border-adrena-border text-adrena-muted'
-              }`}
-            >
-              <span
-                className={`w-2 h-2 rounded-full ${
-                  isWomen
-                    ? 'bg-fuchsia-400 animate-pulse'
-                    : isMen
-                    ? 'bg-emerald-400 animate-pulse'
-                    : 'bg-neutral-500'
-                }`}
-              />
-              <span>{isAr ? status.badgeLabelAr : status.badgeLabelFr}</span>
-              <span className="opacity-40">•</span>
-              <span className="font-mono font-bold tracking-normal">{status.timeStr} (Alger)</span>
-            </div>
-
-            {/* Discipline Tag */}
-            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-adrena-surface border border-adrena-border text-xs font-bold text-adrena-gold">
-              {isWomen ? <VolumeX className="w-3.5 h-3.5" /> : <Dumbbell className="w-3.5 h-3.5" />}
-              <span>{isAr ? status.activeDisciplineBadgeAr : status.activeDisciplineBadgeFr}</span>
-            </span>
-          </div>
-
-          {/* Main Headline */}
-          <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight">
+    <div className="rounded-xl border border-adrena-border bg-adrena-card py-3 px-4 sm:px-6 shadow-sm">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs sm:text-sm">
+        
+        {/* Left: Operational status in human words */}
+        <div className="flex items-center gap-2.5 flex-wrap">
+          <span
+            className={`w-2 h-2 rounded-full flex-shrink-0 ${
+              isWomen
+                ? 'bg-fuchsia-400'
+                : isMen
+                ? 'bg-emerald-400'
+                : 'bg-neutral-500'
+            }`}
+          />
+          <span className="font-bold text-white">
+            {isAr ? status.badgeLabelAr : status.badgeLabelFr} :
+          </span>
+          <span className="text-adrena-stone">
             {isAr ? status.headlineAr : status.headlineFr}
-          </h3>
-
-          {/* Subline with clear practical guidance */}
-          <p className="text-sm sm:text-base text-adrena-stone max-w-2xl leading-relaxed font-medium">
-            {isAr ? status.sublineAr : status.sublineFr}
-          </p>
+          </span>
+          <span className="text-adrena-muted hidden md:inline">
+            ({isAr ? status.closingTimeAr : status.closingTimeFr})
+          </span>
         </div>
 
-        {/* Right column: Clear CTAs */}
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 flex-shrink-0">
+        {/* Right: Clean Schedule Link */}
+        <div className="flex items-center gap-4 flex-shrink-0">
           <a
             href="#planning"
             onClick={() => {
@@ -596,32 +564,11 @@ export default function LiveStatusEngine({ lang, onSelectAudience }: LiveStatusE
                 onSelectAudience(isWomen ? 'femmes' : 'hommes');
               }
             }}
-            className="flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg bg-adrena-gold hover:bg-adrena-gold-light text-adrena-black font-black text-xs uppercase tracking-wider transition-all shadow-md active:scale-95"
+            className="inline-flex items-center gap-1.5 font-bold text-adrena-gold hover:text-white transition-colors"
           >
-            <span>{isAr ? 'عرض جدول الحصص' : 'Voir les créneaux du jour'}</span>
-            <ArrowRight className="w-4 h-4 rtl:rotate-180" />
+            <span>{isAr ? 'عرض جدول الأسبوع' : 'Voir le planning complet'}</span>
+            <ArrowRight className="w-3.5 h-3.5 rtl:rotate-180" />
           </a>
-
-          <a
-            href="https://wa.me/213771570378?text=Bonjour%20Adrena%20Club,%20je%20souhaite%20m'inscrire%20ou%20demander%20des%20informations."
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg bg-adrena-surface hover:bg-white/10 text-white border border-adrena-border font-bold text-xs uppercase tracking-wider transition-all"
-          >
-            <span>{isAr ? 'تواصل عبر واتساب' : 'Contacter sur WhatsApp'}</span>
-          </a>
-        </div>
-      </div>
-
-      {/* Bottom Timing Strip */}
-      <div className="mt-5 pt-4 border-t border-adrena-border flex flex-wrap items-center justify-between gap-3 text-xs sm:text-sm text-adrena-stone">
-        <div className="flex items-center gap-2 font-bold text-white">
-          <Clock className="w-4 h-4 text-adrena-gold flex-shrink-0" />
-          <span>{isAr ? status.closingTimeAr : status.closingTimeFr}</span>
-        </div>
-        <div className="flex items-center gap-2 text-adrena-muted font-medium">
-          <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0" />
-          <span>{isAr ? 'مفتوح 7/7 أيام للرجال والنساء في باب الزوار' : '7j/7 • Bab Ezzouar CUB1 • 2 Niveaux'}</span>
         </div>
       </div>
     </div>

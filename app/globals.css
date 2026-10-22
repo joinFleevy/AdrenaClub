@@ -57,27 +57,6 @@
   background: #F5C518;
 }
 
-/* Kinetic Athletic Accents & Diagonal Geometry */
-.adrena-cut {
-  clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px));
-}
-
-.adrena-slant {
-  transform: skewX(-8deg);
-}
-
-.adrena-unslant {
-  transform: skewX(8deg);
-}
-
-.box-gold-glow {
-  box-shadow: 0 4px 20px -2px rgba(245, 197, 24, 0.25);
-}
-
-.box-gold-glow-lg {
-  box-shadow: 0 8px 30px -4px rgba(245, 197, 24, 0.35);
-}
-
 /* Hide scrollbar for Chrome, Safari and Opera */
 .no-scrollbar::-webkit-scrollbar {
   display: none;

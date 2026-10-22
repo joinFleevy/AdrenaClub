@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Image from 'next/image';
-import { Star, MessageSquareQuote, CheckCircle, ExternalLink } from 'lucide-react';
+import { Star, CheckCircle, ExternalLink } from 'lucide-react';
 import { Language, content } from '@/data/content';
 
 interface ReviewsSectionProps {
@@ -15,13 +15,14 @@ export default function ReviewsSection({ lang }: ReviewsSectionProps) {
   return (
     <section id="avis" className="py-20 scroll-mt-28 relative bg-adrena-black border-b border-adrena-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
         {/* Header */}
         <div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-4">
           <div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight">
               {t.title}
             </h2>
-            <p className="mt-2 text-base text-adrena-stone max-w-[60ch] leading-relaxed font-medium">
+            <p className="mt-2 text-base text-adrena-stone max-w-[60ch] leading-relaxed font-normal">
               {t.subtitle}
             </p>
           </div>
@@ -37,12 +38,12 @@ export default function ReviewsSection({ lang }: ReviewsSectionProps) {
           </a>
         </div>
 
-        {/* Reviews Cards: Horizontal snap carousel on mobile */}
-        <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 -mx-4 px-4 sm:mx-0 sm:px-0 sm:grid sm:grid-cols-3 sm:gap-6 no-scrollbar">
+        {/* Reviews Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
           {t.items.map((item, idx) => (
             <div
               key={idx}
-              className="w-[84vw] max-w-[320px] flex-shrink-0 snap-center sm:w-auto sm:max-w-none flex flex-col justify-between p-6 sm:p-7 rounded-2xl bg-adrena-card border border-adrena-border shadow-lg hover:border-adrena-gold/40 transition-colors"
+              className="flex flex-col justify-between p-6 sm:p-7 rounded-xl bg-adrena-card border border-adrena-border shadow-sm hover:border-adrena-gold/40 transition-colors"
             >
               <div>
                 {/* 5 Stars */}
@@ -53,34 +54,34 @@ export default function ReviewsSection({ lang }: ReviewsSectionProps) {
                 </div>
 
                 {/* Review Content */}
-                <p className="text-sm sm:text-base text-white leading-relaxed italic mb-6 font-medium">
+                <p className="text-sm sm:text-base text-white leading-relaxed italic mb-6 font-normal">
                   &ldquo;{item.text}&rdquo;
                 </p>
               </div>
 
               {/* Author Info */}
               <div className="pt-4 border-t border-adrena-border flex items-center gap-3">
-                <div className="relative w-11 h-11 rounded-full overflow-hidden border-2 border-adrena-gold flex-shrink-0 bg-neutral-800 shadow-md">
+                <div className="relative w-10 h-10 rounded-full overflow-hidden border border-adrena-gold flex-shrink-0 bg-adrena-dark shadow-sm">
                   {item.avatar ? (
                     <Image
                       src={item.avatar}
                       alt={item.author}
                       fill
-                      sizes="44px"
+                      sizes="40px"
                       className="object-cover"
                     />
                   ) : (
-                    <div className="w-full h-full bg-adrena-gold text-[#111215] font-bold flex items-center justify-center text-sm">
+                    <div className="w-full h-full bg-adrena-gold text-adrena-black font-extrabold flex items-center justify-center text-sm">
                       {item.author.charAt(0)}
                     </div>
                   )}
                 </div>
                 <div className="overflow-hidden">
                   <div className="flex items-center gap-1.5">
-                    <span className="text-sm sm:text-base font-semibold text-adrena-bone truncate">{item.author}</span>
+                    <span className="text-sm font-bold text-white truncate">{item.author}</span>
                     <CheckCircle className="w-3.5 h-3.5 text-blue-400 flex-shrink-0" />
                   </div>
-                  <span className="text-xs text-adrena-stone block truncate">{item.meta}</span>
+                  <span className="text-xs text-adrena-muted block truncate">{item.meta}</span>
                 </div>
               </div>
             </div>
@@ -93,7 +94,7 @@ export default function ReviewsSection({ lang }: ReviewsSectionProps) {
             href="https://www.google.com/maps/place/Adr%C3%A9na+club/@36.731219,3.185733,17z/data=!4m6!3m5!1s0x128e510838572915:0x98c81818d117e070!8m2!3d36.731219!4d3.185733!16s%2Fg%2F11v402rb1s"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-adrena-stone hover:text-adrena-gold transition-colors"
+            className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-adrena-stone hover:text-adrena-gold transition-colors"
           >
             <span>{t.viewAllGoogle}</span>
             <ExternalLink className="w-3.5 h-3.5" />
