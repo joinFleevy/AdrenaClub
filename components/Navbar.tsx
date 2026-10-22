@@ -84,19 +84,19 @@ export default function Navbar({ lang, onToggleLang }: NavbarProps) {
   ];
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-adrena-black">
       {/* Top micro utility bar (Desktop / Tablet only - hidden on mobile to maximize viewport) */}
-      <div className="hidden sm:block bg-adrena-black border-b border-adrena-border py-1.5 px-4 sm:px-6 lg:px-8 text-xs text-adrena-stone">
+      <div className="hidden sm:block bg-adrena-black border-b border-adrena-border py-2 px-4 sm:px-6 lg:px-8 text-xs sm:text-sm text-adrena-stone">
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
-          <div className="flex items-center gap-3 sm:gap-4 overflow-hidden text-ellipsis whitespace-nowrap text-[11px] sm:text-xs">
-            <span className="flex items-center gap-1.5 text-adrena-bone">
-              <MapPin className="w-3.5 h-3.5 text-adrena-gold flex-shrink-0" />
+          <div className="flex items-center gap-3 sm:gap-6 overflow-hidden text-ellipsis whitespace-nowrap text-xs sm:text-sm">
+            <span className="flex items-center gap-2 text-white font-medium">
+              <MapPin className="w-4 h-4 text-adrena-gold flex-shrink-0" />
               <span className="hidden sm:inline">{t.topBar.address}</span>
               <span className="sm:hidden">Bab Ezzouar, Alger</span>
             </span>
-            <span className="hidden md:inline text-neutral-700">|</span>
-            <span className="hidden md:flex items-center gap-1.5 text-adrena-bone">
-              <Clock className="w-3.5 h-3.5 text-adrena-gold flex-shrink-0" />
+            <span className="hidden md:inline text-adrena-border font-bold">|</span>
+            <span className="hidden md:flex items-center gap-2 text-adrena-stone font-medium">
+              <Clock className="w-4 h-4 text-adrena-gold flex-shrink-0" />
               <span>
                 {isAr
                   ? 'السبت-الخميس : 06h - 00h (رجال)'
@@ -105,14 +105,14 @@ export default function Navbar({ lang, onToggleLang }: NavbarProps) {
             </span>
           </div>
 
-          <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
-            {/* Live Open Status badge with refined ping ring */}
+          <div className="flex items-center gap-3 flex-shrink-0">
+            {/* Live Open Status badge with clean non-blurry indicator */}
             <div
-              className={`inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full text-[11px] sm:text-xs font-semibold border transition-colors ${
+              className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold border transition-colors ${
                 liveStatus?.audience === 'femmes'
-                  ? 'bg-fuchsia-950/60 border-fuchsia-500/30 text-fuchsia-300'
+                  ? 'bg-adrena-card border-adrena-gold/40 text-adrena-gold'
                   : liveStatus?.isOpen
-                  ? 'bg-emerald-950/60 border-emerald-500/30 text-emerald-400'
+                  ? 'bg-adrena-card border-emerald-500/40 text-emerald-400'
                   : 'bg-adrena-card border-adrena-border text-adrena-muted'
               }`}
             >
@@ -120,14 +120,14 @@ export default function Navbar({ lang, onToggleLang }: NavbarProps) {
                 {liveStatus?.isOpen && (
                   <span
                     className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${
-                      liveStatus?.audience === 'femmes' ? 'bg-fuchsia-400' : 'bg-emerald-400'
+                      liveStatus?.audience === 'femmes' ? 'bg-adrena-gold' : 'bg-emerald-400'
                     }`}
                   />
                 )}
                 <span
                   className={`relative inline-flex rounded-full h-2 w-2 ${
                     liveStatus?.audience === 'femmes'
-                      ? 'bg-fuchsia-400'
+                      ? 'bg-adrena-gold'
                       : liveStatus?.isOpen
                       ? 'bg-emerald-400'
                       : 'bg-neutral-500'
@@ -145,7 +145,7 @@ export default function Navbar({ lang, onToggleLang }: NavbarProps) {
             <button
               type="button"
               onClick={onToggleLang}
-              className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-adrena-card hover:bg-adrena-surface text-adrena-bone border border-adrena-border hover:border-adrena-gold/40 transition-all font-semibold text-[11px] sm:text-xs active:scale-95 focus-visible:ring-2 focus-visible:ring-adrena-gold focus-visible:outline-none"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-adrena-card hover:bg-adrena-surface text-white border border-adrena-border hover:border-adrena-gold/40 transition-all font-bold text-xs active:scale-95 focus-visible:ring-2 focus-visible:ring-adrena-gold focus-visible:outline-none cursor-pointer"
               title="Changer de langue / تغيير اللغة"
               aria-label={isAr ? 'Changer en Français' : 'تغيير إلى العربية'}
             >
@@ -156,13 +156,11 @@ export default function Navbar({ lang, onToggleLang }: NavbarProps) {
         </div>
       </div>
 
-      {/* Main Navbar */}
+      {/* Main Navbar - Solid Opaque Architectural Bar (Zero backdrop-blur bleed) */}
       <nav
         aria-label="Navigation principale"
-        className={`transition-all duration-300 px-4 sm:px-6 lg:px-8 ${
-          isScrolled
-            ? 'bg-adrena-black/98 backdrop-blur-md py-2.5 border-b border-adrena-border shadow-xl'
-            : 'bg-adrena-black/90 backdrop-blur-md py-3.5 border-b border-adrena-border/60'
+        className={`transition-all duration-200 px-4 sm:px-6 lg:px-8 bg-adrena-black border-b border-adrena-border ${
+          isScrolled ? 'py-3 shadow-2xl' : 'py-4'
         }`}
       >
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
@@ -171,45 +169,42 @@ export default function Navbar({ lang, onToggleLang }: NavbarProps) {
             href="#accueil"
             className="flex items-center gap-3 group rounded-xl focus-visible:ring-2 focus-visible:ring-adrena-gold focus-visible:outline-none"
           >
-            <div className="relative w-10 h-10 sm:w-11 sm:h-11 flex-shrink-0">
+            <div className="relative w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0">
               <Image
                 src="/logo.png"
                 alt="Adrena Club Logo"
                 fill
-                sizes="44px"
+                sizes="48px"
                 className="object-contain"
                 priority
               />
             </div>
             <div className="flex flex-col">
-              <div className="flex items-center gap-1.5 font-black text-xl sm:text-2xl tracking-tight leading-none">
+              <div className="flex items-center gap-1.5 font-black text-2xl sm:text-3xl tracking-tight leading-none">
                 <span className="text-white">ADRENA</span>
                 <span className="text-adrena-gold">CLUB</span>
               </div>
-              <span className="text-[10px] sm:text-[11px] text-adrena-muted tracking-widest font-bold mt-0.5 hidden sm:block uppercase">
+              <span className="text-[11px] sm:text-xs text-adrena-muted tracking-widest font-bold mt-1 hidden sm:block uppercase">
                 {isAr ? 'باب الزوار • طابقان' : 'BAB EZZOUAR • 2 ÉTAGES'}
               </span>
             </div>
           </a>
 
           {/* Desktop Navigation Links */}
-          <div className="hidden lg:flex items-center gap-1">
+          <div className="hidden lg:flex items-center gap-1.5">
             {navLinks.map((link) => {
               const isActive = activeSection === link.id;
               return (
                 <a
                   key={link.href}
                   href={link.href}
-                  className={`relative px-3.5 py-1.5 rounded-lg text-sm transition-all duration-150 focus-visible:ring-2 focus-visible:ring-adrena-gold focus-visible:outline-none ${
+                  className={`relative px-4 py-2 rounded-lg text-sm sm:text-base transition-all duration-150 focus-visible:ring-2 focus-visible:ring-adrena-gold focus-visible:outline-none ${
                     isActive
-                      ? 'text-adrena-gold font-bold bg-adrena-surface'
-                      : 'text-adrena-stone font-semibold hover:text-white hover:bg-adrena-card/60'
+                      ? 'text-adrena-gold font-extrabold bg-adrena-surface border border-adrena-border shadow-sm'
+                      : 'text-adrena-stone font-bold hover:text-white hover:bg-white/5'
                   }`}
                 >
                   <span>{link.label}</span>
-                  {isActive && (
-                    <span className="absolute bottom-0 left-3.5 right-3.5 h-[2px] bg-adrena-gold rounded-full" />
-                  )}
                 </a>
               );
             })}
@@ -221,7 +216,7 @@ export default function Navbar({ lang, onToggleLang }: NavbarProps) {
               href="https://wa.me/213771570378?text=Bonjour%20Adrena%20Club,%20je%20souhaite%20avoir%20des%20informations%20sur%20les%20inscriptions."
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-adrena-gold hover:bg-adrena-gold-light text-adrena-black font-black text-xs uppercase tracking-wider transition-all shadow-md active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-adrena-gold focus-visible:outline-none"
+              className="flex items-center gap-2 px-5 py-3 rounded-lg bg-adrena-gold hover:bg-adrena-gold-light text-adrena-black font-extrabold text-xs sm:text-sm uppercase tracking-wider transition-all shadow-md active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-adrena-gold focus-visible:outline-none"
             >
               <MessageCircle className="w-4 h-4 fill-current" />
               <span>{t.nav.ctaButton}</span>

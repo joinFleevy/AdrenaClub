@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { MessageCircle, Image as ImageIcon, Check } from 'lucide-react';
+import { MessageCircle, Image as ImageIcon, Check, Dumbbell, Shield, Flame, Layers } from 'lucide-react';
 import { Language, content } from '@/data/content';
 import {
   musculationPlans,
@@ -98,11 +98,11 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
     window.open(url, '_blank');
   };
 
-  const tabLabels: Record<PricingTab, { fr: string; ar: string }> = {
-    musculation: { fr: 'Musculation', ar: 'كمال الأجسام' },
-    combat: { fr: 'Sports de Combat', ar: 'رياضات القتال' },
-    crosstraining: { fr: 'Cross-Training', ar: 'كروس ترينينغ' },
-    mixtes: { fr: 'Formules Mixtes', ar: 'الباقات المدمجة' },
+  const tabConfig: Record<PricingTab, { fr: string; ar: string; icon: React.ElementType }> = {
+    musculation: { fr: 'Musculation', ar: 'كمال الأجسام', icon: Dumbbell },
+    combat: { fr: 'Sports de Combat', ar: 'رياضات القتال', icon: Shield },
+    crosstraining: { fr: 'Cross-Training', ar: 'كروس ترينينغ', icon: Flame },
+    mixtes: { fr: 'Formules Mixtes', ar: 'الباقات المدمجة', icon: Layers },
   };
 
   return (
@@ -115,38 +115,41 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight">
               {t.title}
             </h2>
-            <p className="mt-2 text-base text-adrena-stone max-w-[60ch] leading-relaxed font-normal">
+            <p className="mt-2 text-base sm:text-lg text-adrena-stone max-w-[60ch] leading-relaxed font-normal">
               {t.subtitle}
             </p>
           </div>
 
           <button
             onClick={() => onOpenPostersModal('tarifs')}
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-adrena-card hover:bg-adrena-surface border border-adrena-border text-xs sm:text-sm font-bold text-adrena-stone hover:text-white transition-all self-start md:self-auto shadow-sm"
+            className="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-adrena-card hover:bg-adrena-surface border border-adrena-border text-sm font-bold text-adrena-stone hover:text-white transition-all self-start md:self-auto shadow-sm"
           >
             <ImageIcon className="w-4 h-4 text-adrena-gold" />
             <span>{t.viewPosterBtn}</span>
           </button>
         </div>
 
-        {/* Tab Selection */}
-        <div className="flex items-center gap-2 mb-10 p-1 bg-adrena-card border border-adrena-border rounded-xl max-w-full overflow-x-auto no-scrollbar" role="tablist" aria-label="Catégories de tarifs">
+        {/* Tactile High-Contrast Tab Selection */}
+        <div className="flex items-center gap-2.5 sm:gap-3 mb-10 p-1.5 bg-adrena-dark border border-adrena-border rounded-xl max-w-full overflow-x-auto no-scrollbar" role="tablist" aria-label="Catégories de tarifs">
           {(['musculation', 'combat', 'crosstraining', 'mixtes'] as PricingTab[]).map(
             (tab) => {
               const isActive = activeTab === tab;
+              const config = tabConfig[tab];
+              const Icon = config.icon;
               return (
                 <button
                   key={tab}
                   role="tab"
                   aria-selected={isActive}
                   onClick={() => setActiveTab(tab)}
-                  className={`px-5 py-2.5 rounded-lg font-bold text-xs sm:text-sm transition-all whitespace-nowrap min-h-[40px] flex items-center justify-center ${
+                  className={`px-5 sm:px-6 py-3 rounded-lg font-extrabold text-sm sm:text-base transition-all whitespace-nowrap min-h-[46px] flex items-center gap-2.5 cursor-pointer shadow-sm active:scale-[0.98] ${
                     isActive
-                      ? 'bg-adrena-surface text-white border border-adrena-border shadow-sm'
-                      : 'text-adrena-stone hover:text-white'
+                      ? 'bg-adrena-gold text-adrena-black border border-adrena-gold shadow-md'
+                      : 'bg-adrena-card hover:bg-adrena-surface text-adrena-stone hover:text-white border border-adrena-border hover:border-adrena-gold/40'
                   }`}
                 >
-                  {isAr ? tabLabels[tab].ar : tabLabels[tab].fr}
+                  <Icon className={`w-4 h-4 flex-shrink-0 ${isActive ? 'text-adrena-black' : 'text-adrena-gold'}`} />
+                  <span>{isAr ? config.ar : config.fr}</span>
                 </button>
               );
             }
