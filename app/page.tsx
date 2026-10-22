@@ -68,7 +68,7 @@ export default function Home() {
   return (
     <div
       dir={isRtl ? 'rtl' : 'ltr'}
-      className={`min-h-screen bg-adrena-black text-adrena-bone ${
+      className={`min-h-screen bg-adrena-black text-adrena-bone pb-20 md:pb-0 ${
         isRtl ? 'font-sans' : 'font-sans'
       }`}
     >
@@ -78,8 +78,8 @@ export default function Home() {
       {/* Hero Section */}
       <Hero lang={lang} />
 
-      {/* Real-time Gym Operational Status Board */}
-      <section className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 sm:-mt-8 mb-4">
+      {/* Real-time Gym Operational Status Strip */}
+      <section className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
         <LiveStatusEngine lang={lang} />
       </section>
 

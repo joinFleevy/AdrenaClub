@@ -23,13 +23,13 @@ export default function MobileStickyBar({ lang }: MobileStickyBarProps) {
           href={`https://wa.me/213771570378?text=${defaultMsg}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex-1 flex items-center justify-center gap-2.5 py-3 px-4 rounded-lg bg-adrena-gold hover:bg-adrena-gold-light text-adrena-black font-black text-sm shadow-lg active:scale-98 transition-all"
+          className="flex-1 flex items-center justify-center gap-2 py-2.5 px-3.5 rounded-lg bg-adrena-gold hover:bg-adrena-gold-light text-adrena-black font-extrabold text-sm shadow-md active:scale-[0.98] transition-all"
         >
-          <MessageCircle className="w-5 h-5 fill-current flex-shrink-0" />
+          <MessageCircle className="w-4 h-4 fill-current flex-shrink-0" />
           <div className="flex flex-col items-start leading-tight">
-            <span className="font-black text-sm uppercase tracking-wider">{isAr ? 'التسجيل عبر واتساب' : 'S\'inscrire via WhatsApp'}</span>
-            <span className="text-[10px] opacity-85 font-bold">
-              {isAr ? 'رد فوري • بدون التزام' : 'réponse rapide • dès 3 000 DA'}
+            <span className="font-extrabold text-xs uppercase tracking-wider">{isAr ? 'التسجيل عبر واتساب' : 'S\'inscrire via WhatsApp'}</span>
+            <span className="text-[10px] opacity-85 font-semibold">
+              {isAr ? 'رد فوري • بدون التزام' : 'réponse rapide • sans engagement'}
             </span>
           </div>
         </a>
@@ -37,11 +37,11 @@ export default function MobileStickyBar({ lang }: MobileStickyBarProps) {
         {/* Compact Phone Call Button */}
         <a
           href="tel:+213771570378"
-          className="flex flex-col items-center justify-center w-14 h-12 rounded-xl bg-adrena-card hover:bg-adrena-surface text-adrena-bone border border-adrena-border transition-colors flex-shrink-0"
+          className="flex flex-col items-center justify-center w-12 h-11 rounded-lg bg-adrena-card hover:bg-adrena-surface text-adrena-bone border border-adrena-border transition-colors flex-shrink-0"
           title={isAr ? 'اتصال مباشر' : 'Appeler la réception'}
         >
-          <Phone className="w-4 h-4 text-adrena-bone mb-0.5" />
-          <span className="text-[10px] font-medium text-adrena-stone">
+          <Phone className="w-3.5 h-3.5 text-adrena-bone mb-0.5" />
+          <span className="text-[9px] font-medium text-adrena-stone">
             {isAr ? 'اتصال' : 'Appel'}
           </span>
         </a>
@@ -51,11 +51,11 @@ export default function MobileStickyBar({ lang }: MobileStickyBarProps) {
           href="https://maps.app.goo.gl/6YJepRtyWvXcrZoV9"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex flex-col items-center justify-center w-14 h-12 rounded-xl bg-adrena-card hover:bg-adrena-surface text-adrena-bone border border-adrena-border transition-colors flex-shrink-0"
+          className="flex flex-col items-center justify-center w-12 h-11 rounded-lg bg-adrena-card hover:bg-adrena-surface text-adrena-bone border border-adrena-border transition-colors flex-shrink-0"
           title={isAr ? 'موقع النادي على الخريطة' : 'Localisation Google Maps'}
         >
-          <MapPin className="w-4 h-4 text-adrena-gold mb-0.5" />
-          <span className="text-[10px] font-medium text-adrena-stone">
+          <MapPin className="w-3.5 h-3.5 text-adrena-gold mb-0.5" />
+          <span className="text-[9px] font-medium text-adrena-stone">
             {isAr ? 'الموقع' : 'GPS'}
           </span>
         </a>

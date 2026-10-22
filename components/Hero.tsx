@@ -14,51 +14,51 @@ export default function Hero({ lang }: HeroProps) {
   const [activeFloor, setActiveFloor] = useState<'soussol' | 'rdc'>('soussol');
 
   return (
-    <section id="accueil" className="relative pt-32 pb-16 md:pt-40 md:pb-20 bg-adrena-black border-b border-adrena-border">
+    <section id="accueil" className="relative pt-24 pb-12 sm:pt-36 sm:pb-16 bg-adrena-black border-b border-adrena-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Main Hero Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
           
           {/* Left Column: Authoritative Editorial Statement */}
           <div className="lg:col-span-7 flex flex-col justify-center">
             
-            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-[1.05] mb-6">
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.1] mb-4 sm:mb-6">
               <span>{isAr ? 'نادي أدرينا سبورت.' : 'ADRENA CLUB.'}</span>
-              <span className="block text-adrena-gold mt-2">
+              <span className="block text-adrena-gold mt-1.5 sm:mt-2 text-2xl sm:text-4xl lg:text-5xl font-extrabold">
                 {isAr ? 'أكبر مجمع رياضي بباب الزوار.' : 'Le complexe sportif majeur de Bab Ezzouar.'}
               </span>
             </h1>
 
-            <p className="text-base sm:text-lg text-adrena-stone max-w-[54ch] leading-relaxed mb-8 font-normal">
+            <p className="text-sm sm:text-base lg:text-lg text-adrena-stone max-w-[54ch] leading-relaxed mb-6 sm:mb-8 font-normal">
               {isAr
                 ? 'طابقان مجهزان بأحدث عتاد كمال الأجسام والقوة البدنية، حلبة ملاكمة وبساط نزال معتمد، وفضاء نسائي مستقل 100% بدون أي موسيقى.'
                 : 'Deux niveaux dédiés à l\'entraînement : plateau musculation charges libres, ring de combat, tatami d\'arts martiaux et espace 100% femmes sans musique.'}
             </p>
 
-            {/* Direct Primary Actions */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+            {/* Direct Primary Actions - Clean Non-Competing Action Pair */}
+            <div className="flex items-center gap-3">
+              <a
+                href="#tarifs"
+                className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3.5 sm:py-4 rounded-lg bg-adrena-gold hover:bg-adrena-gold-light text-adrena-black font-extrabold text-xs sm:text-sm tracking-wide transition-all shadow-md active:scale-[0.98]"
+              >
+                <span>{isAr ? 'مشاهدة الأسعار والبرنامج' : 'Voir les Tarifs & Planning'}</span>
+                <ArrowDown className="w-4 h-4 text-adrena-black flex-shrink-0" />
+              </a>
+
               <a
                 href="https://wa.me/213771570378?text=Bonjour%20Adrena%20Club,%20je%20souhaite%20des%20informations%20sur%20les%20abonnements."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-lg bg-adrena-gold hover:bg-adrena-gold-light text-adrena-black font-extrabold text-sm sm:text-base tracking-wide transition-all shadow-lg active:scale-[0.98]"
+                className="inline-flex items-center justify-center gap-2 px-4 sm:px-6 py-3.5 sm:py-4 rounded-lg bg-adrena-card hover:bg-adrena-surface text-white border border-adrena-border hover:border-adrena-gold/50 font-bold text-xs sm:text-sm transition-all"
               >
-                <MessageCircle className="w-5 h-5 fill-current" />
-                <span>{isAr ? 'تواصل عبر واتساب للتسجيل' : 'S\'inscrire via WhatsApp'}</span>
-              </a>
-
-              <a
-                href="#tarifs"
-                className="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-lg bg-adrena-card hover:bg-adrena-surface text-white border border-adrena-border hover:border-adrena-gold/50 font-bold text-sm sm:text-base transition-all"
-              >
-                <span>{isAr ? 'مشاهدة الأسعار والبرنامج' : 'Voir les Tarifs & Planning'}</span>
-                <ArrowDown className="w-4 h-4 text-adrena-gold" />
+                <MessageCircle className="w-4 h-4 text-adrena-gold fill-current" />
+                <span>{isAr ? 'واتساب' : 'WhatsApp'}</span>
               </a>
             </div>
 
             {/* Practical Club Notice */}
-            <div className="mt-8 pt-6 border-t border-adrena-border/80 flex flex-wrap items-center gap-y-2 gap-x-6 text-xs text-adrena-stone font-medium">
+            <div className="mt-6 pt-5 border-t border-adrena-border/80 flex flex-wrap items-center gap-y-2 gap-x-6 text-xs text-adrena-stone font-medium">
               <span className="flex items-center gap-1.5 text-white">
                 <MapPin className="w-3.5 h-3.5 text-adrena-gold flex-shrink-0" />
                 <span>Bab Ezzouar (CUB1), Alger</span>
@@ -143,8 +143,8 @@ export default function Hero({ lang }: HeroProps) {
           </div>
         </div>
 
-        {/* Clean Architectural Spec Strip (Replacing the clunky 4-card metric slop) */}
-        <div className="mt-14 pt-8 border-t border-adrena-border grid grid-cols-2 lg:grid-cols-4 gap-6 text-xs sm:text-sm">
+        {/* Clean Architectural Spec Strip */}
+        <div className="mt-8 sm:mt-14 pt-6 sm:pt-8 border-t border-adrena-border grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 text-xs sm:text-sm">
           <div>
             <span className="text-adrena-muted text-xs block mb-1 uppercase tracking-wider font-semibold">
               {isAr ? 'المساحة والتهيئة' : 'Infrastructures'}

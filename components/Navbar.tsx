@@ -85,8 +85,8 @@ export default function Navbar({ lang, onToggleLang }: NavbarProps) {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
-      {/* Top micro utility bar */}
-      <div className="bg-adrena-black border-b border-adrena-border py-1.5 px-4 sm:px-6 lg:px-8 text-xs text-adrena-stone">
+      {/* Top micro utility bar (Desktop / Tablet only - hidden on mobile to maximize viewport) */}
+      <div className="hidden sm:block bg-adrena-black border-b border-adrena-border py-1.5 px-4 sm:px-6 lg:px-8 text-xs text-adrena-stone">
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
           <div className="flex items-center gap-3 sm:gap-4 overflow-hidden text-ellipsis whitespace-nowrap text-[11px] sm:text-xs">
             <span className="flex items-center gap-1.5 text-adrena-bone">
@@ -228,24 +228,36 @@ export default function Navbar({ lang, onToggleLang }: NavbarProps) {
             </a>
           </div>
 
-          {/* Mobile menu toggle button */}
-          <button
-            type="button"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2.5 rounded-xl text-adrena-bone hover:text-white bg-adrena-card border border-adrena-border focus-visible:ring-2 focus-visible:ring-adrena-gold focus-visible:outline-none"
-            aria-label={mobileMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
-            aria-expanded={mobileMenuOpen}
-            aria-controls="mobile-navigation"
-          >
-            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-          </button>
+          {/* Mobile Right Controls: Lang Switcher + Hamburger Menu */}
+          <div className="flex items-center gap-2 lg:hidden">
+            <button
+              type="button"
+              onClick={onToggleLang}
+              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-adrena-card hover:bg-adrena-surface text-adrena-bone border border-adrena-border text-xs font-bold transition-all"
+              aria-label={isAr ? 'Changer en Français' : 'تغيير إلى العربية'}
+            >
+              <Globe className="w-3.5 h-3.5 text-adrena-gold" />
+              <span>{lang === 'fr' ? 'العربية' : 'FR'}</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="p-2 rounded-lg text-adrena-bone hover:text-white bg-adrena-card border border-adrena-border focus-visible:ring-2 focus-visible:ring-adrena-gold focus-visible:outline-none"
+              aria-label={mobileMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
+              aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-navigation"
+            >
+              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5 text-white" />}
+            </button>
+          </div>
         </div>
       </nav>
 
       {/* Backdrop overlay for mobile drawer */}
       {mobileMenuOpen && (
         <div
-          className="lg:hidden fixed inset-0 top-[102px] bg-black/70 backdrop-blur-sm z-40 transition-opacity animate-in fade-in duration-200"
+          className="lg:hidden fixed inset-0 top-[60px] sm:top-[102px] bg-black/70 backdrop-blur-sm z-40 transition-opacity animate-in fade-in duration-200"
           onClick={() => setMobileMenuOpen(false)}
           aria-hidden="true"
         />

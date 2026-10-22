@@ -99,17 +99,17 @@ export default function ScheduleSection({ lang, onOpenPostersModal }: ScheduleSe
           </button>
         </div>
 
-        {/* Unified Controls Panel */}
-        <div className="mb-8 p-3 sm:p-4 rounded-2xl bg-adrena-card border border-adrena-border flex flex-col lg:flex-row lg:items-center justify-between gap-4 shadow-md">
-          {/* Audience Tabs */}
-          <div className="flex items-center gap-1.5 p-1 bg-adrena-dark border border-adrena-border rounded-xl w-fit" role="tablist" aria-label="Catégorie de membres">
+        {/* Unified Controls Panel (Clean Segmented Selector & Horizontal Filter on Mobile) */}
+        <div className="mb-6 p-2.5 sm:p-4 rounded-xl bg-adrena-card border border-adrena-border flex flex-col lg:flex-row lg:items-center justify-between gap-3 sm:gap-4 shadow-sm">
+          {/* Audience Tabs - 3 Equal Segments on Mobile */}
+          <div className="grid grid-cols-3 sm:flex items-center gap-1 p-1 bg-adrena-dark border border-adrena-border rounded-lg w-full sm:w-fit" role="tablist" aria-label="Catégorie de membres">
             <button
               role="tab"
               aria-selected={activeTab === 'hommes'}
               onClick={() => setActiveTab('hommes')}
-              className={`px-4 sm:px-5 py-2.5 rounded-lg font-black text-xs sm:text-sm uppercase tracking-wider transition-all ${
+              className={`py-2 px-3 sm:px-5 rounded-md font-extrabold text-xs sm:text-sm transition-all text-center ${
                 activeTab === 'hommes'
-                  ? 'bg-adrena-gold text-adrena-black shadow-md'
+                  ? 'bg-adrena-gold text-adrena-black shadow-sm'
                   : 'text-adrena-stone hover:text-white'
               }`}
             >
@@ -120,22 +120,22 @@ export default function ScheduleSection({ lang, onOpenPostersModal }: ScheduleSe
               role="tab"
               aria-selected={activeTab === 'femmes'}
               onClick={() => setActiveTab('femmes')}
-              className={`px-4 sm:px-5 py-2.5 rounded-lg font-black text-xs sm:text-sm uppercase tracking-wider transition-all ${
+              className={`py-2 px-3 sm:px-5 rounded-md font-extrabold text-xs sm:text-sm transition-all text-center leading-tight ${
                 activeTab === 'femmes'
-                  ? 'bg-adrena-gold text-adrena-black shadow-md'
+                  ? 'bg-adrena-gold text-adrena-black shadow-sm'
                   : 'text-adrena-stone hover:text-white'
               }`}
             >
-              {t.tabs.femmes}
+              {isAr ? 'النساء' : 'Femmes'}
             </button>
 
             <button
               role="tab"
               aria-selected={activeTab === 'enfants'}
               onClick={() => setActiveTab('enfants')}
-              className={`px-4 sm:px-5 py-2.5 rounded-lg font-black text-xs sm:text-sm uppercase tracking-wider transition-all ${
+              className={`py-2 px-3 sm:px-5 rounded-md font-extrabold text-xs sm:text-sm transition-all text-center ${
                 activeTab === 'enfants'
-                  ? 'bg-adrena-gold text-adrena-black shadow-md'
+                  ? 'bg-adrena-gold text-adrena-black shadow-sm'
                   : 'text-adrena-stone hover:text-white'
               }`}
             >
@@ -143,8 +143,8 @@ export default function ScheduleSection({ lang, onOpenPostersModal }: ScheduleSe
             </button>
           </div>
 
-          {/* Discipline In-Place Filter */}
-          <div className="flex flex-wrap items-center gap-2" role="radiogroup" aria-label="Filtrer par discipline">
+          {/* Discipline Filter - Sleek Horizontal Strip without screen-blocking wrapping */}
+          <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5" role="radiogroup" aria-label="Filtrer par discipline">
             {disciplinePills.map((p) => {
               const Icon = p.icon;
               const isActive = activeDiscipline === p.id;
@@ -154,13 +154,13 @@ export default function ScheduleSection({ lang, onOpenPostersModal }: ScheduleSe
                   role="radio"
                   aria-checked={isActive}
                   onClick={() => setActiveDiscipline(p.id)}
-                  className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-xs sm:text-sm font-black uppercase tracking-wider transition-all ${
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap transition-all ${
                     isActive
-                      ? 'bg-adrena-gold text-adrena-black shadow-md ring-1 ring-adrena-gold'
-                      : 'bg-adrena-surface text-adrena-stone hover:text-white border border-adrena-border'
+                      ? 'bg-adrena-surface text-white border border-adrena-gold shadow-sm'
+                      : 'bg-adrena-dark text-adrena-stone hover:text-white border border-adrena-border'
                   }`}
                 >
-                  {Icon && <Icon className="w-4 h-4" />}
+                  {Icon && <Icon className="w-3.5 h-3.5 text-adrena-gold flex-shrink-0" />}
                   <span>{p.label}</span>
                 </button>
               );
@@ -168,9 +168,9 @@ export default function ScheduleSection({ lang, onOpenPostersModal }: ScheduleSe
           </div>
         </div>
 
-        {/* Note Line with High Contrast */}
-        <div className="mb-6 text-sm text-adrena-bone flex items-center gap-2.5 font-semibold bg-adrena-card py-2.5 px-4 rounded-xl border border-adrena-border w-fit">
-          <span className="w-2.5 h-2.5 rounded-full bg-adrena-gold flex-shrink-0" />
+        {/* Audience Note */}
+        <div className="mb-4 text-xs sm:text-sm text-adrena-stone flex items-center gap-2 font-medium px-1">
+          <span className="w-2 h-2 rounded-full bg-adrena-gold flex-shrink-0" />
           <span>{t.notes[activeTab]}</span>
         </div>
 

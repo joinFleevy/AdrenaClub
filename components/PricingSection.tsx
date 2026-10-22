@@ -62,10 +62,19 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
   const t = content[lang].tarifs;
   const isAr = lang === 'ar';
   const [activeTab, setActiveTab] = useState<PricingTab>('musculation');
+  const [showAllMuscu, setShowAllMuscu] = useState<boolean>(false);
 
   const getPlansForTab = (): PricingPlan[] => {
     switch (activeTab) {
       case 'musculation':
+        // Curate to 3 core hero passes by default to eliminate card clutter and mobile scroll fatigue
+        if (!showAllMuscu) {
+          return [
+            musculationPlans[1], // 2 Séances / Semaine (3 000 DA)
+            musculationPlans[2], // 3 Séances / Semaine (3 500 DA - Recommandée)
+            musculationPlans[5], // Accès Libre Illimité (4 500 DA - Total)
+          ];
+        }
         return musculationPlans;
       case 'combat':
         return combatPlans;
@@ -212,6 +221,30 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
             );
           })}
         </div>
+
+        {/* Musculation Frequencies Expand Toggle */}
+        {activeTab === 'musculation' && (
+          <div className="mt-8 flex flex-col items-center justify-center gap-2">
+            <button
+              type="button"
+              onClick={() => setShowAllMuscu(!showAllMuscu)}
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-adrena-card hover:bg-adrena-surface border border-adrena-border text-xs sm:text-sm font-bold text-adrena-stone hover:text-white transition-all shadow-sm"
+            >
+              <span>
+                {showAllMuscu
+                  ? (isAr ? 'عرض الباقات الـ 3 الموصى بها فقط' : 'Afficher les 3 formules recommandées')
+                  : (isAr ? 'عرض جميع الترددات (1، 4، 5 حصص / أسبوع)' : 'Voir les autres fréquences (1, 4, 5 séances / semaine)')}
+              </span>
+            </button>
+            {!showAllMuscu && (
+              <span className="text-[11px] text-adrena-muted">
+                {isAr
+                  ? 'خيارات أخرى متوفرة : حصة واحدة (2 000 دج) • 4 حصص (4 000 دج) • 5 حصص (4 200 دج)'
+                  : 'Options flexibles : 1 séance (2 000 DA) • 4 séances (4 000 DA) • 5 séances (4 200 DA)'}
+              </span>
+            )}
+          </div>
+        )}
 
         {/* Practical Registration Guidance Box */}
         <div className="mt-12 p-5 sm:p-6 rounded-xl bg-adrena-card border border-adrena-border flex flex-col md:flex-row md:items-center justify-between gap-4 text-xs sm:text-sm text-adrena-stone">
