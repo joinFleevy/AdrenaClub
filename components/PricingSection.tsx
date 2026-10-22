@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { MessageCircle, Image as ImageIcon, Check, Dumbbell, Shield, Flame, Layers } from 'lucide-react';
+import { MessageCircle, Image as ImageIcon, Check, Dumbbell, Shield, Flame, Layers, ChevronDown, SlidersHorizontal } from 'lucide-react';
 import { Language, content } from '@/data/content';
 import {
   musculationPlans,
@@ -225,27 +225,61 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
           })}
         </div>
 
-        {/* Musculation Frequencies Expand Toggle */}
+        {/* Musculation Frequencies Expand Banner - High Contrast & Tactile */}
         {activeTab === 'musculation' && (
-          <div className="mt-8 flex flex-col items-center justify-center gap-2">
+          <div className="mt-10 p-4 sm:p-5 rounded-2xl bg-adrena-card border border-adrena-border/90 shadow-lg max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            {/* Left: Clear informative breakdown with high-contrast text and gold figures */}
+            <div className="flex items-center gap-3.5 text-center sm:text-left rtl:sm:text-right">
+              <div className="w-10 h-10 rounded-xl bg-adrena-surface border border-adrena-gold/40 flex items-center justify-center flex-shrink-0 text-adrena-gold">
+                <SlidersHorizontal className="w-5 h-5" />
+              </div>
+              <div>
+                <p className="text-sm sm:text-base font-extrabold text-white">
+                  {isAr ? 'ترددات إضافية متوفرة في النادي' : 'Fréquences flexibles disponibles à la réception'}
+                </p>
+                <p className="text-xs sm:text-sm text-adrena-stone mt-0.5 font-medium">
+                  {isAr ? (
+                    <>
+                      <span>حصة/أسبوع (</span>
+                      <strong className="text-adrena-gold font-bold">2 000 دج</strong>
+                      <span>) • 4 حصص (</span>
+                      <strong className="text-adrena-gold font-bold">4 000 دج</strong>
+                      <span>) • 5 حصص (</span>
+                      <strong className="text-adrena-gold font-bold">4 200 دج</strong>
+                      <span>)</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>1 séance/sem (</span>
+                      <strong className="text-adrena-gold font-bold">2 000 DA</strong>
+                      <span>) • 4 séances (</span>
+                      <strong className="text-adrena-gold font-bold">4 000 DA</strong>
+                      <span>) • 5 séances (</span>
+                      <strong className="text-adrena-gold font-bold">4 200 DA</strong>
+                      <span>)</span>
+                    </>
+                  )}
+                </p>
+              </div>
+            </div>
+
+            {/* Right: High-Contrast Toggle Button */}
             <button
               type="button"
               onClick={() => setShowAllMuscu(!showAllMuscu)}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-adrena-card hover:bg-adrena-surface border border-adrena-border text-xs sm:text-sm font-bold text-adrena-stone hover:text-white transition-all shadow-sm"
+              className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-adrena-surface hover:bg-adrena-gold text-white hover:text-adrena-black border border-adrena-gold/50 hover:border-adrena-gold font-extrabold text-xs sm:text-sm uppercase tracking-wider transition-all shadow-md active:scale-[0.98] cursor-pointer whitespace-nowrap flex-shrink-0"
             >
               <span>
                 {showAllMuscu
-                  ? (isAr ? 'عرض الباقات الـ 3 الموصى بها فقط' : 'Afficher les 3 formules recommandées')
-                  : (isAr ? 'عرض جميع الترددات (1، 4، 5 حصص / أسبوع)' : 'Voir les autres fréquences (1, 4, 5 séances / semaine)')}
+                  ? (isAr ? 'عرض الـ 3 باقات الرئيسية' : 'Masquer les options secondaires')
+                  : (isAr ? 'عرض جميع البطاقات (6)' : 'Afficher toutes les formules (6)')}
               </span>
+              <ChevronDown
+                className={`w-4 h-4 transition-transform duration-200 ${
+                  showAllMuscu ? 'rotate-180' : ''
+                }`}
+              />
             </button>
-            {!showAllMuscu && (
-              <span className="text-[11px] text-adrena-muted">
-                {isAr
-                  ? 'خيارات أخرى متوفرة : حصة واحدة (2 000 دج) • 4 حصص (4 000 دج) • 5 حصص (4 200 دج)'
-                  : 'Options flexibles : 1 séance (2 000 DA) • 4 séances (4 000 DA) • 5 séances (4 200 DA)'}
-              </span>
-            )}
           </div>
         )}
 
