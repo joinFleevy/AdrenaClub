@@ -356,7 +356,7 @@ export const content: Record<Language, ContentStrings> = {
       perMonth: "DA / mois",
       perSession: "DA / séance",
       choosePlan: "S'inscrire sur WhatsApp",
-      popular: "Formule Recommandée",
+      popular: "Recommandé",
       viewPosterBtn: "Voir la grille originale du club",
     },
     reviews: {
@@ -685,7 +685,7 @@ export const content: Record<Language, ContentStrings> = {
       perMonth: "دج / شهر",
       perSession: "دج / حصة",
       choosePlan: "التسجيل عبر واتساب",
-      popular: "الباقة المفضلة",
+      popular: "الأكثر طلباً",
       viewPosterBtn: "مشاهدة الملصق الأصلي للنادي",
     },
     reviews: {

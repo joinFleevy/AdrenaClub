@@ -34,8 +34,8 @@ export const musculationPlans: PricingPlan[] = [
     price: 3000,
     periodFr: 'DA / mois',
     periodAr: 'دج / شهر',
-    featuresFr: ['Idéal pour maintien & tonification', 'Accès plateau force & cardio', 'Vestiaires sécurisés'],
-    featuresAr: ['مثالي للمحافظة على اللياقة والشد', 'دخول قاعة الحديد والكارديو', 'خزائن ملابس آمنة'],
+    featuresFr: ['Accès au plateau charges libres & cardio', 'Créneaux hommes & femmes au choix', 'Vestiaires, douches & casiers inclus'],
+    featuresAr: ['دخول قاعة الحديد والأوزان والكارديو', 'أوقات متاحة للرجال والنساء', 'غرف تبديل، دوشات وخزائن آمنة'],
   },
   {
     id: 'muscu-3',
@@ -47,8 +47,8 @@ export const musculationPlans: PricingPlan[] = [
     periodFr: 'DA / mois',
     periodAr: 'دج / شهر',
     isPopular: true,
-    featuresFr: ['La formule la plus équilibrée', 'Suivi de progression', 'Accès libre aux créneaux dédiés'],
-    featuresAr: ['الباقة الأكثر توازناً وطلباً', 'متابعة التطور البدني', 'دخول مرن للفترات المخصصة'],
+    featuresFr: ['Fréquence idéale pour progresser', 'Accès libre à tous les créneaux du planning', 'Machines guidées, charges libres & cardio', 'Vestiaires, douches & casiers inclus'],
+    featuresAr: ['التردد المثالي لتحقيق تطور ملحوظ', 'دخول مرن لكافة أوقات البرنامج', 'أجهزة متطورة، أوزان حرة وكارديو', 'غرف تبديل، دوشات وخزائن آمنة'],
   },
   {
     id: 'muscu-4',

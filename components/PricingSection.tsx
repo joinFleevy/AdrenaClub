@@ -58,6 +58,8 @@ const mixedPlans: PricingPlan[] = [
   },
 ];
 
+const formatPrice = (p: number) => p.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+
 export default function PricingSection({ lang, onOpenPostersModal }: PricingSectionProps) {
   const t = content[lang].tarifs;
   const isAr = lang === 'ar';
@@ -157,7 +159,7 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
         </div>
 
         {/* Plan Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
           {currentPlans.map((plan) => {
             const name = lang === 'fr' ? plan.nameFr : plan.nameAr;
             const freq = lang === 'fr' ? plan.frequencyFr : plan.frequencyAr;
@@ -167,42 +169,46 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
             return (
               <div
                 key={plan.id}
-                className={`flex flex-col justify-between p-6 sm:p-7 rounded-xl border transition-all ${
+                className={`flex flex-col justify-between p-5 sm:p-6 rounded-2xl border transition-all ${
                   plan.isPopular
-                    ? 'bg-adrena-card border-adrena-gold shadow-xl'
+                    ? 'bg-adrena-card border-adrena-gold shadow-xl ring-1 ring-adrena-gold/30'
                     : 'bg-adrena-card border-adrena-border hover:border-adrena-gold/40 shadow-sm'
                 }`}
               >
                 <div>
+                  {/* Top Metadata Row: Frequency & Recommandé Badge */}
                   <div className="flex items-center justify-between gap-2 mb-2">
-                    <h3 className="text-xl font-bold text-white">{name}</h3>
+                    <span className="text-xs font-bold text-adrena-stone tracking-wide">
+                      {freq}
+                    </span>
                     {plan.isPopular && (
-                      <span className="px-2.5 py-0.5 rounded text-[11px] font-bold bg-adrena-gold text-adrena-black uppercase tracking-wider">
-                        {t.popular}
+                      <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10.5px] font-black bg-adrena-gold text-adrena-black uppercase tracking-wider shadow-sm">
+                        ★ {t.popular}
                       </span>
                     )}
                   </div>
-                  
-                  <p className="text-xs sm:text-sm text-adrena-stone font-medium mb-6">
-                    {freq}
-                  </p>
+
+                  {/* Plan Name (Full width, zero awkward wrapping) */}
+                  <h3 className="text-xl sm:text-2xl font-black text-white tracking-tight mb-3">
+                    {name}
+                  </h3>
 
                   {/* Price Block */}
-                  <div className="mb-6 pb-6 border-b border-adrena-border flex items-baseline gap-2">
-                    <span className="text-4xl font-extrabold text-white tabular-nums tracking-tight">
-                      {plan.price.toLocaleString('fr-FR')}
+                  <div className="mb-4 pb-4 border-b border-adrena-border/80 flex items-baseline gap-2">
+                    <span className="text-3xl sm:text-4xl font-black text-white tabular-nums tracking-tight">
+                      {formatPrice(plan.price)}
                     </span>
-                    <span className="text-xs sm:text-sm font-bold text-adrena-gold uppercase">
+                    <span className="text-xs sm:text-sm font-extrabold text-adrena-gold uppercase tracking-wider">
                       {period}
                     </span>
                   </div>
 
                   {/* Features */}
-                  <div className="space-y-2.5 mb-8">
+                  <div className="space-y-2 mb-6">
                     {feats.map((feat, idx) => (
-                      <div key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-adrena-stone">
+                      <div key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-adrena-bone font-medium">
                         <Check className="w-4 h-4 text-adrena-gold flex-shrink-0 mt-0.5" />
-                        <span>{feat}</span>
+                        <span className="leading-snug">{feat}</span>
                       </div>
                     ))}
                   </div>
@@ -211,14 +217,18 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
                 <button
                   type="button"
                   onClick={() => handleWhatsAppOrder(name, plan.price)}
-                  className={`w-full flex items-center justify-center gap-2 py-3.5 px-4 rounded-lg font-bold text-xs sm:text-sm transition-all shadow-sm active:scale-[0.98] ${
+                  className={`w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl font-black text-xs sm:text-sm transition-all shadow-sm active:scale-[0.98] ${
                     plan.isPopular
-                      ? 'bg-adrena-gold hover:bg-adrena-gold-light text-adrena-black'
-                      : 'bg-adrena-surface hover:bg-white/10 text-white border border-adrena-border'
+                      ? 'bg-adrena-gold hover:bg-adrena-gold-light text-[#08090b] shadow-md shadow-adrena-gold/10'
+                      : 'bg-adrena-surface hover:bg-white/10 text-white border border-adrena-border hover:border-adrena-gold/40'
                   }`}
                 >
-                  <MessageCircle className="w-4 h-4 fill-current" />
-                  <span>{isAr ? 'حجز هذه الباقة عبر واتساب' : 'Choisir cette formule'}</span>
+                  <MessageCircle className="w-4 h-4 fill-current flex-shrink-0" />
+                  <span>
+                    {isAr
+                      ? `حجز الباقة • ${formatPrice(plan.price)} دج`
+                      : `Réserver • ${formatPrice(plan.price)} DA`}
+                  </span>
                 </button>
               </div>
             );
