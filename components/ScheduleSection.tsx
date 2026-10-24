@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useMemo } from 'react';
-import { Clock, Image as ImageIcon, Dumbbell, Shield, Flame, VolumeX, Music } from 'lucide-react';
+import { Clock, Image as ImageIcon, Dumbbell, Shield, Flame, VolumeX } from 'lucide-react';
 import { Language, content } from '@/data/content';
 import { hommesSchedule, femmesSchedule, enfantsSchedule, ScheduleDay } from '@/data/schedules';
 
@@ -297,12 +297,6 @@ export default function ScheduleSection({ lang, onOpenPostersModal }: ScheduleSe
                                 <span>{lang === 'fr' ? 'Sans musique' : 'بدون موسيقى'}</span>
                               </span>
                             )}
-                            {act.musicMode === 'with_music' && (
-                              <span className="inline-flex items-center gap-1 text-[10px] sm:text-[11px] font-bold px-2 py-0.5 rounded-md bg-violet-500/20 text-violet-300 border border-violet-500/35 font-sans whitespace-nowrap flex-shrink-0">
-                                <Music className="w-3.5 h-3.5 text-violet-400" />
-                                <span>{lang === 'fr' ? 'Avec musique' : 'بالموسيقى'}</span>
-                              </span>
-                            )}
                           </div>
                         </div>
                       ))}
@@ -416,12 +410,6 @@ export default function ScheduleSection({ lang, onOpenPostersModal }: ScheduleSe
                               <span className="inline-flex items-center gap-1 text-[10px] sm:text-[11px] font-bold px-2 py-0.5 rounded-md bg-emerald-500/20 text-emerald-300 border border-emerald-500/35 font-sans whitespace-nowrap flex-shrink-0">
                                 <VolumeX className="w-3.5 h-3.5 text-emerald-400" />
                                 <span>{lang === 'fr' ? 'Sans musique' : 'بدون موسيقى'}</span>
-                              </span>
-                            )}
-                            {act.musicMode === 'with_music' && (
-                              <span className="inline-flex items-center gap-1 text-[10px] sm:text-[11px] font-bold px-2 py-0.5 rounded-md bg-violet-500/20 text-violet-300 border border-violet-500/35 font-sans whitespace-nowrap flex-shrink-0">
-                                <Music className="w-3.5 h-3.5 text-violet-400" />
-                                <span>{lang === 'fr' ? 'Avec musique' : 'بالموسيقى'}</span>
                               </span>
                             )}
                           </div>

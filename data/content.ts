@@ -338,7 +338,7 @@ export const content: Record<Language, ContentStrings> = {
       },
       notes: {
         hommes: "Musculation ouverte dès 06:00 le matin et tous les soirs jusqu'à 00:00 (Minuit).",
-        femmes: "Créneaux strictement fermés aux hommes, encadrés par des femmes. Séances avec ou sans musique précisées au planning.",
+        femmes: "Créneaux strictement fermés aux hommes, encadrés par des femmes. Séances sans musique indiquées au planning.",
         enfants: "Séances de combat et motricité adaptées aux plus jeunes.",
       },
       openPosterBtn: "Afficher l'affiche officielle",
@@ -667,7 +667,7 @@ export const content: Record<Language, ContentStrings> = {
       },
       notes: {
         hommes: "كمال الأجسام مفتوح من 06:00 صباحاً ويستمر يومياً حتى منتصف الليل (00:00).",
-        femmes: "فترات مغلقة تماماً على الرجال، بإشراف مدربات. تم توضيح الحصص التي بالموسيقى والتي بدون موسيقى في الجدول.",
+        femmes: "فترات مغلقة تماماً على الرجال، بإشراف مدربات. الحصص بدون موسيقى موضحة برمز خاص في الجدول.",
         enfants: "حصص تدريبية آمنة تناسب أعمار الصغار وقدراتهم.",
       },
       openPosterBtn: "عرض الملصق الأصلي",

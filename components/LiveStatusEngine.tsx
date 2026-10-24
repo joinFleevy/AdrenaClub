@@ -132,12 +132,12 @@ export function computeAlgiersLiveStatus(): LiveStatusData {
       let badgeAr = 'حديد حر';
 
       if (isCrossWithMusic) {
-        headlineFr = 'Espace Femmes : Cross-Training (Avec musique)';
-        headlineAr = 'فضاء النساء : كروس ترينينغ (بالموسيقى)';
-        sublineFr = 'Séance coachée dynamique et rythmée avec musique.';
-        sublineAr = 'حصة تدريبية حماسية ومكثفة مع الموسيقى.';
-        badgeFr = 'Avec Musique';
-        badgeAr = 'بالموسيقى';
+        headlineFr = 'Espace Femmes : Cross-Training';
+        headlineAr = 'فضاء النساء : كروس ترينينغ';
+        sublineFr = 'Séance coachée dynamique et motivante avec coachs féminines.';
+        sublineAr = 'حصة تدريبية حماسية ومكثفة مع مدربات مؤهلات.';
+        badgeFr = 'Cross-Training';
+        badgeAr = 'كروس ترينينغ';
       } else if (isCrossNoMusic) {
         headlineFr = 'Espace Femmes : Cross-Training (Sans musique)';
         headlineAr = 'فضاء النساء : كروس ترينينغ (بدون موسيقى)';
@@ -294,12 +294,12 @@ export function computeAlgiersLiveStatus(): LiveStatusData {
         badgeFr = 'Kickboxing Femme';
         badgeAr = 'كيك بوكسينغ';
       } else if (isCrossWithMusic) {
-        headlineFr = 'Espace Femmes : Cross-Training (Avec musique)';
-        headlineAr = 'فضاء النساء : كروس ترينينغ (بالموسيقى)';
-        sublineFr = 'Séance coachée dynamique et rythmée avec musique.';
-        sublineAr = 'حصة تدريبية حماسية ومكثفة مع الموسيقى.';
-        badgeFr = 'Avec Musique';
-        badgeAr = 'بالموسيقى';
+        headlineFr = 'Espace Femmes : Cross-Training';
+        headlineAr = 'فضاء النساء : كروس ترينينغ';
+        sublineFr = 'Séance coachée dynamique et motivante avec coachs féminines.';
+        sublineAr = 'حصة تدريبية حماسية ومكثفة مع مدربات مؤهلات.';
+        badgeFr = 'Cross-Training';
+        badgeAr = 'كروس ترينينغ';
       } else if (isCrossNoMusic) {
         headlineFr = 'Espace Femmes : Cross-Training (Sans musique)';
         headlineAr = 'فضاء النساء : كروس ترينينغ (بدون موسيقى)';
@@ -448,12 +448,12 @@ export function computeAlgiersLiveStatus(): LiveStatusData {
       let badgeAr = 'حديد حر';
 
       if (isCrossWithMusic) {
-        headlineFr = 'Espace Femmes : Cross-Training (Avec musique)';
-        headlineAr = 'فضاء النساء : كروس ترينينغ (بالموسيقى)';
-        sublineFr = 'Séance coachée dynamique et rythmée avec musique.';
-        sublineAr = 'حصة تدريبية حماسية ومكثفة مع الموسيقى.';
-        badgeFr = 'Avec Musique';
-        badgeAr = 'بالموسيقى';
+        headlineFr = 'Espace Femmes : Cross-Training';
+        headlineAr = 'فضاء النساء : كروس ترينينغ';
+        sublineFr = 'Séance coachée dynamique et motivante avec coachs féminines.';
+        sublineAr = 'حصة تدريبية حماسية ومكثفة مع مدربات مؤهلات.';
+        badgeFr = 'Cross-Training';
+        badgeAr = 'كروس ترينينغ';
       } else if (isCrossNoMusic) {
         headlineFr = 'Espace Femmes : Cross-Training (Sans musique)';
         headlineAr = 'فضاء النساء : كروس ترينينغ (بدون موسيقى)';

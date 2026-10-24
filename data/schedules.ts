@@ -9,7 +9,7 @@ export interface ScheduleDay {
     time: string;
     badge?: string;
     badgeColor?: string;
-    musicMode?: 'with_music' | 'without_music';
+    musicMode?: 'without_music';
   }>;
 }
 
@@ -102,7 +102,6 @@ export const femmesSchedule: ScheduleDay[] = [
         time: '16:00 - 17:00',
         badge: 'Fitness',
         badgeColor: 'bg-violet-500/20 text-violet-400 border-violet-500/30',
-        musicMode: 'with_music',
       },
       {
         nameFr: 'CrossTraining Femme',
@@ -140,7 +139,6 @@ export const femmesSchedule: ScheduleDay[] = [
         time: '16:00 - 17:00',
         badge: 'Fitness',
         badgeColor: 'bg-violet-500/20 text-violet-400 border-violet-500/30',
-        musicMode: 'with_music',
       },
       {
         nameFr: 'CrossTraining Femme',
@@ -171,7 +169,6 @@ export const femmesSchedule: ScheduleDay[] = [
         time: '16:00 - 17:00',
         badge: 'Fitness',
         badgeColor: 'bg-violet-500/20 text-violet-400 border-violet-500/30',
-        musicMode: 'with_music',
       },
       {
         nameFr: 'CrossTraining Femme',
