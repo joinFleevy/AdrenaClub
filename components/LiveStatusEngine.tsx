@@ -121,21 +121,46 @@ export function computeAlgiersLiveStatus(): LiveStatusData {
       };
     }
     if (inRange(15, 0, 19, 0)) {
-      const isCross = inRange(16, 0, 18, 30);
+      const isCrossWithMusic = inRange(16, 0, 17, 0);
+      const isCrossNoMusic = inRange(17, 30, 18, 30);
+
+      let headlineFr = 'Espace 100% Femmes (Plateau Musculation)';
+      let headlineAr = 'فضاء 100% نسائي (قاعة كمال الأجسام)';
+      let sublineFr = 'Accès libre aux machines & poids libres avec coachs féminines.';
+      let sublineAr = 'دخول حر للأجهزة والأوزان الحرة مع مدربات مؤهلات.';
+      let badgeFr = 'Musculation';
+      let badgeAr = 'حديد حر';
+
+      if (isCrossWithMusic) {
+        headlineFr = 'Espace Femmes : Cross-Training (Avec musique)';
+        headlineAr = 'فضاء النساء : كروس ترينينغ (بالموسيقى)';
+        sublineFr = 'Séance coachée dynamique et rythmée avec musique.';
+        sublineAr = 'حصة تدريبية حماسية ومكثفة مع الموسيقى.';
+        badgeFr = 'Avec Musique';
+        badgeAr = 'بالموسيقى';
+      } else if (isCrossNoMusic) {
+        headlineFr = 'Espace Femmes : Cross-Training (Sans musique)';
+        headlineAr = 'فضاء النساء : كروس ترينينغ (بدون موسيقى)';
+        sublineFr = 'Séance coachée sereine et calme, sans aucune musique.';
+        sublineAr = 'حصة تدريبية هادئة ومريحة، بدون أي موسيقى.';
+        badgeFr = 'Sans Musique';
+        badgeAr = 'بدون موسيقى';
+      }
+
       return {
         isOpen: true,
         audience: 'femmes',
         timeStr: timeFormatted,
         badgeLabelFr: 'Créneau Femmes en cours',
         badgeLabelAr: 'فترة النساء جارية الآن',
-        headlineFr: isCross ? 'Espace Femmes : Musculation & Cross-Training' : 'Espace 100% Femmes (Musculation)',
-        headlineAr: isCross ? 'فضاء النساء : كمال أجسام وكروس ترينينغ' : 'فضاء 100% نسائي (كمال أجسام)',
-        sublineFr: 'Privatisation absolue sans musique avec coachs féminines.',
-        sublineAr: 'خصوصية تامة بدون موسيقى مع مدربات مؤهلات.',
+        headlineFr,
+        headlineAr,
+        sublineFr,
+        sublineAr,
         closingTimeFr: 'Fin du créneau femmes à 19:00',
         closingTimeAr: 'نهاية الفترة النسائية على 19:00',
-        activeDisciplineBadgeFr: isCross ? 'CrossTraining' : 'Sans Musique',
-        activeDisciplineBadgeAr: isCross ? 'كروس ترينينغ' : 'بدون موسيقى',
+        activeDisciplineBadgeFr: badgeFr,
+        activeDisciplineBadgeAr: badgeAr,
       };
     }
     if (inRange(19, 0, 24, 0)) {
@@ -251,29 +276,53 @@ export function computeAlgiersLiveStatus(): LiveStatusData {
     }
     if (inRange(14, 0, 19, 0)) {
       const isKick = inRange(14, 0, 15, 15);
-      const isCross = inRange(16, 0, 18, 30);
+      const isCrossWithMusic = inRange(16, 0, 17, 0);
+      const isCrossNoMusic = inRange(17, 30, 18, 30);
+
+      let headlineFr = 'Espace 100% Femmes (Musculation & Cardio)';
+      let headlineAr = 'فضاء 100% نسائي (كمال أجسام وكارديو)';
+      let sublineFr = 'Accès libre aux machines et plateau force avec coachs féminines.';
+      let sublineAr = 'دخول حر للعتاد والأوزان الحرة مع مدربات مؤهلات.';
+      let badgeFr = 'Musculation';
+      let badgeAr = 'حديد حر';
+
+      if (isKick) {
+        headlineFr = 'Espace Femmes : Kickboxing Féminin Dédié';
+        headlineAr = 'فضاء النساء : كيك بوكسينغ نسائي مخصص';
+        sublineFr = 'Entraînement combat & self-défense encadré par des coachs féminines.';
+        sublineAr = 'تدريب قتالي ودفاع عن النفس مع مدربات مؤهلات.';
+        badgeFr = 'Kickboxing Femme';
+        badgeAr = 'كيك بوكسينغ';
+      } else if (isCrossWithMusic) {
+        headlineFr = 'Espace Femmes : Cross-Training (Avec musique)';
+        headlineAr = 'فضاء النساء : كروس ترينينغ (بالموسيقى)';
+        sublineFr = 'Séance coachée dynamique et rythmée avec musique.';
+        sublineAr = 'حصة تدريبية حماسية ومكثفة مع الموسيقى.';
+        badgeFr = 'Avec Musique';
+        badgeAr = 'بالموسيقى';
+      } else if (isCrossNoMusic) {
+        headlineFr = 'Espace Femmes : Cross-Training (Sans musique)';
+        headlineAr = 'فضاء النساء : كروس ترينينغ (بدون موسيقى)';
+        sublineFr = 'Séance coachée sereine et calme, sans aucune musique.';
+        sublineAr = 'حصة تدريبية هادئة ومريحة، بدون أي موسيقى.';
+        badgeFr = 'Sans Musique';
+        badgeAr = 'بدون موسيقى';
+      }
+
       return {
         isOpen: true,
         audience: 'femmes',
         timeStr: timeFormatted,
         badgeLabelFr: 'Créneau Femmes en cours',
         badgeLabelAr: 'فترة النساء جارية الآن',
-        headlineFr: isKick
-          ? 'Espace Femmes : Kickboxing Féminin Dédié'
-          : isCross
-          ? 'Espace Femmes : Cross-Training Spécial'
-          : 'Espace 100% Femmes (Musculation & Cardio)',
-        headlineAr: isKick
-          ? 'فضاء النساء : كيك بوكسينغ نسائي مخصص'
-          : isCross
-          ? 'فضاء النساء : كروس ترينينغ خاص'
-          : 'فضاء 100% نسائي (كمال أجسام وكارديو)',
-        sublineFr: '100% sans musique. Encadrement féminin diplômé.',
-        sublineAr: '100% بدون موسيقى مع مدربات معتمدات.',
+        headlineFr,
+        headlineAr,
+        sublineFr,
+        sublineAr,
         closingTimeFr: 'Fin du créneau femmes à 19:00',
         closingTimeAr: 'نهاية الفترة النسائية على 19:00',
-        activeDisciplineBadgeFr: isKick ? 'Kickboxing Femme' : isCross ? 'CrossTraining' : 'Sans Musique',
-        activeDisciplineBadgeAr: isKick ? 'كيك بوكسينغ' : isCross ? 'كروس ترينينغ' : 'بدون موسيقى',
+        activeDisciplineBadgeFr: badgeFr,
+        activeDisciplineBadgeAr: badgeAr,
       };
     }
     if (inRange(19, 0, 24, 0)) {
@@ -388,21 +437,46 @@ export function computeAlgiersLiveStatus(): LiveStatusData {
       };
     }
     if (inRange(15, 0, 19, 0)) {
-      const isCross = inRange(16, 0, 18, 30);
+      const isCrossWithMusic = inRange(16, 0, 17, 0);
+      const isCrossNoMusic = inRange(17, 30, 18, 30);
+
+      let headlineFr = 'Espace 100% Femmes (Plateau Musculation)';
+      let headlineAr = 'فضاء 100% نسائي (قاعة كمال الأجسام)';
+      let sublineFr = 'Accès libre aux machines & poids libres avec coachs féminines.';
+      let sublineAr = 'دخول حر للأجهزة والأوزان الحرة مع مدربات مؤهلات.';
+      let badgeFr = 'Musculation';
+      let badgeAr = 'حديد حر';
+
+      if (isCrossWithMusic) {
+        headlineFr = 'Espace Femmes : Cross-Training (Avec musique)';
+        headlineAr = 'فضاء النساء : كروس ترينينغ (بالموسيقى)';
+        sublineFr = 'Séance coachée dynamique et rythmée avec musique.';
+        sublineAr = 'حصة تدريبية حماسية ومكثفة مع الموسيقى.';
+        badgeFr = 'Avec Musique';
+        badgeAr = 'بالموسيقى';
+      } else if (isCrossNoMusic) {
+        headlineFr = 'Espace Femmes : Cross-Training (Sans musique)';
+        headlineAr = 'فضاء النساء : كروس ترينينغ (بدون موسيقى)';
+        sublineFr = 'Séance coachée sereine et calme, sans aucune musique.';
+        sublineAr = 'حصة تدريبية هادئة ومريحة، بدون أي موسيقى.';
+        badgeFr = 'Sans Musique';
+        badgeAr = 'بدون موسيقى';
+      }
+
       return {
         isOpen: true,
         audience: 'femmes',
         timeStr: timeFormatted,
         badgeLabelFr: 'Créneau Femmes en cours',
         badgeLabelAr: 'فترة النساء جارية الآن',
-        headlineFr: isCross ? 'Espace Femmes : Musculation & Cross-Training' : 'Espace 100% Femmes (Musculation)',
-        headlineAr: isCross ? 'فضاء النساء : كمال أجسام وكروس ترينينغ' : 'فضاء 100% نسائي (كمال أجسام)',
-        sublineFr: 'Intimité totale, pas de musique, vestiaires privés.',
-        sublineAr: 'خصوصية كاملة، بدون موسيقى مع غرف تبديل خاصة.',
+        headlineFr,
+        headlineAr,
+        sublineFr,
+        sublineAr,
         closingTimeFr: 'Fin du créneau femmes à 19:00',
         closingTimeAr: 'نهاية الفترة النسائية على 19:00',
-        activeDisciplineBadgeFr: isCross ? 'CrossTraining' : 'Sans Musique',
-        activeDisciplineBadgeAr: isCross ? 'كروس ترينينغ' : 'بدون موسيقى',
+        activeDisciplineBadgeFr: badgeFr,
+        activeDisciplineBadgeAr: badgeAr,
       };
     }
     if (inRange(19, 0, 24, 0)) {

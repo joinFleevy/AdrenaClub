@@ -33,8 +33,8 @@ const posters = [
   },
   {
     id: 'femmes',
-    titleFr: 'Planning Femmes — 100% Privé & Sans Musique',
-    titleAr: 'مخطط النساء — خصوصية تامة وبدون موسيقى',
+    titleFr: 'Planning Femmes — Séances avec & sans musique',
+    titleAr: 'مخطط أوقات النساء — حصص بالموسيقى وبدون موسيقى',
     src: '/images/posters/planning_femmes.jpg',
   },
   {

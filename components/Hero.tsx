@@ -32,8 +32,8 @@ export default function Hero({ lang }: HeroProps) {
 
             <p className="text-sm sm:text-base lg:text-lg text-adrena-stone max-w-[54ch] leading-relaxed mb-6 sm:mb-8 font-normal">
               {isAr
-                ? 'طابقان مجهزان بأحدث عتاد كمال الأجسام والقوة البدنية، حلبة ملاكمة وبساط نزال معتمد، وفضاء نسائي مستقل 100% بدون أي موسيقى.'
-                : 'Deux niveaux dédiés à l\'entraînement : plateau musculation charges libres, ring de combat, tatami d\'arts martiaux et espace 100% femmes sans musique.'}
+                ? 'طابقان مجهزان بأحدث عتاد كمال الأجسام والقوة البدنية، حلبة ملاكمة وبساط نزال معتمد، وفضاء نسائي مستقل 100% مع حصص بالموسيقى وأخرى بدون موسيقى.'
+                : 'Deux niveaux dédiés à l\'entraînement : plateau musculation charges libres, ring de combat, tatami d\'arts martiaux et espace 100% femmes avec séances avec ou sans musique.'}
             </p>
 
             {/* Direct Primary Actions - Clean Non-Competing Action Pair */}
@@ -162,7 +162,7 @@ export default function Hero({ lang }: HeroProps) {
               {isAr ? 'فضاء النساء' : 'Espace 100% Femmes'}
             </span>
             <p className="font-extrabold text-white text-base">
-              {isAr ? 'خصوصية تامة بدون موسيقى' : 'Strictement Sans Musique'}
+              {isAr ? 'حصص بالموسيقى وبدونها' : 'Avec & Sans Musique'}
             </p>
             <p className="text-adrena-stone text-xs mt-0.5">
               {isAr ? 'طابق أرضي مع مدربات' : 'RDC privé avec coachs féminines'}

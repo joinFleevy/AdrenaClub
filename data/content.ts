@@ -199,7 +199,7 @@ export const content: Record<Language, ContentStrings> = {
   fr: {
     meta: {
       title: "Adréna Club | Salle de Sport à Bab Ezzouar (Alger)",
-      description: "Adréna Club Bab Ezzouar : Complexe sportif sur 2 étages. Musculation lourde, Cross-Training, Ring de Boxe, Lutte, Judo, Sauna et créneaux femmes sans musique.",
+      description: "Adréna Club Bab Ezzouar : Complexe sportif sur 2 étages. Musculation lourde, Cross-Training, Ring de Boxe, Lutte, Judo, Sauna et créneaux femmes avec séances avec ou sans musique.",
     },
     topBar: {
       address: "Cité Universitaire CUB1, Bab Ezzouar, Alger",
@@ -222,20 +222,20 @@ export const content: Record<Language, ContentStrings> = {
     hero: {
       tagline: "Complexe Sportif • Bab Ezzouar • 2 Étages",
       title: "Deux étages dédiés à la performance.",
-      subtitle: "Plateau musculation complet, ring de combat officiel, tatami & cross-training. Créneaux femmes 100% privés, calmes et sans musique. Ouvert tous les jours jusqu'à minuit.",
+      subtitle: "Plateau musculation complet, ring de combat officiel, tatami & cross-training. Créneaux femmes 100% privés avec séances au choix avec ou sans musique. Ouvert tous les jours jusqu'à minuit.",
       motto: "« Discipline, Respect & Dépassement de Soi : L'Excellence Sportive à Bab Ezzouar »",
       ctaPrimary: "Nous contacter sur WhatsApp",
       ctaSecondary: "Explorer la salle en 360°",
       pillars: [
         { title: "2 Niveaux d'Entraînement", desc: "Accueil & vestiaires au RDC, plateaux d'entraînement au sous-sol" },
         { title: "Jusqu'à Minuit (00:00)", desc: "Ouvert tous les soirs pour les hommes dès 06:00" },
-        { title: "Créneaux Femmes Privés", desc: "100% sans musique avec coachs féminines" },
+        { title: "Créneaux Femmes Privés", desc: "Séances avec ou sans musique, coachs féminines" },
         { title: "Sports de Combat & Ring", desc: "Kickboxing, Lutte & Judo avec coachs diplômés" },
       ],
       trustBadges: [
         { title: "2 Étages Dédiés", subtitle: "Plateau Musculation & Espace Combat" },
         { title: "Ring & Tatami Officiels", subtitle: "Aux normes pour Boxe & Lutte" },
-        { title: "Créneaux Femmes Dédiés", subtitle: "100% sans musique & intimité totale" },
+        { title: "Créneaux Femmes Dédiés", subtitle: "Séances avec & sans musique, 100% privé" },
         { title: "160+ Avis Google", subtitle: "Noté 4.9/5 par les membres" },
       ],
     },
@@ -295,10 +295,10 @@ export const content: Record<Language, ContentStrings> = {
         },
         {
           id: "femmes",
-          title: "Créneaux Femmes (Sans Musique)",
+          title: "Créneaux Femmes (Avec & Sans Musique)",
           category: "100% Réservé",
           image: "/images/disciplines/femmes.jpg",
-          desc: "Horaires exclusifs pour femmes assurant intimité et sérénité. Ambiance calme sans musique avec des coachs féminines qualifiées.",
+          desc: "Horaires exclusifs pour femmes assurant intimité et sérénité. Séances avec musique et créneaux calmes sans musique au choix, avec coachs féminines.",
           features: ["Portes fermées & intimité totale", "Kickboxing féminin dédié", "Musculation & Cross-training adaptés"],
         },
         {
@@ -324,7 +324,7 @@ export const content: Record<Language, ContentStrings> = {
       subtitle: "Des horaires pensés pour votre emploi du temps, du matin jusqu'à minuit.",
       tabs: {
         hommes: "Hommes",
-        femmes: "Femmes (Sans Musique)",
+        femmes: "Femmes",
         enfants: "Enfants",
       },
       days: {
@@ -338,7 +338,7 @@ export const content: Record<Language, ContentStrings> = {
       },
       notes: {
         hommes: "Musculation ouverte dès 06:00 le matin et tous les soirs jusqu'à 00:00 (Minuit).",
-        femmes: "Créneaux strictement fermés aux hommes, encadrés par des femmes, sans musique.",
+        femmes: "Créneaux strictement fermés aux hommes, encadrés par des femmes. Séances avec ou sans musique précisées au planning.",
         enfants: "Séances de combat et motricité adaptées aux plus jeunes.",
       },
       openPosterBtn: "Afficher l'affiche officielle",
@@ -476,8 +476,8 @@ export const content: Record<Language, ContentStrings> = {
           desc: "Accès strictement interdit aux hommes pendant les horaires féminins. Entrées et fenêtres occultées pour une tranquillité totale.",
         },
         {
-          title: "Ambiance Calme Sans Aucune Musique",
-          desc: "Zéro musique diffusée. Un cadre apaisant et respectueux favorisant la concentration, l'effort sain et le bien-être.",
+          title: "Séances Dédiées Sans Musique",
+          desc: "Des créneaux spécifiques sans musique programmés pour favoriser la concentration, la tranquillité et l'effort serein, aux côtés de cours rythmés avec musique.",
         },
         {
           title: "Coachs Féminines Qualifiées",
@@ -528,7 +528,7 @@ export const content: Record<Language, ContentStrings> = {
   ar: {
     meta: {
       title: "نادي أدرينا سبورت | صالة تدريب رياضية في باب الزوار",
-      description: "نادي أدرينا سبورت باب الزوار: مجمع رياضي على طابقين. كمال أجسام، كروس ترينينغ، حلبة ملاكمة، مصارعة، جودو، ساونا وفترات خاصة للنساء بدون موسيقى.",
+      description: "نادي أدرينا سبورت باب الزوار: مجمع رياضي على طابقين. كمال أجسام، كروس ترينينغ، حلبة ملاكمة، مصارعة، جودو، ساونا وفترات خاصة للنساء بحصص بالموسيقى وأخرى بدون موسيقى.",
     },
     topBar: {
       address: "الحي الجامعي CUB1، باب الزوار، الجزائر العاصمة",
@@ -551,20 +551,20 @@ export const content: Record<Language, ContentStrings> = {
     hero: {
       tagline: "مجمع رياضي متكامل • باب الزوار • طابقان",
       title: "طابقان من التدريب والاحتراف في باب الزوار.",
-      subtitle: "كمال أجسام بأحدث الأجهزة، حلبة ملاكمة وبساط تاتامي، وفترات خاصة ومغلقة للنساء بدون موسيقى. مفتوح يومياً حتى منتصف الليل.",
+      subtitle: "كمال أجسام بأحدث الأجهزة، حلبة ملاكمة وبساط تاتامي، وفترات خاصة ومغلقة للنساء مع خيارات بحصص بالموسيقى وأخرى بدون موسيقى. مفتوح يومياً حتى منتصف الليل.",
       motto: "« الانضباط، الاحترام، والتطور البدني : بيئة تدريب استثنائية في باب الزوار »",
       ctaPrimary: "تواصل معنا مباشرة عبر واتساب",
       ctaSecondary: "جولة 360° داخل الصالة",
       pillars: [
         { title: "طابقان مجهزان بالكامل", desc: "الاستقبال والخدمات بالطابق الأرضي، وقاعات التدريب بالطابق السفلي" },
         { title: "حتى منتصف الليل (00:00)", desc: "مفتوح يومياً للرجال ابتداءً من 06:00 صباحاً" },
-        { title: "فترات خاصة للنساء", desc: "100% خصوصية وبدون موسيقى مع مدربات" },
+        { title: "فترات خاصة للنساء", desc: "خصوصية تامة، حصص بالموسيقى وبدونها مع مدربات" },
         { title: "حلبة ملاكمة وبساط نزال", desc: "كيك بوكسينغ، مصارعة وجودو مع مدربين معتمدين" },
       ],
       trustBadges: [
         { title: "طابقان مجهزان بالكامل", subtitle: "كمال أجسام وفنون قتالية" },
         { title: "حلبة وبساط معتمد", subtitle: "للملاكمة والمصارعة والجودو" },
-        { title: "أوقات مخصصة للنساء", subtitle: "بدون أي موسيقى وخصوصية تامة" },
+        { title: "أوقات مخصصة للنساء", subtitle: "حصص بالموسيقى وأخرى بدون موسيقى" },
         { title: "+160 تقييم Google", subtitle: "تقييم 4.9/5 من الأعضاء" },
       ],
     },
@@ -624,10 +624,10 @@ export const content: Record<Language, ContentStrings> = {
         },
         {
           id: "femmes",
-          title: "فترات النساء (بدون موسيقى)",
+          title: "فترات النساء (بالموسيقى وبدون موسيقى)",
           category: "خصوصية تامة",
           image: "/images/disciplines/femmes.jpg",
-          desc: "مواعيد مغلقة تماماً للنساء تضمن الهدوء والاحترام بدون موسيقى، بإشراف مدربات متخصصات.",
+          desc: "مواعيد مغلقة تماماً للنساء تضمن الخصوصية والاحترام، مع حصص هادئة بدون موسيقى وأخرى حماسية بالموسيقى بإشراف مدربات متخصصات.",
           features: ["أبواب مغلقة وخصوصية كاملة", "كيك بوكسينغ نسائي مخصص", "حصص كمال أجسام ورشاقة ملائمة"],
         },
         {
@@ -653,7 +653,7 @@ export const content: Record<Language, ContentStrings> = {
       subtitle: "مخططات منظمة لتوزيع أوقاتك بكل أريحية من الصباح الباكر حتى منتصف الليل.",
       tabs: {
         hommes: "الرجال",
-        femmes: "النساء (بدون موسيقى)",
+        femmes: "النساء",
         enfants: "الأطفال",
       },
       days: {
@@ -667,7 +667,7 @@ export const content: Record<Language, ContentStrings> = {
       },
       notes: {
         hommes: "كمال الأجسام مفتوح من 06:00 صباحاً ويستمر يومياً حتى منتصف الليل (00:00).",
-        femmes: "فترات مغلقة تماماً على الرجال، بإشراف مدربات، وبدون أي موسيقى.",
+        femmes: "فترات مغلقة تماماً على الرجال، بإشراف مدربات. تم توضيح الحصص التي بالموسيقى والتي بدون موسيقى في الجدول.",
         enfants: "حصص تدريبية آمنة تناسب أعمار الصغار وقدراتهم.",
       },
       openPosterBtn: "عرض الملصق الأصلي",
@@ -805,8 +805,8 @@ export const content: Record<Language, ContentStrings> = {
           desc: "منع تام لدخول الرجال خلال الأوقات المخصصة للنساء. نوافذ ومداخل محجوبة بالكامل لتوفير بيئة تدريب آمنة ومريحة.",
         },
         {
-          title: "بيئة هادئة ومحترمة بدون موسيقى",
-          desc: "صفر موسيقى نهائياً. جو نقي ومركز يمنحكِ الراحة النفسية والتركيز التام على التمارين والصحة البدنية.",
+          title: "حصص مخصصة بدون موسيقى وأخرى بالموسيقى",
+          desc: "حرية اختيار تامة بين جلسات هادئة بدون أي موسيقى تمنحكِ الراحة النفسية والتركيز، وحصص حماسية بإيقاع وموسيقى حسب رغبتكِ.",
         },
         {
           title: "مدربات معتمدات ومتخصصات",

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useMemo } from 'react';
-import { Clock, Image as ImageIcon, Dumbbell, Shield, Flame } from 'lucide-react';
+import { Clock, Image as ImageIcon, Dumbbell, Shield, Flame, VolumeX, Music } from 'lucide-react';
 import { Language, content } from '@/data/content';
 import { hommesSchedule, femmesSchedule, enfantsSchedule, ScheduleDay } from '@/data/schedules';
 
@@ -276,19 +276,33 @@ export default function ScheduleSection({ lang, onOpenPostersModal }: ScheduleSe
                           key={idx}
                           className="p-3.5 rounded-xl bg-adrena-surface border border-adrena-border"
                         >
-                          <div className="flex items-start justify-between gap-2 mb-2">
-                            <span className="text-base font-bold text-adrena-bone font-sans leading-snug">
+                          <div className="flex items-center justify-between gap-2 mb-2">
+                            <span className="text-sm sm:text-base font-bold text-adrena-bone font-sans leading-snug">
                               {lang === 'fr' ? act.nameFr : act.nameAr}
                             </span>
                             {act.badge && (
-                              <span className="text-xs font-bold px-2 py-0.5 rounded-md bg-adrena-card text-adrena-stone border border-adrena-border font-sans flex-shrink-0">
+                              <span className="text-[10px] sm:text-[11px] font-bold px-2 py-0.5 rounded-md bg-adrena-card text-adrena-stone border border-adrena-border font-sans flex-shrink-0">
                                 {act.badge}
                               </span>
                             )}
                           </div>
-                          <div className="flex items-center gap-2 text-sm font-sans font-semibold text-adrena-gold tabular-nums">
-                            <Clock className="w-4 h-4 text-adrena-gold flex-shrink-0" />
-                            <span>{act.time.replace('-', '–')}</span>
+                          <div className="flex items-center justify-between gap-2 pt-2 border-t border-adrena-border/60">
+                            <div className="flex items-center gap-1.5 text-xs sm:text-sm font-sans font-semibold text-adrena-gold tabular-nums whitespace-nowrap">
+                              <Clock className="w-3.5 h-3.5 text-adrena-gold flex-shrink-0" />
+                              <span>{act.time.replace('-', '–')}</span>
+                            </div>
+                            {act.musicMode === 'without_music' && (
+                              <span className="inline-flex items-center gap-1 text-[10px] sm:text-[11px] font-bold px-2 py-0.5 rounded-md bg-emerald-500/20 text-emerald-300 border border-emerald-500/35 font-sans whitespace-nowrap flex-shrink-0">
+                                <VolumeX className="w-3.5 h-3.5 text-emerald-400" />
+                                <span>{lang === 'fr' ? 'Sans musique' : 'بدون موسيقى'}</span>
+                              </span>
+                            )}
+                            {act.musicMode === 'with_music' && (
+                              <span className="inline-flex items-center gap-1 text-[10px] sm:text-[11px] font-bold px-2 py-0.5 rounded-md bg-violet-500/20 text-violet-300 border border-violet-500/35 font-sans whitespace-nowrap flex-shrink-0">
+                                <Music className="w-3.5 h-3.5 text-violet-400" />
+                                <span>{lang === 'fr' ? 'Avec musique' : 'بالموسيقى'}</span>
+                              </span>
+                            )}
                           </div>
                         </div>
                       ))}
@@ -298,24 +312,19 @@ export default function ScheduleSection({ lang, onOpenPostersModal }: ScheduleSe
                   {showMuscu && (
                     <div className="space-y-2">
                       {day.muscuSlots.map((rawSlot, idx) => {
-                        const { time, period } = parseMuscuSlot(rawSlot);
+                        const { time } = parseMuscuSlot(rawSlot);
                         return (
                           <div
                             key={idx}
-                            className="flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-adrena-surface border border-adrena-border text-sm font-sans"
+                            className="flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-adrena-surface border border-adrena-border text-sm font-sans gap-2"
                           >
-                            <div className="flex items-center gap-2 text-adrena-bone min-w-0 pr-2 rtl:pr-0 rtl:pl-2">
+                            <div className="flex items-center gap-2 text-adrena-bone">
                               <Dumbbell className="w-4 h-4 text-adrena-gold flex-shrink-0" />
-                              <span className="font-bold truncate text-sm">
+                              <span className="font-bold text-sm whitespace-nowrap">
                                 {lang === 'fr' ? 'Musculation' : 'حديد حر'}
-                                {period && (
-                                  <span className="text-xs font-semibold text-adrena-stone ml-1.5 rtl:ml-0 rtl:mr-1.5">
-                                    ({period})
-                                  </span>
-                                )}
                               </span>
                             </div>
-                            <span className="font-sans font-semibold text-adrena-gold tabular-nums text-sm whitespace-nowrap flex-shrink-0">
+                            <span className="font-sans font-semibold text-adrena-gold tabular-nums text-xs sm:text-sm whitespace-nowrap flex-shrink-0">
                               {time}
                             </span>
                           </div>
@@ -388,19 +397,33 @@ export default function ScheduleSection({ lang, onOpenPostersModal }: ScheduleSe
                           key={idx}
                           className="p-3.5 rounded-xl bg-adrena-surface border border-adrena-border hover:border-adrena-gold/40 transition-colors"
                         >
-                          <div className="flex items-start justify-between gap-2 mb-2">
-                            <span className="text-base font-bold text-adrena-bone font-sans leading-snug">
+                          <div className="flex items-center justify-between gap-2 mb-2">
+                            <span className="text-sm sm:text-base font-bold text-adrena-bone font-sans leading-snug">
                               {lang === 'fr' ? act.nameFr : act.nameAr}
                             </span>
                             {act.badge && (
-                              <span className="text-xs font-bold px-2.5 py-0.5 rounded-md bg-adrena-card text-adrena-stone border border-adrena-border uppercase tracking-wider font-sans flex-shrink-0">
+                              <span className="text-[10px] sm:text-[11px] font-bold px-2 py-0.5 rounded-md bg-adrena-card text-adrena-stone border border-adrena-border uppercase tracking-wider font-sans flex-shrink-0">
                                 {act.badge}
                               </span>
                             )}
                           </div>
-                          <div className="flex items-center gap-2 text-sm font-sans font-semibold text-adrena-gold tabular-nums">
-                            <Clock className="w-4 h-4 text-adrena-gold flex-shrink-0" />
-                            <span>{act.time.replace('-', '–')}</span>
+                          <div className="flex items-center justify-between gap-2 pt-2 border-t border-adrena-border/60">
+                            <div className="flex items-center gap-1.5 text-xs sm:text-sm font-sans font-semibold text-adrena-gold tabular-nums whitespace-nowrap">
+                              <Clock className="w-3.5 h-3.5 text-adrena-gold flex-shrink-0" />
+                              <span>{act.time.replace('-', '–')}</span>
+                            </div>
+                            {act.musicMode === 'without_music' && (
+                              <span className="inline-flex items-center gap-1 text-[10px] sm:text-[11px] font-bold px-2 py-0.5 rounded-md bg-emerald-500/20 text-emerald-300 border border-emerald-500/35 font-sans whitespace-nowrap flex-shrink-0">
+                                <VolumeX className="w-3.5 h-3.5 text-emerald-400" />
+                                <span>{lang === 'fr' ? 'Sans musique' : 'بدون موسيقى'}</span>
+                              </span>
+                            )}
+                            {act.musicMode === 'with_music' && (
+                              <span className="inline-flex items-center gap-1 text-[10px] sm:text-[11px] font-bold px-2 py-0.5 rounded-md bg-violet-500/20 text-violet-300 border border-violet-500/35 font-sans whitespace-nowrap flex-shrink-0">
+                                <Music className="w-3.5 h-3.5 text-violet-400" />
+                                <span>{lang === 'fr' ? 'Avec musique' : 'بالموسيقى'}</span>
+                              </span>
+                            )}
                           </div>
                         </div>
                       ))}
@@ -411,24 +434,19 @@ export default function ScheduleSection({ lang, onOpenPostersModal }: ScheduleSe
                   {showMuscu && (
                     <div className="space-y-2">
                       {day.muscuSlots.map((rawSlot, idx) => {
-                        const { time, period } = parseMuscuSlot(rawSlot);
+                        const { time } = parseMuscuSlot(rawSlot);
                         return (
                           <div
                             key={idx}
-                            className="flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-adrena-surface border border-adrena-border text-sm font-sans"
+                            className="flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-adrena-surface border border-adrena-border text-sm font-sans gap-2"
                           >
-                            <div className="flex items-center gap-2 text-adrena-bone min-w-0 pr-2 rtl:pr-0 rtl:pl-2">
+                            <div className="flex items-center gap-2 text-adrena-bone">
                               <Dumbbell className="w-4 h-4 text-adrena-gold flex-shrink-0" />
-                              <span className="font-bold truncate text-sm">
+                              <span className="font-bold text-sm whitespace-nowrap">
                                 {lang === 'fr' ? 'Musculation' : 'حديد حر'}
-                                {period && (
-                                  <span className="text-xs font-semibold text-adrena-stone ml-1.5 rtl:ml-0 rtl:mr-1.5">
-                                    ({period})
-                                  </span>
-                                )}
                               </span>
                             </div>
-                            <span className="font-sans font-semibold text-adrena-gold tabular-nums text-sm whitespace-nowrap flex-shrink-0">
+                            <span className="font-sans font-semibold text-adrena-gold tabular-nums text-xs sm:text-sm whitespace-nowrap flex-shrink-0">
                               {time}
                             </span>
                           </div>

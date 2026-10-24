@@ -9,6 +9,7 @@ export interface ScheduleDay {
     time: string;
     badge?: string;
     badgeColor?: string;
+    musicMode?: 'with_music' | 'without_music';
   }>;
 }
 
@@ -95,7 +96,22 @@ export const femmesSchedule: ScheduleDay[] = [
     dayNameAr: 'الأحد',
     muscuSlots: ['15:00 - 19:00 (Après-midi)'],
     activities: [
-      { nameFr: 'CrossTraining Femme', nameAr: 'كروس ترينينغ نسائي', time: '16:00 - 18:30', badge: 'Fitness', badgeColor: 'bg-pink-500/20 text-pink-400 border-pink-500/30' },
+      {
+        nameFr: 'CrossTraining Femme',
+        nameAr: 'كروس ترينينغ نسائي',
+        time: '16:00 - 17:00',
+        badge: 'Fitness',
+        badgeColor: 'bg-violet-500/20 text-violet-400 border-violet-500/30',
+        musicMode: 'with_music',
+      },
+      {
+        nameFr: 'CrossTraining Femme',
+        nameAr: 'كروس ترينينغ نسائي',
+        time: '17:30 - 18:30',
+        badge: 'Fitness',
+        badgeColor: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30',
+        musicMode: 'without_music',
+      },
     ],
   },
   {
@@ -111,8 +127,29 @@ export const femmesSchedule: ScheduleDay[] = [
     dayNameAr: 'الثلاثاء',
     muscuSlots: ['14:00 - 19:00 (Après-midi)'],
     activities: [
-      { nameFr: 'Kickboxing Femme', nameAr: 'كيك بوكسينغ نسائي', time: '14:00 - 15:15', badge: 'Self-Défense', badgeColor: 'bg-purple-500/20 text-purple-400 border-purple-500/30' },
-      { nameFr: 'CrossTraining Femme', nameAr: 'كروس ترينينغ نسائي', time: '16:00 - 18:30', badge: 'Fitness', badgeColor: 'bg-pink-500/20 text-pink-400 border-pink-500/30' },
+      {
+        nameFr: 'Kickboxing Femme',
+        nameAr: 'كيك بوكسينغ نسائي',
+        time: '14:00 - 15:15',
+        badge: 'Self-Défense',
+        badgeColor: 'bg-red-500/20 text-red-400 border-red-500/30',
+      },
+      {
+        nameFr: 'CrossTraining Femme',
+        nameAr: 'كروس ترينينغ نسائي',
+        time: '16:00 - 17:00',
+        badge: 'Fitness',
+        badgeColor: 'bg-violet-500/20 text-violet-400 border-violet-500/30',
+        musicMode: 'with_music',
+      },
+      {
+        nameFr: 'CrossTraining Femme',
+        nameAr: 'كروس ترينينغ نسائي',
+        time: '17:30 - 18:30',
+        badge: 'Fitness',
+        badgeColor: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30',
+        musicMode: 'without_music',
+      },
     ],
   },
   {
@@ -128,7 +165,22 @@ export const femmesSchedule: ScheduleDay[] = [
     dayNameAr: 'الخميس',
     muscuSlots: ['15:00 - 19:00 (Après-midi)'],
     activities: [
-      { nameFr: 'CrossTraining Femme', nameAr: 'كروس ترينينغ نسائي', time: '16:00 - 18:30', badge: 'Fitness', badgeColor: 'bg-pink-500/20 text-pink-400 border-pink-500/30' },
+      {
+        nameFr: 'CrossTraining Femme',
+        nameAr: 'كروس ترينينغ نسائي',
+        time: '16:00 - 17:00',
+        badge: 'Fitness',
+        badgeColor: 'bg-violet-500/20 text-violet-400 border-violet-500/30',
+        musicMode: 'with_music',
+      },
+      {
+        nameFr: 'CrossTraining Femme',
+        nameAr: 'كروس ترينينغ نسائي',
+        time: '17:30 - 18:30',
+        badge: 'Fitness',
+        badgeColor: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30',
+        musicMode: 'without_music',
+      },
     ],
   },
   {
@@ -137,7 +189,13 @@ export const femmesSchedule: ScheduleDay[] = [
     dayNameAr: 'الجمعة',
     muscuSlots: ['08:00 - 12:00 (Matinée)', '14:00 - 15:15 (Après-midi)'],
     activities: [
-      { nameFr: 'Kickboxing Femme', nameAr: 'كيك بوكسينغ نسائي', time: '14:00 - 15:15', badge: 'Self-Défense', badgeColor: 'bg-purple-500/20 text-purple-400 border-purple-500/30' },
+      {
+        nameFr: 'Kickboxing Femme',
+        nameAr: 'كيك بوكسينغ نسائي',
+        time: '14:00 - 15:15',
+        badge: 'Self-Défense',
+        badgeColor: 'bg-red-500/20 text-red-400 border-red-500/30',
+      },
     ],
   },
 ];
