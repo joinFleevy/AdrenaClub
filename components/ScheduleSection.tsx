@@ -289,7 +289,7 @@ export default function ScheduleSection({ lang, onOpenPostersModal }: ScheduleSe
                           <div className="flex items-center justify-between gap-2 pt-2 border-t border-adrena-border/60">
                             <div className="flex items-center gap-1.5 text-xs sm:text-sm font-sans font-semibold text-adrena-gold tabular-nums whitespace-nowrap">
                               <Clock className="w-3.5 h-3.5 text-adrena-gold flex-shrink-0" />
-                              <span>{act.time.replace('-', '–')}</span>
+                              <span dir="ltr" className="inline-block tabular-nums font-sans">{act.time.replace('-', '–')}</span>
                             </div>
                             {act.musicMode === 'without_music' && (
                               <span className="inline-flex items-center gap-1 text-[10px] sm:text-[11px] font-bold px-2 py-0.5 rounded-md bg-emerald-500/20 text-emerald-300 border border-emerald-500/35 font-sans whitespace-nowrap flex-shrink-0">
@@ -318,7 +318,7 @@ export default function ScheduleSection({ lang, onOpenPostersModal }: ScheduleSe
                                 {lang === 'fr' ? 'Musculation' : 'حديد حر'}
                               </span>
                             </div>
-                            <span className="font-sans font-semibold text-adrena-gold tabular-nums text-xs sm:text-sm whitespace-nowrap flex-shrink-0">
+                            <span dir="ltr" className="font-sans font-semibold text-adrena-gold tabular-nums text-xs sm:text-sm whitespace-nowrap flex-shrink-0">
                               {time}
                             </span>
                           </div>
@@ -404,7 +404,7 @@ export default function ScheduleSection({ lang, onOpenPostersModal }: ScheduleSe
                           <div className="flex items-center justify-between gap-2 pt-2 border-t border-adrena-border/60">
                             <div className="flex items-center gap-1.5 text-xs sm:text-sm font-sans font-semibold text-adrena-gold tabular-nums whitespace-nowrap">
                               <Clock className="w-3.5 h-3.5 text-adrena-gold flex-shrink-0" />
-                              <span>{act.time.replace('-', '–')}</span>
+                              <span dir="ltr" className="inline-block tabular-nums font-sans">{act.time.replace('-', '–')}</span>
                             </div>
                             {act.musicMode === 'without_music' && (
                               <span className="inline-flex items-center gap-1 text-[10px] sm:text-[11px] font-bold px-2 py-0.5 rounded-md bg-emerald-500/20 text-emerald-300 border border-emerald-500/35 font-sans whitespace-nowrap flex-shrink-0">
@@ -434,7 +434,7 @@ export default function ScheduleSection({ lang, onOpenPostersModal }: ScheduleSe
                                 {lang === 'fr' ? 'Musculation' : 'حديد حر'}
                               </span>
                             </div>
-                            <span className="font-sans font-semibold text-adrena-gold tabular-nums text-xs sm:text-sm whitespace-nowrap flex-shrink-0">
+                            <span dir="ltr" className="font-sans font-semibold text-adrena-gold tabular-nums text-xs sm:text-sm whitespace-nowrap flex-shrink-0">
                               {time}
                             </span>
                           </div>
