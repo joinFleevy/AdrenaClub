@@ -19,6 +19,7 @@ import {
   musculationPlans,
   crosstrainingPlans,
   combatPlans,
+  mixedPlans,
   PricingPlan,
 } from '@/data/pricing';
 
@@ -28,46 +29,6 @@ interface PricingSectionProps {
 }
 
 type PricingTab = 'musculation' | 'combat' | 'crosstraining' | 'mixtes';
-
-const mixedPlans: PricingPlan[] = [
-  {
-    id: 'mixte-1',
-    nameFr: 'Pack Découverte Mixte',
-    nameAr: 'باقة مدمجة أولية',
-    frequencyFr: '2x Combat + 2x Musculation / semaine',
-    frequencyAr: 'حصتان قتال + حصتان كمال أجسام أسبوعياً',
-    price: 3200,
-    periodFr: 'DA / mois',
-    periodAr: 'دج / شهر',
-    featuresFr: ['Accès au ring ou tatami 2x/sem', 'Accès au plateau musculation 2x/sem', 'Vestiaires et douches inclus'],
-    featuresAr: ['دخول الحلبة أو البساط مرتين أسبوعياً', 'دخول قاعة الحديد مرتين أسبوعياً', 'غرف تبديل الملابس ودوش'],
-  },
-  {
-    id: 'mixte-2',
-    nameFr: 'Pack Athlète Complet',
-    nameAr: 'باقة الرياضي الشاملة',
-    frequencyFr: '2x Combat + 3x Musculation / semaine',
-    frequencyAr: 'حصتان قتال + 3 حصص كمال أجسام أسبوعياً',
-    price: 3600,
-    periodFr: 'DA / mois',
-    periodAr: 'دج / شهر',
-    isPopular: true,
-    featuresFr: ['La formule la plus demandée au club', 'Perfectionnement technique en combat', 'Développement musculaire ciblé', 'Encadrement par les coachs'],
-    featuresAr: ['الباقة الأكثر طلباً في النادي', 'تطوير تقني في فنون القتال', 'بناء وتضخيم عضلي مستمر', 'متابعة وتأطير فني معتمد'],
-  },
-  {
-    id: 'mixte-3',
-    nameFr: 'Pack Performance Pro',
-    nameAr: 'باقة الاحتراف والأداء',
-    frequencyFr: '3x Combat + 3x Musculation / semaine',
-    frequencyAr: '3 حصص قتال + 3 حصص كمال أجسام أسبوعياً',
-    price: 4100,
-    periodFr: 'DA / mois',
-    periodAr: 'دج / شهر',
-    featuresFr: ['6 entraînements par semaine', 'Idéal pour compétiteurs & athlètes', 'Accès prioritaire aux équipements'],
-    featuresAr: ['6 حصص تدريب أسبوعياً', 'مثالية للمتنافسين والرياضيين المتقدمين', 'أولوية الاستفادة من التجهيزات'],
-  },
-];
 
 // Bulletproof non-breaking space formatter (\u00A0) preventing line breaks in numbers
 const formatPrice = (p: number) => p.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '\u00A0');
@@ -108,7 +69,7 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
     } else if (tab === 'crosstraining') {
       setSelectedPlanIndex(1); // 2 Séances
     } else if (tab === 'mixtes') {
-      setSelectedPlanIndex(1); // Pack Athlète
+      setSelectedPlanIndex(0); // Cross 2 + Muscu 2 (Most popular)
     } else {
       setSelectedPlanIndex(0);
     }
@@ -132,7 +93,7 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
     musculation: { fr: 'Musculation', ar: 'كمال الأجسام', countFr: '6 formules', countAr: '6 باقات', icon: Dumbbell },
     combat: { fr: 'Sports de Combat', ar: 'رياضات القتال', countFr: '3 disciplines', countAr: '3 فئات', icon: Shield },
     crosstraining: { fr: 'Cross-Training', ar: 'كروس ترينينغ', countFr: '3 formules', countAr: '3 باقات', icon: Flame },
-    mixtes: { fr: 'Formules Mixtes', ar: 'الباقات المدمجة', countFr: '3 formules', countAr: '3 باقات', icon: Layers },
+    mixtes: { fr: 'Formules Mixtes', ar: 'الباقات المدمجة', countFr: '6 formules', countAr: '6 باقات', icon: Layers },
   };
 
   const getChipShortTitle = (plan: PricingPlan): { titleFr: string; titleAr: string } => {
@@ -151,9 +112,12 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
     if (plan.id === 'combat-kick-judo') return { titleFr: 'Kick / Judo', titleAr: 'كيك / جودو' };
     if (plan.id === 'combat-lutte') return { titleFr: 'Lutte', titleAr: 'مصارعة' };
 
-    if (plan.id === 'mixte-1') return { titleFr: 'Découverte', titleAr: 'باقة أولية' };
-    if (plan.id === 'mixte-2') return { titleFr: 'Athlète', titleAr: 'باقة الرياضي' };
-    if (plan.id === 'mixte-3') return { titleFr: 'Pro', titleAr: 'باقة الاحتراف' };
+    if (plan.id === 'mixte-cross-2-muscu-2') return { titleFr: 'Cross 2 + Muscu 2', titleAr: 'كروس 2 + حديد 2' };
+    if (plan.id === 'mixte-cross-1-muscu-2') return { titleFr: 'Cross 1 + Muscu 2', titleAr: 'كروس 1 + حديد 2' };
+    if (plan.id === 'mixte-kick-muscu-2') return { titleFr: 'Kick + Muscu 2', titleAr: 'كيك + حديد 2' };
+    if (plan.id === 'mixte-cross-2-muscu-3') return { titleFr: 'Cross 2 + Muscu 3', titleAr: 'كروس 2 + حديد 3' };
+    if (plan.id === 'mixte-kick-muscu-1') return { titleFr: 'Kick + Muscu 1', titleAr: 'كيك + حديد 1' };
+    if (plan.id === 'mixte-lutte-muscu-2') return { titleFr: 'Lutte + Muscu 2', titleAr: 'مصارعة + حديد 2' };
 
     return { titleFr: plan.nameFr, titleAr: plan.nameAr };
   };
@@ -613,6 +577,38 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
                   showAllMuscu ? 'rotate-180' : ''
                 }`}
               />
+            </button>
+          </div>
+        )}
+
+        {/* Formules Mixtes Official Poster Access Banner */}
+        {activeTab === 'mixtes' && (
+          <div className="mt-8 p-4 sm:p-5 rounded-2xl bg-adrena-card border border-adrena-border/90 shadow-lg max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            <div className="flex items-center gap-3.5 text-center sm:text-left rtl:sm:text-right">
+              <div className="w-10 h-10 rounded-xl bg-adrena-surface border border-adrena-gold/40 flex items-center justify-center flex-shrink-0 text-adrena-gold">
+                <ImageIcon className="w-5 h-5" />
+              </div>
+              <div>
+                <p className="text-sm sm:text-base font-extrabold text-white">
+                  {isAr ? 'أكثر من 50 تركيبة مدمجة رسمية متوفرة في النادي' : 'Plus de 50 combinaisons mixtes officielles au club'}
+                </p>
+                <p className="text-xs sm:text-sm text-adrena-stone mt-0.5 font-medium">
+                  {isAr
+                    ? 'يمكنك دمج أي عدد من حصص الكروس أو القتال مع كمال الأجسام بسعر تفضيلي ومباشر'
+                    : 'Associez librement vos séances de cross ou combat avec la musculation à tarif réduit'}
+                </p>
+              </div>
+            </div>
+
+            <button
+              type="button"
+              onClick={() => onOpenPostersModal('mixtes')}
+              className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-adrena-gold hover:bg-adrena-gold-light text-adrena-black font-black text-xs sm:text-sm uppercase tracking-wider transition-all shadow-md active:scale-[0.98] cursor-pointer whitespace-nowrap flex-shrink-0"
+            >
+              <ImageIcon className="w-4 h-4 flex-shrink-0" />
+              <span>
+                {isAr ? 'مشاهدة جدول الأسعار المدمجة الأصلي' : 'Consulter le tableau officiel (50+ formules)'}
+              </span>
             </button>
           </div>
         )}

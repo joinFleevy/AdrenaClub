@@ -20,6 +20,12 @@ const posters = [
     src: '/images/posters/tarifs_officiels.jpg',
   },
   {
+    id: 'mixtes',
+    titleFr: 'Grille Officielle des Tarifs Mixtes (50+ formules)',
+    titleAr: 'قائمة الأسعار الرسمية للباقات المدمجة (أكثر من 50 تركيبة)',
+    src: '/images/posters/tarifs_mixtes.jpg',
+  },
+  {
     id: 'hommes',
     titleFr: 'Planning Hommes — Musculation (06:00 - 00:00)',
     titleAr: 'مخطط كمال الأجسام للرجال (06:00 - 00:00)',
@@ -55,6 +61,15 @@ export default function OfficialPostersModal({
     const idx = posters.findIndex((p) => p.id === initialPoster);
     return idx !== -1 ? idx : 0;
   });
+
+  useEffect(() => {
+    if (isOpen && initialPoster) {
+      const idx = posters.findIndex((p) => p.id === initialPoster);
+      if (idx !== -1) {
+        setCurrentIndex(idx);
+      }
+    }
+  }, [isOpen, initialPoster]);
 
   useEffect(() => {
     if (!isOpen) return;
