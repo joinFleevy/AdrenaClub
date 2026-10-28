@@ -39,8 +39,8 @@ const posters = [
   },
   {
     id: 'femmes',
-    titleFr: 'Planning Femmes — Séances avec & sans musique',
-    titleAr: 'مخطط أوقات النساء — حصص بالموسيقى وبدون موسيقى',
+    titleFr: 'Planning Femmes — Séances dédiées sans musique',
+    titleAr: 'مخطط أوقات النساء — فضاء خاص وحصص بدون موسيقى',
     src: '/images/posters/planning_femmes.jpg',
   },
   {

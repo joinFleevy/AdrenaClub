@@ -11,7 +11,7 @@ interface HeroProps {
 
 export default function Hero({ lang }: HeroProps) {
   const isAr = lang === 'ar';
-  const [activeFloor, setActiveFloor] = useState<'soussol' | 'rdc'>('soussol');
+  const [activeFloor, setActiveFloor] = useState<'soussol' | 'rdc'>('rdc');
 
   return (
     <section id="accueil" className="relative pt-24 pb-12 sm:pt-36 sm:pb-16 bg-adrena-black border-b border-adrena-border">
@@ -32,8 +32,8 @@ export default function Hero({ lang }: HeroProps) {
 
             <p className="text-sm sm:text-base lg:text-lg text-adrena-stone max-w-[54ch] leading-relaxed mb-6 sm:mb-8 font-normal">
               {isAr
-                ? 'طابقان مجهزان بأحدث عتاد كمال الأجسام والقوة البدنية، حلبة ملاكمة وبساط نزال معتمد، وفضاء نسائي مستقل 100% مع حصص بالموسيقى وأخرى بدون موسيقى.'
-                : 'Deux niveaux dédiés à l\'entraînement : plateau musculation charges libres, ring de combat, tatami d\'arts martiaux et espace 100% femmes avec séances avec ou sans musique.'}
+                ? 'طابقان مجهزان بأحدث عتاد كمال الأجسام والقوة البدنية، حلبة ملاكمة وبساط نزال معتمد، وفضاء نسائي مستقل 100% مع حصص خاصة بدون موسيقى.'
+                : 'Deux niveaux dédiés à l\'entraînement : plateau musculation charges libres, ring de combat, tatami d\'arts martiaux et espace 100% femmes avec séances dédiées sans musique.'}
             </p>
 
             {/* Direct Primary Actions - Clean Non-Competing Action Pair */}
@@ -162,7 +162,7 @@ export default function Hero({ lang }: HeroProps) {
               {isAr ? 'فضاء النساء' : 'Espace 100% Femmes'}
             </span>
             <p className="font-extrabold text-white text-base">
-              {isAr ? 'حصص بالموسيقى وبدونها' : 'Avec & Sans Musique'}
+              {isAr ? 'فضاء خاص وحصص بدون موسيقى' : 'Espace privé & sans musique'}
             </p>
             <p className="text-adrena-stone text-xs mt-0.5">
               {isAr ? 'طابق أرضي مع مدربات' : 'RDC privé avec coachs féminines'}

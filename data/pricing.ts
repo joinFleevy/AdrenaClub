@@ -345,6 +345,111 @@ export const mixedPlans: PricingPlan[] = [
   },
 ];
 
+export type MixedDisciplineKey = 'cross' | 'kick' | 'lutte';
+
+export interface OfficialMixedRate {
+  discipline: MixedDisciplineKey;
+  disciplineSessions: number;
+  muscuSessions: number;
+  price: number;
+}
+
+export const officialMixedRates: OfficialMixedRate[] = [
+  // Cross + Muscu
+  { discipline: 'cross', disciplineSessions: 1, muscuSessions: 1, price: 3000 },
+  { discipline: 'cross', disciplineSessions: 1, muscuSessions: 2, price: 3500 },
+  { discipline: 'cross', disciplineSessions: 1, muscuSessions: 3, price: 4200 },
+  { discipline: 'cross', disciplineSessions: 1, muscuSessions: 4, price: 4800 },
+  { discipline: 'cross', disciplineSessions: 1, muscuSessions: 5, price: 5000 },
+  { discipline: 'cross', disciplineSessions: 1, muscuSessions: 6, price: 5500 },
+  { discipline: 'cross', disciplineSessions: 2, muscuSessions: 1, price: 3500 },
+  { discipline: 'cross', disciplineSessions: 2, muscuSessions: 2, price: 4500 },
+  { discipline: 'cross', disciplineSessions: 2, muscuSessions: 3, price: 4800 },
+  { discipline: 'cross', disciplineSessions: 2, muscuSessions: 4, price: 5000 },
+  { discipline: 'cross', disciplineSessions: 2, muscuSessions: 5, price: 5500 },
+  { discipline: 'cross', disciplineSessions: 2, muscuSessions: 6, price: 6000 },
+  { discipline: 'cross', disciplineSessions: 3, muscuSessions: 1, price: 4000 },
+  { discipline: 'cross', disciplineSessions: 3, muscuSessions: 2, price: 4800 },
+  { discipline: 'cross', disciplineSessions: 3, muscuSessions: 3, price: 5000 },
+  { discipline: 'cross', disciplineSessions: 3, muscuSessions: 4, price: 5500 },
+  { discipline: 'cross', disciplineSessions: 3, muscuSessions: 5, price: 6000 },
+  { discipline: 'cross', disciplineSessions: 3, muscuSessions: 6, price: 6500 },
+  { discipline: 'cross', disciplineSessions: 4, muscuSessions: 1, price: 5000 },
+  { discipline: 'cross', disciplineSessions: 4, muscuSessions: 2, price: 5500 },
+  { discipline: 'cross', disciplineSessions: 4, muscuSessions: 3, price: 6000 },
+
+  // Kickboxing + Muscu
+  { discipline: 'kick', disciplineSessions: 1, muscuSessions: 1, price: 3500 },
+  { discipline: 'kick', disciplineSessions: 1, muscuSessions: 2, price: 4000 },
+  { discipline: 'kick', disciplineSessions: 1, muscuSessions: 3, price: 4500 },
+  { discipline: 'kick', disciplineSessions: 1, muscuSessions: 4, price: 5000 },
+  { discipline: 'kick', disciplineSessions: 1, muscuSessions: 5, price: 5500 },
+  { discipline: 'kick', disciplineSessions: 1, muscuSessions: 6, price: 6000 },
+  { discipline: 'kick', disciplineSessions: 2, muscuSessions: 1, price: 3500 },
+  { discipline: 'kick', disciplineSessions: 2, muscuSessions: 2, price: 4500 },
+  { discipline: 'kick', disciplineSessions: 2, muscuSessions: 3, price: 4800 },
+  { discipline: 'kick', disciplineSessions: 2, muscuSessions: 4, price: 5000 },
+  { discipline: 'kick', disciplineSessions: 2, muscuSessions: 5, price: 5500 },
+  { discipline: 'kick', disciplineSessions: 3, muscuSessions: 1, price: 4000 },
+  { discipline: 'kick', disciplineSessions: 3, muscuSessions: 2, price: 5000 },
+  { discipline: 'kick', disciplineSessions: 3, muscuSessions: 3, price: 5500 },
+  { discipline: 'kick', disciplineSessions: 3, muscuSessions: 4, price: 6000 },
+  { discipline: 'kick', disciplineSessions: 3, muscuSessions: 5, price: 6500 },
+  { discipline: 'kick', disciplineSessions: 4, muscuSessions: 1, price: 5000 },
+  { discipline: 'kick', disciplineSessions: 4, muscuSessions: 2, price: 6000 },
+  { discipline: 'kick', disciplineSessions: 4, muscuSessions: 3, price: 6500 },
+  { discipline: 'kick', disciplineSessions: 4, muscuSessions: 4, price: 7000 },
+
+  // Lutte + Muscu
+  { discipline: 'lutte', disciplineSessions: 2, muscuSessions: 1, price: 3500 },
+  { discipline: 'lutte', disciplineSessions: 2, muscuSessions: 2, price: 4500 },
+  { discipline: 'lutte', disciplineSessions: 2, muscuSessions: 3, price: 4800 },
+  { discipline: 'lutte', disciplineSessions: 2, muscuSessions: 4, price: 5000 },
+];
+
+export const muscuStandalonePrices: Record<number, number> = {
+  1: 2000,
+  2: 3000,
+  3: 3500,
+  4: 4000,
+  5: 4200,
+  6: 4500,
+};
+
+export const disciplineStandalonePrices: Record<MixedDisciplineKey, Record<number, number>> = {
+  cross: { 1: 2000, 2: 2500, 3: 3000, 4: 4000 },
+  kick: { 1: 2000, 2: 2500, 3: 3000, 4: 4000 },
+  lutte: { 2: 2500 },
+};
+
+export function lookupOfficialMixedRate(
+  discipline: MixedDisciplineKey,
+  disciplineSessions: number,
+  muscuSessions: number
+): { price: number; standalonePrice: number; savings: number } {
+  const match = officialMixedRates.find(
+    (r) =>
+      r.discipline === discipline &&
+      r.disciplineSessions === disciplineSessions &&
+      r.muscuSessions === muscuSessions
+  );
+
+  const muscuCost = muscuStandalonePrices[muscuSessions] || 4500;
+  const discCost =
+    disciplineStandalonePrices[discipline]?.[disciplineSessions] ||
+    (discipline === 'lutte' ? 2500 : 2500);
+  const standaloneTotal = muscuCost + discCost;
+
+  if (match) {
+    const savings = Math.max(0, standaloneTotal - match.price);
+    return { price: match.price, standalonePrice: standaloneTotal, savings };
+  }
+
+  // Fallback calculation if combination outside standard grid
+  const fallbackPrice = Math.max(3500, standaloneTotal - 1000);
+  return { price: fallbackPrice, standalonePrice: standaloneTotal, savings: 1000 };
+}
+
 export const formulesMixtesMatrix = [
   { cross: 1, muscu: 1, price: 3000 },
   { cross: 1, muscu: 2, price: 3500 },

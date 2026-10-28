@@ -19,8 +19,8 @@ export default function WomensSanctuary({ lang }: WomensSanctuaryProps) {
           desc: 'قاعة مستقلة تماماً، بدون أي رؤية من الخارج، مع غرف تبديل ملابس ودوشات خاصة.',
         },
         {
-          title: 'حصص مخصصة بدون موسيقى وأخرى بالموسيقى',
-          desc: 'حرية اختيار تامة: حصص هادئة ومخصصة بدون موسيقى لتوفير أقصى درجات التركيز، إلى جانب حصص حماسية بالموسيقى.',
+          title: 'حصص هادئة مخصصة بدون موسيقى',
+          desc: 'حصص هادئة ومخصصة بدون موسيقى لتوفير أقصى درجات التركيز والراحة، بإشراف مدربات مؤهلات.',
         },
         {
           title: 'تأطير ومدربات معتمدات',
@@ -37,8 +37,8 @@ export default function WomensSanctuary({ lang }: WomensSanctuaryProps) {
           desc: 'Salle entièrement fermée sans vis-à-vis, avec vestiaires et douches dédiés.',
         },
         {
-          title: 'Séances avec musique & séances sans musique',
-          desc: 'Liberté de choix : créneaux calmes sans musique pour une sérénité totale, et séances rythmées avec musique selon vos envies.',
+          title: 'Séances calmes sans musique au choix',
+          desc: 'Créneaux spécifiques sans musique pour une sérénité et une concentration totales, encadrées par des coachs féminines.',
         },
         {
           title: 'Encadrement par des coachs féminines',
@@ -72,7 +72,7 @@ export default function WomensSanctuary({ lang }: WomensSanctuaryProps) {
                 <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-xs text-white">
                   <div className="flex items-center gap-2 bg-adrena-black/90 px-3 py-1.5 rounded-lg border border-adrena-border">
                     <VolumeX className="w-3.5 h-3.5 text-adrena-gold flex-shrink-0" />
-                    <span className="font-bold">{isAr ? 'حصص بدون موسيقى + حصص بالموسيقى' : 'Séances Sans & Avec Musique'}</span>
+                    <span className="font-bold">{isAr ? 'حصص مخصصة بدون موسيقى' : 'Séances dédiées Sans Musique'}</span>
                   </div>
                   <a
                     href="#planning"

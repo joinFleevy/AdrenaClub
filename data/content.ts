@@ -298,7 +298,7 @@ export const content: Record<Language, ContentStrings> = {
           title: "Créneaux Femmes (Avec & Sans Musique)",
           category: "100% Réservé",
           image: "/images/disciplines/femmes.jpg",
-          desc: "Horaires exclusifs pour femmes assurant intimité et sérénité. Séances avec musique et créneaux calmes sans musique au choix, avec coachs féminines.",
+          desc: "Horaires exclusifs pour femmes assurant intimité et sérénité. Séances calmes sans musique au choix, avec coachs féminines.",
           features: ["Portes fermées & intimité totale", "Kickboxing féminin dédié", "Musculation & Cross-training adaptés"],
         },
         {
@@ -477,7 +477,7 @@ export const content: Record<Language, ContentStrings> = {
         },
         {
           title: "Séances Dédiées Sans Musique",
-          desc: "Des créneaux spécifiques sans musique programmés pour favoriser la concentration, la tranquillité et l'effort serein, aux côtés de cours rythmés avec musique.",
+          desc: "Des créneaux spécifiques sans musique programmés pour favoriser la concentration, la tranquillité et l'effort serein, avec coachs féminines.",
         },
         {
           title: "Coachs Féminines Qualifiées",
@@ -528,7 +528,7 @@ export const content: Record<Language, ContentStrings> = {
   ar: {
     meta: {
       title: "نادي أدرينا سبورت | صالة تدريب رياضية في باب الزوار",
-      description: "نادي أدرينا سبورت باب الزوار: مجمع رياضي على طابقين. كمال أجسام، كروس ترينينغ، حلبة ملاكمة، مصارعة، جودو، ساونا وفترات خاصة للنساء بحصص بالموسيقى وأخرى بدون موسيقى.",
+      description: "نادي أدرينا سبورت باب الزوار: مجمع رياضي على طابقين. كمال أجسام، كروس ترينينغ، حلبة ملاكمة، مصارعة، جودو، ساونا وفترات خاصة للنساء بحصص هادئة ومخصصة بدون موسيقى.",
     },
     topBar: {
       address: "الحي الجامعي CUB1، باب الزوار، الجزائر العاصمة",
@@ -551,20 +551,20 @@ export const content: Record<Language, ContentStrings> = {
     hero: {
       tagline: "مجمع رياضي متكامل • باب الزوار • طابقان",
       title: "طابقان من التدريب والاحتراف في باب الزوار.",
-      subtitle: "كمال أجسام بأحدث الأجهزة، حلبة ملاكمة وبساط تاتامي، وفترات خاصة ومغلقة للنساء مع خيارات بحصص بالموسيقى وأخرى بدون موسيقى. مفتوح يومياً حتى منتصف الليل.",
+      subtitle: "كمال أجسام بأحدث الأجهزة، حلبة ملاكمة وبساط تاتامي، وفترات خاصة ومغلقة للنساء مع حصص بدون موسيقى. مفتوح يومياً حتى منتصف الليل.",
       motto: "« الانضباط، الاحترام، والتطور البدني : بيئة تدريب استثنائية في باب الزوار »",
       ctaPrimary: "تواصل معنا مباشرة عبر واتساب",
       ctaSecondary: "جولة 360° داخل الصالة",
       pillars: [
         { title: "طابقان مجهزان بالكامل", desc: "الاستقبال والخدمات بالطابق الأرضي، وقاعات التدريب بالطابق السفلي" },
         { title: "حتى منتصف الليل (00:00)", desc: "مفتوح يومياً للرجال ابتداءً من 06:00 صباحاً" },
-        { title: "فترات خاصة للنساء", desc: "خصوصية تامة، حصص بالموسيقى وبدونها مع مدربات" },
+        { title: "فترات خاصة للنساء", desc: "خصوصية تامة، حصص مخصصة بدون موسيقى مع مدربات" },
         { title: "حلبة ملاكمة وبساط نزال", desc: "كيك بوكسينغ، مصارعة وجودو مع مدربين معتمدين" },
       ],
       trustBadges: [
         { title: "طابقان مجهزان بالكامل", subtitle: "كمال أجسام وفنون قتالية" },
         { title: "حلبة وبساط معتمد", subtitle: "للملاكمة والمصارعة والجودو" },
-        { title: "أوقات مخصصة للنساء", subtitle: "حصص بالموسيقى وأخرى بدون موسيقى" },
+        { title: "أوقات مخصصة للنساء", subtitle: "فضاء مستقل وحصص بدون موسيقى" },
         { title: "+160 تقييم Google", subtitle: "تقييم 4.9/5 من الأعضاء" },
       ],
     },
@@ -624,10 +624,10 @@ export const content: Record<Language, ContentStrings> = {
         },
         {
           id: "femmes",
-          title: "فترات النساء (بالموسيقى وبدون موسيقى)",
+          title: "فترات النساء (حصص بدون موسيقى)",
           category: "خصوصية تامة",
           image: "/images/disciplines/femmes.jpg",
-          desc: "مواعيد مغلقة تماماً للنساء تضمن الخصوصية والاحترام، مع حصص هادئة بدون موسيقى وأخرى حماسية بالموسيقى بإشراف مدربات متخصصات.",
+          desc: "مواعيد مغلقة تماماً للنساء تضمن الخصوصية والاحترام، مع حصص هادئة ومخصصة بدون موسيقى بإشراف مدربات متخصصات.",
           features: ["أبواب مغلقة وخصوصية كاملة", "كيك بوكسينغ نسائي مخصص", "حصص كمال أجسام ورشاقة ملائمة"],
         },
         {
@@ -805,8 +805,8 @@ export const content: Record<Language, ContentStrings> = {
           desc: "منع تام لدخول الرجال خلال الأوقات المخصصة للنساء. نوافذ ومداخل محجوبة بالكامل لتوفير بيئة تدريب آمنة ومريحة.",
         },
         {
-          title: "حصص مخصصة بدون موسيقى وأخرى بالموسيقى",
-          desc: "حرية اختيار تامة بين جلسات هادئة بدون أي موسيقى تمنحكِ الراحة النفسية والتركيز، وحصص حماسية بإيقاع وموسيقى حسب رغبتكِ.",
+          title: "حصص مخصصة بدون موسيقى",
+          desc: "جلسات هادئة مخصصة بدون أي موسيقى تمنحكِ الراحة النفسية والتركيز، بإشراف وتأطير مدربات مؤهلات.",
         },
         {
           title: "مدربات معتمدات ومتخصصات",

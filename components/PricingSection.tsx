@@ -13,8 +13,11 @@ import {
   ChevronLeft,
   ChevronRight,
   SlidersHorizontal,
+  Calculator,
+  Sparkles,
 } from 'lucide-react';
 import { Language, content } from '@/data/content';
+import PricingCalculator from './PricingCalculator';
 import {
   musculationPlans,
   crosstrainingPlans,
@@ -40,6 +43,7 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
   const [selectedPlanIndex, setSelectedPlanIndex] = useState<number>(2); // Default to 3 séances (index 2)
   const [showAllMuscu, setShowAllMuscu] = useState<boolean>(false);
   const [showMobileAllGrid, setShowMobileAllGrid] = useState<boolean>(false);
+  const [mixedViewMode, setMixedViewMode] = useState<'calculator' | 'cards'>('calculator');
 
   const getAllPlansForTab = (): PricingPlan[] => {
     switch (activeTab) {
@@ -195,11 +199,52 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
           })}
         </div>
 
-        {/* ============================================================== */}
-        {/* MOBILE VIEW (< md): Interactive Frequency Selector + Hero Card */}
-        {/* Solves scrolling fatigue & exposes 100% of offers in place    */}
-        {/* ============================================================== */}
-        <div className="block md:hidden">
+        {/* For Mixed Plans: Toggle between Interactive Calculator (50+ combinations) and Curated Cards (6) */}
+        {activeTab === 'mixtes' && (
+          <div className="flex items-center justify-center gap-2 mb-6 sm:mb-8" role="tablist" aria-label="Mode formules mixtes">
+            <button
+              type="button"
+              role="tab"
+              aria-selected={mixedViewMode === 'calculator'}
+              onClick={() => setMixedViewMode('calculator')}
+              className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer border ${
+                mixedViewMode === 'calculator'
+                  ? 'bg-adrena-gold text-adrena-black border-adrena-gold shadow-md font-black'
+                  : 'bg-adrena-card hover:bg-adrena-surface text-adrena-stone hover:text-white border-adrena-border'
+              }`}
+            >
+              <Calculator className={`w-4 h-4 flex-shrink-0 ${mixedViewMode === 'calculator' ? 'text-adrena-black' : 'text-adrena-gold'}`} />
+              <span>{isAr ? 'حاسبة الباقات المدمجة (50+)' : 'Simulateur Sur-Mesure (50+)'}</span>
+            </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected={mixedViewMode === 'cards'}
+              onClick={() => setMixedViewMode('cards')}
+              className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer border ${
+                mixedViewMode === 'cards'
+                  ? 'bg-adrena-gold text-adrena-black border-adrena-gold shadow-md font-black'
+                  : 'bg-adrena-card hover:bg-adrena-surface text-adrena-stone hover:text-white border-adrena-border'
+              }`}
+            >
+              <Sparkles className={`w-4 h-4 flex-shrink-0 ${mixedViewMode === 'cards' ? 'text-adrena-black' : 'text-adrena-gold'}`} />
+              <span>{isAr ? 'الباقات الأكثر طلباً (6)' : 'Formules Populaires (6)'}</span>
+            </button>
+          </div>
+        )}
+
+        {activeTab === 'mixtes' && mixedViewMode === 'calculator' ? (
+          <PricingCalculator
+            lang={lang}
+            onOpenPoster={() => onOpenPostersModal('mixtes')}
+          />
+        ) : (
+          <>
+            {/* ============================================================== */}
+            {/* MOBILE VIEW (< md): Interactive Frequency Selector + Hero Card */}
+            {/* Solves scrolling fatigue & exposes 100% of offers in place    */}
+            {/* ============================================================== */}
+            <div className="block md:hidden">
           {/* Quick Frequency / Offer Chips Matrix */}
           <div className="mb-3">
             <div className="flex items-center justify-between text-[11px] font-bold text-adrena-stone mb-1.5 px-0.5">
@@ -580,6 +625,8 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
               </span>
             </button>
           </div>
+        )}
+          </>
         )}
 
         {/* Practical Registration Guidance Box */}

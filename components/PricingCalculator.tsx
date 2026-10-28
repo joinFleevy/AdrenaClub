@@ -1,398 +1,457 @@
 'use client';
 
-import React, { useState } from 'react';
-import { Calculator, Sparkles, Check, MessageCircle, Flame, Dumbbell } from 'lucide-react';
-import { Language, content } from '@/data/content';
-import { formulesMixtesMatrix } from '@/data/pricing';
+import React, { useState, useMemo } from 'react';
+import { Calculator, Flame, Shield, Dumbbell, Sparkles, Check, MessageCircle, ImageIcon, Plus } from 'lucide-react';
+import { Language } from '@/data/content';
+import {
+  MixedDisciplineKey,
+  lookupOfficialMixedRate,
+} from '@/data/pricing';
 
 interface PricingCalculatorProps {
   lang: Language;
+  onOpenPoster?: () => void;
 }
 
-export default function PricingCalculator({ lang }: PricingCalculatorProps) {
-  const t = content[lang].calculator;
+export default function PricingCalculator({ lang, onOpenPoster }: PricingCalculatorProps) {
   const isAr = lang === 'ar';
 
-  const [formulaType, setFormulaType] = useState<'mixte' | 'muscu' | 'combat'>('mixte');
-  const [crossSessions, setCrossSessions] = useState<number>(2);
-  const [muscuSessions, setMuscuSessions] = useState<number>(3);
+  const [discipline, setDiscipline] = useState<MixedDisciplineKey>('cross');
+  const [disciplineSessions, setDisciplineSessions] = useState<number>(2);
+  const [muscuSessions, setMuscuSessions] = useState<number>(2);
   const [includeSauna, setIncludeSauna] = useState<boolean>(false);
-  const [includeNutrition, setIncludeNutrition] = useState<boolean>(false);
 
-  // Standalone muscu pricing
-  const muscuStandalonePrice: Record<number, number> = {
-    1: 2000,
-    2: 3000,
-    3: 3500,
-    4: 4000,
-    5: 4200,
-    6: 4500, // unlimited
-  };
+  // Available sessions per discipline
+  const availableDisciplineSessions: number[] = useMemo(() => {
+    if (discipline === 'lutte') return [2];
+    return [1, 2, 3, 4];
+  }, [discipline]);
 
-  // Mixed formula matrix lookup
-  const getMixedBasePrice = (cross: number, muscu: number): number => {
-    const item = formulesMixtesMatrix.find((f) => f.cross === cross && f.muscu === muscu);
-    if (item) return item.price;
-    // Safe formula calculation if outside predefined matrix
-    return 3000 + (cross - 1) * 600 + (muscu - 1) * 500;
-  };
-
-  const calculateTotal = (): number => {
-    let base = 0;
-    if (formulaType === 'mixte') {
-      base = getMixedBasePrice(crossSessions, muscuSessions);
-    } else if (formulaType === 'muscu') {
-      base = muscuStandalonePrice[muscuSessions] || 3500;
+  // Handle discipline change
+  const handleDisciplineChange = (newDisc: MixedDisciplineKey) => {
+    setDiscipline(newDisc);
+    if (newDisc === 'lutte') {
+      setDisciplineSessions(2);
+      if (muscuSessions > 4) setMuscuSessions(4);
     } else {
-      base = 2500; // Combat standalone
+      if (![1, 2, 3, 4].includes(disciplineSessions)) {
+        setDisciplineSessions(2);
+      }
     }
-
-    if (includeSauna) base += 2000;
-    if (includeNutrition) base += 2000;
-
-    return base;
   };
 
-  const totalPrice = calculateTotal();
+  // Available muscu sessions
+  const availableMuscuSessions: number[] = useMemo(() => {
+    if (discipline === 'lutte') return [1, 2, 3, 4];
+    if (discipline === 'cross' && disciplineSessions === 4) return [1, 2, 3];
+    if (discipline === 'kick' && disciplineSessions === 4) return [1, 2, 3, 4];
+    return [1, 2, 3, 4, 5, 6];
+  }, [discipline, disciplineSessions]);
 
+  // Ensure muscu sessions are valid within available options
+  React.useEffect(() => {
+    if (!availableMuscuSessions.includes(muscuSessions)) {
+      setMuscuSessions(availableMuscuSessions[availableMuscuSessions.length - 1] || 2);
+    }
+  }, [availableMuscuSessions, muscuSessions]);
+
+  // Calculate rate
+  const calculation = useMemo(() => {
+    return lookupOfficialMixedRate(discipline, disciplineSessions, muscuSessions);
+  }, [discipline, disciplineSessions, muscuSessions]);
+
+  const finalPrice = calculation.price + (includeSauna ? 2000 : 0);
+  const totalSavings = calculation.savings;
+
+  // Preset quick picks
+  const presets = [
+    {
+      labelFr: 'Cross 2 + Muscu 2',
+      labelAr: 'كروس 2 + حديد 2',
+      disc: 'cross' as MixedDisciplineKey,
+      discSess: 2,
+      muscuSess: 2,
+      price: 4500,
+    },
+    {
+      labelFr: 'Cross 1 + Muscu 2',
+      labelAr: 'كروس 1 + حديد 2',
+      disc: 'cross' as MixedDisciplineKey,
+      discSess: 1,
+      muscuSess: 2,
+      price: 3500,
+    },
+    {
+      labelFr: 'Kick + Muscu 2',
+      labelAr: 'كيك + حديد 2',
+      disc: 'kick' as MixedDisciplineKey,
+      discSess: 2,
+      muscuSess: 2,
+      price: 4500,
+    },
+    {
+      labelFr: 'Cross 2 + Muscu 3',
+      labelAr: 'كروس 2 + حديد 3',
+      disc: 'cross' as MixedDisciplineKey,
+      discSess: 2,
+      muscuSess: 3,
+      price: 4800,
+    },
+    {
+      labelFr: 'Lutte + Muscu 2',
+      labelAr: 'مصارعة + حديد 2',
+      disc: 'lutte' as MixedDisciplineKey,
+      discSess: 2,
+      muscuSess: 2,
+      price: 4500,
+    },
+  ];
+
+  // WhatsApp order
   const handleWhatsAppBooking = () => {
-    let summaryText = '';
-    if (formulaType === 'mixte') {
-      summaryText = isAr
-        ? `باقة مدمجة (${crossSessions} حصص قتال/كروس + ${muscuSessions} حصص حديد أسبوعياً)`
-        : `Pack Mixte (${crossSessions}x combat/cross + ${muscuSessions}x muscu/semaine)`;
-    } else if (formulaType === 'muscu') {
-      summaryText = isAr
-        ? `كمال أجسام (${muscuSessions} حصص أسبوعياً)`
-        : `Musculation seule (${muscuSessions} séances/semaine)`;
-    } else {
-      summaryText = isAr ? 'فنون قتال / كيك بوكسينغ فقط' : 'Combat / Arts martiaux seul';
-    }
+    const discNameFr =
+      discipline === 'cross' ? 'Cross-Training' : discipline === 'kick' ? 'Kickboxing' : 'Lutte';
+    const discNameAr =
+      discipline === 'cross' ? 'كروس ترينينغ' : discipline === 'kick' ? 'كيك بوكسينغ' : 'مصارعة';
 
-    if (includeSauna) {
-      summaryText += isAr ? ' + حصة ساونا' : ' + 1 séance Sauna';
-    }
-    if (includeNutrition) {
-      summaryText += isAr ? ' + برنامج تغذية' : ' + Suivi Nutrition';
-    }
+    const formulaFr = `${discNameFr} (${disciplineSessions}x/sem) + Musculation (${muscuSessions}x/sem)${
+      includeSauna ? ' + 1 séance Sauna' : ''
+    }`;
+    const formulaAr = `${discNameAr} (${disciplineSessions} حصص أسبوعياً) + كمال أجسام (${muscuSessions} حصص أسبوعياً)${
+      includeSauna ? ' + حصة ساونا' : ''
+    }`;
 
-    const message = isAr
-      ? `السلام عليكم نادي أدرينا سبورت، قمت بحساب اشتراكي عبر الموقع: ${summaryText} بمجموع (${totalPrice} دج شهرياً). أود تأكيد التسجيل ومعرفة الوثائق المطلوبة.`
-      : `Bonjour Adréna Club, j'ai configuré ma formule via votre calculateur en ligne : ${summaryText} pour un total de ${totalPrice} DA/mois. Comment finaliser mon inscription ?`;
+    const text = isAr
+      ? `السلام عليكم نادي أدرينا سبورت، قمت بحساب اشتراكي عبر حاسبة الباقات المدمجة: ${formulaAr} بمجموع (${finalPrice.toLocaleString('fr-FR')} دج شهرياً). أود تأكيد التسجيل ومعرفة الوثائق المطلوبة.`
+      : `Bonjour Adréna Club, j'ai configuré ma formule via votre simulateur officiel : ${formulaFr} pour un montant de ${finalPrice.toLocaleString('fr-FR')} DA/mois. Comment finaliser mon inscription ?`;
 
-    window.open(`https://wa.me/213771570378?text=${encodeURIComponent(message)}`, '_blank');
+    window.open(`https://wa.me/213771570378?text=${encodeURIComponent(text)}`, '_blank');
+  };
+
+  const getDisciplineTitle = () => {
+    if (discipline === 'cross') return isAr ? 'كروس ترينينغ' : 'Cross-Training';
+    if (discipline === 'kick') return isAr ? 'كيك بوكسينغ' : 'Kickboxing';
+    return isAr ? 'مصارعة أولمبية' : 'Lutte Olympique';
   };
 
   return (
-    <div className="mb-16 p-6 sm:p-8 rounded-3xl bg-adrena-card border border-adrena-border shadow-xl">
-      {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 pb-6 border-b border-adrena-border">
+    <div className="rounded-3xl bg-adrena-card border border-adrena-gold/30 shadow-2xl p-5 sm:p-8">
+      {/* Top Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 mb-6 border-b border-adrena-border">
         <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-adrena-surface border border-adrena-border text-adrena-gold text-xs font-semibold mb-2">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-adrena-surface border border-adrena-border text-adrena-gold text-xs font-bold mb-2">
             <Calculator className="w-3.5 h-3.5" />
-            <span>{isAr ? 'حاسبة الاشتراكات الرسمية' : 'Simulateur d\'abonnement'}</span>
+            <span>{isAr ? 'حاسبة الباقات المدمجة الرسمية' : 'Simulateur Officiel de Formules Mixtes'}</span>
           </div>
-          <h3 className="text-2xl sm:text-3xl font-extrabold text-adrena-bone tracking-tight">
-            {t.title}
+          <h3 className="text-xl sm:text-2xl font-black text-white tracking-tight">
+            {isAr ? 'ركّب باقتك المدمجة حسب رغبتك' : 'Composez votre formule sur-mesure'}
           </h3>
           <p className="text-xs sm:text-sm text-adrena-stone mt-1">
-            {t.subtitle}
+            {isAr
+              ? 'اختر رياضتك المفضلة وعدد حصص كمال الأجسام واحصل على سعرك الرسمي ووفوراتك فوراً'
+              : 'Combinez votre discipline sportive et votre fréquence musculation avec tarifs dégressifs officiels.'}
           </p>
         </div>
 
-        <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-950/50 border border-emerald-500/30 text-emerald-400 text-xs font-medium self-start md:self-auto">
-          <Sparkles className="w-3.5 h-3.5" />
-          <span>{isAr ? 'وفورات الباقات المدمجة' : 'Meilleur rapport sport / prix'}</span>
-        </div>
-      </div>
-
-      {/* Real-time Mobile Price Bar (Visible only on mobile screens so user never loses sight of total) */}
-      <div className="block lg:hidden mb-6 p-4 rounded-xl bg-adrena-surface border border-adrena-gold/50 shadow-md">
-        <div className="flex items-center justify-between gap-3">
-          <div>
-            <span className="text-[11px] font-bold uppercase tracking-wider text-adrena-stone block">
-              {isAr ? 'المجموع المحسوب' : 'Total en temps réel'}
-            </span>
-            <div className="flex items-baseline gap-1.5">
-              <span className="text-2xl font-extrabold text-adrena-gold">
-                {totalPrice.toLocaleString('fr-FR')}
-              </span>
-              <span className="text-xs font-bold text-adrena-bone">
-                {isAr ? 'دج / شهر' : 'DA / mois'}
-              </span>
-            </div>
-          </div>
-
+        {onOpenPoster && (
           <button
             type="button"
-            onClick={handleWhatsAppBooking}
-            className="flex items-center gap-2 py-2 px-3.5 rounded-xl bg-adrena-gold hover:bg-adrena-gold-light text-[#111215] font-bold text-xs shadow-sm active:scale-95"
+            onClick={onOpenPoster}
+            className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-adrena-surface hover:bg-neutral-800 border border-adrena-border text-xs font-bold text-adrena-stone hover:text-white transition-all self-start sm:self-auto cursor-pointer flex-shrink-0"
           >
-            <MessageCircle className="w-4 h-4 fill-[#111215]" />
-            <span>{isAr ? 'تأكيد عبر واتساب' : 'S\'inscrire'}</span>
+            <ImageIcon className="w-3.5 h-3.5 text-adrena-gold" />
+            <span>{isAr ? 'عرض ملصق الأسعار (50+)' : 'Affiche officielle (50+ tarifs)'}</span>
           </button>
+        )}
+      </div>
+
+      {/* Quick Presets Strip */}
+      <div className="mb-6">
+        <span className="text-[11px] font-bold text-adrena-stone uppercase tracking-wider block mb-2 px-0.5">
+          {isAr ? 'تركيبات سريعة شائعة :' : 'Sélection rapide des combinaisons populaires :'}
+        </span>
+        <div className="flex flex-wrap gap-2">
+          {presets.map((p, idx) => {
+            const isMatch =
+              discipline === p.disc &&
+              disciplineSessions === p.discSess &&
+              muscuSessions === p.muscuSess;
+            return (
+              <button
+                key={idx}
+                type="button"
+                onClick={() => {
+                  setDiscipline(p.disc);
+                  setDisciplineSessions(p.discSess);
+                  setMuscuSessions(p.muscuSess);
+                }}
+                className={`py-1.5 px-3 rounded-lg text-xs font-bold transition-all border flex items-center gap-1.5 cursor-pointer ${
+                  isMatch
+                    ? 'bg-adrena-gold text-adrena-black border-adrena-gold shadow-sm font-black'
+                    : 'bg-adrena-surface hover:bg-neutral-800 text-adrena-stone hover:text-white border-adrena-border'
+                }`}
+              >
+                <span>{isAr ? p.labelAr : p.labelFr}</span>
+                <span dir="ltr" className="text-[11px] font-mono tabular-nums opacity-90">
+                  ({p.price.toLocaleString('fr-FR')} {isAr ? 'دج' : 'DA'})
+                </span>
+              </button>
+            );
+          })}
         </div>
       </div>
 
+      {/* Main Builder Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        {/* Left Column: Interactive Controls (7 cols) */}
+        {/* Left Column: Interactive Selectors (7 Cols) */}
         <div className="lg:col-span-7 space-y-6">
-          {/* Step 1: Base Formula */}
+          {/* Step 1: Discipline Choice */}
           <div>
-            <label className="block text-sm font-semibold text-adrena-bone mb-3">
-              {t.step1Title}
+            <label className="block text-xs sm:text-sm font-bold text-white mb-2.5">
+              {isAr ? '1. اختر الرياضة القتالية أو الوظيفية' : '1. Choisissez votre discipline principale'}
             </label>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3" role="radiogroup" aria-label="Type de formule">
+            <div className="grid grid-cols-3 gap-2" role="radiogroup" aria-label="Discipline">
               <button
                 type="button"
                 role="radio"
-                aria-checked={formulaType === 'mixte'}
-                onClick={() => setFormulaType('mixte')}
-                className={`p-4 rounded-2xl text-left rtl:text-right border transition-all ${
-                  formulaType === 'mixte'
-                    ? 'bg-adrena-surface border-adrena-gold shadow-md ring-1 ring-adrena-gold/40'
-                    : 'bg-adrena-surface/50 border-adrena-border hover:border-neutral-600'
+                aria-checked={discipline === 'cross'}
+                onClick={() => handleDisciplineChange('cross')}
+                className={`p-3 rounded-xl border text-center transition-all cursor-pointer flex flex-col items-center justify-center gap-1 ${
+                  discipline === 'cross'
+                    ? 'bg-adrena-gold text-adrena-black border-adrena-gold shadow-md font-black'
+                    : 'bg-adrena-surface text-adrena-stone hover:text-white border-adrena-border hover:border-adrena-gold/40'
                 }`}
               >
-                <div className="flex items-center justify-between mb-2">
-                  <span className="font-bold text-base text-adrena-bone flex items-center gap-2">
-                    <Flame className="w-5 h-5 text-adrena-gold" />
-                    {t.mixteOption}
-                  </span>
-                  {formulaType === 'mixte' && (
-                    <span className="w-2.5 h-2.5 rounded-full bg-adrena-gold" />
-                  )}
-                </div>
-                <p className="text-sm text-adrena-stone leading-relaxed font-sans">
-                  {t.mixteDesc}
-                </p>
+                <Flame className={`w-4 h-4 ${discipline === 'cross' ? 'text-adrena-black' : 'text-adrena-gold'}`} />
+                <span className="text-xs font-extrabold">{isAr ? 'كروس ترينينغ' : 'Cross-Training'}</span>
               </button>
 
               <button
                 type="button"
                 role="radio"
-                aria-checked={formulaType === 'muscu'}
-                onClick={() => setFormulaType('muscu')}
-                className={`p-4 rounded-2xl text-left rtl:text-right border transition-all ${
-                  formulaType === 'muscu'
-                    ? 'bg-adrena-surface border-adrena-gold shadow-md ring-1 ring-adrena-gold/40'
-                    : 'bg-adrena-surface/50 border-adrena-border hover:border-neutral-600'
+                aria-checked={discipline === 'kick'}
+                onClick={() => handleDisciplineChange('kick')}
+                className={`p-3 rounded-xl border text-center transition-all cursor-pointer flex flex-col items-center justify-center gap-1 ${
+                  discipline === 'kick'
+                    ? 'bg-adrena-gold text-adrena-black border-adrena-gold shadow-md font-black'
+                    : 'bg-adrena-surface text-adrena-stone hover:text-white border-adrena-border hover:border-adrena-gold/40'
                 }`}
               >
-                <div className="flex items-center justify-between mb-2">
-                  <span className="font-bold text-base text-adrena-bone flex items-center gap-2">
-                    <Dumbbell className="w-5 h-5 text-adrena-stone" />
-                    {t.muscuOption}
-                  </span>
-                  {formulaType === 'muscu' && (
-                    <span className="w-2.5 h-2.5 rounded-full bg-adrena-gold" />
-                  )}
-                </div>
-                <p className="text-sm text-adrena-stone leading-relaxed font-sans">
-                  {t.muscuDesc}
-                </p>
+                <Shield className={`w-4 h-4 ${discipline === 'kick' ? 'text-adrena-black' : 'text-adrena-gold'}`} />
+                <span className="text-xs font-extrabold">{isAr ? 'كيك بوكسينغ' : 'Kickboxing'}</span>
+              </button>
+
+              <button
+                type="button"
+                role="radio"
+                aria-checked={discipline === 'lutte'}
+                onClick={() => handleDisciplineChange('lutte')}
+                className={`p-3 rounded-xl border text-center transition-all cursor-pointer flex flex-col items-center justify-center gap-1 ${
+                  discipline === 'lutte'
+                    ? 'bg-adrena-gold text-adrena-black border-adrena-gold shadow-md font-black'
+                    : 'bg-adrena-surface text-adrena-stone hover:text-white border-adrena-border hover:border-adrena-gold/40'
+                }`}
+              >
+                <Shield className={`w-4 h-4 ${discipline === 'lutte' ? 'text-adrena-black' : 'text-adrena-gold'}`} />
+                <span className="text-xs font-extrabold">{isAr ? 'مصارعة' : 'Lutte'}</span>
               </button>
             </div>
           </div>
 
-          {/* Step 2: Frequency Selectors */}
-          {formulaType === 'mixte' && (
-            <div className="p-5 rounded-2xl bg-adrena-surface/70 border border-adrena-border space-y-6">
-              <div>
-                <div className="flex items-center justify-between mb-2.5">
-                  <label className="text-sm font-semibold text-adrena-bone">
-                    {t.combatLabel}
-                  </label>
-                  <span className="font-mono text-xs sm:text-sm font-bold text-adrena-gold bg-adrena-surface border border-adrena-border px-2.5 py-1 rounded-md">
-                    {crossSessions} {isAr ? 'حصص / أسبوع' : 'séances / semaine'}
-                  </span>
-                </div>
-                <div className="grid grid-cols-3 gap-2.5" role="radiogroup" aria-label={isAr ? 'عدد حصص الكروس ترينينغ والقتال' : 'Nombre de séances de combat ou cross'}>
-                  {[1, 2, 3].map((num) => (
-                    <button
-                      key={num}
-                      type="button"
-                      role="radio"
-                      aria-checked={crossSessions === num}
-                      onClick={() => setCrossSessions(num)}
-                      className={`py-3 px-3 rounded-xl text-sm font-bold transition-all ${
-                        crossSessions === num
-                          ? 'bg-adrena-gold text-[#111215] shadow-sm'
-                          : 'bg-adrena-surface text-adrena-stone hover:text-adrena-bone hover:bg-[#252830] border border-adrena-border'
-                      }`}
-                    >
-                      {num} {isAr ? 'حصص' : num > 1 ? 'séances' : 'séance'}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              <div>
-                <div className="flex items-center justify-between mb-2.5">
-                  <label className="text-sm font-semibold text-adrena-bone">
-                    {isAr ? 'عدد حصص كمال الأجسام أسبوعياً' : 'Séances de Musculation par semaine'}
-                  </label>
-                  <span className="font-mono text-xs sm:text-sm font-bold text-adrena-gold bg-adrena-surface border border-adrena-border px-2.5 py-1 rounded-md">
-                    {muscuSessions} {isAr ? 'حصص / أسبوع' : 'séances / semaine'}
-                  </span>
-                </div>
-                <div className="grid grid-cols-3 sm:grid-cols-6 gap-2" role="radiogroup" aria-label={isAr ? 'عدد حصص كمال الأجسام' : 'Nombre de séances de musculation'}>
-                  {[1, 2, 3, 4, 5, 6].map((num) => (
-                    <button
-                      key={num}
-                      type="button"
-                      role="radio"
-                      aria-checked={muscuSessions === num}
-                      onClick={() => setMuscuSessions(num)}
-                      className={`py-3 rounded-xl text-sm font-bold transition-all ${
-                        muscuSessions === num
-                          ? 'bg-adrena-bone text-[#111215] shadow-sm'
-                          : 'bg-adrena-surface text-adrena-stone hover:text-adrena-bone hover:bg-[#252830] border border-adrena-border'
-                      }`}
-                    >
-                      {num}x
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </div>
-          )}
-
-          {formulaType === 'muscu' && (
-            <div className="p-5 rounded-2xl bg-adrena-surface/70 border border-adrena-border">
-              <label className="block text-sm font-semibold text-adrena-bone mb-3">
-                {isAr ? 'وتيرة التدريب في الأسبوع' : 'Fréquence hebdomadaire'}
-              </label>
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2" role="radiogroup" aria-label={isAr ? 'وتيرة تدريب كمال الأجسام' : 'Fréquence de musculation'}>
-                {[1, 2, 3, 4, 5, 6].map((num) => (
-                  <button
-                    key={num}
-                    type="button"
-                    role="radio"
-                    aria-checked={muscuSessions === num}
-                    onClick={() => setMuscuSessions(num)}
-                    className={`py-3 rounded-xl text-sm font-bold transition-all ${
-                      muscuSessions === num
-                        ? 'bg-adrena-gold text-[#111215] shadow-sm'
-                        : 'bg-adrena-surface text-adrena-stone hover:text-adrena-bone hover:bg-[#252830] border border-adrena-border'
-                    }`}
-                  >
-                    {num === 6 ? (isAr ? 'غير محدود' : 'Illimité') : `${num}x / sem`}
-                  </button>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* Optional Add-ons */}
+          {/* Step 2: Discipline Sessions per week */}
           <div>
-            <label className="block text-sm font-semibold text-adrena-stone mb-2.5">
-              {isAr ? 'خدمات إضافية اختيارية' : 'Options bien-être & récupération'}
-            </label>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <button
-                type="button"
-                role="checkbox"
-                aria-checked={includeSauna}
-                onClick={() => setIncludeSauna(!includeSauna)}
-                className={`p-4 rounded-xl border text-left rtl:text-right flex items-center justify-between transition-all ${
-                  includeSauna
-                    ? 'bg-adrena-surface border-adrena-gold text-adrena-bone shadow-sm'
-                    : 'bg-adrena-surface/50 border-adrena-border text-adrena-stone hover:border-neutral-600'
-                }`}
-              >
-                <div>
-                  <p className="text-sm sm:text-base font-bold text-adrena-bone">
-                    {isAr ? 'حصة ساونا ومسبح (1h15)' : 'Séance Sauna & Piscine (1h15)'}
-                  </p>
-                  <p className="text-xs sm:text-sm font-bold text-adrena-gold mt-0.5">+2 000 DA {isAr ? '/ حصة' : '/ séance'}</p>
-                </div>
-                <div
-                  className={`w-6 h-6 rounded-lg flex items-center justify-center border transition-colors ${
-                    includeSauna ? 'bg-adrena-gold border-adrena-gold text-[#111215]' : 'border-neutral-600 bg-adrena-card'
-                  }`}
-                >
-                  {includeSauna && <Check className="w-4 h-4 stroke-[3]" />}
-                </div>
-              </button>
-
-              <button
-                type="button"
-                role="checkbox"
-                aria-checked={includeNutrition}
-                onClick={() => setIncludeNutrition(!includeNutrition)}
-                className={`p-4 rounded-xl border text-left rtl:text-right flex items-center justify-between transition-all ${
-                  includeNutrition
-                    ? 'bg-adrena-surface border-adrena-gold text-adrena-bone shadow-sm'
-                    : 'bg-adrena-surface/50 border-adrena-border text-adrena-stone hover:border-neutral-600'
-                }`}
-              >
-                <div>
-                  <p className="text-sm sm:text-base font-bold text-adrena-bone">
-                    {isAr ? 'متابعة أخصائي التغذية' : 'Bilan & Suivi Nutritionniste'}
-                  </p>
-                  <p className="text-xs sm:text-sm font-bold text-adrena-gold mt-0.5">+2 000 DA {isAr ? '/ برنامج' : '/ programme'}</p>
-                </div>
-                <div
-                  className={`w-6 h-6 rounded-lg flex items-center justify-center border transition-colors ${
-                    includeNutrition ? 'bg-adrena-gold border-adrena-gold text-[#111215]' : 'border-neutral-600 bg-adrena-card'
-                  }`}
-                >
-                  {includeNutrition && <Check className="w-4 h-4 stroke-[3]" />}
-                </div>
-              </button>
+            <div className="flex items-center justify-between mb-2">
+              <label className="text-xs sm:text-sm font-bold text-white">
+                {isAr
+                  ? `2. عدد حصص ${getDisciplineTitle()} في الأسبوع`
+                  : `2. Séances de ${getDisciplineTitle()} par semaine`}
+              </label>
+              <span className="text-xs font-mono font-bold text-adrena-gold">
+                {disciplineSessions} {isAr ? 'حصص / أسبوع' : 'séances / sem'}
+              </span>
             </div>
+            <div className="grid grid-cols-4 gap-2" role="radiogroup" aria-label="Séances discipline">
+              {availableDisciplineSessions.map((num) => (
+                <button
+                  key={num}
+                  type="button"
+                  role="radio"
+                  aria-checked={disciplineSessions === num}
+                  onClick={() => setDisciplineSessions(num)}
+                  className={`py-2.5 px-2 rounded-xl text-xs font-bold transition-all border cursor-pointer ${
+                    disciplineSessions === num
+                      ? 'bg-adrena-gold text-adrena-black border-adrena-gold shadow-sm font-black'
+                      : 'bg-adrena-surface text-adrena-stone hover:text-white border-adrena-border hover:border-adrena-gold/30'
+                  }`}
+                >
+                  {num} {isAr ? 'حصص' : num > 1 ? 'séances' : 'séance'}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Step 3: Musculation Sessions per week */}
+          <div>
+            <div className="flex items-center justify-between mb-2">
+              <label className="text-xs sm:text-sm font-bold text-white flex items-center gap-1.5">
+                <Dumbbell className="w-3.5 h-3.5 text-adrena-gold" />
+                <span>{isAr ? '3. عدد حصص كمال الأجسام في الأسبوع' : '3. Séances de Musculation par semaine'}</span>
+              </label>
+              <span className="text-xs font-mono font-bold text-adrena-gold">
+                {muscuSessions === 6
+                  ? (isAr ? 'دخول يومي غير محدود' : 'Accès illimité')
+                  : `${muscuSessions} ${isAr ? 'حصص / أسبوع' : 'séances / sem'}`}
+              </span>
+            </div>
+            <div
+              className={`grid gap-2 ${
+                availableMuscuSessions.length <= 4 ? 'grid-cols-4' : 'grid-cols-3 sm:grid-cols-6'
+              }`}
+              role="radiogroup"
+              aria-label="Séances musculation"
+            >
+              {availableMuscuSessions.map((num) => (
+                <button
+                  key={num}
+                  type="button"
+                  role="radio"
+                  aria-checked={muscuSessions === num}
+                  onClick={() => setMuscuSessions(num)}
+                  className={`py-2.5 px-2 rounded-xl text-xs font-bold transition-all border cursor-pointer ${
+                    muscuSessions === num
+                      ? 'bg-adrena-bone text-adrena-black border-adrena-bone shadow-sm font-black'
+                      : 'bg-adrena-surface text-adrena-stone hover:text-white border-adrena-border hover:border-adrena-gold/30'
+                  }`}
+                >
+                  {num === 6 ? (isAr ? 'غير محدود' : 'Illimité') : `${num}x / sem`}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Optional Sauna Addon */}
+          <div className="pt-2">
+            <button
+              type="button"
+              role="checkbox"
+              aria-checked={includeSauna}
+              onClick={() => setIncludeSauna(!includeSauna)}
+              className={`w-full p-3.5 rounded-xl border text-left rtl:text-right flex items-center justify-between transition-all cursor-pointer ${
+                includeSauna
+                  ? 'bg-adrena-surface border-adrena-gold text-white shadow-sm ring-1 ring-adrena-gold/30'
+                  : 'bg-adrena-surface/60 border-adrena-border text-adrena-stone hover:border-adrena-border hover:text-white'
+              }`}
+            >
+              <div className="flex items-center gap-2.5">
+                <div
+                  className={`w-5 h-5 rounded-md flex items-center justify-center border transition-all ${
+                    includeSauna
+                      ? 'bg-adrena-gold border-adrena-gold text-adrena-black font-black'
+                      : 'border-adrena-border bg-adrena-card text-transparent'
+                  }`}
+                >
+                  <Check className="w-3.5 h-3.5 stroke-[3]" />
+                </div>
+                <div>
+                  <span className="text-xs sm:text-sm font-bold text-white block">
+                    {isAr ? 'إضافة حصة ساونا ومسبح (1h15)' : 'Option Séance Sauna & Piscine (1h15)'}
+                  </span>
+                  <span className="text-[11px] text-adrena-stone">
+                    {isAr ? 'حجز مسبق للاسترخاء العضلي بعد التدريب' : 'Sur réservation pour récupération musculaire'}
+                  </span>
+                </div>
+              </div>
+              <span dir="ltr" className="text-xs font-mono font-black text-adrena-gold whitespace-nowrap">
+                +2 000 {isAr ? 'دج' : 'DA'}
+              </span>
+            </button>
           </div>
         </div>
 
-        {/* Right Column: Calculated Price Card (5 cols) */}
+        {/* Right Column: Calculated Live Official Card (5 Cols) */}
         <div className="lg:col-span-5">
-          <div className="p-6 sm:p-7 rounded-2xl bg-adrena-card border border-adrena-gold shadow-2xl relative overflow-hidden">
-            <div className="absolute top-0 right-0 left-0 h-1 bg-adrena-gold" />
-
-            <span className="text-xs font-black uppercase tracking-wider text-adrena-muted block mb-1">
-              {t.totalLabel}
-            </span>
-
-            <div className="flex items-baseline gap-2 mb-4">
-              <span className="text-4xl sm:text-5xl font-black text-white tracking-tight tabular-nums">
-                {totalPrice.toLocaleString('fr-FR')}
+          <div className="p-5 sm:p-6 rounded-2xl bg-adrena-surface border-2 border-adrena-gold shadow-2xl relative">
+            {/* Top Badge */}
+            <div className="flex items-center justify-between gap-2 mb-3">
+              <span className="text-[11px] font-bold text-adrena-stone tracking-wide">
+                {disciplineSessions + muscuSessions} {isAr ? 'تدريبات في الأسبوع' : 'entraînements / sem'}
               </span>
-              <span className="text-lg sm:text-xl font-black text-adrena-gold uppercase">
-                {isAr ? 'دج / شهر' : 'DA / mois'}
+              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-black bg-adrena-gold text-adrena-black uppercase tracking-wider shadow-sm">
+                ★ {isAr ? 'تركيبة مخصصة' : 'Sur-Mesure'}
               </span>
             </div>
 
-            {/* Inclusions Callout */}
-            <div className="p-4 rounded-xl bg-adrena-surface border border-adrena-border text-sm text-white space-y-2.5 mb-6">
-              <div className="flex items-center gap-2 text-adrena-gold font-black text-xs uppercase tracking-wider">
-                <Sparkles className="w-4 h-4" />
-                <span>{t.savingsTag}</span>
+            {/* Formula Name */}
+            <h4 className="text-lg sm:text-xl font-black text-white tracking-tight mb-2">
+              {getDisciplineTitle()} {disciplineSessions} + {isAr ? 'حديد' : 'Muscu'} {muscuSessions}
+            </h4>
+
+            {/* Price Display */}
+            <div className="mb-3 pb-3 border-b border-adrena-border/80 flex items-baseline gap-2">
+              <span dir="ltr" className="text-3xl font-black text-white tabular-nums tracking-tight whitespace-nowrap">
+                {finalPrice.toLocaleString('fr-FR')}
+              </span>
+              <span className="text-xs font-bold text-adrena-gold uppercase">
+                {isAr ? 'دج / شهر' : 'DA / MOIS'}
+              </span>
+            </div>
+
+            {/* Savings Callout */}
+            {totalSavings > 0 && (
+              <div className="mb-4 p-2.5 rounded-xl bg-emerald-950/40 border border-emerald-500/30 flex items-center gap-2 text-emerald-400 text-xs font-bold">
+                <Sparkles className="w-4 h-4 flex-shrink-0 text-emerald-400" />
+                <span>
+                  {isAr
+                    ? `توفير ${totalSavings.toLocaleString('fr-FR')} دج شهرياً مقارنة بالاشتراكات المنفصلة!`
+                    : `Économisez ${totalSavings.toLocaleString('fr-FR')} DA / mois vs tarifs séparés !`}
+                </span>
               </div>
-              <ul className="space-y-2 text-xs sm:text-sm text-adrena-stone">
-                <li className="flex items-center gap-2">
-                  <Check className="w-4 h-4 text-emerald-400 flex-shrink-0" />
-                  <span className="font-medium">{isAr ? 'الدخول للغرف والدوشات الساخنة مشمول' : 'Accès douches chaudes & vestiaires inclus'}</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <Check className="w-4 h-4 text-emerald-400 flex-shrink-0" />
-                  <span className="font-medium">{isAr ? 'تأطير تقني وحرية التوقيت' : 'Encadrement par coachs diplômés'}</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <Check className="w-4 h-4 text-emerald-400 flex-shrink-0" />
-                  <span className="font-medium">{isAr ? 'لا توجد أي رسوم تسجيل خفية' : 'Tarifs transparents sans frais cachés'}</span>
-                </li>
-              </ul>
+            )}
+
+            {/* Features List */}
+            <div className="space-y-2 mb-5">
+              <div className="flex items-start gap-2 text-xs text-adrena-bone font-medium">
+                <Check className="w-3.5 h-3.5 text-adrena-gold flex-shrink-0 mt-0.5" />
+                <span className="leading-snug">
+                  {isAr
+                    ? `استفادة كاملة من قاعة كمال الأجسام (${muscuSessions} حصص أسبوعياً)`
+                    : `Accès complet au plateau musculation (${muscuSessions}x / semaine)`}
+                </span>
+              </div>
+              <div className="flex items-start gap-2 text-xs text-adrena-bone font-medium">
+                <Check className="w-3.5 h-3.5 text-adrena-gold flex-shrink-0 mt-0.5" />
+                <span className="leading-snug">
+                  {isAr
+                    ? `حصص ${getDisciplineTitle()} مؤطرة من مدربين معتمدين`
+                    : `Séances encadrées en ${getDisciplineTitle()} avec coachs diplômés`}
+                </span>
+              </div>
+              <div className="flex items-start gap-2 text-xs text-adrena-bone font-medium">
+                <Check className="w-3.5 h-3.5 text-adrena-gold flex-shrink-0 mt-0.5" />
+                <span className="leading-snug">
+                  {isAr ? 'غرف تبديل الملابس ودوشات ساخنة وخزائن مؤمنة' : 'Vestiaires, casiers sécurisés & douches incluses'}
+                </span>
+              </div>
+              <div className="flex items-start gap-2 text-xs text-adrena-bone font-medium">
+                <Check className="w-3.5 h-3.5 text-adrena-gold flex-shrink-0 mt-0.5" />
+                <span className="leading-snug">
+                  {isAr ? 'دفع نقداً مباشر بدون التزام سنوي' : 'Paiement direct sans frais d\'inscription'}
+                </span>
+              </div>
             </div>
 
-            {/* WhatsApp CTA */}
+            {/* WhatsApp Direct Action */}
             <button
               type="button"
               onClick={handleWhatsAppBooking}
-              className="w-full inline-flex items-center justify-center gap-2 py-4 px-5 rounded-lg bg-adrena-gold hover:bg-adrena-gold-light text-adrena-black font-black text-xs uppercase tracking-wider transition-all shadow-md active:scale-98"
+              className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-adrena-gold hover:bg-adrena-gold-light text-[#08090b] font-black text-xs transition-all shadow-md active:scale-[0.98] cursor-pointer"
             >
-              <MessageCircle className="w-4 h-4 fill-current" />
-              <span>{t.ctaWhatsapp}</span>
+              <MessageCircle className="w-4 h-4 fill-current flex-shrink-0" />
+              <span className="whitespace-nowrap">
+                {isAr
+                  ? `حجز هذه الباقة • ${finalPrice.toLocaleString('fr-FR')} دج`
+                  : `Réserver cette combinaison • ${finalPrice.toLocaleString('fr-FR')} DA`}
+              </span>
             </button>
           </div>
         </div>
