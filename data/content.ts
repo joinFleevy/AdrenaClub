@@ -199,7 +199,7 @@ export const content: Record<Language, ContentStrings> = {
   fr: {
     meta: {
       title: "Adréna Club | Salle de Sport à Bab Ezzouar (Alger)",
-      description: "Adréna Club Bab Ezzouar : Complexe sportif sur 2 étages. Musculation lourde, Cross-Training, Ring de Boxe, Lutte, Judo, Sauna et créneaux femmes avec séances avec ou sans musique.",
+      description: "Adréna Club Bab Ezzouar : Complexe sportif sur 2 niveaux. Musculation charges libres, Cross-Training, Ring de combat officiel, Lutte, Judo, Sauna et créneaux femmes 100% privés avec séances sans musique.",
     },
     topBar: {
       address: "Cité Universitaire CUB1, Bab Ezzouar, Alger",
@@ -222,20 +222,20 @@ export const content: Record<Language, ContentStrings> = {
     hero: {
       tagline: "Complexe Sportif • Bab Ezzouar • 2 Étages",
       title: "Deux étages dédiés à la performance.",
-      subtitle: "Plateau musculation complet, ring de combat officiel, tatami & cross-training. Créneaux femmes 100% privés avec séances au choix avec ou sans musique. Ouvert tous les jours jusqu'à minuit.",
+      subtitle: "Plateau musculation charges libres, ring de combat officiel, tatami & cross-training. Créneaux femmes 100% privés avec séances dédiées sans musique. Ouvert 7j/7 jusqu'à minuit.",
       motto: "« Discipline, Respect & Dépassement de Soi : L'Excellence Sportive à Bab Ezzouar »",
       ctaPrimary: "Nous contacter sur WhatsApp",
       ctaSecondary: "Explorer la salle en 360°",
       pillars: [
         { title: "2 Niveaux d'Entraînement", desc: "Accueil & vestiaires au RDC, plateaux d'entraînement au sous-sol" },
         { title: "Jusqu'à Minuit (00:00)", desc: "Ouvert tous les soirs pour les hommes dès 06:00" },
-        { title: "Créneaux Femmes Privés", desc: "Séances avec ou sans musique, coachs féminines" },
+        { title: "Espace Femmes Dédié", desc: "100% privé, séances dédiées sans musique & coachs féminines" },
         { title: "Sports de Combat & Ring", desc: "Kickboxing, Lutte & Judo avec coachs diplômés" },
       ],
       trustBadges: [
         { title: "2 Étages Dédiés", subtitle: "Plateau Musculation & Espace Combat" },
         { title: "Ring & Tatami Officiels", subtitle: "Aux normes pour Boxe & Lutte" },
-        { title: "Créneaux Femmes Dédiés", subtitle: "Séances avec & sans musique, 100% privé" },
+        { title: "Espace Femmes Privé", subtitle: "Séances dédiées sans musique & coachs certifiées" },
         { title: "160+ Avis Google", subtitle: "Noté 4.9/5 par les membres" },
       ],
     },
@@ -295,8 +295,8 @@ export const content: Record<Language, ContentStrings> = {
         },
         {
           id: "femmes",
-          title: "Créneaux Femmes (Avec & Sans Musique)",
-          category: "100% Réservé",
+          title: "Espace 100% Femmes",
+          category: "RDC Privatisé",
           image: "/images/disciplines/femmes.jpg",
           desc: "Horaires exclusifs pour femmes assurant intimité et sérénité. Séances calmes sans musique au choix, avec coachs féminines.",
           features: ["Portes fermées & intimité totale", "Kickboxing féminin dédié", "Musculation & Cross-training adaptés"],
@@ -469,7 +469,7 @@ export const content: Record<Language, ContentStrings> = {
     womensSanctuary: {
       title: "Créneaux 100% Réservés aux Femmes",
       subtitle: "Un espace d'entraînement pensé pour votre sérénité, sans compromis sur l'exigence sportive.",
-      tag: "Sanctuaire Féminin • Bab Ezzouar",
+      tag: "Espace 100% Femmes • Bab Ezzouar",
       features: [
         {
           title: "Intimité Absolue & Portes Closes",
@@ -485,7 +485,7 @@ export const content: Record<Language, ContentStrings> = {
         },
         {
           title: "Vestiaires & Douches Privatisés",
-          desc: "Espaces sanitaires soignés, douches chaudes individuelles et casiers sécurisés pour un confort optimal.",
+          desc: "Espaces sanitaires soignés, douches chaudes individuelles et casiers sécurisés au rez-de-chaussée.",
         },
       ],
       cta: "Découvrir les horaires femmes",
@@ -624,10 +624,10 @@ export const content: Record<Language, ContentStrings> = {
         },
         {
           id: "femmes",
-          title: "فترات النساء (حصص بدون موسيقى)",
+          title: "فضاء خاص 100% للنساء",
           category: "خصوصية تامة",
           image: "/images/disciplines/femmes.jpg",
-          desc: "مواعيد مغلقة تماماً للنساء تضمن الخصوصية والاحترام، مع حصص هادئة ومخصصة بدون موسيقى بإشراف مدربات متخصصات.",
+          desc: "مواعيد مغلقة تماماً للنساء بالطابق الأرضي تضمن الخصوصية والاحترام، مع حصص هادئة ومخصصة بدون موسيقى بإشراف مدربات متخصصات.",
           features: ["أبواب مغلقة وخصوصية كاملة", "كيك بوكسينغ نسائي مخصص", "حصص كمال أجسام ورشاقة ملائمة"],
         },
         {
