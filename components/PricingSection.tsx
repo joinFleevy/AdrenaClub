@@ -129,32 +129,36 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
       : allPlans;
 
   return (
-    <section id="tarifs" className="py-20 scroll-mt-20 relative bg-adrena-black border-b border-adrena-border">
+    <section id="tarifs" className="py-12 md:py-20 scroll-mt-20 relative bg-adrena-black border-b border-adrena-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
-        <div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div className="mb-6 md:mb-10 flex flex-col md:flex-row md:items-end justify-between gap-3">
           <div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight">
+            <h2 className="text-2xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight">
               {t.title}
             </h2>
-            <p className="mt-2 text-base sm:text-lg text-adrena-stone max-w-[60ch] leading-relaxed font-normal">
+            <p className="mt-1 text-xs sm:text-base text-adrena-stone max-w-[60ch] leading-relaxed font-normal">
               {t.subtitle}
             </p>
           </div>
 
           <button
             type="button"
-            onClick={() => onOpenPostersModal('tarifs')}
-            className="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-adrena-card hover:bg-adrena-surface border border-adrena-border text-sm font-bold text-adrena-stone hover:text-white transition-all self-start md:self-auto shadow-sm cursor-pointer"
+            onClick={() => onOpenPostersModal(activeTab === 'mixtes' ? 'mixtes' : 'tarifs')}
+            className="inline-flex items-center gap-2 px-3.5 py-2 sm:px-5 sm:py-3 rounded-lg bg-adrena-card hover:bg-adrena-surface border border-adrena-border text-xs sm:text-sm font-bold text-adrena-stone hover:text-white transition-all self-start md:self-auto shadow-sm cursor-pointer"
           >
-            <ImageIcon className="w-4 h-4 text-adrena-gold" />
-            <span>{t.viewPosterBtn}</span>
+            <ImageIcon className="w-4 h-4 text-adrena-gold flex-shrink-0" />
+            <span>
+              {activeTab === 'mixtes'
+                ? (isAr ? 'عرض ملصق الأسعار المدمجة' : 'Voir l\'affiche des tarifs mixtes')
+                : t.viewPosterBtn}
+            </span>
           </button>
         </div>
 
         {/* 2x2 Category Grid on Mobile, 4-column Flex on Desktop (Zero Cutoff) */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3 mb-8" role="tablist" aria-label="Catégories de tarifs">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 mb-5 md:mb-8" role="tablist" aria-label="Catégories de tarifs">
           {(['musculation', 'combat', 'crosstraining', 'mixtes'] as PricingTab[]).map((tab) => {
             const isActive = activeTab === tab;
             const config = tabConfig[tab];
@@ -165,16 +169,16 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
                 role="tab"
                 aria-selected={isActive}
                 onClick={() => handleTabChange(tab)}
-                className={`p-3 sm:p-4 rounded-xl transition-all flex flex-col justify-between text-left rtl:text-right cursor-pointer shadow-sm active:scale-[0.98] border ${
+                className={`p-2.5 sm:p-4 rounded-xl transition-all flex flex-col justify-between text-left rtl:text-right cursor-pointer shadow-sm active:scale-[0.98] border ${
                   isActive
                     ? 'bg-adrena-gold text-adrena-black border-adrena-gold shadow-md font-black'
                     : 'bg-adrena-card hover:bg-adrena-surface text-adrena-stone hover:text-white border-adrena-border hover:border-adrena-gold/40 font-bold'
                 }`}
               >
-                <div className="flex items-center justify-between w-full mb-2">
-                  <Icon className={`w-5 h-5 flex-shrink-0 ${isActive ? 'text-adrena-black' : 'text-adrena-gold'}`} />
+                <div className="flex items-center justify-between w-full mb-1 sm:mb-2">
+                  <Icon className={`w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0 ${isActive ? 'text-adrena-black' : 'text-adrena-gold'}`} />
                   <span
-                    className={`text-[10px] sm:text-xs font-black px-2 py-0.5 rounded-full ${
+                    className={`text-[9.5px] sm:text-xs font-black px-1.5 sm:px-2 py-0.5 rounded-full ${
                       isActive
                         ? 'bg-adrena-black/15 text-adrena-black'
                         : 'bg-adrena-surface text-adrena-stone border border-adrena-border'
@@ -183,7 +187,7 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
                     {isAr ? config.countAr : config.countFr}
                   </span>
                 </div>
-                <span className="text-sm sm:text-base tracking-tight leading-snug">
+                <span className="text-xs sm:text-base tracking-tight leading-snug">
                   {isAr ? config.ar : config.fr}
                 </span>
               </button>
@@ -197,10 +201,10 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
         {/* ============================================================== */}
         <div className="block md:hidden">
           {/* Quick Frequency / Offer Chips Matrix */}
-          <div className="mb-4">
-            <div className="flex items-center justify-between text-xs font-bold text-adrena-stone mb-2 px-1">
-              <span>{isAr ? 'اختر وتيرة التدريب لتحديث البطاقة فورا :' : 'Sélectionnez une formule pour l\'afficher :'}</span>
-              <span dir="ltr" className="text-adrena-gold font-mono tabular-nums font-bold">
+          <div className="mb-3">
+            <div className="flex items-center justify-between text-[11px] font-bold text-adrena-stone mb-1.5 px-0.5">
+              <span>{isAr ? 'اختر الباقة لتحديث التفاصيل فوراً :' : 'Sélectionnez une formule :'}</span>
+              <span dir="ltr" className="text-adrena-gold font-mono tabular-nums font-bold text-xs">
                 {selectedPlanIndex + 1} / {allPlans.length}
               </span>
             </div>
@@ -216,19 +220,19 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
                     key={plan.id}
                     type="button"
                     onClick={() => setSelectedPlanIndex(idx)}
-                    className={`py-2 px-1.5 rounded-xl text-center transition-all border flex flex-col items-center justify-center min-h-[52px] cursor-pointer ${
+                    className={`py-1.5 px-1 rounded-xl text-center transition-all border flex flex-col items-center justify-center min-h-[46px] cursor-pointer ${
                       isSelected
                         ? 'bg-adrena-gold text-adrena-black border-adrena-gold shadow-md font-black'
                         : 'bg-adrena-card hover:bg-adrena-surface text-adrena-stone border-adrena-border hover:border-adrena-gold/40'
                     }`}
                   >
-                    <span className="text-[11px] font-bold leading-tight flex items-center justify-center gap-1">
-                      {plan.isPopular && <span className="text-amber-500 font-black">★</span>}
+                    <span className="text-[10px] font-bold leading-tight flex items-center justify-center gap-0.5">
+                      {plan.isPopular && <span className="text-amber-500 font-black text-[9px]">★</span>}
                       <span className="truncate">{shortText}</span>
                     </span>
                     <span
                       dir="ltr"
-                      className={`text-[10px] font-mono tabular-nums font-extrabold mt-0.5 whitespace-nowrap ${
+                      className={`text-[9.5px] font-mono tabular-nums font-black mt-0.5 whitespace-nowrap ${
                         isSelected ? 'text-adrena-black' : 'text-adrena-gold'
                       }`}
                     >
@@ -243,86 +247,51 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
           {/* Interactive Live Hero Card (Zero Vertical Scrolling Needed) */}
           {selectedPlan && (
             <div
-              className={`flex flex-col justify-between p-5 rounded-2xl border transition-all ${
+              className={`flex flex-col justify-between p-4 sm:p-5 rounded-2xl border transition-all ${
                 selectedPlan.isPopular
                   ? 'bg-adrena-card border-adrena-gold shadow-xl ring-1 ring-adrena-gold/30'
                   : 'bg-adrena-card border-adrena-border shadow-sm'
               }`}
             >
               <div>
-                {/* Stepper row: Previous / Count / Next */}
-                <div className="flex items-center justify-between gap-2 pb-3 mb-3 border-b border-adrena-border/70 text-xs">
-                  <button
-                    type="button"
-                    onClick={() =>
-                      setSelectedPlanIndex((prev) => (prev > 0 ? prev - 1 : allPlans.length - 1))
-                    }
-                    className="py-1 px-2.5 rounded-lg bg-adrena-surface hover:bg-white/10 text-adrena-stone hover:text-white transition-all flex items-center gap-1 border border-adrena-border font-bold active:scale-95"
-                    aria-label="Précédent"
-                  >
-                    <ChevronLeft className="w-4 h-4 rtl:rotate-180 flex-shrink-0" />
-                    <span>{isAr ? 'السابقة' : 'Précédente'}</span>
-                  </button>
-
-                  <div className="flex items-center gap-1.5">
-                    <span className="text-[11px] font-black text-adrena-gold tracking-wide whitespace-nowrap">
-                      {isAr
-                        ? `الباقة ${selectedPlanIndex + 1} من ${allPlans.length}`
-                        : `Formule ${selectedPlanIndex + 1} / ${allPlans.length}`}
-                    </span>
-                  </div>
-
-                  <button
-                    type="button"
-                    onClick={() =>
-                      setSelectedPlanIndex((prev) => (prev < allPlans.length - 1 ? prev + 1 : 0))
-                    }
-                    className="py-1 px-2.5 rounded-lg bg-adrena-surface hover:bg-white/10 text-adrena-stone hover:text-white transition-all flex items-center gap-1 border border-adrena-border font-bold active:scale-95"
-                    aria-label="Suivant"
-                  >
-                    <span>{isAr ? 'التالية' : 'Suivante'}</span>
-                    <ChevronRight className="w-4 h-4 rtl:rotate-180 flex-shrink-0" />
-                  </button>
-                </div>
-
                 {/* Top Metadata: Frequency & Recommandé Badge */}
-                <div className="flex items-center justify-between gap-2 mb-2">
+                <div className="flex items-center justify-between gap-2 mb-1.5">
                   <span className="text-xs font-bold text-adrena-stone tracking-wide">
                     {isAr ? selectedPlan.frequencyAr : selectedPlan.frequencyFr}
                   </span>
                   {selectedPlan.isPopular && (
-                    <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10.5px] font-black bg-adrena-gold text-adrena-black uppercase tracking-wider shadow-sm">
+                    <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-black bg-adrena-gold text-adrena-black uppercase tracking-wider shadow-sm">
                       ★ {t.popular}
                     </span>
                   )}
                 </div>
 
                 {/* Plan Name */}
-                <h3 className="text-xl sm:text-2xl font-black text-white tracking-tight mb-3">
+                <h3 className="text-lg sm:text-2xl font-black text-white tracking-tight mb-2">
                   {isAr ? selectedPlan.nameAr : selectedPlan.nameFr}
                 </h3>
 
                 {/* Price Block: dir="ltr" + whitespace-nowrap prevents line break in numbers */}
-                <div className="mb-4 pb-4 border-b border-adrena-border/80 flex items-baseline gap-2 flex-wrap">
+                <div className="mb-3 pb-3 border-b border-adrena-border/80 flex items-baseline gap-2 flex-wrap">
                   <span
                     dir="ltr"
-                    className="text-3xl sm:text-4xl font-black text-white tabular-nums tracking-tight whitespace-nowrap"
+                    className="text-2xl sm:text-4xl font-black text-white tabular-nums tracking-tight whitespace-nowrap"
                   >
                     {formatPrice(selectedPlan.price)}
                   </span>
-                  <span className="text-xs sm:text-sm font-extrabold text-adrena-gold uppercase tracking-wider whitespace-nowrap">
+                  <span className="text-xs font-extrabold text-adrena-gold uppercase tracking-wider whitespace-nowrap">
                     {isAr ? selectedPlan.periodAr : selectedPlan.periodFr}
                   </span>
                 </div>
 
                 {/* Features */}
-                <div className="space-y-2 mb-6">
+                <div className="space-y-1.5 mb-4">
                   {(isAr ? selectedPlan.featuresAr : selectedPlan.featuresFr).map((feat, idx) => (
                     <div
                       key={idx}
-                      className="flex items-start gap-2.5 text-xs sm:text-sm text-adrena-bone font-medium"
+                      className="flex items-start gap-2 text-xs text-adrena-bone font-medium"
                     >
-                      <Check className="w-4 h-4 text-adrena-gold flex-shrink-0 mt-0.5" />
+                      <Check className="w-3.5 h-3.5 text-adrena-gold flex-shrink-0 mt-0.5" />
                       <span className="leading-snug">{feat}</span>
                     </div>
                   ))}
@@ -338,7 +307,7 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
                     selectedPlan.price
                   )
                 }
-                className={`w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl font-black text-xs sm:text-sm transition-all shadow-sm active:scale-[0.98] ${
+                className={`w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl font-black text-xs sm:text-sm transition-all shadow-sm active:scale-[0.98] ${
                   selectedPlan.isPopular
                     ? 'bg-adrena-gold hover:bg-adrena-gold-light text-[#08090b] shadow-md shadow-adrena-gold/10'
                     : 'bg-adrena-surface hover:bg-white/10 text-white border border-adrena-border hover:border-adrena-gold/40'
@@ -355,20 +324,20 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
           )}
 
           {/* Toggle for Mobile Users who prefer viewing all cards in a vertical stack */}
-          <div className="mt-4 text-center">
+          <div className="mt-3 text-center">
             <button
               type="button"
               onClick={() => setShowMobileAllGrid(!showMobileAllGrid)}
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-adrena-surface hover:bg-adrena-card border border-adrena-border text-xs font-bold text-adrena-stone hover:text-white transition-all shadow-sm cursor-pointer active:scale-98"
+              className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-adrena-surface hover:bg-adrena-card border border-adrena-border text-[11px] font-bold text-adrena-stone hover:text-white transition-all shadow-sm cursor-pointer active:scale-98"
             >
-              <SlidersHorizontal className="w-3.5 h-3.5 text-adrena-gold" />
+              <SlidersHorizontal className="w-3 h-3 text-adrena-gold" />
               <span>
                 {showMobileAllGrid
-                  ? (isAr ? 'العودة إلى العرض السريع (بدون تمرير)' : 'Revenir au mode interactif sans défilement')
-                  : (isAr ? `عرض جميع الباقات (${allPlans.length}) في صفحة واحدة` : `Afficher les ${allPlans.length} formules complètes`)}
+                  ? (isAr ? 'العودة إلى العرض السريع (بدون تمرير)' : 'Revenir au mode interactif compact')
+                  : (isAr ? `عرض جميع الباقات (${allPlans.length}) في قائمة` : `Afficher les ${allPlans.length} formules en liste`)}
               </span>
               <ChevronDown
-                className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                className={`w-3 h-3 transition-transform duration-200 ${
                   showMobileAllGrid ? 'rotate-180' : ''
                 }`}
               />
@@ -377,7 +346,7 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
 
           {/* Expanded mobile list if requested */}
           {showMobileAllGrid && (
-            <div className="mt-5 space-y-4">
+            <div className="mt-4 space-y-3">
               {allPlans.map((plan) => {
                 const name = isAr ? plan.nameAr : plan.nameFr;
                 const freq = isAr ? plan.frequencyAr : plan.frequencyFr;
@@ -387,26 +356,26 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
                 return (
                   <div
                     key={plan.id}
-                    className={`flex flex-col justify-between p-5 rounded-2xl border transition-all ${
+                    className={`flex flex-col justify-between p-4 rounded-2xl border transition-all ${
                       plan.isPopular
                         ? 'bg-adrena-card border-adrena-gold shadow-xl ring-1 ring-adrena-gold/30'
                         : 'bg-adrena-card border-adrena-border shadow-sm'
                     }`}
                   >
                     <div>
-                      <div className="flex items-center justify-between gap-2 mb-2">
-                        <span className="text-xs font-bold text-adrena-stone tracking-wide">{freq}</span>
+                      <div className="flex items-center justify-between gap-2 mb-1.5">
+                        <span className="text-[11px] font-bold text-adrena-stone tracking-wide">{freq}</span>
                         {plan.isPopular && (
-                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10.5px] font-black bg-adrena-gold text-adrena-black uppercase tracking-wider shadow-sm">
+                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-black bg-adrena-gold text-adrena-black uppercase tracking-wider shadow-sm">
                             ★ {t.popular}
                           </span>
                         )}
                       </div>
-                      <h4 className="text-xl font-black text-white tracking-tight mb-3">{name}</h4>
-                      <div className="mb-4 pb-4 border-b border-adrena-border/80 flex items-baseline gap-2">
+                      <h4 className="text-lg font-black text-white tracking-tight mb-2">{name}</h4>
+                      <div className="mb-3 pb-3 border-b border-adrena-border/80 flex items-baseline gap-2">
                         <span
                           dir="ltr"
-                          className="text-3xl font-black text-white tabular-nums tracking-tight whitespace-nowrap"
+                          className="text-2xl font-black text-white tabular-nums tracking-tight whitespace-nowrap"
                         >
                           {formatPrice(plan.price)}
                         </span>
@@ -414,10 +383,10 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
                           {period}
                         </span>
                       </div>
-                      <div className="space-y-2 mb-6">
+                      <div className="space-y-1.5 mb-4">
                         {feats.map((feat, idx) => (
-                          <div key={idx} className="flex items-start gap-2.5 text-xs text-adrena-bone font-medium">
-                            <Check className="w-4 h-4 text-adrena-gold flex-shrink-0 mt-0.5" />
+                          <div key={idx} className="flex items-start gap-2 text-xs text-adrena-bone font-medium">
+                            <Check className="w-3.5 h-3.5 text-adrena-gold flex-shrink-0 mt-0.5" />
                             <span className="leading-snug">{feat}</span>
                           </div>
                         ))}
@@ -426,13 +395,13 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
                     <button
                       type="button"
                       onClick={() => handleWhatsAppOrder(name, plan.price)}
-                      className={`w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl font-black text-xs transition-all shadow-sm active:scale-[0.98] ${
+                      className={`w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl font-black text-xs transition-all shadow-sm active:scale-[0.98] ${
                         plan.isPopular
                           ? 'bg-adrena-gold hover:bg-adrena-gold-light text-[#08090b]'
                           : 'bg-adrena-surface hover:bg-white/10 text-white border border-adrena-border'
                       }`}
                     >
-                      <MessageCircle className="w-4 h-4 fill-current flex-shrink-0" />
+                      <MessageCircle className="w-3.5 h-3.5 fill-current flex-shrink-0" />
                       <span className="whitespace-nowrap">
                         {isAr ? `حجز الباقة • ${formatPrice(plan.price)} دج` : `Réserver • ${formatPrice(plan.price)} DA`}
                       </span>
