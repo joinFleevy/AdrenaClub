@@ -18,12 +18,12 @@ export default function FAQSection({ lang }: FAQSectionProps) {
   };
 
   return (
-    <section id="faq" className="py-12 md:py-16 scroll-mt-28 relative bg-adrena-black border-b border-adrena-border">
+    <section id="faq" className="py-20 sm:py-28 lg:py-32 scroll-mt-28 relative bg-adrena-black border-b border-adrena-border">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
-        <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight">
+        <div className="text-center mb-12 sm:mb-16">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-tight">
             {t.title}
           </h2>
           <p className="mt-3 text-base sm:text-lg text-adrena-stone max-w-xl mx-auto leading-relaxed font-normal">
@@ -46,7 +46,7 @@ export default function FAQSection({ lang }: FAQSectionProps) {
                   onClick={() => toggleItem(index)}
                   aria-expanded={isOpen}
                   aria-controls={`faq-answer-${index}`}
-                  className="w-full p-5 sm:p-6 text-left rtl:text-right flex items-center justify-between gap-4 font-bold text-base sm:text-lg text-white hover:text-adrena-gold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-adrena-gold"
+                  className="w-full p-5 sm:p-6 text-left rtl:text-right flex items-center justify-between gap-4 font-bold text-base sm:text-lg text-white hover:text-adrena-gold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-adrena-gold cursor-pointer"
                 >
                   <span className="leading-snug">{item.q}</span>
                   <div
@@ -73,24 +73,6 @@ export default function FAQSection({ lang }: FAQSectionProps) {
               </div>
             );
           })}
-        </div>
-
-        {/* Bottom Help Note */}
-        <div className="mt-10 p-5 rounded-xl bg-adrena-card border border-adrena-border text-center shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs sm:text-sm text-adrena-stone font-medium text-left rtl:text-right">
-            {isAr
-              ? 'لديك سؤال آخر أو ترغب في زيارة القاعة اليوم ؟ تواصل مباشرة مع مكتب الاستقبال.'
-              : 'Vous avez une autre question ou souhaitez visiter la salle ? Contactez directement l\'accueil.'}
-          </p>
-          <a
-            href="https://wa.me/213771570378?text=Bonjour,%20j'ai%20une%20question%20sur%20Adrena%20Club"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-adrena-surface hover:bg-white/10 text-white border border-adrena-border text-xs sm:text-sm font-bold whitespace-nowrap"
-          >
-            <MessageCircle className="w-4 h-4 text-adrena-gold" />
-            <span>{isAr ? 'واتساب الاستقبال' : 'WhatsApp Accueil'}</span>
-          </a>
         </div>
       </div>
     </section>

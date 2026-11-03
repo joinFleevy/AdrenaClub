@@ -11,8 +11,6 @@ import {
   Layers,
   ChevronDown,
   Calculator,
-  Sparkles,
-  Users,
   X,
 } from 'lucide-react';
 import { Language, content } from '@/data/content';
@@ -42,17 +40,8 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
   const isAr = lang === 'ar';
 
   const [activeTab, setActiveTab] = useState<PricingTab>('musculation');
-  const [audienceFilter, setAudienceFilter] = useState<AudienceFilter>('all');
   const [showAllMuscu, setShowAllMuscu] = useState<boolean>(false);
   const [isCalculatorModalOpen, setIsCalculatorModalOpen] = useState<boolean>(false);
-
-  // Handle audience filter change
-  const handleAudienceChange = (aud: AudienceFilter) => {
-    setAudienceFilter(aud);
-    if (aud === 'enfants') {
-      setActiveTab('combat');
-    }
-  };
 
   const handleTabChange = (tab: PricingTab) => {
     setActiveTab(tab);
@@ -74,54 +63,41 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
     { fr: string; ar: string; countFr: string; countAr: string; icon: React.ElementType }
   > = {
     musculation: { fr: 'Musculation', ar: 'كمال الأجسام', countFr: '6 formules', countAr: '6 باقات', icon: Dumbbell },
-    combat: { fr: 'Sports de Combat', ar: 'رياضات القتال', countFr: '3 disciplines', countAr: '3 فئات', icon: Shield },
+    combat: { fr: 'Combat & Enfants', ar: 'قتال وأطفال', countFr: '3 disciplines', countAr: '3 فئات', icon: Shield },
     crosstraining: { fr: 'Cross-Training', ar: 'كروس ترينينغ', countFr: '3 formules', countAr: '3 باقات', icon: Flame },
     mixtes: { fr: 'Formules Mixtes', ar: 'الباقات المدمجة', countFr: '50+ formules', countAr: '+50 تركيبة', icon: Layers },
   };
 
-  // Filter plans based on active tab and audience filter
+  // Filter plans based on active tab
   const displayedPlans = useMemo(() => {
-    let plans: PricingPlan[] = [];
     switch (activeTab) {
       case 'musculation':
-        plans = musculationPlans;
-        break;
+        if (!showAllMuscu) {
+          return [musculationPlans[1], musculationPlans[2], musculationPlans[5]]; // 2x, 3x (popular), Illimité
+        }
+        return musculationPlans;
       case 'combat':
-        plans = combatPlans;
-        break;
+        return combatPlans;
       case 'crosstraining':
-        plans = crosstrainingPlans;
-        break;
+        return crosstrainingPlans;
       case 'mixtes':
-        plans = mixedPlans;
-        break;
+        return mixedPlans;
       default:
-        plans = musculationPlans;
+        return musculationPlans;
     }
-
-    if (audienceFilter !== 'all') {
-      plans = plans.filter((p) => p.audience.includes(audienceFilter));
-    }
-
-    // For musculation: when collapsed, show the top 3 hero passes
-    if (activeTab === 'musculation' && !showAllMuscu && audienceFilter === 'all') {
-      return [musculationPlans[1], musculationPlans[2], musculationPlans[5]]; // 2x, 3x, Illimité
-    }
-
-    return plans;
-  }, [activeTab, audienceFilter, showAllMuscu]);
+  }, [activeTab, showAllMuscu]);
 
   return (
-    <section id="tarifs" className="py-12 md:py-20 scroll-mt-20 relative bg-adrena-black border-b border-adrena-border">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="tarifs" className="py-20 sm:py-28 lg:py-32 scroll-mt-20 relative bg-adrena-black border-b border-adrena-border">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Header */}
-        <div className="mb-6 md:mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
-          <div>
-            <h2 className="text-2xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight">
+        {/* Section Header: Focused & Authoritative */}
+        <div className="mb-12 sm:mb-16 flex flex-col sm:flex-row sm:items-end justify-between gap-6">
+          <div className="max-w-2xl">
+            <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
               {t.title}
             </h2>
-            <p className="mt-1 text-sm sm:text-base text-adrena-stone max-w-[65ch] leading-relaxed font-normal">
+            <p className="mt-3 text-base sm:text-lg text-adrena-stone leading-relaxed font-normal">
               {t.subtitle}
             </p>
           </div>
@@ -129,80 +105,21 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
           <button
             type="button"
             onClick={() => onOpenPostersModal(activeTab === 'mixtes' ? 'mixtes' : 'tarifs')}
-            className="inline-flex items-center gap-2 px-4 py-2.5 sm:px-5 sm:py-3 rounded-xl bg-adrena-card hover:bg-adrena-surface border border-adrena-border text-xs sm:text-sm font-bold text-adrena-stone hover:text-white transition-all self-start md:self-auto shadow-sm cursor-pointer flex-shrink-0"
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-adrena-card hover:bg-adrena-surface border border-adrena-border text-xs sm:text-sm font-bold text-adrena-stone hover:text-white transition-all self-start sm:self-auto cursor-pointer flex-shrink-0"
           >
             <ImageIcon className="w-4 h-4 text-adrena-gold flex-shrink-0" />
             <span>
               {activeTab === 'mixtes'
-                ? (isAr ? 'عرض ملصق الأسعار المدمجة' : 'Voir l\'affiche des tarifs mixtes')
+                ? (isAr ? 'عرض الملصق الرسمي (50+)' : 'Affiche officielle (50+ tarifs)')
                 : t.viewPosterBtn}
             </span>
           </button>
         </div>
 
         {/* ============================================================== */}
-        {/* AUDIENCE SEGMENTER: Clear Distinction for Enfants, Femmes, Hommes */}
+        {/* SINGLE UNIFIED CATEGORY NAV: Generous breathing room, zero clutter */}
         {/* ============================================================== */}
-        <div className="mb-6 p-2 rounded-2xl bg-adrena-card border border-adrena-border flex flex-wrap items-center justify-between gap-2">
-          <div className="flex items-center gap-2 px-2 py-1 text-xs font-bold text-adrena-stone uppercase tracking-wider">
-            <Users className="w-4 h-4 text-adrena-gold flex-shrink-0" />
-            <span>{isAr ? 'تصفية حسب الجمهور :' : 'Public cible :'}</span>
-          </div>
-
-          <div className="flex flex-wrap items-center gap-1.5 flex-1 justify-end">
-            {[
-              { id: 'all' as AudienceFilter, labelFr: 'Tout afficher', labelAr: 'الكل', icon: '🥋' },
-              { id: 'hommes' as AudienceFilter, labelFr: 'Hommes (06h - 00h)', labelAr: 'رجال (06:00 - 00:00)', icon: '👨' },
-              { id: 'femmes' as AudienceFilter, labelFr: 'Femmes (RDC Privé)', labelAr: 'نساء (فضاء خاص)', icon: '👩' },
-              { id: 'enfants' as AudienceFilter, labelFr: 'Enfants (6 à 14 ans)', labelAr: 'أطفال (6 - 14 سنة)', icon: '🧒' },
-            ].map((aud) => {
-              const isAudActive = audienceFilter === aud.id;
-              return (
-                <button
-                  key={aud.id}
-                  type="button"
-                  onClick={() => handleAudienceChange(aud.id)}
-                  className={`inline-flex items-center gap-1.5 px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl text-xs sm:text-sm font-bold transition-all border cursor-pointer ${
-                    isAudActive
-                      ? 'bg-adrena-gold text-adrena-black border-adrena-gold shadow-md font-black'
-                      : 'bg-adrena-surface hover:bg-neutral-800 text-adrena-stone hover:text-white border-adrena-border'
-                  }`}
-                >
-                  <span className="text-sm">{aud.icon}</span>
-                  <span>{isAr ? aud.labelAr : aud.labelFr}</span>
-                </button>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Audience Reassurance Banner */}
-        {audienceFilter === 'femmes' && (
-          <div className="mb-6 p-4 rounded-xl bg-violet-950/40 border border-violet-500/30 text-violet-200 text-xs sm:text-sm font-semibold flex items-center gap-3">
-            <span className="text-lg flex-shrink-0">👩</span>
-            <p className="leading-relaxed">
-              {isAr
-                ? 'فضاء الطابق الأرضي (RDC) مخصص 100% للنساء مع مدربات مؤهلات، خصوصية تامة وحصص بدون موسيقى.'
-                : 'Espace RDC 100% réservé aux femmes : accès privé, coachs féminines et séances calmes sans musique.'}
-            </p>
-          </div>
-        )}
-
-        {audienceFilter === 'enfants' && (
-          <div className="mb-6 p-4 rounded-xl bg-sky-950/40 border border-sky-500/30 text-sky-200 text-xs sm:text-sm font-semibold flex items-center gap-3">
-            <span className="text-lg flex-shrink-0">🧒</span>
-            <p className="leading-relaxed">
-              {isAr
-                ? 'أكاديمية الأطفال للرياضات القتالية (من 6 إلى 14 سنة) : جودو، ملاكمة وتنمية حركية بإشراف أبطال ومدربين معتمدين.'
-                : 'Académie Enfants (6 à 14 ans) : Judo éducatif, boxe & motricité sur tatami sécurisé avec encadrement certifié.'}
-            </p>
-          </div>
-        )}
-
-        {/* ============================================================== */}
-        {/* Category Tabs: Musculation, Combat, Cross, Mixtes               */}
-        {/* ============================================================== */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 mb-6 sm:mb-8" role="tablist" aria-label="Catégories de tarifs">
+        <div className="flex items-center justify-start sm:justify-center gap-2 overflow-x-auto pb-3 mb-12 sm:mb-16 no-scrollbar" role="tablist" aria-label="Catégories de tarifs">
           {(['musculation', 'combat', 'crosstraining', 'mixtes'] as PricingTab[]).map((tab) => {
             const isActive = activeTab === tab;
             const config = tabConfig[tab];
@@ -213,27 +130,14 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
                 role="tab"
                 aria-selected={isActive}
                 onClick={() => handleTabChange(tab)}
-                className={`p-3 sm:p-4 rounded-xl transition-all flex flex-col justify-between text-left rtl:text-right cursor-pointer shadow-sm active:scale-[0.98] border ${
+                className={`inline-flex items-center gap-2 px-5 py-3 rounded-xl transition-all cursor-pointer whitespace-nowrap text-sm font-extrabold border ${
                   isActive
-                    ? 'bg-adrena-gold text-adrena-black border-adrena-gold shadow-md font-black'
-                    : 'bg-adrena-card hover:bg-adrena-surface text-adrena-stone hover:text-white border-adrena-border hover:border-adrena-gold/40 font-bold'
+                    ? 'bg-adrena-gold text-adrena-black border-adrena-gold shadow-md'
+                    : 'bg-adrena-card hover:bg-adrena-surface text-adrena-stone hover:text-white border-adrena-border'
                 }`}
               >
-                <div className="flex items-center justify-between w-full mb-1.5 sm:mb-2">
-                  <Icon className={`w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0 ${isActive ? 'text-adrena-black' : 'text-adrena-gold'}`} />
-                  <span
-                    className={`text-[10px] sm:text-xs font-black px-2 py-0.5 rounded-full ${
-                      isActive
-                        ? 'bg-adrena-black/15 text-adrena-black'
-                        : 'bg-adrena-surface text-adrena-stone border border-adrena-border'
-                    }`}
-                  >
-                    {isAr ? config.countAr : config.countFr}
-                  </span>
-                </div>
-                <span className="text-xs sm:text-base tracking-tight leading-snug">
-                  {isAr ? config.ar : config.fr}
-                </span>
+                <Icon className={`w-4 h-4 flex-shrink-0 ${isActive ? 'text-adrena-black' : 'text-adrena-gold'}`} />
+                <span>{isAr ? config.ar : config.fr}</span>
               </button>
             );
           })}
@@ -374,122 +278,28 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
               })}
             </div>
 
-            {/* Musculation Frequencies Expand Banner */}
-            {activeTab === 'musculation' && audienceFilter === 'all' && (
-              <div className="mt-8 p-4 sm:p-5 rounded-2xl bg-adrena-card border border-adrena-border shadow-lg flex flex-col sm:flex-row items-center justify-between gap-4">
-                <div className="text-center sm:text-left rtl:sm:text-right">
-                  <p className="text-sm sm:text-base font-extrabold text-white">
-                    {isAr ? 'ترددات إضافية متوفرة في كمال الأجسام' : 'Autres fréquences disponibles en musculation'}
-                  </p>
-                  <p className="text-xs sm:text-sm text-adrena-stone mt-0.5 font-medium">
-                    {isAr ? (
-                      <>
-                        <span>حصة واحدة بـ </span>
-                        <strong className="text-adrena-gold font-bold whitespace-nowrap tabular-nums">{formatPrice(2000)} دج</strong>
-                        <span> • 4 حصص بـ </span>
-                        <strong className="text-adrena-gold font-bold whitespace-nowrap tabular-nums">{formatPrice(4000)} دج</strong>
-                        <span> • 5 حصص بـ </span>
-                        <strong className="text-adrena-gold font-bold whitespace-nowrap tabular-nums">{formatPrice(4200)} دج</strong>
-                      </>
-                    ) : (
-                      <>
-                        <span>1 séance/sem (</span>
-                        <strong className="text-adrena-gold font-bold whitespace-nowrap tabular-nums">{formatPrice(2000)} DA</strong>
-                        <span>) • 4 séances (</span>
-                        <strong className="text-adrena-gold font-bold whitespace-nowrap tabular-nums">{formatPrice(4000)} DA</strong>
-                        <span>) • 5 séances (</span>
-                        <strong className="text-adrena-gold font-bold whitespace-nowrap tabular-nums">{formatPrice(4200)} DA</strong>
-                        <span>)</span>
-                      </>
-                    )}
-                  </p>
-                </div>
-
+            {/* Musculation Frequencies Expand Button: Clean, Centered, No nested card */}
+            {activeTab === 'musculation' && (
+              <div className="mt-8 flex justify-center">
                 <button
                   type="button"
                   onClick={() => setShowAllMuscu(!showAllMuscu)}
-                  className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-adrena-surface hover:bg-adrena-gold text-white hover:text-adrena-black border border-adrena-gold/50 hover:border-adrena-gold font-extrabold text-xs sm:text-sm uppercase tracking-wider transition-all shadow-md active:scale-[0.98] cursor-pointer whitespace-nowrap flex-shrink-0"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-adrena-card hover:bg-adrena-surface text-adrena-stone hover:text-white border border-adrena-border hover:border-adrena-gold/50 font-bold text-xs sm:text-sm uppercase tracking-wider transition-all shadow-sm active:scale-[0.98] cursor-pointer"
                 >
                   <span>
                     {showAllMuscu
-                      ? (isAr ? 'عرض الباقات الرئيسية فقط' : 'Masquer les 3 autres formules')
-                      : (isAr ? 'عرض جميع البطاقات (6)' : 'Afficher toutes les formules (6)')}
+                      ? (isAr ? 'عرض الباقات الرئيسية فقط (3)' : 'Afficher les 3 formules principales')
+                      : (isAr ? 'عرض جميع باقات كمال الأجسام (6)' : 'Voir les 6 formules de musculation')}
                   </span>
                   <ChevronDown
-                    className={`w-4 h-4 transition-transform duration-200 ${
+                    className={`w-4 h-4 text-adrena-gold transition-transform duration-200 ${
                       showAllMuscu ? 'rotate-180' : ''
                     }`}
                   />
                 </button>
               </div>
             )}
-
-            {/* Formules Mixtes Official Poster Access Banner */}
-            {activeTab === 'mixtes' && (
-              <div className="mt-8 p-4 sm:p-5 rounded-2xl bg-adrena-card border border-adrena-border/90 shadow-lg flex flex-col md:flex-row items-center justify-between gap-4">
-                <div className="flex items-center gap-3.5 text-center sm:text-left rtl:sm:text-right">
-                  <div className="w-10 h-10 rounded-xl bg-adrena-surface border border-adrena-gold/40 flex items-center justify-center flex-shrink-0 text-adrena-gold">
-                    <ImageIcon className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <p className="text-sm sm:text-base font-extrabold text-white">
-                      {isAr ? 'أكثر من 50 تركيبة مدمجة رسمية متوفرة في النادي' : 'Plus de 50 combinaisons mixtes officielles au club'}
-                    </p>
-                    <p className="text-xs sm:text-sm text-adrena-stone mt-0.5 font-medium">
-                      {isAr
-                        ? 'يمكنك دمج أي عدد من حصص الكروس أو القتال مع كمال الأجسام بسعر تفضيلي ومباشر'
-                        : 'Associez librement vos séances de cross ou combat avec la musculation à tarif réduit'}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-2 flex-wrap">
-                  <button
-                    type="button"
-                    onClick={() => setIsCalculatorModalOpen(true)}
-                    className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-adrena-surface hover:bg-neutral-800 text-adrena-gold border border-adrena-gold/50 font-bold text-xs sm:text-sm cursor-pointer whitespace-nowrap"
-                  >
-                    <Calculator className="w-4 h-4" />
-                    <span>{isAr ? 'فتح الحاسبة التفاعلية' : 'Lancer le simulateur'}</span>
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => onOpenPostersModal('mixtes')}
-                    className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-adrena-gold hover:bg-adrena-gold-light text-adrena-black font-black text-xs sm:text-sm uppercase tracking-wider transition-all shadow-md active:scale-[0.98] cursor-pointer whitespace-nowrap flex-shrink-0"
-                  >
-                    <ImageIcon className="w-4 h-4 flex-shrink-0" />
-                    <span>
-                      {isAr ? 'عرض جدول الأسعار الأصلي' : 'Consulter l\'affiche officielle'}
-                    </span>
-                  </button>
-                </div>
-              </div>
-            )}
           </div>
-
-        {/* Practical Registration Guidance Box */}
-        <div className="mt-12 p-5 sm:p-6 rounded-2xl bg-adrena-card border border-adrena-border flex flex-col md:flex-row md:items-center justify-between gap-4 text-xs sm:text-sm text-adrena-stone">
-          <div className="space-y-1">
-            <span className="font-bold text-white block text-sm">
-              {isAr ? 'إجراءات التسجيل في النادي' : 'Modalités d\'inscription à la réception (CUB1)'}
-            </span>
-            <p>
-              {isAr
-                ? 'التسجيل يتم مباشرة بمكتب الاستقبال • الوثائق المطلوبة : شهادة طبية للممارسة الرياضية + صورتان شمسيتان • الدفع نقداً'
-                : 'Dossier à fournir : Certificat médical d\'aptitude + 2 photos d\'identité • Paiement en espèces sur place • Séances d\'essai possibles'}
-            </p>
-          </div>
-
-          <a
-            href="https://wa.me/213771570378?text=Bonjour,%20je%20souhaite%20des%20renseignements%20sur%20les%20inscriptions."
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-adrena-surface hover:bg-white/10 text-white border border-adrena-border font-bold text-xs whitespace-nowrap self-start md:self-auto cursor-pointer"
-          >
-            <MessageCircle className="w-3.5 h-3.5 text-adrena-gold" />
-            <span>{isAr ? 'استفسار عن التسجيل' : 'Une question ? Contactez-nous'}</span>
-          </a>
-        </div>
 
       </div>
 

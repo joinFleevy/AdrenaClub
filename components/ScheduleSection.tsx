@@ -77,7 +77,7 @@ export default function ScheduleSection({ lang, onOpenPostersModal }: ScheduleSe
   };
 
   return (
-    <section id="planning" className="py-12 md:py-16 scroll-mt-28 relative bg-adrena-black border-b border-adrena-border">
+    <section id="planning" className="py-20 sm:py-28 lg:py-32 scroll-mt-28 relative bg-adrena-black border-b border-adrena-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header with clear clearance */}
         <div className="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">

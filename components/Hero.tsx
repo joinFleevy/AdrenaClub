@@ -75,31 +75,31 @@ export default function Hero({ lang, onOpen360 }: HeroProps) {
           <div className="lg:col-span-5 w-full">
             <div className="rounded-xl overflow-hidden border border-adrena-border bg-adrena-card shadow-2xl">
               
-              {/* Floor Switcher */}
+              {/* Photo Showcase Viewport */}
               <div className="flex items-center border-b border-adrena-border bg-adrena-dark p-1 gap-1 text-xs font-bold">
                 <button
                   type="button"
                   onClick={() => setActiveFloor('soussol')}
-                  className={`flex-1 py-2.5 px-3 rounded-lg flex items-center justify-center gap-2 transition-all ${
+                  className={`flex-1 py-2.5 px-3 rounded-lg flex items-center justify-center gap-2 transition-all cursor-pointer ${
                     activeFloor === 'soussol'
                       ? 'bg-adrena-surface text-white font-extrabold border border-adrena-border shadow-sm'
                       : 'text-adrena-stone hover:text-white'
                   }`}
                 >
                   <Dumbbell className="w-3.5 h-3.5 text-adrena-gold" />
-                  <span>{isAr ? 'السفلي : الحديد والقتال' : 'Sous-Sol : Muscu & Combat'}</span>
+                  <span>{isAr ? 'قاعة التمارين والقتال' : 'Plateau Muscu & Combat'}</span>
                 </button>
                 <button
                   type="button"
                   onClick={() => setActiveFloor('rdc')}
-                  className={`flex-1 py-2.5 px-3 rounded-lg flex items-center justify-center gap-2 transition-all ${
+                  className={`flex-1 py-2.5 px-3 rounded-lg flex items-center justify-center gap-2 transition-all cursor-pointer ${
                     activeFloor === 'rdc'
                       ? 'bg-adrena-surface text-white font-extrabold border border-adrena-border shadow-sm'
                       : 'text-adrena-stone hover:text-white'
                   }`}
                 >
                   <ShieldCheck className="w-3.5 h-3.5 text-adrena-gold" />
-                  <span>{isAr ? 'الأرضي : الاستقبال والنساء' : 'RDC : Accueil & Femmes'}</span>
+                  <span>{isAr ? 'الاستقبال ومدخل النادي' : 'Accueil & Entrée Club'}</span>
                 </button>
               </div>
 
@@ -130,14 +130,14 @@ export default function Hero({ lang, onOpen360 }: HeroProps) {
                   <span className="font-semibold bg-adrena-black/90 px-3 py-1.5 rounded-lg border border-adrena-border">
                     {activeFloor === 'soussol'
                       ? (isAr ? 'طابق سفلي : كمال أجسام وحلبة نزال' : 'Sous-sol : Musculation, Ring & Tatami')
-                      : (isAr ? 'طابق أرضي : فضاء نسائي خاص واستقبال' : 'RDC : Espace 100% Femmes & Accueil')}
+                      : (isAr ? 'طابق أرضي : مكتب الاستقبال والبوابة الإلكترونية' : 'RDC : Comptoir d\'accueil & Accès RFID')}
                   </span>
                   <button
                     type="button"
                     onClick={onOpen360}
-                    className="font-bold text-adrena-gold hover:underline bg-adrena-black/90 px-2.5 py-1.5 rounded-lg border border-adrena-border cursor-pointer"
+                    className="font-bold text-adrena-gold hover:underline bg-adrena-black/90 px-2.5 py-1.5 rounded-lg border border-adrena-border cursor-pointer flex items-center gap-1.5"
                   >
-                    {isAr ? 'جولة 360°' : 'Visite 360°'}
+                    <span>{isAr ? 'جولة 360°' : 'Visite 360°'}</span>
                   </button>
                 </div>
               </div>

@@ -13,7 +13,7 @@ export default function ReviewsSection({ lang }: ReviewsSectionProps) {
   const t = content[lang].reviews;
 
   return (
-    <section id="avis" className="py-12 md:py-16 scroll-mt-28 relative bg-adrena-black border-b border-adrena-border">
+    <section id="avis" className="py-20 sm:py-28 lg:py-32 scroll-mt-28 relative bg-adrena-black border-b border-adrena-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
