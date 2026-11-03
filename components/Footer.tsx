@@ -51,13 +51,8 @@ export default function Footer({ lang }: FooterProps) {
                 </a>
               </li>
               <li>
-                <a href="#tour-360" className="hover:text-adrena-gold transition-colors">
-                  {t.nav.tour360}
-                </a>
-              </li>
-              <li>
-                <a href="#activites" className="hover:text-adrena-gold transition-colors">
-                  {t.nav.disciplines}
+                <a href="#tarifs" className="hover:text-adrena-gold transition-colors">
+                  {t.nav.tarifs}
                 </a>
               </li>
               <li>
@@ -66,8 +61,8 @@ export default function Footer({ lang }: FooterProps) {
                 </a>
               </li>
               <li>
-                <a href="#tarifs" className="hover:text-adrena-gold transition-colors">
-                  {t.nav.tarifs}
+                <a href="#espace-femmes" className="hover:text-adrena-gold transition-colors">
+                  {lang === 'fr' ? 'Espace 100% Femmes' : 'فضاء النساء'}
                 </a>
               </li>
               <li>

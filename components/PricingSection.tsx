@@ -13,6 +13,7 @@ import {
   Calculator,
   Sparkles,
   Users,
+  X,
 } from 'lucide-react';
 import { Language, content } from '@/data/content';
 import PricingCalculator from './PricingCalculator';
@@ -43,7 +44,7 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
   const [activeTab, setActiveTab] = useState<PricingTab>('musculation');
   const [audienceFilter, setAudienceFilter] = useState<AudienceFilter>('all');
   const [showAllMuscu, setShowAllMuscu] = useState<boolean>(false);
-  const [mixedViewMode, setMixedViewMode] = useState<'calculator' | 'cards'>('calculator');
+  const [isCalculatorModalOpen, setIsCalculatorModalOpen] = useState<boolean>(false);
 
   // Handle audience filter change
   const handleAudienceChange = (aud: AudienceFilter) => {
@@ -238,52 +239,39 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
           })}
         </div>
 
-        {/* For Mixed Plans: Toggle between Interactive Calculator (50+ combinations) and Curated Cards (6) */}
+        {/* For Mixed Plans: Clean Callout to Launch Custom Builder Modal */}
         {activeTab === 'mixtes' && (
-          <div className="flex items-center justify-center gap-2 mb-6 sm:mb-8" role="tablist" aria-label="Mode formules mixtes">
+          <div className="mb-6 p-4 sm:p-5 rounded-2xl bg-adrena-card border border-adrena-gold/40 shadow-lg flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="flex items-center gap-3.5 text-center sm:text-left rtl:sm:text-right">
+              <div className="w-10 h-10 rounded-xl bg-adrena-gold/15 border border-adrena-gold/40 flex items-center justify-center text-adrena-gold flex-shrink-0">
+                <Calculator className="w-5 h-5" />
+              </div>
+              <div>
+                <p className="text-sm sm:text-base font-extrabold text-white">
+                  {isAr ? 'حاسبة الباقات المدمجة (أكثر من 50 تركيبة)' : 'Simulateur Sur-Mesure (50+ formules)'}
+                </p>
+                <p className="text-xs sm:text-sm text-adrena-stone mt-0.5 font-medium">
+                  {isAr
+                    ? 'اختر عدد حصص الكروس أو القتال مع كمال الأجسام واحصل على تسعيرتك الرسمية فوراً'
+                    : 'Composez votre formule personnalisée selon vos jours et disciplines'}
+                </p>
+              </div>
+            </div>
+
             <button
               type="button"
-              role="tab"
-              aria-selected={mixedViewMode === 'calculator'}
-              onClick={() => setMixedViewMode('calculator')}
-              className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer border ${
-                mixedViewMode === 'calculator'
-                  ? 'bg-adrena-gold text-adrena-black border-adrena-gold shadow-md font-black'
-                  : 'bg-adrena-card hover:bg-adrena-surface text-adrena-stone hover:text-white border-adrena-border'
-              }`}
+              onClick={() => setIsCalculatorModalOpen(true)}
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-adrena-gold hover:bg-adrena-gold-light text-adrena-black font-black text-xs sm:text-sm uppercase tracking-wider transition-all shadow-md active:scale-95 cursor-pointer whitespace-nowrap"
             >
-              <Calculator className={`w-4 h-4 flex-shrink-0 ${mixedViewMode === 'calculator' ? 'text-adrena-black' : 'text-adrena-gold'}`} />
-              <span>{isAr ? 'حاسبة الباقات المدمجة (50+)' : 'Simulateur Sur-Mesure (50+)'}</span>
-            </button>
-            <button
-              type="button"
-              role="tab"
-              aria-selected={mixedViewMode === 'cards'}
-              onClick={() => setMixedViewMode('cards')}
-              className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer border ${
-                mixedViewMode === 'cards'
-                  ? 'bg-adrena-gold text-adrena-black border-adrena-gold shadow-md font-black'
-                  : 'bg-adrena-card hover:bg-adrena-surface text-adrena-stone hover:text-white border-adrena-border'
-              }`}
-            >
-              <Sparkles className={`w-4 h-4 flex-shrink-0 ${mixedViewMode === 'cards' ? 'text-adrena-black' : 'text-adrena-gold'}`} />
-              <span>{isAr ? 'الباقات الأكثر طلباً (6)' : 'Formules Populaires (6)'}</span>
+              <Calculator className="w-4 h-4 flex-shrink-0" />
+              <span>{isAr ? 'فتح الحاسبة التفاعلية' : 'Personnaliser ma formule'}</span>
             </button>
           </div>
         )}
 
-        {/* ============================================================== */}
-        {/* CONTENT RENDERER: Zero Tiny Squares, Pure Legible Responsive Cards */}
-        {/* ============================================================== */}
-        {activeTab === 'mixtes' && mixedViewMode === 'calculator' ? (
-          <PricingCalculator
-            lang={lang}
-            onOpenPoster={() => onOpenPostersModal('mixtes')}
-          />
-        ) : (
-          <div>
-            {/* Direct Cards Grid: 1 column on Mobile, 3 columns on Desktop */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+        <div>
+          {/* Direct Cards Grid: 1 column on Mobile, 3 columns on Desktop */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               {displayedPlans.map((plan) => {
                 const name = isAr ? plan.nameAr : plan.nameFr;
                 const freq = isAr ? plan.frequencyAr : plan.frequencyFr;
@@ -436,8 +424,8 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
               </div>
             )}
 
-            {/* Formules Mixtes Official Poster Access Banner (When on Cards mode) */}
-            {activeTab === 'mixtes' && mixedViewMode === 'cards' && (
+            {/* Formules Mixtes Official Poster Access Banner */}
+            {activeTab === 'mixtes' && (
               <div className="mt-8 p-4 sm:p-5 rounded-2xl bg-adrena-card border border-adrena-border/90 shadow-lg flex flex-col md:flex-row items-center justify-between gap-4">
                 <div className="flex items-center gap-3.5 text-center sm:text-left rtl:sm:text-right">
                   <div className="w-10 h-10 rounded-xl bg-adrena-surface border border-adrena-gold/40 flex items-center justify-center flex-shrink-0 text-adrena-gold">
@@ -458,7 +446,7 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
                 <div className="flex items-center gap-2 flex-wrap">
                   <button
                     type="button"
-                    onClick={() => setMixedViewMode('calculator')}
+                    onClick={() => setIsCalculatorModalOpen(true)}
                     className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-adrena-surface hover:bg-neutral-800 text-adrena-gold border border-adrena-gold/50 font-bold text-xs sm:text-sm cursor-pointer whitespace-nowrap"
                   >
                     <Calculator className="w-4 h-4" />
@@ -478,7 +466,6 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
               </div>
             )}
           </div>
-        )}
 
         {/* Practical Registration Guidance Box */}
         <div className="mt-12 p-5 sm:p-6 rounded-2xl bg-adrena-card border border-adrena-border flex flex-col md:flex-row md:items-center justify-between gap-4 text-xs sm:text-sm text-adrena-stone">
@@ -505,6 +492,40 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
         </div>
 
       </div>
+
+      {/* Interactive 50+ Combination Calculator Modal Dialog */}
+      {isCalculatorModalOpen && (
+        <div
+          onClick={() => setIsCalculatorModalOpen(false)}
+          className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-3 sm:p-6 overflow-y-auto animate-in fade-in duration-200"
+          role="dialog"
+          aria-modal="true"
+          aria-label={isAr ? 'حاسبة الباقات المدمجة' : 'Simulateur officiel de formules mixtes'}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="relative max-w-4xl w-full my-auto"
+          >
+            <div className="absolute top-4 right-4 rtl:right-auto rtl:left-4 z-20">
+              <button
+                type="button"
+                onClick={() => setIsCalculatorModalOpen(false)}
+                className="p-2.5 rounded-xl bg-adrena-surface hover:bg-neutral-800 text-adrena-stone hover:text-white border border-adrena-border transition-colors cursor-pointer"
+                aria-label="Fermer"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            <PricingCalculator
+              lang={lang}
+              onOpenPoster={() => {
+                setIsCalculatorModalOpen(false);
+                onOpenPostersModal('mixtes');
+              }}
+            />
+          </div>
+        </div>
+      )}
     </section>
   );
 }

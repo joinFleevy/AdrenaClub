@@ -9,9 +9,10 @@ import { computeAlgiersLiveStatus, LiveStatusData } from '@/components/LiveStatu
 interface NavbarProps {
   lang: Language;
   onToggleLang: () => void;
+  onOpen360?: () => void;
 }
 
-export default function Navbar({ lang, onToggleLang }: NavbarProps) {
+export default function Navbar({ lang, onToggleLang, onOpen360 }: NavbarProps) {
   const t = content[lang];
   const isAr = lang === 'ar';
   const [isScrolled, setIsScrolled] = useState(false);
@@ -37,7 +38,7 @@ export default function Navbar({ lang, onToggleLang }: NavbarProps) {
 
   // Track active section via IntersectionObserver for polished navigation feedback
   useEffect(() => {
-    const sectionIds = ['accueil', 'tour-360', 'activites', 'planning', 'tarifs', 'avis', 'contact'];
+    const sectionIds = ['accueil', 'tarifs', 'planning', 'espace-femmes', 'avis', 'contact'];
     const elements = sectionIds
       .map((id) => document.getElementById(id))
       .filter((el): el is HTMLElement => el !== null);
@@ -75,10 +76,9 @@ export default function Navbar({ lang, onToggleLang }: NavbarProps) {
 
   const navLinks = [
     { id: 'accueil', href: '#accueil', label: t.nav.home },
-    { id: 'tour-360', href: '#tour-360', label: t.nav.tour360 },
-    { id: 'activites', href: '#activites', label: t.nav.disciplines },
-    { id: 'planning', href: '#planning', label: t.nav.planning },
     { id: 'tarifs', href: '#tarifs', label: t.nav.tarifs },
+    { id: 'planning', href: '#planning', label: t.nav.planning },
+    { id: 'espace-femmes', href: '#espace-femmes', label: isAr ? 'فضاء النساء' : 'Espace Femmes' },
     { id: 'avis', href: '#avis', label: t.nav.reviews },
     { id: 'contact', href: '#contact', label: t.nav.contact },
   ];
@@ -208,6 +208,16 @@ export default function Navbar({ lang, onToggleLang }: NavbarProps) {
                 </a>
               );
             })}
+
+            {onOpen360 && (
+              <button
+                type="button"
+                onClick={onOpen360}
+                className="px-3 py-2 rounded-lg text-xs sm:text-sm font-bold text-adrena-stone hover:text-white border border-adrena-border hover:border-adrena-gold/40 transition-all cursor-pointer"
+              >
+                <span>{isAr ? 'جولة 360°' : 'Visite 360°'}</span>
+              </button>
+            )}
           </div>
 
           {/* Right Action Button */}
@@ -283,6 +293,20 @@ export default function Navbar({ lang, onToggleLang }: NavbarProps) {
                 </a>
               );
             })}
+
+            {onOpen360 && (
+              <button
+                type="button"
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  onOpen360();
+                }}
+                className="px-4 py-3 rounded-xl text-base font-bold text-adrena-gold hover:bg-white/5 border border-adrena-gold/30 transition-all flex items-center justify-between min-h-[44px] cursor-pointer"
+              >
+                <span>{isAr ? 'جولة 360° داخل القاعة' : 'Visite 360° interactive'}</span>
+                <span className="text-xs bg-adrena-surface px-2 py-0.5 rounded text-adrena-gold">360°</span>
+              </button>
+            )}
 
             <div className="pt-4 mt-2 border-t border-adrena-border flex flex-col gap-3">
               <a

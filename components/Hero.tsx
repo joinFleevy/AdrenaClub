@@ -7,9 +7,10 @@ import { Language, content } from '@/data/content';
 
 interface HeroProps {
   lang: Language;
+  onOpen360?: () => void;
 }
 
-export default function Hero({ lang }: HeroProps) {
+export default function Hero({ lang, onOpen360 }: HeroProps) {
   const isAr = lang === 'ar';
   const [activeFloor, setActiveFloor] = useState<'soussol' | 'rdc'>('rdc');
 
@@ -131,66 +132,16 @@ export default function Hero({ lang }: HeroProps) {
                       ? (isAr ? 'طابق سفلي : كمال أجسام وحلبة نزال' : 'Sous-sol : Musculation, Ring & Tatami')
                       : (isAr ? 'طابق أرضي : فضاء نسائي خاص واستقبال' : 'RDC : Espace 100% Femmes & Accueil')}
                   </span>
-                  <a
-                    href="#tour-360"
-                    className="font-bold text-adrena-gold hover:underline bg-adrena-black/90 px-2.5 py-1.5 rounded-lg border border-adrena-border"
+                  <button
+                    type="button"
+                    onClick={onOpen360}
+                    className="font-bold text-adrena-gold hover:underline bg-adrena-black/90 px-2.5 py-1.5 rounded-lg border border-adrena-border cursor-pointer"
                   >
                     {isAr ? 'جولة 360°' : 'Visite 360°'}
-                  </a>
+                  </button>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-
-        {/* Clean Architectural Spec Strip */}
-        <div className="mt-8 sm:mt-14 pt-6 sm:pt-8 border-t border-adrena-border grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 text-xs sm:text-sm">
-          <div>
-            <span className="text-adrena-muted text-xs block mb-1 uppercase tracking-wider font-semibold">
-              {isAr ? 'المساحة والتهيئة' : 'Infrastructures'}
-            </span>
-            <p className="font-extrabold text-white text-base">
-              {isAr ? 'طابقان مستقلان' : '1 200 m² sur 2 Niveaux'}
-            </p>
-            <p className="text-adrena-stone text-xs mt-0.5">
-              {isAr ? 'كمال أجسام، حلبة وبساط' : 'Plateau force, ring & tatami'}
-            </p>
-          </div>
-
-          <div>
-            <span className="text-adrena-muted text-xs block mb-1 uppercase tracking-wider font-semibold">
-              {isAr ? 'فضاء النساء' : 'Espace 100% Femmes'}
-            </span>
-            <p className="font-extrabold text-white text-base">
-              {isAr ? 'فضاء خاص وحصص بدون موسيقى' : 'Espace privé & sans musique'}
-            </p>
-            <p className="text-adrena-stone text-xs mt-0.5">
-              {isAr ? 'طابق أرضي مع مدربات' : 'RDC privé avec coachs féminines'}
-            </p>
-          </div>
-
-          <div>
-            <span className="text-adrena-muted text-xs block mb-1 uppercase tracking-wider font-semibold">
-              {isAr ? 'ساعات العمل' : 'Amplitude Horaires'}
-            </span>
-            <p className="font-extrabold text-white text-base">
-              06:00 — 00:00 (7j/7)
-            </p>
-            <p className="text-adrena-stone text-xs mt-0.5">
-              {isAr ? 'سهرات مفتوحة للرجال' : 'Nocturne hommes jusqu\'à minuit'}
-            </p>
-          </div>
-
-          <div>
-            <span className="text-adrena-muted text-xs block mb-1 uppercase tracking-wider font-semibold">
-              {isAr ? 'الاشتراكات الشهرية' : 'Tarifs & Formules'}
-            </span>
-            <p className="font-extrabold text-adrena-gold text-base">
-              {isAr ? 'تبدأ من 2 500 دج / شهر' : 'Dès 2 500 DA / mois'}
-            </p>
-            <p className="text-adrena-stone text-xs mt-0.5">
-              {isAr ? 'دفع نقداً بدون التزام سنوي' : 'Sans engagement, paiement espèces'}
-            </p>
           </div>
         </div>
 

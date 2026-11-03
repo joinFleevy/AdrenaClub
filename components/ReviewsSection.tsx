@@ -13,7 +13,7 @@ export default function ReviewsSection({ lang }: ReviewsSectionProps) {
   const t = content[lang].reviews;
 
   return (
-    <section id="avis" className="py-20 scroll-mt-28 relative bg-adrena-black border-b border-adrena-border">
+    <section id="avis" className="py-12 md:py-16 scroll-mt-28 relative bg-adrena-black border-b border-adrena-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
@@ -88,8 +88,28 @@ export default function ReviewsSection({ lang }: ReviewsSectionProps) {
           ))}
         </div>
 
+        {/* Coach Trust Strip */}
+        <div className="mt-8 p-4 rounded-xl bg-adrena-card border border-adrena-border flex flex-col sm:flex-row items-center justify-between gap-3 text-xs sm:text-sm text-adrena-stone">
+          <div className="flex items-center gap-2 font-medium">
+            <span className="w-2 h-2 rounded-full bg-adrena-gold flex-shrink-0" />
+            <span>
+              {lang === 'fr'
+                ? 'Encadrement d\'élite : Coach Abdellah (Combat & Cross) & Coach Hmimed (Judo & Lutte)'
+                : 'تأطير وإشراف معتمد : الكوتش عبد الله (قتال وكروس) والكوتش حميمد (جودو ومصارعة)'}
+            </span>
+          </div>
+          <a
+            href="https://wa.me/213771570378?text=Bonjour,%20je%20souhaite%20des%20informations%20sur%20les%20cours%20de%20combat."
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-bold text-adrena-gold hover:underline whitespace-nowrap"
+          >
+            {lang === 'fr' ? 'Contacter les coachs' : 'تواصل مع المدربين'}
+          </a>
+        </div>
+
         {/* View on Google link */}
-        <div className="mt-8 text-center">
+        <div className="mt-6 text-center">
           <a
             href="https://www.google.com/maps/place/Adr%C3%A9na+club/@36.731219,3.185733,17z/data=!4m6!3m5!1s0x128e510838572915:0x98c81818d117e070!8m2!3d36.731219!4d3.185733!16s%2Fg%2F11v402rb1s"
             target="_blank"

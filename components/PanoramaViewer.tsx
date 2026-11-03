@@ -7,6 +7,7 @@ import { Language, content } from '@/data/content';
 
 interface PanoramaViewerProps {
   lang: Language;
+  isModal?: boolean;
 }
 
 type PanoKey = 'rdc' | 'muscu' | 'combat';
@@ -23,7 +24,7 @@ const floorIcons: Record<PanoKey, React.ComponentType<{ className?: string }>> =
   combat: Swords,
 };
 
-export default function PanoramaViewer({ lang }: PanoramaViewerProps) {
+export default function PanoramaViewer({ lang, isModal = false }: PanoramaViewerProps) {
   const t = content[lang].tour360;
   const [activePano, setActivePano] = useState<PanoKey>('muscu');
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -234,36 +235,13 @@ export default function PanoramaViewer({ lang }: PanoramaViewerProps) {
     }
   };
 
-  return (
-    <section id="tour-360" className="py-20 scroll-mt-28 relative bg-adrena-black border-b border-adrena-border">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header: direct and clean without generic kicker pills */}
-        <div className="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
-          <div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight">
-              {t.title}
-            </h2>
-            <p className="mt-2 text-base text-adrena-stone max-w-[60ch] leading-relaxed">
-              {t.subtitle}
-            </p>
-          </div>
-
-          <a
-            href="https://www.google.com/maps/place/Adr%C3%A9na+club/@36.731219,3.185733,17z/data=!4m6!3m5!1s0x128e510838572915:0x98c81818d117e070!8m2!3d36.731219!4d3.185733!16s%2Fg%2F11v402rb1s"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-adrena-card hover:bg-adrena-surface border border-adrena-border text-xs sm:text-sm font-semibold text-adrena-stone hover:text-adrena-bone transition-all self-start md:self-auto shadow-sm"
-          >
-            <MapPin className="w-4 h-4 text-adrena-gold" />
-            <span>{t.googleMapsBtn}</span>
-          </a>
-        </div>
-
-        {/* 360 Viewer Card with INTEGRATED Controls */}
-        <div
-          id="tour-360-container"
-          className="relative w-full rounded-2xl border border-adrena-border bg-adrena-dark overflow-hidden shadow-2xl"
-        >
+  const viewerContent = (
+    <>
+      {/* 360 Viewer Card with INTEGRATED Controls */}
+      <div
+        id="tour-360-container"
+        className="relative w-full rounded-2xl border border-adrena-border bg-adrena-dark overflow-hidden shadow-2xl"
+      >
           {/* Top Left: Active Area Label */}
           <div className="absolute top-3 left-3 sm:top-4 sm:left-4 rtl:left-auto rtl:right-3 sm:rtl:right-4 z-20 flex items-center gap-2 bg-black/85 backdrop-blur-md px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg border border-white/10 text-xs text-white max-w-[calc(100%-130px)] sm:max-w-none">
             <span className="w-2 h-2 rounded-full bg-adrena-gold animate-pulse shrink-0" />
@@ -392,6 +370,38 @@ export default function PanoramaViewer({ lang }: PanoramaViewerProps) {
           <strong className="text-white font-extrabold">{t.floors[activePano].title} :</strong>{' '}
           {t.floors[activePano].desc}
         </div>
+    </>
+  );
+
+  if (isModal) {
+    return <div>{viewerContent}</div>;
+  }
+
+  return (
+    <section id="tour-360" className="py-20 scroll-mt-28 relative bg-adrena-black border-b border-adrena-border">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
+          <div>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight">
+              {t.title}
+            </h2>
+            <p className="mt-2 text-base text-adrena-stone max-w-[60ch] leading-relaxed">
+              {t.subtitle}
+            </p>
+          </div>
+
+          <a
+            href="https://maps.app.goo.gl/6YJepRtyWvXcrZoV9"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-adrena-card hover:bg-adrena-surface border border-adrena-border text-xs sm:text-sm font-semibold text-adrena-stone hover:text-adrena-bone transition-all self-start md:self-auto shadow-sm"
+          >
+            <MapPin className="w-4 h-4 text-adrena-gold" />
+            <span>{t.googleMapsBtn}</span>
+          </a>
+        </div>
+
+        {viewerContent}
       </div>
     </section>
   );

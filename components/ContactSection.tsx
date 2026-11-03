@@ -12,7 +12,7 @@ export default function ContactSection({ lang }: ContactSectionProps) {
   const t = content[lang].contact;
 
   return (
-    <section id="contact" className="py-20 scroll-mt-28 relative bg-adrena-black border-b border-adrena-border">
+    <section id="contact" className="py-12 md:py-16 scroll-mt-28 relative bg-adrena-black border-b border-adrena-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-12">
