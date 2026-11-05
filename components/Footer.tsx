@@ -24,54 +24,54 @@ export default function Footer({ lang }: FooterProps) {
               </div>
               <div className="flex items-center gap-1.5 font-black text-2xl tracking-tight">
                 <span className="text-white">ADRENA</span>
-                <span className="text-adrena-gold">CLUB</span>
+                <span className="text-amber-400">CLUB</span>
               </div>
             </div>
 
-            <p className="text-xs sm:text-sm text-adrena-stone leading-relaxed max-w-[38ch]">
+            <p className="text-xs sm:text-sm text-slate-400 leading-relaxed max-w-[38ch]">
               {lang === 'fr'
                 ? 'Complexe sportif haut de gamme sur 2 étages à Bab Ezzouar. Musculation, CrossTraining, Sports de Combat, Sauna & Espace 100% femmes.'
                 : 'مجمع رياضي متكامل على طابقين في باب الزوار. كمال أجسام، كروس ترينينغ، رياضات قتالية، ساونا وفترات خاصة للنساء.'}
             </p>
 
-            <div className="p-3.5 rounded-xl bg-adrena-card border border-adrena-border text-xs italic text-adrena-gold font-medium leading-relaxed">
+            <div className="p-3.5 rounded-xl bg-slate-900 border border-slate-800 text-xs italic text-amber-400 font-medium leading-relaxed">
               {t.hero.motto}
             </div>
           </div>
 
           {/* Col 2: Navigation Links */}
           <div>
-            <h4 className="text-xs font-bold text-adrena-bone uppercase tracking-wider mb-4">
+            <h4 className="text-xs font-black text-white uppercase tracking-wider mb-4">
               {lang === 'fr' ? 'Navigation' : 'روابط سريعة'}
             </h4>
-            <ul className="space-y-2 text-xs sm:text-sm text-adrena-stone">
+            <ul className="space-y-2 text-xs sm:text-sm text-slate-400">
               <li>
-                <a href="#accueil" className="hover:text-adrena-gold transition-colors">
+                <a href="#accueil" className="hover:text-amber-400 transition-colors">
                   {t.nav.home}
                 </a>
               </li>
               <li>
-                <a href="#tarifs" className="hover:text-adrena-gold transition-colors">
+                <a href="#tarifs" className="hover:text-amber-400 transition-colors">
                   {t.nav.tarifs}
                 </a>
               </li>
               <li>
-                <a href="#planning" className="hover:text-adrena-gold transition-colors">
+                <a href="#planning" className="hover:text-amber-400 transition-colors">
                   {t.nav.planning}
                 </a>
               </li>
               <li>
-                <a href="#espace-femmes" className="hover:text-adrena-gold transition-colors">
+                <a href="#espace-femmes" className="hover:text-amber-400 transition-colors">
                   {lang === 'fr' ? 'Espace 100% Femmes' : 'فضاء النساء'}
                 </a>
               </li>
               <li>
-                <a href="#avis" className="hover:text-adrena-gold transition-colors">
+                <a href="#avis" className="hover:text-amber-400 transition-colors">
                   {t.nav.reviews}
                 </a>
               </li>
               <li>
-                <a href="#contact" className="hover:text-adrena-gold transition-colors">
+                <a href="#contact" className="hover:text-amber-400 transition-colors">
                   {t.nav.contact}
                 </a>
               </li>
@@ -80,10 +80,10 @@ export default function Footer({ lang }: FooterProps) {
 
           {/* Col 3: Disciplines */}
           <div>
-            <h4 className="text-xs font-bold text-adrena-bone uppercase tracking-wider mb-4">
+            <h4 className="text-xs font-black text-white uppercase tracking-wider mb-4">
               {lang === 'fr' ? 'Activités du Club' : 'الأنشطة المتاحة'}
             </h4>
-            <ul className="space-y-2 text-xs sm:text-sm text-adrena-stone">
+            <ul className="space-y-2 text-xs sm:text-sm text-slate-400">
               {lang === 'fr' ? (
                 <>
                   <li>• Musculation & Plateau Force</li>
@@ -110,22 +110,22 @@ export default function Footer({ lang }: FooterProps) {
 
           {/* Col 4: Contact & Social */}
           <div>
-            <h4 className="text-xs font-bold text-adrena-bone uppercase tracking-wider mb-4">
+            <h4 className="text-xs font-black text-white uppercase tracking-wider mb-4">
               {lang === 'fr' ? 'Contact & Réseaux' : 'التواصل والشبكات'}
             </h4>
-            <ul className="space-y-2.5 text-xs sm:text-sm mb-6">
+            <ul className="space-y-2.5 text-xs sm:text-sm mb-6 text-slate-300">
               <li className="flex items-center gap-2">
-                <MapPin className="w-4 h-4 text-adrena-gold flex-shrink-0" />
+                <MapPin className="w-4 h-4 text-amber-400 flex-shrink-0" />
                 <span>Bab Ezzouar (CUB1), Alger</span>
               </li>
               <li className="flex items-center gap-2">
-                <Phone className="w-4 h-4 text-adrena-gold flex-shrink-0" />
-                <a href="tel:+213771570378" className="hover:text-adrena-gold font-mono tabular-nums font-bold">
+                <Phone className="w-4 h-4 text-amber-400 flex-shrink-0" />
+                <a href="tel:+213771570378" className="hover:text-amber-400 font-mono tabular-nums font-bold">
                   0771 57 03 78
                 </a>
               </li>
               <li className="flex items-center gap-2">
-                <Mail className="w-4 h-4 text-adrena-gold flex-shrink-0" />
+                <Mail className="w-4 h-4 text-amber-400 flex-shrink-0" />
                 <span>1adrenaclub@gmail.com</span>
               </li>
             </ul>

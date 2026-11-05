@@ -4,7 +4,6 @@ import React, { useState, useEffect } from 'react';
 import { Language } from '@/data/content';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
-import LiveStatusEngine from '@/components/LiveStatusEngine';
 import PricingSection from '@/components/PricingSection';
 import ScheduleSection from '@/components/ScheduleSection';
 import WomensSanctuary from '@/components/WomensSanctuary';
@@ -66,11 +65,6 @@ export default function Home() {
         lang={lang}
         onOpen360={() => setIs360ModalOpen(true)}
       />
-
-      {/* Real-time Gym Operational Status Strip */}
-      <section className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
-        <LiveStatusEngine lang={lang} />
-      </section>
 
       {/* 1. Official Pricing & Formules */}
       <PricingSection lang={lang} onOpenPostersModal={handleOpenPostersModal} />

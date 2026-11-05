@@ -57,27 +57,24 @@ export default function Hero({ lang, onOpen360 }: HeroProps) {
           {/* Left Column: Human Athletic Statement */}
           <div className="lg:col-span-7 flex flex-col justify-center">
             
-            {/* Community Pill */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-50 border border-amber-200 text-amber-950 text-xs sm:text-sm font-bold mb-5 self-start shadow-xs">
-              <span className="flex h-2 w-2 rounded-full bg-amber-500 animate-pulse" />
-              <span>{isAr ? 'مجتمع رياضي حقيقي • باب الزوار (CUB1)' : 'Communauté sportive • Bab Ezzouar (CUB1)'}</span>
-              <span className="text-amber-300">|</span>
-              <span className="text-amber-800">{isAr ? 'مفتوح 7/7 أيام' : 'Ouvert 7j/7'}</span>
+            {/* Athletic Grounded Tag */}
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-amber-100/80 border border-amber-300 text-amber-950 text-xs sm:text-sm font-black uppercase tracking-wider mb-5 self-start">
+              <span>{isAr ? 'باب الزوار (CUB1) • مركب رياضي على طابقين' : 'Bab Ezzouar (CUB1) • Complexe Sportif sur 2 Niveaux'}</span>
             </div>
 
             {/* Main Headline */}
-            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.1] mb-5">
-              <span>{isAr ? 'طاقة نادي حقيقي.' : 'L\'ÉNERGIE D\'UN VRAI CLUB.'}</span>
-              <span className="block text-amber-500 mt-2 text-2xl sm:text-4xl lg:text-5xl font-extrabold">
-                {isAr ? 'هنا نبني القوة والانضباط معاً.' : 'Ici, on s\'entraîne vraiment.'}
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.08] mb-5">
+              <span>{isAr ? 'نادي رياضي حقيقي في باب الزوار.' : 'VOTRE SALLE DE SPORT À BAB EZZOUAR.'}</span>
+              <span className="block text-amber-500 mt-1.5 text-2xl sm:text-4xl lg:text-5xl font-black">
+                {isAr ? 'كمال أجسام، فنون قتالية وفضاء نسائي خاص.' : 'Musculation, Sports de Combat & Espace Femmes.'}
               </span>
             </h1>
 
             {/* Subtitle with Warm Human Tone */}
             <p className="text-base sm:text-lg text-slate-600 max-w-[54ch] leading-relaxed mb-7 font-medium">
               {isAr
-                ? 'كمال أجسام بأحدث الأجهزة، حلبة ملاكمة وبساط نزال معتمد، وفضاء نسائي مستقل 100% مع حصص خاصة بدون موسيقى. انضم إلى بيئة محفزة تحت إشراف مدربين ذوي خبرة وبطولات.'
-                : 'Plateau musculation complet, ring de combat officiel, tatami d\'arts martiaux et espace 100% femmes avec séances dédiées sans musique. Des coachs passionnés pour vous guider, quel que soit votre niveau.'}
+                ? 'أجهزة كمال أجسام متطورة وأوزان حرة، حلبة ملاكمة وبساط نزال معتمد (كيك بوكسينغ، جودو، مصارعة)، وقاعة مستقلة 100% للنساء مع حصص بدون موسيقى. بإشراف مدربين ذوي بطولات وخبرة.'
+                : 'Plateau musculation complet, ring de boxe officiel, tatami d\'arts martiaux et espace 100% femmes avec créneaux calmes sans musique. Ouvert 7j/7 jusqu\'à minuit sous l\'encadrement de coachs diplômés.'}
             </p>
 
             {/* Direct High-Contrast Action Pair */}

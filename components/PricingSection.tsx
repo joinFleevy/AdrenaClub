@@ -65,7 +65,7 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
     musculation: { fr: 'Musculation', ar: 'كمال الأجسام', countFr: '6 formules', countAr: '6 باقات', icon: Dumbbell },
     combat: { fr: 'Combat & Enfants', ar: 'قتال وأطفال', countFr: '3 disciplines', countAr: '3 فئات', icon: Shield },
     crosstraining: { fr: 'Cross-Training', ar: 'كروس ترينينغ', countFr: '3 formules', countAr: '3 باقات', icon: Flame },
-    mixtes: { fr: 'Formules Mixtes', ar: 'الباقات المدمجة', countFr: '50+ formules', countAr: '+50 تركيبة', icon: Layers },
+    mixtes: { fr: 'Packs Combinés', ar: 'باقات مدمجة', countFr: 'Sur-mesure', countAr: 'مخصصة', icon: Layers },
   };
 
   // Filter plans based on active tab
@@ -149,16 +149,16 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
           <div className="mb-8 p-5 sm:p-6 rounded-2xl bg-amber-50/60 border border-amber-200 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-3.5 text-center sm:text-left rtl:sm:text-right">
               <div className="w-11 h-11 rounded-xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-amber-700 flex-shrink-0">
-                <Calculator className="w-5 h-5" />
+                <Layers className="w-5 h-5" />
               </div>
               <div>
                 <p className="text-sm sm:text-base font-extrabold text-slate-900">
-                  {isAr ? 'حاسبة الباقات المدمجة (أكثر من 50 تركيبة)' : 'Simulateur Sur-Mesure (50+ formules)'}
+                  {isAr ? 'دمج التخصصات حسب رغبتك' : 'Combinez vos disciplines préférées'}
                 </p>
                 <p className="text-xs sm:text-sm text-slate-600 mt-0.5 font-medium">
                   {isAr
-                    ? 'اختر عدد حصص الكروس أو القتال مع كمال الأجسام واحصل على تسعيرتك الرسمية فوراً'
-                    : 'Composez votre formule personnalisée selon vos jours et disciplines'}
+                    ? 'يمكنك دمج كمال الأجسام مع حصص القتال أو الكروس ترينينغ حسب جدولك الأسبوعي.'
+                    : 'Musculation + Boxe ou Cross-Training : créez votre planning personnalisé.'}
                 </p>
               </div>
             </div>
@@ -166,10 +166,10 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
             <button
               type="button"
               onClick={() => setIsCalculatorModalOpen(true)}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs sm:text-sm uppercase tracking-wider transition-all shadow-md active:scale-95 cursor-pointer whitespace-nowrap"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-slate-900 hover:bg-black text-white font-extrabold text-xs sm:text-sm uppercase tracking-wider transition-all shadow-md active:scale-95 cursor-pointer whitespace-nowrap"
             >
-              <Calculator className="w-4 h-4 flex-shrink-0" />
-              <span>{isAr ? 'فتح الحاسبة التفاعلية' : 'Personnaliser ma formule'}</span>
+              <Calculator className="w-4 h-4 text-amber-400 flex-shrink-0" />
+              <span>{isAr ? 'حساب السعر المخصص' : 'Calculer mon tarif sur-mesure'}</span>
             </button>
           </div>
         )}

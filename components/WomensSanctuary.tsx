@@ -90,7 +90,7 @@ export default function WomensSanctuary({ lang }: WomensSanctuaryProps) {
           <div className="lg:col-span-7 order-1 lg:order-2">
             
             <span className="text-xs sm:text-sm font-extrabold text-amber-800 uppercase tracking-wider block mb-2">
-              {isAr ? 'احترام وخصوصية تامة' : 'Sanctuaire Féminin Dédié'}
+              {isAr ? 'خصوصية كاملة وراحة بال' : 'Espace Dédié au Rez-de-Chaussée'}
             </span>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 tracking-tight leading-tight mb-4">
               <span>{isAr ? 'فضاء خاص 100% للنساء.' : 'Espace 100% Femmes.'}</span>

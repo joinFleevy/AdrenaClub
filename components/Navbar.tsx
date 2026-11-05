@@ -4,7 +4,6 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { Phone, MapPin, Globe, Menu, X, MessageCircle, Clock } from 'lucide-react';
 import { Language, content } from '@/data/content';
-import { computeAlgiersLiveStatus, LiveStatusData } from '@/components/LiveStatusEngine';
 
 interface NavbarProps {
   lang: Language;
@@ -18,15 +17,6 @@ export default function Navbar({ lang, onToggleLang, onOpen360 }: NavbarProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<string>('accueil');
-  const [liveStatus, setLiveStatus] = useState<LiveStatusData | null>(null);
-
-  useEffect(() => {
-    setLiveStatus(computeAlgiersLiveStatus());
-    const interval = setInterval(() => {
-      setLiveStatus(computeAlgiersLiveStatus());
-    }, 30000);
-    return () => clearInterval(interval);
-  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -84,72 +74,43 @@ export default function Navbar({ lang, onToggleLang, onOpen360 }: NavbarProps) {
   ];
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white">
-      {/* Top micro utility bar (Desktop / Tablet only) */}
-      <div className="hidden sm:block bg-slate-900 border-b border-slate-800 py-2 px-4 sm:px-6 lg:px-8 text-xs sm:text-sm text-slate-300">
-        <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
-          <div className="flex items-center gap-3 sm:gap-6 overflow-hidden text-ellipsis whitespace-nowrap text-xs sm:text-sm">
-            <span className="flex items-center gap-2 text-white font-medium">
-              <MapPin className="w-4 h-4 text-amber-400 flex-shrink-0" />
-              <span className="hidden sm:inline">{t.topBar.address}</span>
-              <span className="sm:hidden">Bab Ezzouar, Alger</span>
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-xs">
+      {/* Clean Athletic Utility Top Bar (Desktop / Tablet only) */}
+      <div className="hidden sm:block bg-slate-100 border-b border-slate-200 py-1.5 px-4 sm:px-6 lg:px-8 text-xs text-slate-700">
+        <div className="max-w-7xl mx-auto flex items-center justify-between gap-4 font-semibold">
+          <div className="flex items-center gap-4 sm:gap-6 overflow-hidden text-ellipsis whitespace-nowrap">
+            <span className="flex items-center gap-1.5 text-slate-900">
+              <MapPin className="w-3.5 h-3.5 text-amber-600 flex-shrink-0" />
+              <span>Bab Ezzouar (CUB1), Alger</span>
             </span>
-            <span className="hidden md:inline text-slate-700 font-bold">|</span>
-            <span className="hidden md:flex items-center gap-2 text-slate-300 font-medium">
-              <Clock className="w-4 h-4 text-amber-400 flex-shrink-0" />
-              <span>
-                {isAr
-                  ? 'السبت-الخميس : 06h - 00h (رجال)'
-                  : 'Sam-Jeu : 06h - 00h (Hommes)'}
-              </span>
+            <span className="text-slate-300 font-bold">|</span>
+            <span className="flex items-center gap-1.5 text-slate-700">
+              <Clock className="w-3.5 h-3.5 text-amber-600 flex-shrink-0" />
+              <span>{isAr ? 'مفتوح 7/7 أيام • حتى 00:00' : 'Ouvert 7j/7 • Jusqu\'à minuit (00:00)'}</span>
             </span>
           </div>
 
           <div className="flex items-center gap-3 flex-shrink-0">
-            {/* Live Open Status badge */}
-            <div
-              className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold border transition-colors ${
-                liveStatus?.audience === 'femmes'
-                  ? 'bg-amber-950/60 border-amber-400/40 text-amber-300'
-                  : liveStatus?.isOpen
-                  ? 'bg-emerald-950/60 border-emerald-500/40 text-emerald-300'
-                  : 'bg-slate-800 border-slate-700 text-slate-400'
-              }`}
+            {/* Phone link */}
+            <a
+              href="tel:+213771570378"
+              className="flex items-center gap-1.5 text-slate-800 hover:text-amber-600 font-bold transition-colors"
             >
-              <span className="relative flex h-2 w-2">
-                {liveStatus?.isOpen && (
-                  <span
-                    className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${
-                      liveStatus?.audience === 'femmes' ? 'bg-amber-400' : 'bg-emerald-400'
-                    }`}
-                  />
-                )}
-                <span
-                  className={`relative inline-flex rounded-full h-2 w-2 ${
-                    liveStatus?.audience === 'femmes'
-                      ? 'bg-amber-400'
-                      : liveStatus?.isOpen
-                      ? 'bg-emerald-400'
-                      : 'bg-neutral-500'
-                  }`}
-                />
-              </span>
-              <span>
-                {isAr
-                  ? (liveStatus?.badgeLabelAr || 'مفتوح')
-                  : (liveStatus?.badgeLabelFr || 'Ouvert')}
-              </span>
-            </div>
+              <Phone className="w-3 h-3 text-amber-600" />
+              <span className="font-mono tabular-nums">0771 57 03 78</span>
+            </a>
+
+            <span className="text-slate-300 font-bold">|</span>
 
             {/* Language Switcher */}
             <button
               type="button"
               onClick={onToggleLang}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 hover:border-amber-400/40 transition-all font-bold text-xs active:scale-95 cursor-pointer"
+              className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white hover:bg-slate-50 text-slate-800 border border-slate-300 hover:border-slate-400 transition-all font-bold text-xs cursor-pointer shadow-xs"
               title="Changer de langue / تغيير اللغة"
               aria-label={isAr ? 'Changer en Français' : 'تغيير إلى العربية'}
             >
-              <Globe className="w-3.5 h-3.5 text-amber-400 flex-shrink-0" />
+              <Globe className="w-3.5 h-3.5 text-amber-600 flex-shrink-0" />
               <span>{lang === 'fr' ? 'العربية' : 'Français'}</span>
             </button>
           </div>
