@@ -9,8 +9,6 @@ import {
   Clock,
   Play,
   Pause,
-  Volume2,
-  VolumeX,
   Star,
   Dumbbell,
   Video,
@@ -27,7 +25,6 @@ export default function Hero({ lang, onOpen360 }: HeroProps) {
   const isAr = lang === 'ar';
   const [activeMedia, setActiveMedia] = useState<'video' | 'photo'>('video');
   const [isPlaying, setIsPlaying] = useState<boolean>(true);
-  const [isMuted, setIsMuted] = useState<boolean>(true);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const togglePlay = () => {
@@ -39,12 +36,6 @@ export default function Hero({ lang, onOpen360 }: HeroProps) {
       videoRef.current.play();
       setIsPlaying(true);
     }
-  };
-
-  const toggleMute = () => {
-    if (!videoRef.current) return;
-    videoRef.current.muted = !isMuted;
-    setIsMuted(!isMuted);
   };
 
   return (
@@ -171,7 +162,7 @@ export default function Hero({ lang, onOpen360 }: HeroProps) {
                       poster="/images/video-poster.jpg"
                       autoPlay
                       loop
-                      muted={isMuted}
+                      muted
                       playsInline
                       className="w-full h-full object-cover"
                     />
@@ -184,19 +175,10 @@ export default function Hero({ lang, onOpen360 }: HeroProps) {
                       <button
                         type="button"
                         onClick={togglePlay}
-                        className="p-2 rounded-full bg-black/60 hover:bg-black/80 text-white backdrop-blur-md border border-white/20 transition-all cursor-pointer"
+                        className="p-2 rounded-full bg-black/60 hover:bg-black/80 text-white backdrop-blur-md border border-white/20 transition-all cursor-pointer shadow-sm"
                         aria-label={isPlaying ? 'Pause' : 'Lire'}
                       >
                         {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4 fill-current" />}
-                      </button>
-
-                      <button
-                        type="button"
-                        onClick={toggleMute}
-                        className="p-2 rounded-full bg-black/60 hover:bg-black/80 text-white backdrop-blur-md border border-white/20 transition-all cursor-pointer"
-                        aria-label={isMuted ? 'Activer le son' : 'Couper le son'}
-                      >
-                        {isMuted ? <VolumeX className="w-4 h-4 text-amber-400" /> : <Volume2 className="w-4 h-4 text-amber-400" />}
                       </button>
                     </div>
 
