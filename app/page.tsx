@@ -52,9 +52,7 @@ export default function Home() {
   return (
     <div
       dir={isRtl ? 'rtl' : 'ltr'}
-      className={`min-h-screen bg-adrena-black text-adrena-bone pb-20 md:pb-0 ${
-        isRtl ? 'font-sans' : 'font-sans'
-      }`}
+      className="min-h-screen bg-slate-50 text-slate-900 pb-20 md:pb-0 font-sans"
     >
       {/* Navigation */}
       <Navbar

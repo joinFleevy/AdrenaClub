@@ -84,19 +84,19 @@ export default function Navbar({ lang, onToggleLang, onOpen360 }: NavbarProps) {
   ];
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-adrena-black">
-      {/* Top micro utility bar (Desktop / Tablet only - hidden on mobile to maximize viewport) */}
-      <div className="hidden sm:block bg-adrena-black border-b border-adrena-border py-2 px-4 sm:px-6 lg:px-8 text-xs sm:text-sm text-adrena-stone">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white">
+      {/* Top micro utility bar (Desktop / Tablet only) */}
+      <div className="hidden sm:block bg-slate-900 border-b border-slate-800 py-2 px-4 sm:px-6 lg:px-8 text-xs sm:text-sm text-slate-300">
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
           <div className="flex items-center gap-3 sm:gap-6 overflow-hidden text-ellipsis whitespace-nowrap text-xs sm:text-sm">
             <span className="flex items-center gap-2 text-white font-medium">
-              <MapPin className="w-4 h-4 text-adrena-gold flex-shrink-0" />
+              <MapPin className="w-4 h-4 text-amber-400 flex-shrink-0" />
               <span className="hidden sm:inline">{t.topBar.address}</span>
               <span className="sm:hidden">Bab Ezzouar, Alger</span>
             </span>
-            <span className="hidden md:inline text-adrena-border font-bold">|</span>
-            <span className="hidden md:flex items-center gap-2 text-adrena-stone font-medium">
-              <Clock className="w-4 h-4 text-adrena-gold flex-shrink-0" />
+            <span className="hidden md:inline text-slate-700 font-bold">|</span>
+            <span className="hidden md:flex items-center gap-2 text-slate-300 font-medium">
+              <Clock className="w-4 h-4 text-amber-400 flex-shrink-0" />
               <span>
                 {isAr
                   ? 'السبت-الخميس : 06h - 00h (رجال)'
@@ -106,28 +106,28 @@ export default function Navbar({ lang, onToggleLang, onOpen360 }: NavbarProps) {
           </div>
 
           <div className="flex items-center gap-3 flex-shrink-0">
-            {/* Live Open Status badge with clean non-blurry indicator */}
+            {/* Live Open Status badge */}
             <div
               className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold border transition-colors ${
                 liveStatus?.audience === 'femmes'
-                  ? 'bg-adrena-card border-adrena-gold/40 text-adrena-gold'
+                  ? 'bg-amber-950/60 border-amber-400/40 text-amber-300'
                   : liveStatus?.isOpen
-                  ? 'bg-adrena-card border-emerald-500/40 text-emerald-400'
-                  : 'bg-adrena-card border-adrena-border text-adrena-muted'
+                  ? 'bg-emerald-950/60 border-emerald-500/40 text-emerald-300'
+                  : 'bg-slate-800 border-slate-700 text-slate-400'
               }`}
             >
               <span className="relative flex h-2 w-2">
                 {liveStatus?.isOpen && (
                   <span
                     className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${
-                      liveStatus?.audience === 'femmes' ? 'bg-adrena-gold' : 'bg-emerald-400'
+                      liveStatus?.audience === 'femmes' ? 'bg-amber-400' : 'bg-emerald-400'
                     }`}
                   />
                 )}
                 <span
                   className={`relative inline-flex rounded-full h-2 w-2 ${
                     liveStatus?.audience === 'femmes'
-                      ? 'bg-adrena-gold'
+                      ? 'bg-amber-400'
                       : liveStatus?.isOpen
                       ? 'bg-emerald-400'
                       : 'bg-neutral-500'
@@ -145,29 +145,29 @@ export default function Navbar({ lang, onToggleLang, onOpen360 }: NavbarProps) {
             <button
               type="button"
               onClick={onToggleLang}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-adrena-card hover:bg-adrena-surface text-white border border-adrena-border hover:border-adrena-gold/40 transition-all font-bold text-xs active:scale-95 focus-visible:ring-2 focus-visible:ring-adrena-gold focus-visible:outline-none cursor-pointer"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 hover:border-amber-400/40 transition-all font-bold text-xs active:scale-95 cursor-pointer"
               title="Changer de langue / تغيير اللغة"
               aria-label={isAr ? 'Changer en Français' : 'تغيير إلى العربية'}
             >
-              <Globe className="w-3.5 h-3.5 text-adrena-gold flex-shrink-0" />
+              <Globe className="w-3.5 h-3.5 text-amber-400 flex-shrink-0" />
               <span>{lang === 'fr' ? 'العربية' : 'Français'}</span>
             </button>
           </div>
         </div>
       </div>
 
-      {/* Main Navbar - Solid Opaque Architectural Bar (Zero backdrop-blur bleed) */}
+      {/* Main Navbar - Bright Clean Architectural Bar */}
       <nav
         aria-label="Navigation principale"
-        className={`transition-all duration-200 px-4 sm:px-6 lg:px-8 bg-adrena-black border-b border-adrena-border ${
-          isScrolled ? 'py-3 shadow-2xl' : 'py-4'
+        className={`transition-all duration-200 px-4 sm:px-6 lg:px-8 bg-white/95 backdrop-blur-md border-b border-slate-200 ${
+          isScrolled ? 'py-3 shadow-md' : 'py-4'
         }`}
       >
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
           {/* Brand Logo */}
           <a
             href="#accueil"
-            className="flex items-center gap-3 group rounded-xl focus-visible:ring-2 focus-visible:ring-adrena-gold focus-visible:outline-none"
+            className="flex items-center gap-3 group rounded-xl focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:outline-none"
           >
             <div className="relative w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0">
               <Image
@@ -181,10 +181,10 @@ export default function Navbar({ lang, onToggleLang, onOpen360 }: NavbarProps) {
             </div>
             <div className="flex flex-col">
               <div className="flex items-center gap-1.5 font-black text-2xl sm:text-3xl tracking-tight leading-none">
-                <span className="text-white">ADRENA</span>
-                <span className="text-adrena-gold">CLUB</span>
+                <span className="text-slate-900">ADRENA</span>
+                <span className="text-amber-500">CLUB</span>
               </div>
-              <span className="text-[11px] sm:text-xs text-adrena-muted tracking-widest font-bold mt-1 hidden sm:block uppercase">
+              <span className="text-[11px] sm:text-xs text-slate-500 tracking-widest font-extrabold mt-1 hidden sm:block uppercase">
                 {isAr ? 'باب الزوار • طابقان' : 'BAB EZZOUAR • 2 ÉTAGES'}
               </span>
             </div>
@@ -198,10 +198,10 @@ export default function Navbar({ lang, onToggleLang, onOpen360 }: NavbarProps) {
                 <a
                   key={link.href}
                   href={link.href}
-                  className={`relative px-4 py-2 rounded-lg text-sm sm:text-base transition-all duration-150 focus-visible:ring-2 focus-visible:ring-adrena-gold focus-visible:outline-none ${
+                  className={`relative px-4 py-2 rounded-lg text-sm sm:text-base transition-all duration-150 focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:outline-none ${
                     isActive
-                      ? 'text-adrena-gold font-extrabold bg-adrena-surface border border-adrena-border shadow-sm'
-                      : 'text-adrena-stone font-bold hover:text-white hover:bg-white/5'
+                      ? 'text-amber-600 font-extrabold bg-amber-50 border border-amber-200 shadow-sm'
+                      : 'text-slate-700 font-bold hover:text-amber-600 hover:bg-slate-100'
                   }`}
                 >
                   <span>{link.label}</span>
@@ -213,7 +213,7 @@ export default function Navbar({ lang, onToggleLang, onOpen360 }: NavbarProps) {
               <button
                 type="button"
                 onClick={onOpen360}
-                className="px-3 py-2 rounded-lg text-xs sm:text-sm font-bold text-adrena-stone hover:text-white border border-adrena-border hover:border-adrena-gold/40 transition-all cursor-pointer"
+                className="px-3.5 py-2 rounded-lg text-xs sm:text-sm font-bold text-slate-700 hover:text-slate-900 border border-slate-300 hover:border-amber-500 transition-all cursor-pointer bg-white shadow-sm flex items-center gap-1.5"
               >
                 <span>{isAr ? 'جولة 360°' : 'Visite 360°'}</span>
               </button>
@@ -226,9 +226,9 @@ export default function Navbar({ lang, onToggleLang, onOpen360 }: NavbarProps) {
               href="https://wa.me/213771570378?text=Bonjour%20Adrena%20Club,%20je%20souhaite%20avoir%20des%20informations%20sur%20les%20inscriptions."
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 px-5 py-3 rounded-lg bg-adrena-gold hover:bg-adrena-gold-light text-adrena-black font-extrabold text-xs sm:text-sm uppercase tracking-wider transition-all shadow-md active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-adrena-gold focus-visible:outline-none"
+              className="flex items-center gap-2 px-5 py-3 rounded-xl bg-slate-900 hover:bg-black text-white font-extrabold text-xs sm:text-sm uppercase tracking-wider transition-all shadow-md active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:outline-none"
             >
-              <MessageCircle className="w-4 h-4 fill-current" />
+              <MessageCircle className="w-4 h-4 text-amber-400 fill-current" />
               <span>{t.nav.ctaButton}</span>
             </a>
           </div>
@@ -238,22 +238,22 @@ export default function Navbar({ lang, onToggleLang, onOpen360 }: NavbarProps) {
             <button
               type="button"
               onClick={onToggleLang}
-              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-adrena-card hover:bg-adrena-surface text-adrena-bone border border-adrena-border text-xs font-bold transition-all"
+              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-300 text-xs font-bold transition-all"
               aria-label={isAr ? 'Changer en Français' : 'تغيير إلى العربية'}
             >
-              <Globe className="w-3.5 h-3.5 text-adrena-gold" />
+              <Globe className="w-3.5 h-3.5 text-amber-500" />
               <span>{lang === 'fr' ? 'العربية' : 'FR'}</span>
             </button>
 
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-lg text-adrena-bone hover:text-white bg-adrena-card border border-adrena-border focus-visible:ring-2 focus-visible:ring-adrena-gold focus-visible:outline-none"
+              className="p-2 rounded-lg text-slate-900 hover:bg-slate-100 bg-white border border-slate-300 focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:outline-none"
               aria-label={mobileMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
               aria-expanded={mobileMenuOpen}
               aria-controls="mobile-navigation"
             >
-              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5 text-white" />}
+              {mobileMenuOpen ? <X className="w-5 h-5 text-slate-900" /> : <Menu className="w-5 h-5 text-slate-900" />}
             </button>
           </div>
         </div>
@@ -262,7 +262,7 @@ export default function Navbar({ lang, onToggleLang, onOpen360 }: NavbarProps) {
       {/* Backdrop overlay for mobile drawer */}
       {mobileMenuOpen && (
         <div
-          className="lg:hidden fixed inset-0 top-[60px] sm:top-[102px] bg-black/70 backdrop-blur-sm z-40 transition-opacity animate-in fade-in duration-200"
+          className="lg:hidden fixed inset-0 top-[60px] sm:top-[102px] bg-slate-900/60 backdrop-blur-sm z-40 transition-opacity animate-in fade-in duration-200"
           onClick={() => setMobileMenuOpen(false)}
           aria-hidden="true"
         />
@@ -272,7 +272,7 @@ export default function Navbar({ lang, onToggleLang, onOpen360 }: NavbarProps) {
       {mobileMenuOpen && (
         <div
           id="mobile-navigation"
-          className="lg:hidden relative z-50 bg-adrena-dark border-b border-adrena-border px-6 py-6 shadow-2xl transition-all animate-in fade-in slide-in-from-top-2 duration-200"
+          className="lg:hidden relative z-50 bg-white border-b border-slate-200 px-6 py-6 shadow-2xl transition-all animate-in fade-in slide-in-from-top-2 duration-200 text-slate-900"
         >
           <div className="flex flex-col gap-2">
             {navLinks.map((link) => {
@@ -284,12 +284,12 @@ export default function Navbar({ lang, onToggleLang, onOpen360 }: NavbarProps) {
                   onClick={() => setMobileMenuOpen(false)}
                   className={`px-4 py-3 rounded-xl text-base font-bold transition-all flex items-center justify-between min-h-[44px] ${
                     isActive
-                      ? 'bg-adrena-surface text-adrena-gold border border-adrena-gold/40'
-                      : 'text-adrena-bone hover:bg-white/5 border border-transparent'
+                      ? 'bg-amber-50 text-amber-600 border border-amber-200'
+                      : 'text-slate-800 hover:bg-slate-100 border border-transparent'
                   }`}
                 >
                   <span>{link.label}</span>
-                  {isActive && <span className="w-2 h-2 rounded-full bg-adrena-gold" />}
+                  {isActive && <span className="w-2 h-2 rounded-full bg-amber-500" />}
                 </a>
               );
             })}
@@ -301,28 +301,28 @@ export default function Navbar({ lang, onToggleLang, onOpen360 }: NavbarProps) {
                   setMobileMenuOpen(false);
                   onOpen360();
                 }}
-                className="px-4 py-3 rounded-xl text-base font-bold text-adrena-gold hover:bg-white/5 border border-adrena-gold/30 transition-all flex items-center justify-between min-h-[44px] cursor-pointer"
+                className="px-4 py-3 rounded-xl text-base font-bold text-amber-600 hover:bg-amber-50 border border-amber-200 transition-all flex items-center justify-between min-h-[44px] cursor-pointer"
               >
                 <span>{isAr ? 'جولة 360° داخل القاعة' : 'Visite 360° interactive'}</span>
-                <span className="text-xs bg-adrena-surface px-2 py-0.5 rounded text-adrena-gold">360°</span>
+                <span className="text-xs bg-amber-100 px-2 py-0.5 rounded text-amber-700 font-black">360°</span>
               </button>
             )}
 
-            <div className="pt-4 mt-2 border-t border-adrena-border flex flex-col gap-3">
+            <div className="pt-4 mt-2 border-t border-slate-200 flex flex-col gap-3">
               <a
                 href="tel:+213771570378"
-                className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-adrena-card border border-adrena-border text-adrena-bone font-bold text-sm min-h-[44px] hover:border-adrena-gold/40 transition-colors"
+                className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-slate-100 border border-slate-300 text-slate-900 font-bold text-sm min-h-[44px] hover:border-amber-500 transition-colors"
               >
-                <Phone className="w-4 h-4 text-adrena-gold" />
+                <Phone className="w-4 h-4 text-amber-500" />
                 <span className="font-mono tabular-nums">0771 57 03 78</span>
               </a>
               <a
                 href="https://wa.me/213771570378?text=Bonjour%20Adrena%20Club,%20je%20souhaite%20m'inscrire."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 px-4 py-3.5 rounded-xl bg-adrena-gold hover:bg-adrena-gold-light text-adrena-black font-black text-sm uppercase tracking-wider transition-all shadow-md active:scale-98 min-h-[44px]"
+                className="flex items-center justify-center gap-2 px-4 py-3.5 rounded-xl bg-slate-900 hover:bg-black text-white font-black text-sm uppercase tracking-wider transition-all shadow-md active:scale-98 min-h-[44px]"
               >
-                <MessageCircle className="w-4 h-4 fill-current" />
+                <MessageCircle className="w-4 h-4 text-amber-400 fill-current" />
                 <span>{t.nav.ctaButton}</span>
               </a>
             </div>

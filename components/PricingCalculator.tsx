@@ -135,18 +135,18 @@ export default function PricingCalculator({ lang, onOpenPoster }: PricingCalcula
   };
 
   return (
-    <div className="rounded-3xl bg-adrena-card border border-adrena-gold/30 shadow-2xl p-5 sm:p-8">
+    <div className="rounded-3xl bg-white border border-slate-200 shadow-2xl p-5 sm:p-8 text-slate-900">
       {/* Top Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 mb-6 border-b border-adrena-border">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 mb-6 border-b border-slate-200">
         <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-adrena-surface border border-adrena-border text-adrena-gold text-xs font-bold mb-2">
-            <Calculator className="w-3.5 h-3.5" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 border border-amber-200 text-amber-800 text-xs font-bold mb-2">
+            <Calculator className="w-3.5 h-3.5 text-amber-600" />
             <span>{isAr ? 'حاسبة الباقات المدمجة الرسمية' : 'Simulateur Officiel de Formules Mixtes'}</span>
           </div>
-          <h3 className="text-xl sm:text-2xl font-black text-white tracking-tight">
+          <h3 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
             {isAr ? 'ركّب باقتك المدمجة حسب رغبتك' : 'Composez votre formule sur-mesure'}
           </h3>
-          <p className="text-xs sm:text-sm text-adrena-stone mt-1">
+          <p className="text-xs sm:text-sm text-slate-600 mt-1">
             {isAr
               ? 'اختر رياضتك المفضلة وعدد حصص كمال الأجسام واحصل على سعرك الرسمي ووفوراتك فوراً'
               : 'Combinez votre discipline sportive et votre fréquence musculation avec tarifs dégressifs officiels.'}
@@ -157,9 +157,9 @@ export default function PricingCalculator({ lang, onOpenPoster }: PricingCalcula
           <button
             type="button"
             onClick={onOpenPoster}
-            className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-adrena-surface hover:bg-neutral-800 border border-adrena-border text-xs font-bold text-adrena-stone hover:text-white transition-all self-start sm:self-auto cursor-pointer flex-shrink-0"
+            className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-300 text-xs font-bold text-slate-700 hover:text-slate-900 transition-all self-start sm:self-auto cursor-pointer flex-shrink-0"
           >
-            <ImageIcon className="w-3.5 h-3.5 text-adrena-gold" />
+            <ImageIcon className="w-3.5 h-3.5 text-amber-600" />
             <span>{isAr ? 'عرض ملصق الأسعار (50+)' : 'Affiche officielle (50+ tarifs)'}</span>
           </button>
         )}
@@ -167,7 +167,7 @@ export default function PricingCalculator({ lang, onOpenPoster }: PricingCalcula
 
       {/* Quick Presets Strip */}
       <div className="mb-6">
-        <span className="text-[11px] font-bold text-adrena-stone uppercase tracking-wider block mb-2 px-0.5">
+        <span className="text-[11px] font-bold text-slate-600 uppercase tracking-wider block mb-2 px-0.5">
           {isAr ? 'تركيبات سريعة شائعة :' : 'Sélection rapide des combinaisons populaires :'}
         </span>
         <div className="flex flex-wrap gap-2">
@@ -187,8 +187,8 @@ export default function PricingCalculator({ lang, onOpenPoster }: PricingCalcula
                 }}
                 className={`py-1.5 px-3 rounded-lg text-xs font-bold transition-all border flex items-center gap-1.5 cursor-pointer ${
                   isMatch
-                    ? 'bg-adrena-gold text-adrena-black border-adrena-gold shadow-sm font-black'
-                    : 'bg-adrena-surface hover:bg-neutral-800 text-adrena-stone hover:text-white border-adrena-border'
+                    ? 'bg-slate-900 text-white border-slate-900 shadow-sm font-black'
+                    : 'bg-slate-100 hover:bg-slate-200 text-slate-700 hover:text-slate-900 border-slate-200'
                 }`}
               >
                 <span>{isAr ? p.labelAr : p.labelFr}</span>
@@ -207,7 +207,7 @@ export default function PricingCalculator({ lang, onOpenPoster }: PricingCalcula
         <div className="lg:col-span-7 space-y-6">
           {/* Step 1: Discipline Choice */}
           <div>
-            <label className="block text-xs sm:text-sm font-bold text-white mb-2.5">
+            <label className="block text-xs sm:text-sm font-bold text-slate-900 mb-2.5">
               {isAr ? '1. اختر الرياضة القتالية أو الوظيفية' : '1. Choisissez votre discipline principale'}
             </label>
             <div className="grid grid-cols-3 gap-2" role="radiogroup" aria-label="Discipline">
@@ -218,11 +218,11 @@ export default function PricingCalculator({ lang, onOpenPoster }: PricingCalcula
                 onClick={() => handleDisciplineChange('cross')}
                 className={`p-3 rounded-xl border text-center transition-all cursor-pointer flex flex-col items-center justify-center gap-1 ${
                   discipline === 'cross'
-                    ? 'bg-adrena-gold text-adrena-black border-adrena-gold shadow-md font-black'
-                    : 'bg-adrena-surface text-adrena-stone hover:text-white border-adrena-border hover:border-adrena-gold/40'
+                    ? 'bg-amber-500 text-slate-950 border-amber-500 shadow-md font-black'
+                    : 'bg-slate-100 text-slate-700 hover:text-slate-900 border-slate-200 hover:border-amber-400'
                 }`}
               >
-                <Flame className={`w-4 h-4 ${discipline === 'cross' ? 'text-adrena-black' : 'text-adrena-gold'}`} />
+                <Flame className={`w-4 h-4 ${discipline === 'cross' ? 'text-slate-950' : 'text-amber-500'}`} />
                 <span className="text-xs font-extrabold">{isAr ? 'كروس ترينينغ' : 'Cross-Training'}</span>
               </button>
 
@@ -233,11 +233,11 @@ export default function PricingCalculator({ lang, onOpenPoster }: PricingCalcula
                 onClick={() => handleDisciplineChange('kick')}
                 className={`p-3 rounded-xl border text-center transition-all cursor-pointer flex flex-col items-center justify-center gap-1 ${
                   discipline === 'kick'
-                    ? 'bg-adrena-gold text-adrena-black border-adrena-gold shadow-md font-black'
-                    : 'bg-adrena-surface text-adrena-stone hover:text-white border-adrena-border hover:border-adrena-gold/40'
+                    ? 'bg-amber-500 text-slate-950 border-amber-500 shadow-md font-black'
+                    : 'bg-slate-100 text-slate-700 hover:text-slate-900 border-slate-200 hover:border-amber-400'
                 }`}
               >
-                <Shield className={`w-4 h-4 ${discipline === 'kick' ? 'text-adrena-black' : 'text-adrena-gold'}`} />
+                <Shield className={`w-4 h-4 ${discipline === 'kick' ? 'text-slate-950' : 'text-amber-500'}`} />
                 <span className="text-xs font-extrabold">{isAr ? 'كيك بوكسينغ' : 'Kickboxing'}</span>
               </button>
 
@@ -248,11 +248,11 @@ export default function PricingCalculator({ lang, onOpenPoster }: PricingCalcula
                 onClick={() => handleDisciplineChange('lutte')}
                 className={`p-3 rounded-xl border text-center transition-all cursor-pointer flex flex-col items-center justify-center gap-1 ${
                   discipline === 'lutte'
-                    ? 'bg-adrena-gold text-adrena-black border-adrena-gold shadow-md font-black'
-                    : 'bg-adrena-surface text-adrena-stone hover:text-white border-adrena-border hover:border-adrena-gold/40'
+                    ? 'bg-amber-500 text-slate-950 border-amber-500 shadow-md font-black'
+                    : 'bg-slate-100 text-slate-700 hover:text-slate-900 border-slate-200 hover:border-amber-400'
                 }`}
               >
-                <Shield className={`w-4 h-4 ${discipline === 'lutte' ? 'text-adrena-black' : 'text-adrena-gold'}`} />
+                <Shield className={`w-4 h-4 ${discipline === 'lutte' ? 'text-slate-950' : 'text-amber-500'}`} />
                 <span className="text-xs font-extrabold">{isAr ? 'مصارعة' : 'Lutte'}</span>
               </button>
             </div>
@@ -261,12 +261,12 @@ export default function PricingCalculator({ lang, onOpenPoster }: PricingCalcula
           {/* Step 2: Discipline Sessions per week */}
           <div>
             <div className="flex items-center justify-between mb-2">
-              <label className="text-xs sm:text-sm font-bold text-white">
+              <label className="text-xs sm:text-sm font-bold text-slate-900">
                 {isAr
                   ? `2. عدد حصص ${getDisciplineTitle()} في الأسبوع`
                   : `2. Séances de ${getDisciplineTitle()} par semaine`}
               </label>
-              <span className="text-xs font-mono font-bold text-adrena-gold">
+              <span className="text-xs font-mono font-bold text-amber-600">
                 {disciplineSessions} {isAr ? 'حصص / أسبوع' : 'séances / sem'}
               </span>
             </div>
@@ -280,8 +280,8 @@ export default function PricingCalculator({ lang, onOpenPoster }: PricingCalcula
                   onClick={() => setDisciplineSessions(num)}
                   className={`py-2.5 px-2 rounded-xl text-xs font-bold transition-all border cursor-pointer ${
                     disciplineSessions === num
-                      ? 'bg-adrena-gold text-adrena-black border-adrena-gold shadow-sm font-black'
-                      : 'bg-adrena-surface text-adrena-stone hover:text-white border-adrena-border hover:border-adrena-gold/30'
+                      ? 'bg-amber-500 text-slate-950 border-amber-500 shadow-sm font-black'
+                      : 'bg-slate-100 text-slate-700 hover:text-slate-900 border-slate-200 hover:border-amber-400'
                   }`}
                 >
                   {num} {isAr ? 'حصص' : num > 1 ? 'séances' : 'séance'}
@@ -293,11 +293,11 @@ export default function PricingCalculator({ lang, onOpenPoster }: PricingCalcula
           {/* Step 3: Musculation Sessions per week */}
           <div>
             <div className="flex items-center justify-between mb-2">
-              <label className="text-xs sm:text-sm font-bold text-white flex items-center gap-1.5">
-                <Dumbbell className="w-3.5 h-3.5 text-adrena-gold" />
+              <label className="text-xs sm:text-sm font-bold text-slate-900 flex items-center gap-1.5">
+                <Dumbbell className="w-3.5 h-3.5 text-amber-500" />
                 <span>{isAr ? '3. عدد حصص كمال الأجسام في الأسبوع' : '3. Séances de Musculation par semaine'}</span>
               </label>
-              <span className="text-xs font-mono font-bold text-adrena-gold">
+              <span className="text-xs font-mono font-bold text-amber-600">
                 {muscuSessions === 6
                   ? (isAr ? 'دخول يومي غير محدود' : 'Accès illimité')
                   : `${muscuSessions} ${isAr ? 'حصص / أسبوع' : 'séances / sem'}`}
@@ -319,8 +319,8 @@ export default function PricingCalculator({ lang, onOpenPoster }: PricingCalcula
                   onClick={() => setMuscuSessions(num)}
                   className={`py-2.5 px-2 rounded-xl text-xs font-bold transition-all border cursor-pointer ${
                     muscuSessions === num
-                      ? 'bg-adrena-bone text-adrena-black border-adrena-bone shadow-sm font-black'
-                      : 'bg-adrena-surface text-adrena-stone hover:text-white border-adrena-border hover:border-adrena-gold/30'
+                      ? 'bg-slate-900 text-white border-slate-900 shadow-sm font-black'
+                      : 'bg-slate-100 text-slate-700 hover:text-slate-900 border-slate-200 hover:border-amber-400'
                   }`}
                 >
                   {num === 6 ? (isAr ? 'غير محدود' : 'Illimité') : `${num}x / sem`}
@@ -338,30 +338,30 @@ export default function PricingCalculator({ lang, onOpenPoster }: PricingCalcula
               onClick={() => setIncludeSauna(!includeSauna)}
               className={`w-full p-3.5 rounded-xl border text-left rtl:text-right flex items-center justify-between transition-all cursor-pointer ${
                 includeSauna
-                  ? 'bg-adrena-surface border-adrena-gold text-white shadow-sm ring-1 ring-adrena-gold/30'
-                  : 'bg-adrena-surface/60 border-adrena-border text-adrena-stone hover:border-adrena-border hover:text-white'
+                  ? 'bg-amber-50 border-amber-400 text-slate-900 shadow-sm ring-1 ring-amber-400/30'
+                  : 'bg-slate-50 border-slate-200 text-slate-700 hover:border-slate-300'
               }`}
             >
               <div className="flex items-center gap-2.5">
                 <div
                   className={`w-5 h-5 rounded-md flex items-center justify-center border transition-all ${
                     includeSauna
-                      ? 'bg-adrena-gold border-adrena-gold text-adrena-black font-black'
-                      : 'border-adrena-border bg-adrena-card text-transparent'
+                      ? 'bg-amber-500 border-amber-500 text-slate-950 font-black'
+                      : 'border-slate-300 bg-white text-transparent'
                   }`}
                 >
                   <Check className="w-3.5 h-3.5 stroke-[3]" />
                 </div>
                 <div>
-                  <span className="text-xs sm:text-sm font-bold text-white block">
+                  <span className="text-xs sm:text-sm font-bold text-slate-900 block">
                     {isAr ? 'إضافة حصة ساونا ومسبح (1h15)' : 'Option Séance Sauna & Piscine (1h15)'}
                   </span>
-                  <span className="text-[11px] text-adrena-stone">
+                  <span className="text-[11px] text-slate-500">
                     {isAr ? 'حجز مسبق للاسترخاء العضلي بعد التدريب' : 'Sur réservation pour récupération musculaire'}
                   </span>
                 </div>
               </div>
-              <span dir="ltr" className="text-xs font-mono font-black text-adrena-gold whitespace-nowrap">
+              <span dir="ltr" className="text-xs font-mono font-black text-amber-700 whitespace-nowrap">
                 +2 000 {isAr ? 'دج' : 'DA'}
               </span>
             </button>
@@ -370,36 +370,36 @@ export default function PricingCalculator({ lang, onOpenPoster }: PricingCalcula
 
         {/* Right Column: Calculated Live Official Card (5 Cols) */}
         <div className="lg:col-span-5">
-          <div className="p-5 sm:p-6 rounded-2xl bg-adrena-surface border-2 border-adrena-gold shadow-2xl relative">
+          <div className="p-5 sm:p-6 rounded-2xl bg-gradient-to-b from-amber-50/70 via-white to-white border-2 border-amber-500 shadow-xl relative">
             {/* Top Badge */}
             <div className="flex items-center justify-between gap-2 mb-3">
-              <span className="text-[11px] font-bold text-adrena-stone tracking-wide">
+              <span className="text-[11px] font-bold text-slate-600 tracking-wide">
                 {disciplineSessions + muscuSessions} {isAr ? 'تدريبات في الأسبوع' : 'entraînements / sem'}
               </span>
-              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-black bg-adrena-gold text-adrena-black uppercase tracking-wider shadow-sm">
+              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-black bg-amber-500 text-slate-950 uppercase tracking-wider shadow-sm">
                 ★ {isAr ? 'تركيبة مخصصة' : 'Sur-Mesure'}
               </span>
             </div>
 
             {/* Formula Name */}
-            <h4 className="text-lg sm:text-xl font-black text-white tracking-tight mb-2">
+            <h4 className="text-lg sm:text-xl font-black text-slate-900 tracking-tight mb-2">
               {getDisciplineTitle()} {disciplineSessions} + {isAr ? 'حديد' : 'Muscu'} {muscuSessions}
             </h4>
 
             {/* Price Display */}
-            <div className="mb-3 pb-3 border-b border-adrena-border/80 flex items-baseline gap-2">
-              <span dir="ltr" className="text-3xl font-black text-white tabular-nums tracking-tight whitespace-nowrap">
+            <div className="mb-3 pb-3 border-b border-slate-200 flex items-baseline gap-2">
+              <span dir="ltr" className="text-3xl font-black text-slate-900 tabular-nums tracking-tight whitespace-nowrap">
                 {finalPrice.toLocaleString('fr-FR')}
               </span>
-              <span className="text-xs font-bold text-adrena-gold uppercase">
+              <span className="text-xs font-bold text-amber-700 uppercase">
                 {isAr ? 'دج / شهر' : 'DA / MOIS'}
               </span>
             </div>
 
             {/* Savings Callout */}
             {totalSavings > 0 && (
-              <div className="mb-4 p-2.5 rounded-xl bg-emerald-950/40 border border-emerald-500/30 flex items-center gap-2 text-emerald-400 text-xs font-bold">
-                <Sparkles className="w-4 h-4 flex-shrink-0 text-emerald-400" />
+              <div className="mb-4 p-2.5 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center gap-2 text-emerald-800 text-xs font-bold">
+                <Sparkles className="w-4 h-4 flex-shrink-0 text-emerald-600" />
                 <span>
                   {isAr
                     ? `توفير ${totalSavings.toLocaleString('fr-FR')} دج شهرياً مقارنة بالاشتراكات المنفصلة!`
@@ -410,30 +410,30 @@ export default function PricingCalculator({ lang, onOpenPoster }: PricingCalcula
 
             {/* Features List */}
             <div className="space-y-2 mb-5">
-              <div className="flex items-start gap-2 text-xs text-adrena-bone font-medium">
-                <Check className="w-3.5 h-3.5 text-adrena-gold flex-shrink-0 mt-0.5" />
+              <div className="flex items-start gap-2 text-xs text-slate-700 font-medium">
+                <Check className="w-3.5 h-3.5 text-amber-500 flex-shrink-0 mt-0.5" />
                 <span className="leading-snug">
                   {isAr
                     ? `استفادة كاملة من قاعة كمال الأجسام (${muscuSessions} حصص أسبوعياً)`
                     : `Accès complet au plateau musculation (${muscuSessions}x / semaine)`}
                 </span>
               </div>
-              <div className="flex items-start gap-2 text-xs text-adrena-bone font-medium">
-                <Check className="w-3.5 h-3.5 text-adrena-gold flex-shrink-0 mt-0.5" />
+              <div className="flex items-start gap-2 text-xs text-slate-700 font-medium">
+                <Check className="w-3.5 h-3.5 text-amber-500 flex-shrink-0 mt-0.5" />
                 <span className="leading-snug">
                   {isAr
                     ? `حصص ${getDisciplineTitle()} مؤطرة من مدربين معتمدين`
                     : `Séances encadrées en ${getDisciplineTitle()} avec coachs diplômés`}
                 </span>
               </div>
-              <div className="flex items-start gap-2 text-xs text-adrena-bone font-medium">
-                <Check className="w-3.5 h-3.5 text-adrena-gold flex-shrink-0 mt-0.5" />
+              <div className="flex items-start gap-2 text-xs text-slate-700 font-medium">
+                <Check className="w-3.5 h-3.5 text-amber-500 flex-shrink-0 mt-0.5" />
                 <span className="leading-snug">
                   {isAr ? 'غرف تبديل الملابس ودوشات ساخنة وخزائن مؤمنة' : 'Vestiaires, casiers sécurisés & douches incluses'}
                 </span>
               </div>
-              <div className="flex items-start gap-2 text-xs text-adrena-bone font-medium">
-                <Check className="w-3.5 h-3.5 text-adrena-gold flex-shrink-0 mt-0.5" />
+              <div className="flex items-start gap-2 text-xs text-slate-700 font-medium">
+                <Check className="w-3.5 h-3.5 text-amber-500 flex-shrink-0 mt-0.5" />
                 <span className="leading-snug">
                   {isAr ? 'دفع نقداً مباشر بدون التزام سنوي' : 'Paiement direct sans frais d\'inscription'}
                 </span>
@@ -444,7 +444,7 @@ export default function PricingCalculator({ lang, onOpenPoster }: PricingCalcula
             <button
               type="button"
               onClick={handleWhatsAppBooking}
-              className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-adrena-gold hover:bg-adrena-gold-light text-[#08090b] font-black text-xs transition-all shadow-md active:scale-[0.98] cursor-pointer"
+              className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs transition-all shadow-md active:scale-[0.98] cursor-pointer"
             >
               <MessageCircle className="w-4 h-4 fill-current flex-shrink-0" />
               <span className="whitespace-nowrap">

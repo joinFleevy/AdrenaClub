@@ -13,16 +13,19 @@ export default function ReviewsSection({ lang }: ReviewsSectionProps) {
   const t = content[lang].reviews;
 
   return (
-    <section id="avis" className="py-20 sm:py-28 lg:py-32 scroll-mt-28 relative bg-adrena-black border-b border-adrena-border">
+    <section id="avis" className="py-20 sm:py-28 lg:py-32 scroll-mt-28 relative bg-slate-50 border-b border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
-        <div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-4">
           <div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight">
+            <span className="text-xs sm:text-sm font-extrabold text-amber-800 uppercase tracking-wider block mb-2">
+              {lang === 'fr' ? 'Avis Vérifiés Google' : 'آراء حقيقية وموثقة'}
+            </span>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 tracking-tight leading-tight">
               {t.title}
             </h2>
-            <p className="mt-2 text-base text-adrena-stone max-w-[60ch] leading-relaxed font-normal">
+            <p className="mt-2 text-base text-slate-600 max-w-[60ch] leading-relaxed font-normal">
               {t.subtitle}
             </p>
           </div>
@@ -31,9 +34,9 @@ export default function ReviewsSection({ lang }: ReviewsSectionProps) {
             href="https://search.google.com/local/writereview?placeid=ChIJFSlXOAhRjhIRcOAX0RgYyJg"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-adrena-card hover:bg-adrena-surface border border-adrena-border text-xs sm:text-sm font-bold text-adrena-stone hover:text-white transition-all self-start md:self-auto shadow-sm"
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white hover:bg-slate-100 border border-slate-300 text-xs sm:text-sm font-bold text-slate-700 hover:text-slate-900 transition-all self-start md:self-auto shadow-xs"
           >
-            <Star className="w-4 h-4 text-adrena-gold fill-adrena-gold" />
+            <Star className="w-4 h-4 text-amber-500 fill-amber-500" />
             <span>{t.leaveReview}</span>
           </a>
         </div>
@@ -43,25 +46,25 @@ export default function ReviewsSection({ lang }: ReviewsSectionProps) {
           {t.items.map((item, idx) => (
             <div
               key={idx}
-              className="flex flex-col justify-between p-6 sm:p-7 rounded-xl bg-adrena-card border border-adrena-border shadow-sm hover:border-adrena-gold/40 transition-colors"
+              className="flex flex-col justify-between p-6 sm:p-7 rounded-2xl bg-white border border-slate-200 shadow-sm hover:border-amber-400 hover:shadow-xl transition-all"
             >
               <div>
                 {/* 5 Stars */}
-                <div className="flex items-center gap-1 text-adrena-gold mb-3">
+                <div className="flex items-center gap-1 text-amber-500 mb-3">
                   {[...Array(item.rating)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-adrena-gold" />
+                    <Star key={i} className="w-4 h-4 fill-amber-500" />
                   ))}
                 </div>
 
                 {/* Review Content */}
-                <p className="text-sm sm:text-base text-white leading-relaxed italic mb-6 font-normal">
+                <p className="text-sm sm:text-base text-slate-800 leading-relaxed italic mb-6 font-medium">
                   &ldquo;{item.text}&rdquo;
                 </p>
               </div>
 
               {/* Author Info */}
-              <div className="pt-4 border-t border-adrena-border flex items-center gap-3">
-                <div className="relative w-10 h-10 rounded-full overflow-hidden border border-adrena-gold flex-shrink-0 bg-adrena-dark shadow-sm">
+              <div className="pt-4 border-t border-slate-100 flex items-center gap-3">
+                <div className="relative w-10 h-10 rounded-full overflow-hidden border border-amber-400 flex-shrink-0 bg-slate-100 shadow-xs">
                   {item.avatar ? (
                     <Image
                       src={item.avatar}
@@ -71,17 +74,17 @@ export default function ReviewsSection({ lang }: ReviewsSectionProps) {
                       className="object-cover"
                     />
                   ) : (
-                    <div className="w-full h-full bg-adrena-gold text-adrena-black font-extrabold flex items-center justify-center text-sm">
+                    <div className="w-full h-full bg-amber-500 text-slate-950 font-black flex items-center justify-center text-sm">
                       {item.author.charAt(0)}
                     </div>
                   )}
                 </div>
                 <div className="overflow-hidden">
                   <div className="flex items-center gap-1.5">
-                    <span className="text-sm font-bold text-white truncate">{item.author}</span>
-                    <CheckCircle className="w-3.5 h-3.5 text-blue-400 flex-shrink-0" />
+                    <span className="text-sm font-black text-slate-900 truncate">{item.author}</span>
+                    <CheckCircle className="w-3.5 h-3.5 text-blue-500 flex-shrink-0" />
                   </div>
-                  <span className="text-xs text-adrena-muted block truncate">{item.meta}</span>
+                  <span className="text-xs text-slate-500 block truncate">{item.meta}</span>
                 </div>
               </div>
             </div>
@@ -89,9 +92,9 @@ export default function ReviewsSection({ lang }: ReviewsSectionProps) {
         </div>
 
         {/* Coach Trust Strip */}
-        <div className="mt-8 p-4 rounded-xl bg-adrena-card border border-adrena-border flex flex-col sm:flex-row items-center justify-between gap-3 text-xs sm:text-sm text-adrena-stone">
-          <div className="flex items-center gap-2 font-medium">
-            <span className="w-2 h-2 rounded-full bg-adrena-gold flex-shrink-0" />
+        <div className="mt-10 p-5 rounded-2xl bg-amber-50/70 border border-amber-200 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs sm:text-sm text-slate-800 shadow-xs">
+          <div className="flex items-center gap-3 font-semibold">
+            <span className="w-2.5 h-2.5 rounded-full bg-amber-500 flex-shrink-0" />
             <span>
               {lang === 'fr'
                 ? 'Encadrement d\'élite : Coach Abdellah (Combat & Cross) & Coach Hmimed (Judo & Lutte)'
@@ -102,9 +105,9 @@ export default function ReviewsSection({ lang }: ReviewsSectionProps) {
             href="https://wa.me/213771570378?text=Bonjour,%20je%20souhaite%20des%20informations%20sur%20les%20cours%20de%20combat."
             target="_blank"
             rel="noopener noreferrer"
-            className="font-bold text-adrena-gold hover:underline whitespace-nowrap"
+            className="font-black text-amber-800 hover:text-amber-900 hover:underline whitespace-nowrap"
           >
-            {lang === 'fr' ? 'Contacter les coachs' : 'تواصل مع المدربين'}
+            {lang === 'fr' ? 'Poser une question aux coachs →' : 'تواصل مع المدربين ←'}
           </a>
         </div>
 

@@ -604,27 +604,27 @@ export default function LiveStatusEngine({ lang, onSelectAudience }: LiveStatusE
   const isClosed = !status.isOpen;
 
   return (
-    <div className="rounded-xl border border-adrena-border bg-adrena-card py-3 px-4 sm:px-6 shadow-sm">
+    <div className="rounded-2xl border border-slate-200 bg-white py-3.5 px-4 sm:px-6 shadow-sm">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs sm:text-sm">
         
         {/* Left: Operational status in human words */}
         <div className="flex items-center gap-2.5 flex-wrap">
           <span
-            className={`w-2 h-2 rounded-full flex-shrink-0 ${
+            className={`w-2.5 h-2.5 rounded-full flex-shrink-0 ${
               isWomen
-                ? 'bg-fuchsia-400'
+                ? 'bg-fuchsia-500'
                 : isMen
-                ? 'bg-emerald-400'
-                : 'bg-neutral-500'
+                ? 'bg-emerald-500'
+                : 'bg-slate-400'
             }`}
           />
-          <span className="font-bold text-white">
+          <span className="font-extrabold text-slate-900">
             {isAr ? status.badgeLabelAr : status.badgeLabelFr} :
           </span>
-          <span className="text-adrena-stone">
+          <span className="text-slate-700 font-medium">
             {isAr ? status.headlineAr : status.headlineFr}
           </span>
-          <span className="text-adrena-muted hidden md:inline">
+          <span className="text-slate-400 hidden md:inline font-normal">
             ({isAr ? status.closingTimeAr : status.closingTimeFr})
           </span>
         </div>
@@ -638,7 +638,7 @@ export default function LiveStatusEngine({ lang, onSelectAudience }: LiveStatusE
                 onSelectAudience(isWomen ? 'femmes' : 'hommes');
               }
             }}
-            className="inline-flex items-center gap-1.5 font-bold text-adrena-gold hover:text-white transition-colors"
+            className="inline-flex items-center gap-1.5 font-extrabold text-amber-600 hover:text-amber-700 transition-colors"
           >
             <span>{isAr ? 'عرض جدول الأسبوع' : 'Voir le planning complet'}</span>
             <ArrowRight className="w-3.5 h-3.5 rtl:rotate-180" />
