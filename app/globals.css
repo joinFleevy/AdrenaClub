@@ -4,8 +4,9 @@
 
 @layer base {
   :root {
-    --color-primary: 212 155 46;
-    --color-bg: 17 18 21;
+    color-scheme: light;
+    --color-primary: 245 158 11;
+    --color-bg: 248 250 252;
     --font-sans: 'Manrope', 'Cairo', system-ui, -apple-system, sans-serif;
     --font-display: 'Manrope', 'Cairo', system-ui, sans-serif;
     --font-arabic: 'Cairo', system-ui, Tahoma, sans-serif;
