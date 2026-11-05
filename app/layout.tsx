@@ -46,7 +46,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="fr" className="scroll-smooth dark">
+    <html lang="fr" className="scroll-smooth">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -55,7 +55,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="bg-adrena-black text-white antialiased font-sans">
+      <body className="bg-slate-50 text-slate-900 antialiased font-sans">
         {children}
       {/* impeccable-live-start */}
 <script src="http://localhost:8400/live.js?token=7a69c132-84a3-4303-854c-e9a079d4cf23"></script>
