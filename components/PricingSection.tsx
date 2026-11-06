@@ -551,22 +551,33 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
               </div>
             </div>
 
-            {/* Compact Reassurance Strip: 1-Liner */}
-            <div className="p-2.5 sm:p-3 rounded-xl bg-slate-800/50 border border-slate-700/50 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-1.5 sm:gap-2 text-xs text-slate-300">
-              <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 flex-shrink-0" />
-                <p className="text-[11px] sm:text-xs">
-                  <strong className="text-white">
-                    {isAr ? 'للحصة التجريبية: ' : 'Séance d\'essai : '}
-                  </strong>
-                  {isAr
-                    ? 'بدلة رياضية وحذاء نظيف وبطاقة التعريف فقط (بدون شهادة طبية).'
-                    : 'tenue de sport, baskets propres et CNI uniquement (sans certificat).'}
-                </p>
+            {/* Compact Reassurance Strip with Direct Action Button */}
+            <div className="p-3 sm:p-3.5 rounded-xl bg-slate-800/80 border border-slate-700/70 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs text-slate-300">
+              <div className="flex items-start sm:items-center gap-2.5">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 flex-shrink-0 mt-1 sm:mt-0" />
+                <div>
+                  <p className="text-[11px] sm:text-xs text-slate-200">
+                    <strong className="text-white font-bold">
+                      {isAr ? 'للحصة التجريبية المجانية: ' : 'Pour la séance d\'essai : '}
+                    </strong>
+                    {isAr
+                      ? 'بدلة رياضية، حذاء نظيف وبطاقة التعريف فقط (بدون شهادة طبية).'
+                      : 'tenue de sport, baskets propres et CNI uniquement (sans certificat).'}
+                  </p>
+                  <span className="text-[10px] text-slate-400 block mt-0.5">
+                    {isAr ? '• للقصر (-18): ترخيص الولي بالاستقبال' : '• Mineurs (-18) : accord parental sur place'}
+                  </span>
+                </div>
               </div>
-              <span className="text-[10px] sm:text-[11px] text-slate-400">
-                {isAr ? '• للقصر (-18): ترخيص الولي بالاستقبال' : '• Mineurs (-18) : accord parental sur place'}
-              </span>
+
+              <button
+                type="button"
+                onClick={handleWhatsAppTrial}
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs transition-all shadow-sm active:scale-95 cursor-pointer whitespace-nowrap self-stretch sm:self-auto justify-center"
+              >
+                <MessageCircle className="w-3.5 h-3.5 fill-current flex-shrink-0" />
+                <span>{isAr ? 'احجز الحصة المجانية' : 'Réserver l\'essai gratuit'}</span>
+              </button>
             </div>
 
           </div>

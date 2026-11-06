@@ -13,6 +13,7 @@ import {
   Dumbbell,
   Video,
   Compass,
+  Sparkles,
 } from 'lucide-react';
 import { Language } from '@/data/content';
 
@@ -69,15 +70,19 @@ export default function Hero({ lang, onOpen360 }: HeroProps) {
             </p>
 
             {/* Direct High-Contrast Action Pair */}
-            <div className="flex flex-wrap items-center gap-3 mb-8">
+            <div className="flex flex-wrap items-center gap-3 mb-4">
               <a
-                href="https://wa.me/213771570378?text=Bonjour%20Adrena%20Club,%20je%20souhaite%20m'inscrire."
+                href={
+                  isAr
+                    ? "https://wa.me/213771570378?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%20%D9%86%D8%A7%D8%AF%D9%8A%20%D8%A3%D8%AF%D8%B1%D9%8A%D9%86%D8%A7%D8%8C%20%D8%A3%D9%86%D8%A7%20%D9%85%D8%B4%D8%AA%D8%B1%D9%83%20%D8%AC%D8%AF%D9%8A%D8%AF%20%D9%88%D8%A3%D9%88%D8%AF%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%A7%D8%AF%D8%A9%20%D9%85%D9%86%20%D8%AD%D8%B5%D8%AA%D9%8A%20%D8%A7%D9%84%D8%A3%D9%88%D9%84%D9%89%20%D8%A7%D9%84%D9%85%D8%AC%D8%A7%D9%86%D9%8A%D8%A9%20%D9%84%D9%84%D8%AA%D8%AC%D8%B1%D8%A8%D8%A9.%20%D9%85%D8%A7%20%D9%87%D9%8A%20%D8%A3%D9%88%D9%82%D8%A7%D8%AA%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%82%D8%A8%D8%A7%D9%84%20%D8%A7%D9%84%D9%8A%D9%88%D9%85%D8%9F"
+                    : "https://wa.me/213771570378?text=Bonjour%20Adrena%20Club,%20je%20suis%20nouveau%20et%20j'aimerais%20profiter%20de%20ma%201%C3%A8re%20s%C3%A9ance%20d'essai%20offerte.%20Quels%20sont%20vos%20horaires%20d'accueil%20aujourd'hui%20%3F"
+                }
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2.5 px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl bg-slate-900 hover:bg-black text-white font-black text-xs sm:text-sm uppercase tracking-wider transition-all shadow-md hover:shadow-xl active:scale-[0.98] cursor-pointer"
+                className="inline-flex items-center justify-center gap-2.5 px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs sm:text-sm uppercase tracking-wider transition-all shadow-md hover:shadow-xl active:scale-[0.98] cursor-pointer"
               >
-                <MessageCircle className="w-4 h-4 text-amber-400 fill-current flex-shrink-0" />
-                <span>{isAr ? 'سجل عبر واتساب مباشرة' : 'S\'inscrire via WhatsApp'}</span>
+                <Sparkles className="w-4 h-4 fill-slate-950 flex-shrink-0" />
+                <span>{isAr ? 'احجز حصتك الأولى مجاناً' : '1ère Séance Offerte (Essai)'}</span>
               </a>
 
               <a
@@ -92,27 +97,23 @@ export default function Hero({ lang, onOpen360 }: HeroProps) {
                 <button
                   type="button"
                   onClick={onOpen360}
-                  className="inline-flex items-center justify-center gap-2 px-4 py-3.5 sm:py-4 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 font-bold text-xs sm:text-sm transition-all shadow-xs cursor-pointer"
+                  className="inline-flex items-center justify-center gap-2 px-4 py-3.5 sm:py-4 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-300 font-bold text-xs sm:text-sm transition-all shadow-xs cursor-pointer"
                 >
-                  <Compass className="w-4 h-4 text-amber-600" />
+                  <Compass className="w-4 h-4 text-slate-700" />
                   <span>{isAr ? 'جولة 360°' : 'Visite 360°'}</span>
                 </button>
               )}
             </div>
 
-            {/* Free Trial Invitation Pill */}
-            <div className="pt-1">
-              <a
-                href="#tarifs"
-                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-50 hover:bg-amber-100/80 border border-amber-300 text-xs font-bold text-amber-900 transition-colors shadow-xs"
-              >
-                <span className="w-2 h-2 rounded-full bg-amber-500 flex-shrink-0"></span>
-                <span>
-                  {isAr
-                    ? 'الحصة التدريبية الأولى مهداة للجدد • جرّب القاعة والعتاد بدون أي التزام'
-                    : '1ère séance d\'essai 100% offerte aux nouveaux adhérents • Sans engagement'}
-                </span>
-              </a>
+            {/* Free Trial Reassurance Pill */}
+            <div className="mb-6 flex items-center gap-2 flex-wrap text-xs">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 font-bold">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 flex-shrink-0"></span>
+                <span>{isAr ? 'بدون أي التزام مالي' : '100% Gratuit & Sans engagement'}</span>
+              </span>
+              <span className="text-slate-600 font-medium">
+                {isAr ? '• يكفي حذاء نظيف وبطاقة التعريف في الاستقبال' : '• Baskets propres & CNI suffisent à l\'accueil'}
+              </span>
             </div>
 
             {/* Human Proof Bar */}
