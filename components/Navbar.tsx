@@ -223,7 +223,7 @@ export default function Navbar({ lang, onToggleLang, onOpen360 }: NavbarProps) {
       {/* Backdrop overlay for mobile drawer */}
       {mobileMenuOpen && (
         <div
-          className="lg:hidden fixed inset-0 top-[60px] sm:top-[102px] bg-slate-900/60 backdrop-blur-sm z-40 transition-opacity animate-in fade-in duration-200"
+          className="lg:hidden fixed inset-0 top-[68px] sm:top-[102px] bg-slate-900/60 backdrop-blur-sm z-40 transition-opacity animate-in fade-in duration-200"
           onClick={() => setMobileMenuOpen(false)}
           aria-hidden="true"
         />
