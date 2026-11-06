@@ -12,6 +12,8 @@ import {
   ChevronDown,
   Calculator,
   X,
+  Sparkles,
+  Award,
 } from 'lucide-react';
 import { Language, content } from '@/data/content';
 import PricingCalculator from './PricingCalculator';
@@ -21,7 +23,8 @@ import {
   combatPlans,
   mixedPlans,
   PricingPlan,
-  TargetAudience,
+  SubscriptionDuration,
+  calculatePlanPricing,
 } from '@/data/pricing';
 
 interface PricingSectionProps {
@@ -30,7 +33,6 @@ interface PricingSectionProps {
 }
 
 type PricingTab = 'musculation' | 'combat' | 'crosstraining' | 'mixtes';
-type AudienceFilter = 'all' | 'hommes' | 'femmes' | 'enfants';
 
 // Bulletproof non-breaking space formatter (\u00A0) preventing line breaks in numbers
 const formatPrice = (p: number) => p.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '\u00A0');
@@ -40,6 +42,7 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
   const isAr = lang === 'ar';
 
   const [activeTab, setActiveTab] = useState<PricingTab>('musculation');
+  const [duration, setDuration] = useState<SubscriptionDuration>('1m');
   const [showAllMuscu, setShowAllMuscu] = useState<boolean>(false);
   const [isCalculatorModalOpen, setIsCalculatorModalOpen] = useState<boolean>(false);
 
@@ -48,12 +51,48 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
     setShowAllMuscu(false);
   };
 
-  const handleWhatsAppOrder = (planName: string, price: number | string) => {
-    const formattedP = typeof price === 'number' ? formatPrice(price) : price;
+  const handleWhatsAppOrder = (
+    planName: string,
+    calculatedPrice: number,
+    saunaCount: number,
+    curDuration: SubscriptionDuration
+  ) => {
+    const formattedP = formatPrice(calculatedPrice);
+    let durationTextFr = '1 mois';
+    let durationTextAr = 'شهر واحد';
+    let bonusFr = '';
+    let bonusAr = '';
+
+    if (curDuration === '3m') {
+      durationTextFr = '3 mois (Trimestriel)';
+      durationTextAr = '3 أشهر (فصلي)';
+      if (saunaCount > 0) {
+        bonusFr = ' avec 1 séance Sauna offerte';
+        bonusAr = ' مع حصة ساونا مهداة للاسترجاع';
+      }
+    } else if (curDuration === '6m') {
+      durationTextFr = '6 mois (Semestriel)';
+      durationTextAr = '6 أشهر (نصفي)';
+      if (saunaCount > 0) {
+        bonusFr = ' avec 3 séances Sauna offertes';
+        bonusAr = ' مع 3 حصص ساونا مهداة للاسترجاع';
+      }
+    }
+
     const message =
       lang === 'fr'
-        ? `Bonjour Adrena Club, je souhaite m'inscrire à la formule "${planName}" (${formattedP} DA/mois). Pouvez-vous me confirmer les créneaux disponibles ?`
-        : `السلام عليكم نادي أدرينا، أود الاستفسار والتسجيل في باقة "${planName}" بسعر ${formattedP} دج/شهر. ما هي الإجراءات والمواعيد المتاحة؟`;
+        ? `Bonjour Adrena Club, je souhaite m'inscrire à la formule "${planName}" - Formule ${durationTextFr} (${formattedP} DA${bonusFr}). Pouvez-vous me confirmer les démarches à l'accueil ?`
+        : `السلام عليكم نادي أدرينا، أود التسجيل في باقة "${planName}" - عرض ${durationTextAr} (${formattedP} دج${bonusAr}). ما هي الإجراءات في مكتب الاستقبال؟`;
+
+    const url = `https://wa.me/213771570378?text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank');
+  };
+
+  const handleWhatsAppTrial = () => {
+    const message =
+      lang === 'fr'
+        ? `Bonjour Adrena Club, je suis nouveau et j'aimerais profiter de ma 1ère séance d'essai offerte. Quels sont vos horaires d'accueil aujourd'hui ?`
+        : `السلام عليكم نادي أدرينا، أنا مشترك جديد وأود الاستفادة من حصتي الأولى المجانية للتجربة. ما هي أوقات الاستقبال اليوم؟`;
     const url = `https://wa.me/213771570378?text=${encodeURIComponent(message)}`;
     window.open(url, '_blank');
   };
@@ -92,7 +131,7 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header: Focused, Human & Welcoming */}
-        <div className="mb-12 sm:mb-16 flex flex-col sm:flex-row sm:items-end justify-between gap-6">
+        <div className="mb-8 sm:mb-12 flex flex-col sm:flex-row sm:items-end justify-between gap-6">
           <div className="max-w-2xl">
             <span className="text-xs sm:text-sm font-extrabold text-amber-800 uppercase tracking-wider block mb-2">
               {isAr ? 'شفافية كاملة وبدون رسوم خفية' : 'Tarifs officiels & Transparents'}
@@ -119,8 +158,41 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
           </button>
         </div>
 
+        {/* FREE TRIAL REASSURANCE BANNER (Séance d'essai offerte) */}
+        <div className="mb-10 sm:mb-12 p-5 sm:p-6 rounded-2xl bg-gradient-to-r from-amber-500/10 via-amber-500/5 to-slate-50 border border-amber-300/80 shadow-xs flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <div className="flex items-start gap-3.5 sm:gap-4">
+            <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-amber-500 text-slate-950 flex items-center justify-center flex-shrink-0 shadow-sm mt-0.5">
+              <Sparkles className="w-5 h-5 sm:w-6 sm:h-6" />
+            </div>
+            <div>
+              <div className="flex items-center gap-2 flex-wrap">
+                <span className="px-2.5 py-0.5 rounded-full text-[11px] font-black bg-amber-500 text-slate-950 uppercase tracking-wider">
+                  {isAr ? 'حصرياً للمشتركين الجدد' : 'Nouveaux Adhérents'}
+                </span>
+                <h3 className="text-base sm:text-lg font-black text-slate-900">
+                  {isAr ? 'حصتك التدريبية الأولى مهداة بالكامل (مجاناً)' : 'Votre 1ère séance d\'essai est 100% offerte'}
+                </h3>
+              </div>
+              <p className="mt-1 text-xs sm:text-sm text-slate-600 max-w-2xl leading-relaxed font-normal">
+                {isAr
+                  ? 'جرّب عتاد القاعة، مساحة التمارين، وتعرّف على المدربين في أرض الواقع قبل دفع أي اشتراك. يكفي إحضار بدلة رياضية وحذاء نظيف وبطاقة تعريفك.'
+                  : 'Testez nos équipements, l\'ambiance du club et rencontrez nos coachs sans engagement avant de choisir votre formule. Venez simplement avec tenue de sport, baskets propres et CNI.'}
+              </p>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            onClick={handleWhatsAppTrial}
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-slate-900 hover:bg-black text-white text-xs sm:text-sm font-extrabold transition-all shadow-sm active:scale-95 cursor-pointer whitespace-nowrap self-stretch md:self-auto justify-center"
+          >
+            <MessageCircle className="w-4 h-4 text-amber-400 flex-shrink-0" />
+            <span>{isAr ? 'استفسر عن الحصة المجانية' : 'Profiter de la séance d\'essai'}</span>
+          </button>
+        </div>
+
         {/* SINGLE UNIFIED CATEGORY NAV: Crisp light athletic tabs */}
-        <div className="flex items-center justify-start sm:justify-center gap-2 overflow-x-auto pb-3 mb-12 sm:mb-16 no-scrollbar" role="tablist" aria-label="Catégories de tarifs">
+        <div className="flex items-center justify-start sm:justify-center gap-2 overflow-x-auto pb-3 mb-8 sm:mb-10 no-scrollbar" role="tablist" aria-label="Catégories de tarifs">
           {(['musculation', 'combat', 'crosstraining', 'mixtes'] as PricingTab[]).map((tab) => {
             const isActive = activeTab === tab;
             const config = tabConfig[tab];
@@ -142,6 +214,48 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
               </button>
             );
           })}
+        </div>
+
+        {/* DURATION SWITCHER: 1 Mois / 3 Mois / 6 Mois */}
+        <div className="mb-10 sm:mb-14 flex flex-col items-center">
+          <div className="w-full max-w-2xl bg-slate-100 p-1.5 rounded-2xl border border-slate-200 shadow-inner flex flex-col sm:flex-row gap-1.5">
+            {[
+              { id: '1m', labelFr: '1 Mois', labelAr: 'شهر واحد', subFr: 'Tarif standard', subAr: 'شهري عادي' },
+              { id: '3m', labelFr: '3 Mois', labelAr: '3 أشهر', subFr: '-10% • 1 Sauna Offert', subAr: 'وفر 10% • +1 ساونا', isHot: true },
+              { id: '6m', labelFr: '6 Mois', labelAr: '6 أشهر', subFr: '-15% • 3 Saunas Offerts', subAr: 'وفر 15% • +3 ساونا', isBest: true },
+            ].map((d) => {
+              const isSelected = duration === d.id;
+              return (
+                <button
+                  key={d.id}
+                  type="button"
+                  onClick={() => setDuration(d.id as SubscriptionDuration)}
+                  className={`flex-1 py-3 px-3 rounded-xl transition-all flex flex-col items-center justify-center gap-0.5 cursor-pointer relative ${
+                    isSelected
+                      ? 'bg-slate-900 text-white shadow-md'
+                      : 'text-slate-700 hover:text-slate-950 hover:bg-white/60'
+                  }`}
+                >
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-sm font-black tracking-tight">{isAr ? d.labelAr : d.labelFr}</span>
+                    {d.isHot && (
+                      <span className={`px-1.5 py-0.2 rounded text-[10px] font-black uppercase tracking-wider ${isSelected ? 'bg-amber-400 text-slate-950' : 'bg-amber-100 text-amber-800'}`}>
+                        {isAr ? 'هدية' : 'Bonus'}
+                      </span>
+                    )}
+                    {d.isBest && (
+                      <span className={`px-1.5 py-0.2 rounded text-[10px] font-black uppercase tracking-wider ${isSelected ? 'bg-amber-400 text-slate-950' : 'bg-amber-100 text-amber-800'}`}>
+                        {isAr ? 'الأوفر' : 'Top'}
+                      </span>
+                    )}
+                  </div>
+                  <span className={`text-[11px] font-semibold ${isSelected ? 'text-amber-300' : 'text-slate-600'}`}>
+                    {isAr ? d.subAr : d.subFr}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
         </div>
 
         {/* For Mixed Plans: Clean Callout to Launch Custom Builder Modal */}
@@ -178,9 +292,10 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
           {/* Direct Cards Grid: Clean White Cards with High Contrast */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {displayedPlans.map((plan) => {
+              const pricing = calculatePlanPricing(plan, duration);
               const name = isAr ? plan.nameAr : plan.nameFr;
               const freq = isAr ? plan.frequencyAr : plan.frequencyFr;
-              const period = isAr ? plan.periodAr : plan.periodFr;
+              const period = isAr ? pricing.periodAr : pricing.periodFr;
               const feats = isAr ? plan.featuresAr : plan.featuresFr;
               const audLabel = isAr ? plan.audienceLabelAr : plan.audienceLabelFr;
 
@@ -234,16 +349,52 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
                     </h3>
 
                     {/* Price Block: dir="ltr" + whitespace-nowrap prevents line break */}
-                    <div className="mb-5 pb-5 border-b border-slate-200 flex items-baseline gap-2 flex-wrap">
-                      <span
-                        dir="ltr"
-                        className="text-4xl sm:text-5xl font-black text-slate-900 tabular-nums tracking-tight whitespace-nowrap"
-                      >
-                        {formatPrice(plan.price)}
-                      </span>
-                      <span className="text-xs sm:text-sm font-extrabold text-amber-800 uppercase tracking-wider whitespace-nowrap">
-                        {period}
-                      </span>
+                    <div className="mb-4 pb-4 border-b border-slate-200">
+                      <div className="flex items-baseline gap-2 flex-wrap">
+                        <span
+                          dir="ltr"
+                          className="text-4xl sm:text-5xl font-black text-slate-900 tabular-nums tracking-tight whitespace-nowrap"
+                        >
+                          {formatPrice(pricing.price)}
+                        </span>
+                        <span className="text-xs sm:text-sm font-extrabold text-amber-800 uppercase tracking-wider whitespace-nowrap">
+                          {period}
+                        </span>
+                      </div>
+
+                      {/* Crossed-out original and savings badge when duration > 1m */}
+                      {duration !== '1m' && pricing.savings > 0 && (
+                        <div className="mt-2 flex items-center gap-2 flex-wrap text-xs">
+                          <span className="line-through text-slate-600 font-bold" dir="ltr">
+                            {formatPrice(pricing.basePriceWithoutDiscount)} DA
+                          </span>
+                          <span className="px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-800 border border-emerald-200 font-extrabold">
+                            {isAr ? `توفير ${formatPrice(pricing.savings)} دج` : `Économisez ${formatPrice(pricing.savings)} DA`}
+                          </span>
+                        </div>
+                      )}
+
+                      {/* Adult Sauna Bonus Badge */}
+                      {pricing.saunaSessions > 0 && (
+                        <div className="mt-2.5 p-2 rounded-xl bg-amber-50 border border-amber-200/80 flex items-center gap-2 text-xs font-bold text-amber-900">
+                          <span className="text-base flex-shrink-0">🧖</span>
+                          <span className="leading-tight">
+                            {isAr
+                              ? `+ ${pricing.saunaSessions} حصة ساونا مهداة للاسترجاع (قسيمة من الاستقبال)`
+                              : `+ ${pricing.saunaSessions} séance(s) sauna offerte(s) (bon à l'accueil)`}
+                          </span>
+                        </div>
+                      )}
+
+                      {/* Kids Plan Specific Perk (No sauna for under 14) */}
+                      {pricing.isKidsPlan && duration !== '1m' && (
+                        <div className="mt-2.5 p-2 rounded-xl bg-sky-50 border border-sky-200 flex items-center gap-2 text-xs font-bold text-sky-900">
+                          <span className="text-base flex-shrink-0">⭐</span>
+                          <span className="leading-tight">
+                            {isAr ? 'إعفاء من رسوم الملف وبطاقة النادي' : 'Frais de dossier & badge offerts'}
+                          </span>
+                        </div>
+                      )}
                     </div>
 
                     {/* Features Checklist */}
@@ -260,7 +411,7 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
                   {/* WhatsApp Reservation Button */}
                   <button
                     type="button"
-                    onClick={() => handleWhatsAppOrder(name, plan.price)}
+                    onClick={() => handleWhatsAppOrder(name, pricing.price, pricing.saunaSessions, duration)}
                     className={`w-full flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl font-black text-xs sm:text-sm transition-all shadow-sm active:scale-[0.98] cursor-pointer ${
                       plan.isPopular
                         ? 'bg-amber-500 hover:bg-amber-400 text-slate-950 shadow-md shadow-amber-500/20'
@@ -270,8 +421,8 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
                     <MessageCircle className="w-4 h-4 fill-current flex-shrink-0" />
                     <span className="whitespace-nowrap">
                       {isAr
-                        ? `حجز الباقة • ${formatPrice(plan.price)} دج`
-                        : `Réserver • ${formatPrice(plan.price)} DA`}
+                        ? `حجز الباقة • ${formatPrice(pricing.price)} دج`
+                        : `Réserver • ${formatPrice(pricing.price)} DA`}
                     </span>
                   </button>
                 </div>
@@ -279,28 +430,142 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
             })}
           </div>
 
-            {/* Musculation Frequencies Expand Button: Clean, Centered, No nested card */}
-            {activeTab === 'musculation' && (
-              <div className="mt-8 flex justify-center">
-                <button
-                  type="button"
-                  onClick={() => setShowAllMuscu(!showAllMuscu)}
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 hover:text-slate-900 border border-slate-300 hover:border-amber-500 font-bold text-xs sm:text-sm uppercase tracking-wider transition-all shadow-sm active:scale-[0.98] cursor-pointer"
-                >
-                  <span>
-                    {showAllMuscu
-                      ? (isAr ? 'عرض الباقات الرئيسية فقط (3)' : 'Afficher les 3 formules principales')
-                      : (isAr ? 'عرض جميع باقات كمال الأجسام (6)' : 'Voir les 6 formules de musculation')}
-                  </span>
-                  <ChevronDown
-                    className={`w-4 h-4 text-amber-500 transition-transform duration-200 ${
-                      showAllMuscu ? 'rotate-180' : ''
-                    }`}
-                  />
-                </button>
-              </div>
-            )}
+          {/* Musculation Frequencies Expand Button: Clean, Centered, No nested card */}
+          {activeTab === 'musculation' && (
+            <div className="mt-8 flex justify-center">
+              <button
+                type="button"
+                onClick={() => setShowAllMuscu(!showAllMuscu)}
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 hover:text-slate-900 border border-slate-300 hover:border-amber-500 font-bold text-xs sm:text-sm uppercase tracking-wider transition-all shadow-sm active:scale-[0.98] cursor-pointer"
+              >
+                <span>
+                  {showAllMuscu
+                    ? (isAr ? 'عرض الباقات الرئيسية فقط (3)' : 'Afficher les 3 formules principales')
+                    : (isAr ? 'عرض جميع باقات كمال الأجسام (6)' : 'Voir les 6 formules de musculation')}
+                </span>
+                <ChevronDown
+                  className={`w-4 h-4 text-amber-500 transition-transform duration-200 ${
+                    showAllMuscu ? 'rotate-180' : ''
+                  }`}
+                />
+              </button>
+            </div>
+          )}
+        </div>
+
+        {/* DOSSIER D'INSCRIPTION & PIÈCES À FOURNIR */}
+        <div className="mt-16 sm:mt-24 pt-12 sm:pt-16 border-t border-slate-200">
+          <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-12">
+            <span className="text-xs font-black text-amber-800 uppercase tracking-wider block mb-2">
+              {isAr ? 'التسجيل في الاستقبال' : 'Inscription simplifiée à l\'accueil'}
+            </span>
+            <h3 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+              {isAr ? 'الملف والوثائق المطلوبة للتسجيل' : 'Dossier d\'inscription & Pièces à fournir'}
+            </h3>
+            <p className="mt-2 text-xs sm:text-sm text-slate-600 font-medium">
+              {isAr
+                ? 'كل ما يلزمك لإصدار بطاقة الاشتراك الرياضية والبدء فوراً في نفس اليوم في مكتب استقبال CUB1.'
+                : 'Tout ce dont vous avez besoin pour créer votre carte de membre et débuter vos entraînements le jour même.'}
+            </p>
           </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+            {/* Doc 1 */}
+            <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-xs hover:border-slate-300 transition-all flex flex-col justify-between">
+              <div>
+                <div className="w-10 h-10 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center text-xl mb-3">
+                  🩺
+                </div>
+                <h4 className="text-sm sm:text-base font-black text-slate-900 mb-1">
+                  {isAr ? 'شهادة طبية عامة' : 'Certificat médical'}
+                </h4>
+                <p className="text-xs text-slate-600 leading-relaxed font-normal">
+                  {isAr
+                    ? 'شهادة طبية عامة تثبت القدرة البدنية لممارسة الرياضة (صالحة لأقل من 3 أشهر).'
+                    : 'Certificat médical d\'aptitude physique datant de moins de 3 mois.'}
+                </p>
+              </div>
+              <span className="mt-4 text-[11px] font-bold text-amber-700 bg-amber-50/80 px-2 py-1 rounded-md self-start border border-amber-200/50">
+                {isAr ? 'إجباري لسلامتك' : 'Obligatoire'}
+              </span>
+            </div>
+
+            {/* Doc 2 */}
+            <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-xs hover:border-slate-300 transition-all flex flex-col justify-between">
+              <div>
+                <div className="w-10 h-10 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center text-xl mb-3">
+                  📷
+                </div>
+                <h4 className="text-sm sm:text-base font-black text-slate-900 mb-1">
+                  {isAr ? 'صورتان شمسيتان' : '2 Photos d\'identité'}
+                </h4>
+                <p className="text-xs text-slate-600 leading-relaxed font-normal">
+                  {isAr
+                    ? 'صورتان شمسيتان حديثتان لتثبيتهما على بطاقة العضوية والملف الإداري الورقي.'
+                    : 'Photos récentes pour l\'édition immédiate de votre carte de membre.'}
+                </p>
+              </div>
+              <span className="mt-4 text-[11px] font-bold text-slate-700 bg-slate-100 px-2 py-1 rounded-md self-start border border-slate-200">
+                {isAr ? 'لبطاقة الاشتراك' : 'Pour votre badge'}
+              </span>
+            </div>
+
+            {/* Doc 3 */}
+            <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-xs hover:border-slate-300 transition-all flex flex-col justify-between">
+              <div>
+                <div className="w-10 h-10 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center text-xl mb-3">
+                  🪪
+                </div>
+                <h4 className="text-sm sm:text-base font-black text-slate-900 mb-1">
+                  {isAr ? 'نسخة بطاقة التعريف' : 'Pièce d\'identité'}
+                </h4>
+                <p className="text-xs text-slate-600 leading-relaxed font-normal">
+                  {isAr
+                    ? 'نسخة من بطاقة التعريف الوطنية أو رخصة السياقة (أو الدفتر العائلي للأطفال).'
+                    : 'Copie de la CNI ou permis (ou livret de famille pour les mineurs).'}
+                </p>
+              </div>
+              <span className="mt-4 text-[11px] font-bold text-slate-700 bg-slate-100 px-2 py-1 rounded-md self-start border border-slate-200">
+                {isAr ? 'إثبات الهوية' : 'Vérification'}
+              </span>
+            </div>
+
+            {/* Doc 4 */}
+            <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-xs hover:border-slate-300 transition-all flex flex-col justify-between">
+              <div>
+                <div className="w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-xl mb-3">
+                  💵
+                </div>
+                <h4 className="text-sm sm:text-base font-black text-slate-900 mb-1">
+                  {isAr ? 'الدفع نقداً بالاستقبال' : 'Règlement en espèces'}
+                </h4>
+                <p className="text-xs text-slate-600 leading-relaxed font-normal">
+                  {isAr
+                    ? 'دفع مبلغ الصيغة المختارة نقداً في مكتب الاستقبال بمقر النادي (CUB1) عند استلام البطاقة.'
+                    : 'Paiement du montant de votre formule à la réception CUB1.'}
+                </p>
+              </div>
+              <span className="mt-4 text-[11px] font-bold text-emerald-800 bg-emerald-50 px-2 py-1 rounded-md self-start border border-emerald-200">
+                {isAr ? 'عند الاستلام' : 'À la réception'}
+              </span>
+            </div>
+          </div>
+
+          {/* Reassurance Footer Notice */}
+          <div className="mt-6 p-4 rounded-xl bg-slate-100 border border-slate-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs text-slate-700">
+            <div className="flex items-center gap-2">
+              <span className="text-base flex-shrink-0">⚡</span>
+              <p className="font-semibold">
+                {isAr
+                  ? 'للحصة التجريبية المجانية: لا تحتاج لإحضار هذا الملف في أول يوم! يكفي إحضار بدلة رياضية، حذاء نظيف خاص بالقاعة، منشفة وبطاقة تعريفك.'
+                  : 'Pour la séance d\'essai offerte : inutile de fournir le certificat ce jour-là. Venez simplement avec tenue de sport, baskets propres et CNI.'}
+              </p>
+            </div>
+            <span className="text-[11px] text-slate-600 whitespace-nowrap font-medium">
+              {isAr ? '• للقصر (-18): توقيع ترخيص الولي في الاستقبال' : '• Mineurs (-18) : accord parental sur place'}
+            </span>
+          </div>
+        </div>
 
       </div>
 

@@ -100,6 +100,21 @@ export default function Hero({ lang, onOpen360 }: HeroProps) {
               )}
             </div>
 
+            {/* Free Trial Invitation Pill */}
+            <div className="pt-1">
+              <a
+                href="#tarifs"
+                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-50 hover:bg-amber-100/80 border border-amber-300 text-xs font-bold text-amber-900 transition-colors shadow-xs"
+              >
+                <span className="w-2 h-2 rounded-full bg-amber-500 flex-shrink-0"></span>
+                <span>
+                  {isAr
+                    ? 'الحصة التدريبية الأولى مهداة للجدد • جرّب القاعة والعتاد بدون أي التزام'
+                    : '1ère séance d\'essai 100% offerte aux nouveaux adhérents • Sans engagement'}
+                </span>
+              </a>
+            </div>
+
             {/* Human Proof Bar */}
             <div className="pt-6 border-t border-slate-200 flex flex-wrap items-center gap-y-2 gap-x-6 text-xs sm:text-sm text-slate-600 font-semibold">
               <span className="flex items-center gap-1.5 text-slate-900">

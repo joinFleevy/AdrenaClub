@@ -1,4 +1,69 @@
 export type TargetAudience = 'all' | 'hommes' | 'femmes' | 'enfants';
+export type SubscriptionDuration = '1m' | '3m' | '6m';
+
+export interface PlanPricingResult {
+  price: number;
+  basePriceWithoutDiscount: number;
+  periodFr: string;
+  periodAr: string;
+  savings: number;
+  saunaSessions: number;
+  isKidsPlan: boolean;
+}
+
+export function calculatePlanPricing(
+  plan: PricingPlan,
+  duration: SubscriptionDuration
+): PlanPricingResult {
+  const isKids = plan.audience.includes('enfants') && !plan.audience.includes('hommes');
+
+  if (duration === '1m') {
+    return {
+      price: plan.price,
+      basePriceWithoutDiscount: plan.price,
+      periodFr: plan.periodFr,
+      periodAr: plan.periodAr,
+      savings: 0,
+      saunaSessions: 0,
+      isKidsPlan: isKids,
+    };
+  }
+
+  if (duration === '3m') {
+    const rawSum = plan.price * 3;
+    // ~10% discount, strictly rounded to nearest 100 DA (ZERO 50 DA small change)
+    const discounted = Math.round((rawSum * 0.9) / 100) * 100;
+    const savings = rawSum - discounted;
+
+    return {
+      price: discounted,
+      basePriceWithoutDiscount: rawSum,
+      periodFr: 'DA / 3 mois',
+      periodAr: 'دج / 3 أشهر',
+      savings,
+      // Medical safety: Children under 14 strictly excluded from sauna; adults get 1 session
+      saunaSessions: isKids ? 0 : 1,
+      isKidsPlan: isKids,
+    };
+  }
+
+  // 6 months
+  const rawSum = plan.price * 6;
+  // ~15% discount, strictly rounded to nearest 100 DA (ZERO 50 DA small change)
+  const discounted = Math.round((rawSum * 0.85) / 100) * 100;
+  const savings = rawSum - discounted;
+
+  return {
+    price: discounted,
+    basePriceWithoutDiscount: rawSum,
+    periodFr: 'DA / 6 mois',
+    periodAr: 'دج / 6 أشهر',
+    savings,
+    // Medical safety: Children under 14 strictly excluded from sauna; adults get 3 sessions
+    saunaSessions: isKids ? 0 : 3,
+    isKidsPlan: isKids,
+  };
+}
 
 export interface PricingPlan {
   id: string;

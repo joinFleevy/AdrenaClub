@@ -504,7 +504,7 @@ export const content: Record<Language, ContentStrings> = {
         },
         {
           q: "Puis-je faire une séance d'essai avant de m'abonner ?",
-          a: "Absolument ! Des séances à l'unité (séance libre musculation ou cours de combat) sont disponibles à la réception pour vous permettre de tester les équipements, l'ambiance et la pédagogie des coachs sans engagement.",
+          a: "Absolument ! La 1ère séance d'essai est offerte pour les nouveaux adhérents sur simple présentation d'une pièce d'identité à la réception. Cela vous permet de tester les équipements, l'ambiance et la pédagogie des coachs sans aucun engagement.",
         },
         {
           q: "Les débutants complets peuvent-ils intégrer les cours de combat et cross-training ?",
@@ -833,7 +833,7 @@ export const content: Record<Language, ContentStrings> = {
         },
         {
           q: "هل يمكنني إجراء حصة تجريبية قبل الاشتراك الشهري ؟",
-          a: "بالتأكيد ! نوفر إمكانية دفع حصة فردية واحدة (كمال أجسام أو حصة قتالية/كروس ترينينغ) في مكتب الاستقبال لتجربة القاعة، العتاد، وأجواء التدريب بحرية تامة.",
+          a: "بالتأكيد ! الحصة الأولى مهداة لجميع المشتركين الجدد بمجرد إظهار بطاقة التعريف في مكتب الاستقبال، لتجربة الأجهزة وأجواء التدريب والتأطير بكل حرية وبدون أي التزام مالي مسبق.",
         },
         {
           q: "هل يمكن للمبتدئين تماماً الانضمام لحصص القتال والكروس ترينينغ ؟",
