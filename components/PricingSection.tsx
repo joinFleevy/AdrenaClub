@@ -457,113 +457,115 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
           )}
         </div>
 
-        {/* DOSSIER D'INSCRIPTION — BESPOKE ATHLETIC CRAFT */}
-        <div className="mt-16 sm:mt-24 pt-12 sm:pt-16 border-t border-slate-200">
-          <div className="rounded-3xl bg-slate-900 text-white p-7 sm:p-10 lg:p-12 shadow-xl border border-slate-800 relative overflow-hidden">
+        {/* DOSSIER D'INSCRIPTION — ULTRA COMPACT & VISUAL */}
+        <div className="mt-12 sm:mt-16 pt-8 sm:pt-12 border-t border-slate-200">
+          <div className="rounded-2xl sm:rounded-3xl bg-slate-900 text-white p-5 sm:p-7 lg:p-8 shadow-xl border border-slate-800">
             
-            {/* Header: Confident, Direct, No AI Kickers */}
-            <div className="max-w-2xl mb-8 sm:mb-10">
-              <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-white">
-                {isAr ? 'الملف المطلوب للتسجيل في الاستقبال' : 'Dossier d\'inscription à l\'accueil'}
-              </h3>
-              <p className="mt-2 text-sm sm:text-base text-slate-300 font-normal leading-relaxed">
-                {isAr
-                  ? 'يتم استخراج بطاقة العضوية والبدء فوراً في التمارين في نفس اليوم فور تقديم هذه الوثائق في مكتب الاستقبال (CUB1).'
-                  : 'Votre badge de membre officiel est édité sur place à la réception CUB1 pour démarrer vos entraînements le jour même.'}
-              </p>
+            {/* Header: Concise & Direct */}
+            <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1.5 mb-5 pb-3.5 border-b border-slate-800">
+              <div>
+                <h3 className="text-xl sm:text-2xl font-black text-white tracking-tight">
+                  {isAr ? 'الملف المطلوب للتسجيل' : 'Dossier d\'inscription'}
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-400 mt-0.5">
+                  {isAr ? 'الوثائق المطلوبة لاستخراج بطاقة العضوية في الاستقبال (CUB1)' : 'Pièces requises pour éditer votre badge d\'adhérent à la réception'}
+                </p>
+              </div>
+              <span className="text-[11px] font-bold text-amber-400 bg-amber-500/10 px-2.5 py-1 rounded-full border border-amber-500/20 self-start sm:self-auto">
+                {isAr ? 'تسليم فوري للبطاقة' : 'Badge remis sur place'}
+              </span>
             </div>
 
-            {/* 4 Items Architecture — Integrated Flow, Zero Nested Box Slop */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 pb-8 border-b border-slate-800">
+            {/* 4 Items: 2x2 Grid on Mobile, 4 across on Desktop — Visual & Fast */}
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4 mb-4">
               {/* Item 01 */}
-              <div className="space-y-2">
-                <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-amber-400">
-                    <FileText className="w-4 h-4" />
+              <div className="p-3 sm:p-4 rounded-xl bg-slate-800/70 border border-slate-700/60 flex flex-col justify-between">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-amber-500/15 border border-amber-500/25 flex items-center justify-center text-amber-400">
+                    <FileText className="w-5 h-5" />
                   </div>
-                  <span className="text-xs font-mono font-bold text-amber-400 uppercase tracking-widest">01</span>
+                  <span className="text-[11px] font-mono font-bold text-slate-400">01</span>
                 </div>
-                <h4 className="text-base font-bold text-white pt-1">
-                  {isAr ? 'شهادة طبية عامة' : 'Certificat médical'}
-                </h4>
-                <p className="text-xs text-slate-400 leading-relaxed font-normal">
-                  {isAr
-                    ? 'شهادة طبية عامة للقدرة البدنية صالحة لأقل من 3 أشهر لسلامتك الرياضية.'
-                    : 'Certificat médical d\'aptitude sportive datant de moins de 3 mois.'}
-                </p>
+                <div>
+                  <h4 className="text-xs sm:text-sm font-black text-white leading-tight">
+                    {isAr ? 'شهادة طبية' : 'Certificat médical'}
+                  </h4>
+                  <span className="text-[11px] text-amber-300 font-bold block mt-0.5">
+                    {isAr ? 'أقل من 3 أشهر' : 'Moins de 3 mois'}
+                  </span>
+                </div>
               </div>
 
               {/* Item 02 */}
-              <div className="space-y-2">
-                <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-amber-400">
-                    <Camera className="w-4 h-4" />
+              <div className="p-3 sm:p-4 rounded-xl bg-slate-800/70 border border-slate-700/60 flex flex-col justify-between">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-amber-500/15 border border-amber-500/25 flex items-center justify-center text-amber-400">
+                    <Camera className="w-5 h-5" />
                   </div>
-                  <span className="text-xs font-mono font-bold text-amber-400 uppercase tracking-widest">02</span>
+                  <span className="text-[11px] font-mono font-bold text-slate-400">02</span>
                 </div>
-                <h4 className="text-base font-bold text-white pt-1">
-                  {isAr ? 'صورتان شمسيتان' : '2 Photos d\'identité'}
-                </h4>
-                <p className="text-xs text-slate-400 leading-relaxed font-normal">
-                  {isAr
-                    ? 'حديثتان لتثبيتهما على بطاقة العضوية والملف الإداري الورقي.'
-                    : 'Photos récentes pour l\'édition de votre carte de membre officielle.'}
-                </p>
+                <div>
+                  <h4 className="text-xs sm:text-sm font-black text-white leading-tight">
+                    {isAr ? 'صورتان شمسيتان' : '2 Photos d\'identité'}
+                  </h4>
+                  <span className="text-[11px] text-slate-400 font-medium block mt-0.5">
+                    {isAr ? 'لبطاقة النادي' : 'Format carte'}
+                  </span>
+                </div>
               </div>
 
               {/* Item 03 */}
-              <div className="space-y-2">
-                <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-amber-400">
-                    <IdCard className="w-4 h-4" />
+              <div className="p-3 sm:p-4 rounded-xl bg-slate-800/70 border border-slate-700/60 flex flex-col justify-between">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-amber-500/15 border border-amber-500/25 flex items-center justify-center text-amber-400">
+                    <IdCard className="w-5 h-5" />
                   </div>
-                  <span className="text-xs font-mono font-bold text-amber-400 uppercase tracking-widest">03</span>
+                  <span className="text-[11px] font-mono font-bold text-slate-400">03</span>
                 </div>
-                <h4 className="text-base font-bold text-white pt-1">
-                  {isAr ? 'بطاقة التعريف الوطنية' : 'Pièce d\'identité'}
-                </h4>
-                <p className="text-xs text-slate-400 leading-relaxed font-normal">
-                  {isAr
-                    ? 'نسخة من CNI أو رخصة السياقة (أو الدفتر العائلي للأطفال).'
-                    : 'Copie de la CNI ou permis (ou livret de famille pour les mineurs).'}
-                </p>
+                <div>
+                  <h4 className="text-xs sm:text-sm font-black text-white leading-tight">
+                    {isAr ? 'بطاقة التعريف' : 'Pièce d\'identité'}
+                  </h4>
+                  <span className="text-[11px] text-slate-400 font-medium block mt-0.5">
+                    {isAr ? 'CNI أو رخصة' : 'CNI ou Permis'}
+                  </span>
+                </div>
               </div>
 
               {/* Item 04 */}
-              <div className="space-y-2">
-                <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-amber-400">
-                    <Banknote className="w-4 h-4" />
+              <div className="p-3 sm:p-4 rounded-xl bg-slate-800/70 border border-slate-700/60 flex flex-col justify-between">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-emerald-500/15 border border-emerald-500/25 flex items-center justify-center text-emerald-400">
+                    <Banknote className="w-5 h-5" />
                   </div>
-                  <span className="text-xs font-mono font-bold text-amber-400 uppercase tracking-widest">04</span>
+                  <span className="text-[11px] font-mono font-bold text-slate-400">04</span>
                 </div>
-                <h4 className="text-base font-bold text-white pt-1">
-                  {isAr ? 'الدفع نقداً' : 'Règlement en espèces'}
-                </h4>
-                <p className="text-xs text-slate-400 leading-relaxed font-normal">
-                  {isAr
-                    ? 'دفع مبلغ الصيغة المختارة نقداً عند استلام البطاقة بمكتب الاستقبال.'
-                    : 'Paiement du montant de votre formule à la réception CUB1.'}
-                </p>
+                <div>
+                  <h4 className="text-xs sm:text-sm font-black text-white leading-tight">
+                    {isAr ? 'دفع نقداً' : 'Règlement espèces'}
+                  </h4>
+                  <span className="text-[11px] text-emerald-300 font-bold block mt-0.5">
+                    {isAr ? 'في الاستقبال' : 'À la réception'}
+                  </span>
+                </div>
               </div>
             </div>
 
-            {/* Bottom Strip: Free Trial vs Full Subscription */}
-            <div className="pt-6 flex flex-col md:flex-row md:items-center justify-between gap-4 text-xs sm:text-sm">
-              <div className="flex items-start sm:items-center gap-2.5">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 flex-shrink-0 mt-1 sm:mt-0" />
-                <p className="text-slate-300 font-normal">
-                  <strong className="text-white font-bold">
-                    {isAr ? 'للحصة التجريبية المجانية: ' : 'Pour la séance d\'essai offerte : '}
+            {/* Compact Reassurance Strip: 1-Liner */}
+            <div className="p-2.5 sm:p-3 rounded-xl bg-slate-800/50 border border-slate-700/50 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-1.5 sm:gap-2 text-xs text-slate-300">
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 flex-shrink-0" />
+                <p className="text-[11px] sm:text-xs">
+                  <strong className="text-white">
+                    {isAr ? 'للحصة التجريبية: ' : 'Séance d\'essai : '}
                   </strong>
                   {isAr
-                    ? 'لا تحتاج لإحضار الشهادة الطبية في أول يوم! يكفي إحضار بدلة رياضية، حذاء نظيف خاص بالقاعة، منشفة وبطاقة تعريفك.'
-                    : 'inutile de fournir le certificat ce jour-là. Venez simplement en tenue de sport avec baskets propres, serviette et CNI.'}
+                    ? 'بدلة رياضية وحذاء نظيف وبطاقة التعريف فقط (بدون شهادة طبية).'
+                    : 'tenue de sport, baskets propres et CNI uniquement (sans certificat).'}
                 </p>
               </div>
-
-              <span className="text-xs text-slate-400 whitespace-nowrap self-start md:self-auto font-medium">
-                {isAr ? '• للقصر (-18): توقيع ترخيص الولي في الاستقبال' : '• Mineurs (-18) : accord parental sur place'}
+              <span className="text-[10px] sm:text-[11px] text-slate-400">
+                {isAr ? '• للقصر (-18): ترخيص الولي بالاستقبال' : '• Mineurs (-18) : accord parental sur place'}
               </span>
             </div>
 
