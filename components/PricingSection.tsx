@@ -18,6 +18,7 @@ import {
   Camera,
   IdCard,
   Banknote,
+  Stethoscope,
 } from 'lucide-react';
 import { Language, content } from '@/data/content';
 import PricingCalculator from './PricingCalculator';
@@ -131,19 +132,16 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
   }, [activeTab, showAllMuscu]);
 
   return (
-    <section id="tarifs" className="py-10 sm:py-20 lg:py-28 scroll-mt-16 sm:scroll-mt-20 relative bg-white border-b border-slate-200">
+    <section id="tarifs" className="py-10 sm:py-16 lg:py-24 scroll-mt-16 sm:scroll-mt-20 relative bg-white border-b border-slate-200">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Section Header: Focused, Human & Welcoming */}
-        <div className="mb-6 sm:mb-10 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
-          <div className="max-w-2xl">
-            <span className="text-xs font-extrabold text-amber-800 uppercase tracking-wider block mb-1">
-              {isAr ? 'شفافية كاملة وبدون رسوم خفية' : 'Tarifs officiels & Transparents'}
-            </span>
-            <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-tight">
+        {/* Section Header: Clean, Direct, One-line Title & Subtle Poster Link */}
+        <div className="mb-6 sm:mb-8 flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
+          <div>
+            <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight">
               {t.title}
             </h2>
-            <p className="mt-1.5 sm:mt-2 text-sm sm:text-base text-slate-600 leading-relaxed font-normal">
+            <p className="mt-1 text-xs sm:text-sm text-slate-500 font-medium">
               {t.subtitle}
             </p>
           </div>
@@ -151,46 +149,19 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
           <button
             type="button"
             onClick={() => onOpenPostersModal(activeTab === 'mixtes' ? 'mixtes' : 'tarifs')}
-            className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-300 text-xs sm:text-sm font-bold text-slate-700 hover:text-slate-900 transition-all self-start sm:self-auto cursor-pointer flex-shrink-0 shadow-xs"
+            className="text-xs font-bold text-amber-800 hover:text-amber-900 underline underline-offset-4 decoration-amber-400 hover:decoration-amber-600 transition-colors self-start sm:self-auto cursor-pointer flex items-center gap-1.5"
           >
-            <ImageIcon className="w-4 h-4 text-amber-600 flex-shrink-0" />
+            <ImageIcon className="w-3.5 h-3.5 text-amber-600" />
             <span>
               {activeTab === 'mixtes'
-                ? (isAr ? 'عرض الملصق الرسمي (50+)' : 'Affiche officielle (50+ tarifs)')
-                : t.viewPosterBtn}
+                ? (isAr ? 'الملصق الرسمي (50+ باقة) ↗' : 'Affiche officielle (50+ tarifs) ↗')
+                : (isAr ? 'عرض الملصق الأصلي للصالة ↗' : 'Affiche officielle originale ↗')}
             </span>
           </button>
         </div>
 
-        {/* COMPACT FREE TRIAL STRIP */}
-        <div className="mb-6 sm:mb-8 p-3 sm:p-4 rounded-xl bg-amber-500/10 border border-amber-300/80 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs sm:text-sm">
-          <div className="flex items-center gap-2.5 min-w-0">
-            <div className="w-8 h-8 rounded-lg bg-amber-500 text-slate-950 flex items-center justify-center flex-shrink-0">
-              <Sparkles className="w-4 h-4" />
-            </div>
-            <div>
-              <p className="text-xs sm:text-sm font-black text-slate-900 leading-tight">
-                <span className="text-amber-800">{isAr ? 'مشترك جديد ؟ ' : 'Nouveau au club ? '}</span>
-                {isAr ? 'حصتك التدريبية الأولى مهداة بالكامل' : '1ère séance d\'essai offerte'}
-              </p>
-              <p className="text-[11px] text-slate-600 mt-0.5">
-                {isAr ? 'جرّب العتاد والأجواء بدون أي التزام • ببطاقة التعريف فقط' : 'Testez les équipements sans engagement • CNI & baskets propres'}
-              </p>
-            </div>
-          </div>
-
-          <button
-            type="button"
-            onClick={handleWhatsAppTrial}
-            className="inline-flex items-center justify-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-slate-900 hover:bg-black text-white text-xs font-black transition-all shadow-xs self-stretch sm:self-auto cursor-pointer flex-shrink-0"
-          >
-            <MessageCircle className="w-3.5 h-3.5 text-amber-400 flex-shrink-0" />
-            <span>{isAr ? 'جرّب مجاناً' : 'Profiter de l\'essai'}</span>
-          </button>
-        </div>
-
         {/* SINGLE UNIFIED CATEGORY NAV: Crisp light athletic tabs */}
-        <div className="flex items-center justify-start sm:justify-center gap-1.5 sm:gap-2 overflow-x-auto pb-2.5 mb-6 sm:mb-8 no-scrollbar" role="tablist" aria-label="Catégories de tarifs">
+        <div className="flex items-center justify-start sm:justify-center gap-1.5 sm:gap-2 overflow-x-auto pb-2 mb-4 sm:mb-6 no-scrollbar" role="tablist" aria-label="Catégories de tarifs">
           {(['musculation', 'combat', 'crosstraining', 'mixtes'] as PricingTab[]).map((tab) => {
             const isActive = activeTab === tab;
             const config = tabConfig[tab];
@@ -201,7 +172,7 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
                 role="tab"
                 aria-selected={isActive}
                 onClick={() => handleTabChange(tab)}
-                className={`inline-flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-5 py-2.5 sm:py-3 rounded-xl transition-all cursor-pointer whitespace-nowrap text-xs sm:text-sm font-extrabold border ${
+                className={`inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl transition-all cursor-pointer whitespace-nowrap text-xs sm:text-sm font-extrabold border ${
                   isActive
                     ? 'bg-slate-900 text-white border-slate-900 shadow-md'
                     : 'bg-slate-100 hover:bg-slate-200 text-slate-700 hover:text-slate-900 border-slate-200'
@@ -214,13 +185,13 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
           })}
         </div>
 
-        {/* DURATION SWITCHER: 1 Single Horizontal Row of 3 Segments (Never Stacks on Mobile) */}
-        <div className="mb-6 sm:mb-10 flex flex-col items-center">
-          <div className="w-full max-w-md bg-slate-100 p-1 rounded-xl border border-slate-200 grid grid-cols-3 gap-1 shadow-inner">
+        {/* DURATION SWITCHER: Quiet, Slim 3-Segment Control */}
+        <div className="mb-6 sm:mb-8 flex justify-center">
+          <div className="w-full max-w-xs sm:max-w-sm bg-slate-100 p-1 rounded-xl border border-slate-200 grid grid-cols-3 gap-1 shadow-inner">
             {[
-              { id: '1m', labelFr: '1 Mois', labelAr: 'شهر واحد', subFr: 'Standard', subAr: 'عادي' },
-              { id: '3m', labelFr: '3 Mois', labelAr: '3 أشهر', subFr: '-10% • 🎁', subAr: 'وفر 10% 🎁' },
-              { id: '6m', labelFr: '6 Mois', labelAr: '6 أشهر', subFr: '-15% • 👑', subAr: 'وفر 15% 👑' },
+              { id: '1m', labelFr: '1 Mois', labelAr: 'شهر', subFr: 'Standard', subAr: 'عادي' },
+              { id: '3m', labelFr: '3 Mois', labelAr: '3 أشهر', subFr: '-10% • 🎁', subAr: '-10% 🎁' },
+              { id: '6m', labelFr: '6 Mois', labelAr: '6 أشهر', subFr: '-15% • 👑', subAr: '-15% 👑' },
             ].map((d) => {
               const isSelected = duration === d.id;
               return (
@@ -228,17 +199,17 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
                   key={d.id}
                   type="button"
                   onClick={() => setDuration(d.id as SubscriptionDuration)}
-                  className={`py-2 px-1 sm:px-2 rounded-lg transition-all flex flex-col items-center justify-center cursor-pointer select-none text-center ${
+                  className={`py-1.5 px-1 rounded-lg transition-all flex flex-col items-center justify-center cursor-pointer select-none text-center ${
                     isSelected
-                      ? 'bg-slate-900 text-white shadow-md'
-                      : 'text-slate-700 hover:text-slate-950 hover:bg-white/60'
+                      ? 'bg-slate-900 text-white shadow-sm'
+                      : 'text-slate-600 hover:text-slate-900 hover:bg-white/60'
                   }`}
                 >
                   <span className="text-xs sm:text-sm font-black tracking-tight leading-tight">
                     {isAr ? d.labelAr : d.labelFr}
                   </span>
                   <span
-                    className={`text-[10px] sm:text-[11px] font-bold leading-tight mt-0.5 ${
+                    className={`text-[10px] font-bold leading-tight mt-0.5 ${
                       isSelected ? 'text-amber-300' : 'text-slate-500'
                     }`}
                   >
@@ -307,9 +278,9 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
                 >
                   <div>
                     {/* Top Metadata Row: Audience Badge + Popular Tag */}
-                    <div className="flex items-center justify-between gap-2 mb-4 flex-wrap">
+                    <div className="flex items-center justify-between gap-2 mb-3 flex-wrap">
                       <span
-                        className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-bold ${
+                        className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-bold ${
                           isKids
                             ? 'bg-sky-50 text-sky-800 border border-sky-200'
                             : isFemmesOnly
@@ -324,16 +295,11 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
                       </span>
 
                       {plan.isPopular && (
-                        <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-[11px] font-black bg-amber-500 text-slate-950 uppercase tracking-wider shadow-sm">
+                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-black bg-amber-500 text-slate-950 uppercase tracking-wider shadow-sm">
                           ★ {t.popular}
                         </span>
                       )}
                     </div>
-
-                    {/* Frequency / Duration */}
-                    <span className="text-xs font-bold text-slate-600 uppercase tracking-wider block mb-1">
-                      {freq}
-                    </span>
 
                     {/* Plan Name */}
                     <h3 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight mb-3">
@@ -445,98 +411,132 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
           )}
         </div>
 
-        {/* PIÈCES À FOURNIR — CLEAN EDITORIAL ATHLETIC CHECKLIST */}
+        {/* PIÈCES À FOURNIR — CLEAN EDITORIAL ATHLETIC CARDS (FAITHFUL TO SCREENSHOT 1) */}
         <div className="mt-12 sm:mt-16 pt-8 sm:pt-12 border-t border-slate-200">
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-5xl mx-auto">
             
             {/* Header */}
-            <div className="text-center sm:text-left rtl:sm:text-right mb-6 sm:mb-8">
-              <h3 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
-                {isAr ? 'الوثائق المطلوبة للتسجيل في الاستقبال' : 'Pièces requises pour l\'inscription'}
+            <div className="text-center mb-6 sm:mb-8">
+              <span className="text-xs font-extrabold text-amber-800 uppercase tracking-wider block mb-1">
+                {isAr ? 'تسجيل فوري في الاستقبال' : 'INSCRIPTION SIMPLIFIÉE À L\'ACCUEIL'}
+              </span>
+              <h3 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+                {isAr ? 'ملف التسجيل والوثائق المطلوبة' : 'Dossier d\'inscription & Pièces à fournir'}
               </h3>
-              <p className="text-xs sm:text-sm text-slate-500 mt-1 font-medium">
+              <p className="text-xs sm:text-sm text-slate-500 mt-1.5 font-medium max-w-2xl mx-auto">
                 {isAr
-                  ? 'يتم تسليم بطاقة العضوية والبدء في التمارين فور تقديم هذه الوثائق في مكتب الاستقبال (CUB1).'
-                  : 'Votre carte de membre est éditée sur place dès remise de ces éléments à la réception CUB1.'}
+                  ? 'كل ما تحتاجه لاستلام بطاقة عضويتك والبدء في التمارين في نفس اليوم.'
+                  : 'Tout ce dont vous avez besoin pour créer votre carte de membre et débuter vos entraînements le jour même.'}
               </p>
             </div>
 
-            {/* 4 Clean Items: Flat, Minimal, Zero Box Nesting */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 pb-6 border-b border-slate-200">
-              {/* 01 */}
-              <div className="flex items-start gap-3">
-                <FileText className="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" />
+            {/* 4 Crisp Cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+              {/* Card 1: Certificat médical */}
+              <div className="bg-white rounded-2xl border border-slate-200 p-4 sm:p-5 shadow-xs flex flex-col justify-between hover:border-slate-300 transition-all">
                 <div>
-                  <h4 className="text-xs sm:text-sm font-black text-slate-900 leading-tight">
+                  <div className="w-10 h-10 rounded-xl bg-indigo-50 border border-indigo-100 flex items-center justify-center mb-3 text-indigo-600">
+                    <Stethoscope className="w-5 h-5" />
+                  </div>
+                  <h4 className="text-sm sm:text-base font-black text-slate-900 leading-tight">
                     {isAr ? 'شهادة طبية' : 'Certificat médical'}
                   </h4>
-                  <p className="text-[11px] sm:text-xs text-slate-500 mt-0.5 font-medium">
-                    {isAr ? 'أقل من 3 أشهر' : 'Moins de 3 mois'}
+                  <p className="text-xs text-slate-500 mt-1 leading-relaxed">
+                    {isAr
+                      ? 'شهادة اللياقة البدنية لا تتعدى مدتها 3 أشهر.'
+                      : 'Certificat médical d\'aptitude physique datant de moins de 3 mois.'}
                   </p>
+                </div>
+                <div className="mt-4">
+                  <span className="inline-block px-2.5 py-1 rounded-md text-[11px] font-bold bg-amber-50 text-amber-800 border border-amber-200/80">
+                    {isAr ? 'إجباري' : 'Obligatoire'}
+                  </span>
                 </div>
               </div>
 
-              {/* 02 */}
-              <div className="flex items-start gap-3">
-                <Camera className="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" />
+              {/* Card 2: 2 Photos d'identité */}
+              <div className="bg-white rounded-2xl border border-slate-200 p-4 sm:p-5 shadow-xs flex flex-col justify-between hover:border-slate-300 transition-all">
                 <div>
-                  <h4 className="text-xs sm:text-sm font-black text-slate-900 leading-tight">
+                  <div className="w-10 h-10 rounded-xl bg-amber-50 border border-amber-100 flex items-center justify-center mb-3 text-amber-600">
+                    <Camera className="w-5 h-5" />
+                  </div>
+                  <h4 className="text-sm sm:text-base font-black text-slate-900 leading-tight">
                     {isAr ? '2 صور شمسية' : '2 Photos d\'identité'}
                   </h4>
-                  <p className="text-[11px] sm:text-xs text-slate-500 mt-0.5 font-medium">
-                    {isAr ? 'لبطاقة النادي' : 'Format récent'}
+                  <p className="text-xs text-slate-500 mt-1 leading-relaxed">
+                    {isAr
+                      ? 'صور حديثة لطباعة وتسليم بطاقة العضوية فورياً.'
+                      : 'Photos récentes pour l\'édition immédiate de votre carte de membre.'}
                   </p>
+                </div>
+                <div className="mt-4">
+                  <span className="inline-block px-2.5 py-1 rounded-md text-[11px] font-bold bg-slate-100 text-slate-700 border border-slate-200">
+                    {isAr ? 'لبطاقة النادي' : 'Pour votre badge'}
+                  </span>
                 </div>
               </div>
 
-              {/* 03 */}
-              <div className="flex items-start gap-3">
-                <IdCard className="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" />
+              {/* Card 3: Pièce d'identité */}
+              <div className="bg-white rounded-2xl border border-slate-200 p-4 sm:p-5 shadow-xs flex flex-col justify-between hover:border-slate-300 transition-all">
                 <div>
-                  <h4 className="text-xs sm:text-sm font-black text-slate-900 leading-tight">
+                  <div className="w-10 h-10 rounded-xl bg-sky-50 border border-sky-100 flex items-center justify-center mb-3 text-sky-600">
+                    <IdCard className="w-5 h-5" />
+                  </div>
+                  <h4 className="text-sm sm:text-base font-black text-slate-900 leading-tight">
                     {isAr ? 'بطاقة التعريف' : 'Pièce d\'identité'}
                   </h4>
-                  <p className="text-[11px] sm:text-xs text-slate-500 mt-0.5 font-medium">
-                    {isAr ? 'CNI أو رخصة' : 'CNI ou permis'}
+                  <p className="text-xs text-slate-500 mt-1 leading-relaxed">
+                    {isAr
+                      ? 'نسخة من بطاقة التعريف أو رخصة السياقة (أو الدفتر العائلي للقصر).'
+                      : 'Copie de la CNI ou permis (ou livret de famille pour les mineurs).'}
                   </p>
+                </div>
+                <div className="mt-4">
+                  <span className="inline-block px-2.5 py-1 rounded-md text-[11px] font-bold bg-slate-100 text-slate-700 border border-slate-200">
+                    {isAr ? 'للتحقق' : 'Vérification'}
+                  </span>
                 </div>
               </div>
 
-              {/* 04 */}
-              <div className="flex items-start gap-3">
-                <Banknote className="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" />
+              {/* Card 4: Règlement en espèces */}
+              <div className="bg-white rounded-2xl border border-slate-200 p-4 sm:p-5 shadow-xs flex flex-col justify-between hover:border-slate-300 transition-all">
                 <div>
-                  <h4 className="text-xs sm:text-sm font-black text-slate-900 leading-tight">
-                    {isAr ? 'دفع نقداً' : 'Règlement espèces'}
+                  <div className="w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-100 flex items-center justify-center mb-3 text-emerald-600">
+                    <Banknote className="w-5 h-5" />
+                  </div>
+                  <h4 className="text-sm sm:text-base font-black text-slate-900 leading-tight">
+                    {isAr ? 'دفع نقداً' : 'Règlement en espèces'}
                   </h4>
-                  <p className="text-[11px] sm:text-xs text-slate-500 mt-0.5 font-medium">
-                    {isAr ? 'في الاستقبال' : 'À la réception CUB1'}
+                  <p className="text-xs text-slate-500 mt-1 leading-relaxed">
+                    {isAr
+                      ? 'دفع اشتراك الباقة في مكتب الاستقبال (CUB1).'
+                      : 'Paiement du montant de votre formule à la réception CUB1.'}
                   </p>
+                </div>
+                <div className="mt-4">
+                  <span className="inline-block px-2.5 py-1 rounded-md text-[11px] font-bold bg-emerald-50 text-emerald-800 border border-emerald-200/80">
+                    {isAr ? 'في الاستقبال' : 'À la réception'}
+                  </span>
                 </div>
               </div>
             </div>
 
-            {/* Clean, Flat Free Trial Note */}
-            <div className="pt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs text-slate-600">
+            {/* Clean Light Strip at Bottom */}
+            <div className="mt-4 p-3.5 sm:p-4 rounded-xl bg-slate-50 border border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs text-slate-600">
               <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 flex-shrink-0" />
+                <span className="text-amber-600 font-bold">⚡</span>
                 <p>
-                  <strong className="text-slate-900 font-bold">
-                    {isAr ? 'للحصة التجريبية المجانية: ' : 'Pour la 1ère séance d\'essai : '}
+                  <strong className="font-bold text-slate-900">
+                    {isAr ? 'للحصة التجريبية الأولى : ' : 'Pour la séance d\'essai offerte : '}
                   </strong>
                   {isAr
-                    ? 'بدلة رياضية وحذاء نظيف وبطاقة التعريف فقط (الشهادة الطبية غير مطلوبة في أول زيارة).'
-                    : 'tenue de sport, baskets propres et CNI suffisent (sans certificat).'}
+                    ? 'لا داعي لإحضار الشهادة الطبية في هذا اليوم. تفضل فقط ببدلة رياضية، حذاء نظيف، وبطاقة التعريف.'
+                    : 'inutile de fournir le certificat ce jour-là. Venez simplement avec tenue de sport, baskets propres et CNI.'}
                 </p>
               </div>
-
-              <button
-                type="button"
-                onClick={handleWhatsAppTrial}
-                className="inline-flex items-center gap-1.5 text-xs font-black text-amber-800 hover:text-amber-900 self-start sm:self-auto cursor-pointer underline underline-offset-4 decoration-amber-400 hover:decoration-amber-600 transition-colors"
-              >
-                <span>{isAr ? 'احجز حصتك التجريبية الآن ←' : 'Réserver l\'essai gratuit →'}</span>
-              </button>
+              <span className="text-[11px] font-bold text-slate-500 whitespace-nowrap self-start sm:self-auto">
+                {isAr ? '• القصر (-18) : موافقة الولي في عين المكان' : '• Mineurs (-18) : accord parental sur place'}
+              </span>
             </div>
 
           </div>
