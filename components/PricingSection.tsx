@@ -19,11 +19,12 @@ import {
   IdCard,
   Banknote,
   Stethoscope,
-  Zap,
-  TrendingUp,
-  Trophy,
+  Crown,
+  Clock,
   Users,
   ShieldCheck,
+  Trophy,
+  Zap,
 } from 'lucide-react';
 import { Language, content } from '@/data/content';
 import PricingCalculator from './PricingCalculator';
@@ -190,87 +191,85 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
           })}
         </div>
 
-        {/* DURATION SWITCHER: Precision Athletic Progression Ladder */}
-        <div className="mb-6 sm:mb-8 flex justify-center px-2">
-          <div className="w-full max-w-md bg-slate-100 p-1.5 rounded-2xl border border-slate-200/90 grid grid-cols-3 gap-1.5 shadow-inner">
+        {/* DURATION SWITCHER: Athletic Progression (1M Starter → 3M Transformation → 6M Élite) */}
+        <div className="mb-6 sm:mb-8 flex flex-col items-center">
+          {/* 3-Segment Selector */}
+          <div className="w-full max-w-sm sm:max-w-md bg-slate-100 p-1.5 rounded-2xl border border-slate-200 grid grid-cols-3 gap-1.5 shadow-inner">
             {[
               {
                 id: '1m',
-                tierFr: 'Flexible',
-                tierAr: 'مرونة',
                 labelFr: '1 Mois',
                 labelAr: 'شهر واحد',
-                perkFr: 'Standard',
-                perkAr: 'عادي',
-                icon: Zap,
-                isTop: false,
+                subFr: 'Sans engagement',
+                subAr: 'شهري مرن',
+                badgeFr: null,
+                badgeAr: null,
+                icon: Clock,
               },
               {
                 id: '3m',
-                tierFr: 'Évolution',
-                tierAr: 'تطور',
                 labelFr: '3 Mois',
                 labelAr: '3 أشهر',
-                perkFr: '-10% • 1 Sauna',
-                perkAr: 'وفر 10% • ساونا',
-                icon: TrendingUp,
-                isTop: false,
+                subFr: '-10% • 1 Sauna',
+                subAr: 'وفر 10% + ساونا',
+                badgeFr: 'Avantage',
+                badgeAr: 'توفير 10%',
+                icon: Flame,
               },
               {
                 id: '6m',
-                tierFr: 'Top Valeur',
-                tierAr: 'أفضل توفير',
                 labelFr: '6 Mois',
                 labelAr: '6 أشهر',
-                perkFr: '-15% • 3 Saunas',
-                perkAr: 'وفر 15% • 3 ساونا',
-                icon: Trophy,
-                isTop: true,
+                subFr: '-15% • 3 Saunas',
+                subAr: 'وفر 15% + 3 ساونا',
+                badgeFr: 'Meilleur Tarif',
+                badgeAr: 'أعلى توفير',
+                icon: Crown,
               },
             ].map((d) => {
               const isSelected = duration === d.id;
               const Icon = d.icon;
+              const isSixMonths = d.id === '6m';
+              const isThreeMonths = d.id === '3m';
+
               return (
                 <button
                   key={d.id}
                   type="button"
                   onClick={() => setDuration(d.id as SubscriptionDuration)}
-                  className={`py-2 px-1 rounded-xl transition-all flex flex-col items-center justify-between cursor-pointer select-none text-center relative ${
+                  className={`relative py-2 px-1 rounded-xl transition-all flex flex-col items-center justify-center cursor-pointer select-none text-center ${
                     isSelected
-                      ? d.isTop
-                        ? 'bg-slate-900 text-white shadow-md ring-1 ring-amber-400/50'
-                        : 'bg-slate-900 text-white shadow-md'
-                      : d.isTop
-                      ? 'text-slate-700 hover:text-slate-950 hover:bg-white/80 bg-amber-500/5'
-                      : 'text-slate-700 hover:text-slate-950 hover:bg-white/80'
+                      ? 'bg-slate-900 text-white shadow-md'
+                      : 'text-slate-700 hover:text-slate-950 hover:bg-white/70'
                   }`}
                 >
-                  {/* Tier status pill */}
-                  <span
-                    className={`text-[9px] font-black uppercase tracking-wider leading-none mb-1 px-1.5 py-0.5 rounded ${
-                      isSelected
-                        ? d.isTop
-                          ? 'bg-amber-400 text-slate-950 font-black'
-                          : 'bg-white/10 text-slate-300'
-                        : d.isTop
-                        ? 'bg-amber-500/20 text-amber-900 font-black'
-                        : 'text-slate-600'
-                    }`}
-                  >
-                    {isAr ? d.tierAr : d.tierFr}
-                  </span>
+                  {/* Floating micro-badge for 6m or 3m */}
+                  {d.badgeFr && (
+                    <span
+                      className={`absolute -top-2.5 px-1.5 py-0.5 rounded-full text-[9px] font-black uppercase tracking-wider shadow-xs whitespace-nowrap ${
+                        isSixMonths
+                          ? isSelected
+                            ? 'bg-amber-400 text-slate-950 ring-1 ring-amber-300'
+                            : 'bg-amber-500 text-slate-950'
+                          : isSelected
+                          ? 'bg-slate-800 text-amber-300 border border-slate-700'
+                          : 'bg-slate-200 text-slate-700'
+                      }`}
+                    >
+                      {isAr ? d.badgeAr : d.badgeFr}
+                    </span>
+                  )}
 
-                  {/* Main Duration Row: Clean Vector Icon + Label */}
-                  <div className="flex items-center justify-center gap-1 my-0.5">
+                  <div className="flex items-center justify-center gap-1 mt-0.5">
                     <Icon
                       className={`w-3.5 h-3.5 flex-shrink-0 ${
                         isSelected
-                          ? d.isTop
+                          ? isSixMonths || isThreeMonths
                             ? 'text-amber-400'
-                            : 'text-amber-300'
-                          : d.isTop
+                            : 'text-slate-400'
+                          : isSixMonths || isThreeMonths
                           ? 'text-amber-600'
-                          : 'text-slate-600'
+                          : 'text-slate-400'
                       }`}
                     />
                     <span className="text-xs sm:text-sm font-black tracking-tight leading-tight">
@@ -278,27 +277,60 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
                     </span>
                   </div>
 
-                  {/* Perks / Savings badge */}
                   <span
-                    className={`text-[10px] font-bold leading-tight mt-1 px-1 py-0.5 rounded whitespace-nowrap ${
+                    className={`text-[10px] font-bold leading-tight mt-1 whitespace-nowrap ${
                       isSelected
-                        ? d.isTop
-                          ? 'text-amber-300 font-black'
-                          : d.id === '3m'
-                          ? 'text-amber-300 font-extrabold'
+                        ? isSixMonths || isThreeMonths
+                          ? 'text-amber-300'
                           : 'text-slate-300'
-                        : d.isTop
-                        ? 'text-amber-900 font-extrabold bg-amber-100/70'
-                        : d.id === '3m'
-                        ? 'text-amber-800 font-bold bg-amber-50'
-                        : 'text-slate-600'
+                        : isSixMonths
+                        ? 'text-amber-800 font-extrabold'
+                        : isThreeMonths
+                        ? 'text-slate-600 font-bold'
+                        : 'text-slate-500'
                     }`}
                   >
-                    {isAr ? d.perkAr : d.perkFr}
+                    {isAr ? d.subAr : d.subFr}
                   </span>
                 </button>
               );
             })}
+          </div>
+
+          {/* DYNAMIC POWER BENEFIT STRIP: Reinforces tier advantage with authority */}
+          <div className="mt-3 w-full max-w-sm sm:max-w-md">
+            {duration === '1m' && (
+              <div className="py-2 px-3 rounded-xl bg-slate-100/90 border border-slate-200/90 flex items-center gap-2 text-xs text-slate-700">
+                <Clock className="w-4 h-4 text-slate-500 flex-shrink-0" />
+                <span className="leading-tight text-[11px] sm:text-xs font-semibold">
+                  {isAr
+                    ? 'اشتراك شهري مرن : حرية كاملة للتدريب والتجديد دون التزام طويل'
+                    : 'Formule mensuelle sans engagement : liberté totale d\'entraînement'}
+                </span>
+              </div>
+            )}
+
+            {duration === '3m' && (
+              <div className="py-2 px-3 rounded-xl bg-amber-50/80 border border-amber-300/80 flex items-center gap-2 text-xs text-amber-950">
+                <Flame className="w-4 h-4 text-amber-600 flex-shrink-0" />
+                <span className="leading-tight text-[11px] sm:text-xs font-bold">
+                  {isAr
+                    ? 'باقة التحول البدني : خصم فوري 10% + 1 حصة ساونا مهداة للاسترجاع'
+                    : 'Pack Transformation : 10% de réduction immédiate + 1 sauna offert'}
+                </span>
+              </div>
+            )}
+
+            {duration === '6m' && (
+              <div className="py-2 px-3 rounded-xl bg-gradient-to-r from-amber-500/15 via-amber-500/20 to-amber-500/15 border border-amber-400/90 flex items-center gap-2 text-xs text-slate-950 shadow-xs">
+                <Crown className="w-4 h-4 text-amber-600 fill-amber-500/20 flex-shrink-0" />
+                <span className="leading-tight text-[11px] sm:text-xs font-black">
+                  {isAr
+                    ? 'باقة النخبة (أعلى توفير) : خصم أقصى 15% + 3 حصص ساونا مهداة'
+                    : 'Formule Élite (Meilleur Tarif) : 15% de réduction max + 3 saunas offerts'}
+                </span>
+              </div>
+            )}
           </div>
         </div>
 
@@ -372,7 +404,7 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
                         }`}
                       >
                         {isKids ? (
-                          <Shield className="w-3.5 h-3.5 text-sky-600 flex-shrink-0" />
+                          <ShieldCheck className="w-3.5 h-3.5 text-sky-600 flex-shrink-0" />
                         ) : isFemmesOnly ? (
                           <Users className="w-3.5 h-3.5 text-fuchsia-600 flex-shrink-0" />
                         ) : isHommesOnly ? (
@@ -385,8 +417,7 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
 
                       {plan.isPopular && (
                         <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-black bg-amber-500 text-slate-950 uppercase tracking-wider shadow-sm">
-                          <Sparkles className="w-3 h-3 fill-current" />
-                          <span>{t.popular}</span>
+                          ★ {t.popular}
                         </span>
                       )}
                     </div>
@@ -422,53 +453,25 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
                         </div>
                       )}
 
-                      {/* Adult Sauna Bonus Badge: Powerful Athletic Perk */}
+                      {/* Adult Sauna Bonus Badge */}
                       {pricing.saunaSessions > 0 && (
-                        <div className="mt-3 p-2.5 sm:p-3 rounded-xl bg-gradient-to-r from-amber-500/10 via-amber-500/5 to-transparent border border-amber-300/80 flex items-start gap-2.5 text-xs text-amber-950">
-                          <div className="w-7 h-7 rounded-lg bg-amber-500 text-slate-950 flex items-center justify-center flex-shrink-0 mt-0.5 shadow-2xs">
-                            <Flame className="w-4 h-4 fill-current" />
-                          </div>
-                          <div className="min-w-0">
-                            <div className="flex items-center gap-1.5 flex-wrap">
-                              <span className="text-[10px] font-black uppercase tracking-wider text-amber-900 bg-amber-200/60 px-1.5 py-0.5 rounded">
-                                {duration === '6m'
-                                  ? (isAr ? 'امتياز الأداء النخبوي' : 'Bonus Performance Élite')
-                                  : (isAr ? 'امتياز الاسترجاع' : 'Bonus Récupération')}
-                              </span>
-                              <span className="text-[10.5px] font-black text-emerald-800 bg-emerald-100/90 px-1.5 py-0.5 rounded">
-                                {isAr
-                                  ? `قيمة ${formatPrice(pricing.saunaSessions * 2000)} دج مهداة`
-                                  : `Valeur ${formatPrice(pricing.saunaSessions * 2000)} DA offerte`}
-                              </span>
-                            </div>
-                            <p className="font-black text-slate-900 leading-snug mt-1 text-xs sm:text-sm">
-                              {isAr
-                                ? `+ ${pricing.saunaSessions} ${pricing.saunaSessions > 1 ? 'حصص ساونا ومسبح مهداة' : 'حصة ساونا ومسبح مهداة'}`
-                                : `+ ${pricing.saunaSessions} séance${pricing.saunaSessions > 1 ? 's' : ''} Sauna & Bain Récupération`}
-                            </p>
-                            <p className="text-[10.5px] text-slate-600 mt-0.5">
-                              {isAr
-                                ? 'قسيمة معتمدة تسلم مباشرة من مكتب الاستقبال (CUB1)'
-                                : 'Bons physiques remis directement à la réception CUB1'}
-                            </p>
-                          </div>
+                        <div className="mt-2.5 p-2 rounded-xl bg-amber-50 border border-amber-200/80 flex items-center gap-2 text-xs font-bold text-amber-900">
+                          <Flame className="w-4 h-4 text-amber-600 flex-shrink-0" />
+                          <span className="leading-tight text-[11px] sm:text-xs">
+                            {isAr
+                              ? `+ ${pricing.saunaSessions} حصة ساونا مهداة للاسترجاع (قسيمة من الاستقبال)`
+                              : `+ ${pricing.saunaSessions} séance(s) sauna offerte(s) (bon à l'accueil)`}
+                          </span>
                         </div>
                       )}
 
                       {/* Kids Plan Specific Perk (No sauna for under 14) */}
                       {pricing.isKidsPlan && duration !== '1m' && (
-                        <div className="mt-3 p-2.5 sm:p-3 rounded-xl bg-sky-50 border border-sky-200 flex items-center gap-2.5 text-xs text-sky-950">
-                          <div className="w-7 h-7 rounded-lg bg-sky-500 text-white flex items-center justify-center flex-shrink-0 shadow-2xs">
-                            <ShieldCheck className="w-4 h-4" />
-                          </div>
-                          <div>
-                            <span className="text-[10px] font-black uppercase tracking-wider text-sky-800 block">
-                              {isAr ? 'ميزة الاشتراك المطول' : 'Avantage Jeune Athlète'}
-                            </span>
-                            <span className="font-extrabold text-slate-900 text-xs">
-                              {isAr ? 'إعفاء كامل من رسوم الملف وبطاقة النادي' : 'Frais de dossier & badge officiel offerts'}
-                            </span>
-                          </div>
+                        <div className="mt-2.5 p-2 rounded-xl bg-sky-50 border border-sky-200 flex items-center gap-2 text-xs font-bold text-sky-900">
+                          <Award className="w-4 h-4 text-sky-600 flex-shrink-0" />
+                          <span className="leading-tight text-[11px] sm:text-xs">
+                            {isAr ? 'إعفاء من رسوم الملف وبطاقة النادي' : 'Frais de dossier & badge offerts'}
+                          </span>
                         </div>
                       )}
                     </div>
