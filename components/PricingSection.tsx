@@ -25,6 +25,7 @@ import {
   ShieldCheck,
   Trophy,
   Zap,
+  GraduationCap,
 } from 'lucide-react';
 import { Language, content } from '@/data/content';
 import PricingCalculator from './PricingCalculator';
@@ -32,6 +33,7 @@ import {
   musculationPlans,
   crosstrainingPlans,
   combatPlans,
+  studentPlans,
   mixedPlans,
   PricingPlan,
   SubscriptionDuration,
@@ -43,7 +45,7 @@ interface PricingSectionProps {
   onOpenPostersModal: (posterName?: string) => void;
 }
 
-type PricingTab = 'musculation' | 'combat' | 'crosstraining' | 'mixtes';
+type PricingTab = 'musculation' | 'combat' | 'crosstraining' | 'etudiant' | 'mixtes';
 
 // Bulletproof non-breaking space formatter (\u00A0) preventing line breaks in numbers
 const formatPrice = (p: number) => p.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '\u00A0');
@@ -90,10 +92,14 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
       }
     }
 
+    const isStudentPlan = activeTab === 'etudiant' || planName.toLowerCase().includes('étudiant') || planName.toLowerCase().includes('طالب');
+    const studentNoteFr = isStudentPlan ? " (avec présentation de ma carte d'étudiant)" : "";
+    const studentNoteAr = isStudentPlan ? " (مع تقديم بطاقة الطالب الجامعية)" : "";
+
     const message =
       lang === 'fr'
-        ? `Bonjour Adrena Club, je souhaite m'inscrire à la formule "${planName}" - Formule ${durationTextFr} (${formattedP} DA${bonusFr}). Pouvez-vous me confirmer les démarches à l'accueil ?`
-        : `السلام عليكم نادي أدرينا، أود التسجيل في باقة "${planName}" - عرض ${durationTextAr} (${formattedP} دج${bonusAr}). ما هي الإجراءات في مكتب الاستقبال؟`;
+        ? `Bonjour Adrena Club, je souhaite m'inscrire à la formule "${planName}"${studentNoteFr} - Formule ${durationTextFr} (${formattedP} DA${bonusFr}). Pouvez-vous me confirmer les démarches à l'accueil ?`
+        : `السلام عليكم نادي أدرينا، أود التسجيل في باقة "${planName}"${studentNoteAr} - عرض ${durationTextAr} (${formattedP} دج${bonusAr}). ما هي الإجراءات في مكتب الاستقبال؟`;
 
     const url = `https://wa.me/213771570378?text=${encodeURIComponent(message)}`;
     window.open(url, '_blank');
@@ -115,6 +121,7 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
     musculation: { fr: 'Musculation', ar: 'كمال الأجسام', countFr: '6 formules', countAr: '6 باقات', icon: Dumbbell },
     combat: { fr: 'Combat & Enfants', ar: 'قتال وأطفال', countFr: '3 disciplines', countAr: '3 فئات', icon: Shield },
     crosstraining: { fr: 'Cross-Training', ar: 'كروس ترينينغ', countFr: '3 formules', countAr: '3 باقات', icon: Flame },
+    etudiant: { fr: 'Étudiants 🎓', ar: 'الطلبة 🎓', countFr: '8 formules', countAr: '8 باقات', icon: GraduationCap },
     mixtes: { fr: 'Packs Combinés', ar: 'باقات مدمجة', countFr: 'Sur-mesure', countAr: 'مخصصة', icon: Layers },
   };
 
@@ -130,6 +137,8 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
         return combatPlans;
       case 'crosstraining':
         return crosstrainingPlans;
+      case 'etudiant':
+        return studentPlans;
       case 'mixtes':
         return mixedPlans;
       default:
@@ -154,13 +163,15 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
 
           <button
             type="button"
-            onClick={() => onOpenPostersModal(activeTab === 'mixtes' ? 'mixtes' : 'tarifs')}
+            onClick={() => onOpenPostersModal(activeTab === 'mixtes' ? 'mixtes' : activeTab === 'etudiant' ? 'etudiant' : 'tarifs')}
             className="text-xs font-bold text-amber-800 hover:text-amber-900 underline underline-offset-4 decoration-amber-400 hover:decoration-amber-600 transition-colors self-start sm:self-auto cursor-pointer flex items-center gap-1.5"
           >
             <ImageIcon className="w-3.5 h-3.5 text-amber-600" />
             <span>
               {activeTab === 'mixtes'
                 ? (isAr ? 'الملصق الرسمي (50+ باقة) ↗' : 'Affiche officielle (50+ tarifs) ↗')
+                : activeTab === 'etudiant'
+                ? (isAr ? 'عرض ملصق باقات الطلبة الأصلي ↗' : 'Affiche officielle tarifs étudiants ↗')
                 : (isAr ? 'عرض الملصق الأصلي للصالة ↗' : 'Affiche officielle originale ↗')}
             </span>
           </button>
@@ -168,7 +179,7 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
 
         {/* SINGLE UNIFIED CATEGORY NAV: Crisp light athletic tabs */}
         <div className="flex items-center justify-start sm:justify-center gap-1.5 sm:gap-2 overflow-x-auto pb-2 mb-4 sm:mb-6 no-scrollbar" role="tablist" aria-label="Catégories de tarifs">
-          {(['musculation', 'combat', 'crosstraining', 'mixtes'] as PricingTab[]).map((tab) => {
+          {(['musculation', 'combat', 'crosstraining', 'etudiant', 'mixtes'] as PricingTab[]).map((tab) => {
             const isActive = activeTab === tab;
             const config = tabConfig[tab];
             const Icon = config.icon;
@@ -333,6 +344,25 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
             )}
           </div>
         </div>
+
+        {/* For Student Plans: Official Student Discount Banner */}
+        {activeTab === 'etudiant' && (
+          <div className="mb-6 sm:mb-8 p-4 sm:p-5 rounded-2xl bg-amber-50/70 border border-amber-300 shadow-xs flex items-center gap-3.5">
+            <div className="w-11 h-11 rounded-xl bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-amber-800 flex-shrink-0">
+              <GraduationCap className="w-6 h-6" />
+            </div>
+            <div>
+              <p className="text-xs sm:text-sm font-extrabold text-slate-900">
+                {isAr ? 'أسعار تفضيلية رسمية خاصة بالطلبة والجامعيين 🎓' : 'Tarifs préférentiels officiels réservés aux étudiants 🎓'}
+              </p>
+              <p className="text-[11px] sm:text-xs text-slate-600 mt-0.5 font-medium">
+                {isAr
+                  ? 'خصومات استثنائية تصل إلى 20% على كمال الأجسام والكروس ترينينغ. يرجى تقديم بطاقة الطالب أو الشهادة المدرسية عند التسجيل في مكتب الاستقبال.'
+                  : 'Tarifs réduits jusqu\'à -20% sur la musculation et le cross-training. Présentation obligatoire de la carte d\'étudiant ou certificat de scolarité à la réception.'}
+              </p>
+            </div>
+          </div>
+        )}
 
         {/* For Mixed Plans: Clean Callout to Launch Custom Builder Modal */}
         {activeTab === 'mixtes' && (
@@ -655,9 +685,10 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
                     : 'inutile de fournir le certificat ce jour-là. Venez simplement avec tenue de sport, baskets propres et CNI.'}
                 </p>
               </div>
-              <span className="text-[11px] font-bold text-slate-500 whitespace-nowrap self-start sm:self-auto">
-                {isAr ? '• القصر (-18) : موافقة الولي في عين المكان' : '• Mineurs (-18) : accord parental sur place'}
-              </span>
+              <div className="text-[11px] font-bold text-slate-500 whitespace-nowrap self-start sm:self-auto flex flex-wrap items-center gap-2 sm:gap-3">
+                <span>{isAr ? '• الطلبة : إحضار بطاقة الطالب' : '• Étudiants : carte d\'étudiant'}</span>
+                <span>{isAr ? '• القصر (-18) : موافقة الولي في عين المكان' : '• Mineurs (-18) : accord parental sur place'}</span>
+              </div>
             </div>
 
           </div>

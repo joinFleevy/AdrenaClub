@@ -20,6 +20,12 @@ const posters = [
     src: '/images/posters/tarifs_officiels.jpg',
   },
   {
+    id: 'etudiant',
+    titleFr: 'Grille Officielle — Tarifs Étudiants & Facultatifs',
+    titleAr: 'قائمة الأسعار الرسمية — باقات الطلبة والجامعيين',
+    src: '/images/posters/tarif_etudiant.jpg',
+  },
+  {
     id: 'mixtes',
     titleFr: 'Grille Officielle des Tarifs Mixtes (50+ formules)',
     titleAr: 'قائمة الأسعار الرسمية للباقات المدمجة (أكثر من 50 تركيبة)',
