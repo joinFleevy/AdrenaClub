@@ -146,7 +146,7 @@ export default function PlanCheckoutModal({
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="relative w-full max-w-lg bg-white rounded-t-3xl sm:rounded-3xl shadow-2xl border border-slate-200 overflow-hidden max-h-[90vh] sm:max-h-[85vh] flex flex-col mt-auto sm:my-auto mb-0"
+        className="relative w-full max-w-lg bg-white rounded-t-3xl sm:rounded-3xl shadow-2xl border border-slate-200 overflow-hidden max-h-[90vh] sm:max-h-[85vh] flex flex-col mt-auto sm:my-auto mb-0 animate-sheet-up"
       >
         {/* Mobile Pull Indicator */}
         <div className="w-10 h-1 bg-slate-300 rounded-full mx-auto mt-2.5 sm:hidden flex-shrink-0" />
@@ -154,10 +154,13 @@ export default function PlanCheckoutModal({
         {/* Compact Header */}
         <div className="px-5 py-4 border-b border-slate-100 flex items-center justify-between gap-3 bg-slate-50/80 flex-shrink-0">
           <div className="flex items-center gap-2.5">
-            <span className="w-6 h-6 rounded-full bg-amber-500 text-slate-950 font-black text-xs flex items-center justify-center flex-shrink-0 shadow-xs">
+            <span
+              key={step}
+              className="w-6 h-6 rounded-full bg-amber-500 text-slate-950 font-black text-xs flex items-center justify-center flex-shrink-0 shadow-xs animate-badge-pop"
+            >
               {step}
             </span>
-            <h3 className="text-sm sm:text-base font-black text-slate-900 tracking-tight">
+            <h3 className="text-sm sm:text-base font-black text-slate-900 tracking-tight transition-all duration-200">
               {step === 1
                 ? isAr
                   ? 'هل ملفك جاهز للتسجيل؟'
@@ -171,7 +174,7 @@ export default function PlanCheckoutModal({
           <button
             type="button"
             onClick={onClose}
-            className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-200/60 transition-colors cursor-pointer"
+            className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-200/60 active:scale-95 transition-all cursor-pointer"
             aria-label="Fermer"
           >
             <X className="w-5 h-5" />
@@ -210,19 +213,19 @@ export default function PlanCheckoutModal({
         <div className="p-5 overflow-y-auto space-y-4">
           {/* STEP 1: DISTILLED CHECKLIST */}
           {step === 1 && (
-            <div className="space-y-3.5 animate-in fade-in duration-200">
+            <div key="step-1" className="space-y-3.5 animate-step-in">
               <p className="text-xs font-bold text-slate-500 uppercase tracking-wider">
                 {isAr
                   ? 'الوثائق المطلوبة لملف التسجيل في الاستقبال'
                   : 'Pièces requises pour votre badge à l’accueil'}
               </p>
 
-              {/* Scannable Checklist Rows */}
+              {/* Scannable Checklist Rows with Tactile Hover */}
               <div className="divide-y divide-slate-100 border border-slate-200 rounded-2xl bg-white shadow-xs overflow-hidden">
                 {/* 1. Medical Certificate */}
-                <div className="p-3 sm:p-3.5 flex items-center justify-between gap-3">
+                <div className="group p-3 sm:p-3.5 flex items-center justify-between gap-3 hover:bg-slate-50/90 transition-colors duration-150">
                   <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center flex-shrink-0">
+                    <div className="w-8 h-8 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-150">
                       <Stethoscope className="w-4 h-4" />
                     </div>
                     <div>
@@ -240,9 +243,9 @@ export default function PlanCheckoutModal({
                 </div>
 
                 {/* 2. Photos */}
-                <div className="p-3 sm:p-3.5 flex items-center justify-between gap-3">
+                <div className="group p-3 sm:p-3.5 flex items-center justify-between gap-3 hover:bg-slate-50/90 transition-colors duration-150">
                   <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center flex-shrink-0">
+                    <div className="w-8 h-8 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-150">
                       <Camera className="w-4 h-4" />
                     </div>
                     <div>
@@ -260,9 +263,9 @@ export default function PlanCheckoutModal({
                 </div>
 
                 {/* 3. CNI */}
-                <div className="p-3 sm:p-3.5 flex items-center justify-between gap-3">
+                <div className="group p-3 sm:p-3.5 flex items-center justify-between gap-3 hover:bg-slate-50/90 transition-colors duration-150">
                   <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-sky-50 text-sky-600 flex items-center justify-center flex-shrink-0">
+                    <div className="w-8 h-8 rounded-lg bg-sky-50 text-sky-600 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-150">
                       <IdCard className="w-4 h-4" />
                     </div>
                     <div>
@@ -281,9 +284,9 @@ export default function PlanCheckoutModal({
 
                 {/* 4. Student Card (Only for Student Plans) */}
                 {isStudentPlan && (
-                  <div className="p-3 sm:p-3.5 flex items-center justify-between gap-3 bg-amber-50/40">
+                  <div className="group p-3 sm:p-3.5 flex items-center justify-between gap-3 bg-amber-50/40 hover:bg-amber-50/70 transition-colors duration-150">
                     <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-800 flex items-center justify-center flex-shrink-0">
+                      <div className="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-800 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-150">
                         <GraduationCap className="w-4 h-4" />
                       </div>
                       <div>
@@ -302,9 +305,9 @@ export default function PlanCheckoutModal({
                 )}
 
                 {/* 5. Cash payment */}
-                <div className="p-3 sm:p-3.5 flex items-center justify-between gap-3">
+                <div className="group p-3 sm:p-3.5 flex items-center justify-between gap-3 hover:bg-slate-50/90 transition-colors duration-150">
                   <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center flex-shrink-0">
+                    <div className="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-150">
                       <Banknote className="w-4 h-4" />
                     </div>
                     <div>
@@ -330,12 +333,12 @@ export default function PlanCheckoutModal({
                 <button
                   type="button"
                   onClick={handleTrialRedirect}
-                  className="inline-flex items-center gap-1 font-bold text-amber-800 hover:text-amber-950 cursor-pointer whitespace-nowrap"
+                  className="group inline-flex items-center gap-1 font-bold text-amber-800 hover:text-amber-950 active:scale-95 transition-all cursor-pointer whitespace-nowrap"
                 >
                   <span className="underline underline-offset-2">
                     {isAr ? 'احجز حصة تجريبية مجانية' : 'Essai gratuit sans certificat'}
                   </span>
-                  <span>⚡</span>
+                  <span className="inline-block group-hover:scale-125 group-hover:rotate-12 transition-transform duration-200">⚡</span>
                 </button>
               </div>
             </div>
@@ -343,9 +346,9 @@ export default function PlanCheckoutModal({
 
           {/* STEP 2: FORK ROUTER (GPS MAPS VS WHATSAPP) */}
           {step === 2 && (
-            <div className="space-y-4 animate-in fade-in duration-200">
-              <div className="flex items-center gap-2.5 p-3 rounded-xl bg-amber-50 border border-amber-200/80">
-                <CheckCircle2 className="w-5 h-5 text-amber-600 flex-shrink-0" />
+            <div key="step-2" className="space-y-4 animate-step-in">
+              <div className="flex items-center gap-2.5 p-3 rounded-xl bg-amber-50 border border-amber-200/80 shadow-xs">
+                <CheckCircle2 className="w-5 h-5 text-amber-600 flex-shrink-0 animate-check-pop" />
                 <p className="text-xs sm:text-sm font-extrabold text-slate-900 leading-tight">
                   {isAr
                     ? 'ننتظرك في الصالة لتسليمك شارة العضوية والبدء فورياً.'
@@ -358,10 +361,10 @@ export default function PlanCheckoutModal({
                 <button
                   type="button"
                   onClick={handleOpenMaps}
-                  className="w-full p-4 rounded-2xl bg-slate-900 hover:bg-black text-white transition-all cursor-pointer flex items-center justify-between gap-3 text-left rtl:text-right shadow-md active:scale-[0.99]"
+                  className="group w-full p-4 rounded-2xl bg-slate-900 hover:bg-black text-white transition-all duration-200 cursor-pointer flex items-center justify-between gap-3 text-left rtl:text-right shadow-md hover:shadow-xl hover:-translate-y-0.5 active:scale-[0.98]"
                 >
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-amber-400 text-slate-950 flex items-center justify-center flex-shrink-0">
+                    <div className="w-10 h-10 rounded-xl bg-amber-400 text-slate-950 flex items-center justify-center flex-shrink-0 group-hover:scale-110 group-hover:rotate-6 transition-transform duration-200 shadow-xs">
                       <Navigation className="w-5 h-5" />
                     </div>
                     <div>
@@ -373,17 +376,17 @@ export default function PlanCheckoutModal({
                       </p>
                     </div>
                   </div>
-                  <ExternalLink className="w-4 h-4 text-amber-400 flex-shrink-0" />
+                  <ExternalLink className="w-4 h-4 text-amber-400 flex-shrink-0 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
                 </button>
 
                 {/* Action 2: WhatsApp (Secondary) */}
                 <button
                   type="button"
                   onClick={handleWhatsAppNotify}
-                  className="w-full p-4 rounded-2xl bg-emerald-50 hover:bg-emerald-100/80 border border-emerald-300 transition-all cursor-pointer flex items-center justify-between gap-3 text-left rtl:text-right active:scale-[0.99]"
+                  className="group w-full p-4 rounded-2xl bg-emerald-50 hover:bg-emerald-100/90 border border-emerald-300 transition-all duration-200 cursor-pointer flex items-center justify-between gap-3 text-left rtl:text-right hover:shadow-md hover:-translate-y-0.5 active:scale-[0.98]"
                 >
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center flex-shrink-0">
+                    <div className="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center flex-shrink-0 group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-200 shadow-xs">
                       <MessageCircle className="w-5 h-5 fill-current" />
                     </div>
                     <div>
@@ -395,7 +398,7 @@ export default function PlanCheckoutModal({
                       </p>
                     </div>
                   </div>
-                  <ArrowRight className="w-4 h-4 text-emerald-700 rtl:rotate-180 flex-shrink-0" />
+                  <ArrowRight className="w-4 h-4 text-emerald-700 rtl:rotate-180 flex-shrink-0 group-hover:translate-x-1 rtl:group-hover:-translate-x-1 transition-transform duration-200" />
                 </button>
               </div>
 
@@ -423,10 +426,10 @@ export default function PlanCheckoutModal({
               <button
                 type="button"
                 onClick={() => setStep(2)}
-                className="flex-1 inline-flex items-center justify-center gap-2 py-3 px-5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs sm:text-sm tracking-tight transition-all shadow-md active:scale-[0.98] cursor-pointer"
+                className="group flex-1 inline-flex items-center justify-center gap-2 py-3 px-5 rounded-xl bg-amber-500 hover:bg-amber-400 active:scale-[0.98] text-slate-950 font-black text-xs sm:text-sm tracking-tight transition-all shadow-md hover:shadow-lg hover:shadow-amber-500/20 cursor-pointer"
               >
                 <span>{isAr ? 'نعم، ملفي جاهز للمتابعة' : 'Oui, mon dossier est prêt'}</span>
-                <ArrowRight className="w-4 h-4 rtl:rotate-180" />
+                <ArrowRight className="w-4 h-4 rtl:rotate-180 group-hover:translate-x-1 rtl:group-hover:-translate-x-1 transition-transform duration-200" />
               </button>
             </>
           ) : (
@@ -434,9 +437,9 @@ export default function PlanCheckoutModal({
               <button
                 type="button"
                 onClick={() => setStep(1)}
-                className="inline-flex items-center gap-1.5 py-2.5 px-3 rounded-xl text-xs font-bold text-slate-600 hover:text-slate-900 transition-colors cursor-pointer"
+                className="group inline-flex items-center gap-1.5 py-2.5 px-3 rounded-xl text-xs font-bold text-slate-600 hover:text-slate-900 active:scale-95 transition-all cursor-pointer"
               >
-                <ArrowLeft className="w-3.5 h-3.5 rtl:rotate-180" />
+                <ArrowLeft className="w-3.5 h-3.5 rtl:rotate-180 group-hover:-translate-x-0.5 rtl:group-hover:translate-x-0.5 transition-transform duration-200" />
                 <span>{isAr ? 'العودة للملف' : 'Retour au dossier'}</span>
               </button>
 
