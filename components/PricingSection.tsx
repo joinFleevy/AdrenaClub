@@ -543,7 +543,7 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
                     <span className="whitespace-nowrap">
                       {isAr
                         ? `حجز الباقة • ${formatPrice(pricing.price)} دج`
-                        : `Réserver la formule • ${formatPrice(pricing.price)} DA`}
+                        : `Réserver • ${formatPrice(pricing.price)} DA`}
                     </span>
                   </button>
                 </div>
