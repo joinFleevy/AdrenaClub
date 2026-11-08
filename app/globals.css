@@ -156,3 +156,91 @@
   animation: checkmarkPop 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
+/* Bottom Sheet & Backdrop Motion (GPU-Accelerated) */
+@keyframes overlayFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes overlayFadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes sheetSpringUp {
+  0% {
+    opacity: 0.4;
+    transform: translateY(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes sheetSlideDown {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+}
+
+@keyframes itemFadeSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(14px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes iconWiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-8deg); }
+  75% { transform: rotate(8deg); }
+}
+
+.animate-overlay-in {
+  animation: overlayFadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-overlay-out {
+  animation: overlayFadeOut 0.2s cubic-bezier(0.4, 0, 1, 1) forwards;
+}
+
+.animate-sheet-spring {
+  animation: sheetSpringUp 0.36s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: transform, opacity;
+}
+
+.animate-sheet-down {
+  animation: sheetSlideDown 0.22s cubic-bezier(0.4, 0, 1, 1) forwards;
+  will-change: transform, opacity;
+}
+
+.animate-item-stagger-1 {
+  animation: itemFadeSlideUp 0.32s cubic-bezier(0.16, 1, 0.3, 1) 0.05s both;
+  will-change: transform, opacity;
+}
+
+.animate-item-stagger-2 {
+  animation: itemFadeSlideUp 0.32s cubic-bezier(0.16, 1, 0.3, 1) 0.12s both;
+  will-change: transform, opacity;
+}
+
+.animate-item-stagger-3 {
+  animation: itemFadeSlideUp 0.32s cubic-bezier(0.16, 1, 0.3, 1) 0.18s both;
+  will-change: transform, opacity;
+}
+
+.animate-icon-wiggle {
+  animation: iconWiggle 0.5s ease-in-out;
+}
+
+
