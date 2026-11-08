@@ -29,6 +29,7 @@ import {
 } from 'lucide-react';
 import { Language, content } from '@/data/content';
 import PricingCalculator from './PricingCalculator';
+import PlanCheckoutModal, { PlanCheckoutDetails } from './PlanCheckoutModal';
 import {
   musculationPlans,
   crosstrainingPlans,
@@ -58,6 +59,7 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
   const [duration, setDuration] = useState<SubscriptionDuration>('1m');
   const [showAllMuscu, setShowAllMuscu] = useState<boolean>(false);
   const [isCalculatorModalOpen, setIsCalculatorModalOpen] = useState<boolean>(false);
+  const [checkoutPlan, setCheckoutPlan] = useState<PlanCheckoutDetails | null>(null);
 
   const handleTabChange = (tab: PricingTab) => {
     setActiveTab(tab);
@@ -517,21 +519,31 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
                     </div>
                   </div>
 
-                  {/* WhatsApp Reservation Button */}
+                  {/* Reservation Button: Triggers Smart Onboarding Modal */}
                   <button
                     type="button"
-                    onClick={() => handleWhatsAppOrder(name, pricing.price, pricing.saunaSessions, duration)}
+                    onClick={() =>
+                      setCheckoutPlan({
+                        name,
+                        price: pricing.price,
+                        duration,
+                        saunaSessions: pricing.saunaSessions,
+                        isStudent: activeTab === 'etudiant' || plan.id.startsWith('etudiant'),
+                        savings: pricing.savings,
+                        basePriceWithoutDiscount: pricing.basePriceWithoutDiscount,
+                      })
+                    }
                     className={`w-full flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl font-black text-xs sm:text-sm transition-all shadow-sm active:scale-[0.98] cursor-pointer ${
                       plan.isPopular
                         ? 'bg-amber-500 hover:bg-amber-400 text-slate-950 shadow-md shadow-amber-500/20'
                         : 'bg-slate-900 hover:bg-black text-white'
                     }`}
                   >
-                    <MessageCircle className="w-4 h-4 fill-current flex-shrink-0" />
+                    <ShieldCheck className="w-4 h-4 flex-shrink-0" />
                     <span className="whitespace-nowrap">
                       {isAr
                         ? `حجز الباقة • ${formatPrice(pricing.price)} دج`
-                        : `Réserver • ${formatPrice(pricing.price)} DA`}
+                        : `Réserver la formule • ${formatPrice(pricing.price)} DA`}
                     </span>
                   </button>
                 </div>
@@ -725,10 +737,26 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
                 setIsCalculatorModalOpen(false);
                 onOpenPostersModal('mixtes');
               }}
+              onSelectCombination={(details) => {
+                setIsCalculatorModalOpen(false);
+                setCheckoutPlan(details);
+              }}
             />
           </div>
         </div>
       )}
+
+      {/* Smart 2-Step Registration & Dossier Checkout Modal */}
+      <PlanCheckoutModal
+        isOpen={Boolean(checkoutPlan)}
+        onClose={() => setCheckoutPlan(null)}
+        lang={lang}
+        plan={checkoutPlan}
+        onOpenTrial={() => {
+          setCheckoutPlan(null);
+          handleWhatsAppTrial();
+        }}
+      />
     </section>
   );
 }

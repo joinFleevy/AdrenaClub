@@ -6,14 +6,25 @@ import { Language } from '@/data/content';
 import {
   MixedDisciplineKey,
   lookupOfficialMixedRate,
+  SubscriptionDuration,
 } from '@/data/pricing';
 
 interface PricingCalculatorProps {
   lang: Language;
   onOpenPoster?: () => void;
+  onSelectCombination?: (details: {
+    name: string;
+    price: number;
+    duration: SubscriptionDuration;
+    saunaSessions: number;
+  }) => void;
 }
 
-export default function PricingCalculator({ lang, onOpenPoster }: PricingCalculatorProps) {
+export default function PricingCalculator({
+  lang,
+  onOpenPoster,
+  onSelectCombination,
+}: PricingCalculatorProps) {
   const isAr = lang === 'ar';
 
   const [discipline, setDiscipline] = useState<MixedDisciplineKey>('cross');
@@ -107,7 +118,7 @@ export default function PricingCalculator({ lang, onOpenPoster }: PricingCalcula
     },
   ];
 
-  // WhatsApp order
+  // WhatsApp order or direct modal flow
   const handleWhatsAppBooking = () => {
     const discNameFr =
       discipline === 'cross' ? 'Cross-Training' : discipline === 'kick' ? 'Kickboxing' : 'Lutte';
@@ -120,6 +131,16 @@ export default function PricingCalculator({ lang, onOpenPoster }: PricingCalcula
     const formulaAr = `${discNameAr} (${disciplineSessions} حصص أسبوعياً) + كمال أجسام (${muscuSessions} حصص أسبوعياً)${
       includeSauna ? ' + حصة ساونا' : ''
     }`;
+
+    if (onSelectCombination) {
+      onSelectCombination({
+        name: isAr ? formulaAr : formulaFr,
+        price: finalPrice,
+        duration: '1m',
+        saunaSessions: includeSauna ? 1 : 0,
+      });
+      return;
+    }
 
     const text = isAr
       ? `السلام عليكم نادي أدرينا سبورت، قمت بحساب اشتراكي عبر حاسبة الباقات المدمجة: ${formulaAr} بمجموع (${finalPrice.toLocaleString('fr-FR')} دج شهرياً). أود تأكيد التسجيل ومعرفة الوثائق المطلوبة.`
