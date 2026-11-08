@@ -402,6 +402,16 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
             {displayedPlans.map((plan) => {
               const pricing = calculatePlanPricing(plan, duration);
               const name = isAr ? plan.nameAr : plan.nameFr;
+              const modalPlanName =
+                activeTab === 'musculation'
+                  ? isAr
+                    ? `كمال أجسام • ${plan.nameAr}`
+                    : `Musculation • ${plan.nameFr}`
+                  : activeTab === 'crosstraining'
+                  ? isAr
+                    ? `كروس ترينينغ • ${plan.nameAr}`
+                    : `Cross-Training • ${plan.nameFr}`
+                  : name;
               const freq = isAr ? plan.frequencyAr : plan.frequencyFr;
               const period = isAr ? pricing.periodAr : pricing.periodFr;
               const feats = isAr ? plan.featuresAr : plan.featuresFr;
@@ -524,7 +534,7 @@ export default function PricingSection({ lang, onOpenPostersModal }: PricingSect
                     type="button"
                     onClick={() =>
                       setCheckoutPlan({
-                        name,
+                        name: modalPlanName,
                         price: pricing.price,
                         duration,
                         saunaSessions: pricing.saunaSessions,

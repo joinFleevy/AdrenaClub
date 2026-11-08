@@ -146,15 +146,15 @@ export default function PlanCheckoutModal({
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="relative w-full max-w-lg bg-white rounded-t-3xl sm:rounded-3xl shadow-2xl border border-slate-200 overflow-hidden max-h-[92vh] sm:max-h-[85vh] flex flex-col my-auto"
+        className="relative w-full max-w-lg bg-white rounded-t-3xl sm:rounded-3xl shadow-2xl border border-slate-200 overflow-hidden max-h-[90vh] sm:max-h-[85vh] flex flex-col mt-auto sm:my-auto mb-0"
       >
         {/* Mobile Pull Indicator */}
         <div className="w-10 h-1 bg-slate-300 rounded-full mx-auto mt-2.5 sm:hidden flex-shrink-0" />
 
         {/* Compact Header */}
         <div className="px-5 py-4 border-b border-slate-100 flex items-center justify-between gap-3 bg-slate-50/80 flex-shrink-0">
-          <div className="flex items-center gap-2">
-            <span className="w-6 h-6 rounded-lg bg-slate-900 text-amber-400 font-black text-xs flex items-center justify-center">
+          <div className="flex items-center gap-2.5">
+            <span className="w-6 h-6 rounded-full bg-amber-500 text-slate-950 font-black text-xs flex items-center justify-center flex-shrink-0 shadow-xs">
               {step}
             </span>
             <h3 className="text-sm sm:text-base font-black text-slate-900 tracking-tight">
@@ -210,11 +210,11 @@ export default function PlanCheckoutModal({
         <div className="p-5 overflow-y-auto space-y-4">
           {/* STEP 1: DISTILLED CHECKLIST */}
           {step === 1 && (
-            <div className="space-y-4 animate-in fade-in duration-200">
+            <div className="space-y-3.5 animate-in fade-in duration-200">
               <p className="text-xs font-bold text-slate-500 uppercase tracking-wider">
                 {isAr
-                  ? 'الوثائق المطلوبة لاستلام بطاقة العضوية فورياً :'
-                  : 'Pièces requises pour éditer votre badge sur place :'}
+                  ? 'الوثائق المطلوبة لملف التسجيل في الاستقبال'
+                  : 'Pièces requises pour votre badge à l’accueil'}
               </p>
 
               {/* Scannable Checklist Rows */}
@@ -330,9 +330,12 @@ export default function PlanCheckoutModal({
                 <button
                   type="button"
                   onClick={handleTrialRedirect}
-                  className="font-bold text-amber-800 hover:text-amber-950 underline underline-offset-2 cursor-pointer whitespace-nowrap"
+                  className="inline-flex items-center gap-1 font-bold text-amber-800 hover:text-amber-950 cursor-pointer whitespace-nowrap"
                 >
-                  {isAr ? 'احجز حصة تجريبية مجانية ⚡' : 'Essai gratuit sans certificat ⚡'}
+                  <span className="underline underline-offset-2">
+                    {isAr ? 'احجز حصة تجريبية مجانية' : 'Essai gratuit sans certificat'}
+                  </span>
+                  <span>⚡</span>
                 </button>
               </div>
             </div>
@@ -406,13 +409,13 @@ export default function PlanCheckoutModal({
         </div>
 
         {/* Bottom Bar: Action-oriented & Clean */}
-        <div className="p-4 border-t border-slate-100 bg-slate-50/80 flex items-center justify-between gap-3 flex-shrink-0">
+        <div className="p-4 pb-6 sm:pb-4 border-t border-slate-100 bg-slate-50/80 flex items-center justify-between gap-3 flex-shrink-0">
           {step === 1 ? (
             <>
               <button
                 type="button"
                 onClick={onClose}
-                className="py-2.5 px-3 rounded-xl text-xs font-bold text-slate-500 hover:text-slate-800 transition-colors cursor-pointer"
+                className="py-2.5 px-3.5 rounded-xl text-xs sm:text-sm font-bold text-slate-500 hover:text-slate-800 hover:bg-slate-200/50 transition-colors cursor-pointer"
               >
                 {isAr ? 'إلغاء' : 'Annuler'}
               </button>
@@ -420,7 +423,7 @@ export default function PlanCheckoutModal({
               <button
                 type="button"
                 onClick={() => setStep(2)}
-                className="flex-1 inline-flex items-center justify-center gap-2 py-3 px-5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs sm:text-sm uppercase tracking-wider transition-all shadow-md active:scale-[0.98] cursor-pointer"
+                className="flex-1 inline-flex items-center justify-center gap-2 py-3 px-5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs sm:text-sm tracking-tight transition-all shadow-md active:scale-[0.98] cursor-pointer"
               >
                 <span>{isAr ? 'نعم، ملفي جاهز للمتابعة' : 'Oui, mon dossier est prêt'}</span>
                 <ArrowRight className="w-4 h-4 rtl:rotate-180" />
