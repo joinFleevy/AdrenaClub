@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import './globals.css';
+import SmoothScroll from '@/components/SmoothScroll';
 
 export const viewport: Viewport = {
   themeColor: '#FFFFFF',
@@ -62,6 +63,7 @@ export default function RootLayout({
         />
       </head>
       <body className="bg-slate-50 text-slate-900 antialiased font-sans">
+        <SmoothScroll />
         {children}
       </body>
     </html>

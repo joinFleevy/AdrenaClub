@@ -102,6 +102,7 @@ export default function MobileStickyBar({ lang }: MobileStickyBarProps) {
         >
           <div
             dir={isAr ? 'rtl' : 'ltr'}
+            data-lenis-prevent
             className={`bg-white rounded-t-3xl border-t border-slate-200 p-5 pb-8 shadow-2xl safe-area-pb max-w-lg mx-auto w-full ${
               isClosing ? 'animate-sheet-down' : 'animate-sheet-spring'
             }`}

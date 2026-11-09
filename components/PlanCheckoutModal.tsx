@@ -210,7 +210,7 @@ export default function PlanCheckoutModal({
         </div>
 
         {/* Scrollable Body */}
-        <div className="p-5 overflow-y-auto space-y-4">
+        <div className="p-5 overflow-y-auto space-y-4" data-lenis-prevent>
           {/* STEP 1: DISTILLED CHECKLIST */}
           {step === 1 && (
             <div key="step-1" className="space-y-3.5 animate-step-in">

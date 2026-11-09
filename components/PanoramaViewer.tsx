@@ -248,6 +248,7 @@ export default function PanoramaViewer({ lang, isModal = false }: PanoramaViewer
       {/* 360 Viewer Card with INTEGRATED Controls */}
       <div
         id="tour-360-container"
+        data-lenis-prevent
         className="relative w-full rounded-2xl border border-slate-800 bg-slate-900 overflow-hidden shadow-2xl"
       >
         {/* Top Left: Active Area Label */}

@@ -96,7 +96,7 @@ export default function Tour360Modal({ isOpen, onClose, lang }: Tour360ModalProp
         </div>
 
         {/* Modal Viewer Body */}
-        <div className="p-2.5 sm:p-4 overflow-y-auto">
+        <div className="p-2.5 sm:p-4 overflow-y-auto" data-lenis-prevent>
           <PanoramaViewer lang={lang} isModal={true} />
         </div>
       </div>
